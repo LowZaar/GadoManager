@@ -1,7 +1,7 @@
 package classes;
 
 import java.util.Date;
-import java.util.List;
+
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,7 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 @Entity
 public class Empresas_Pessoas {
@@ -44,7 +43,7 @@ public class Empresas_Pessoas {
 	@ManyToOne
 	private Cidades idCidade;
 	
-	private int idEstado;
+	private Estados idEstado;
 	
 	private String cep;
 	
@@ -172,8 +171,8 @@ public class Empresas_Pessoas {
 	}
 
 
-	public void setIdEstado(Estados idEstado) {
-		this.idEstado = idEstado;
+	public void setIdEstado(int idEstado) {
+		this.idEstado = this.idCidade.getIdEstado();
 	}
 
 
