@@ -1,21 +1,31 @@
 package classes;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Medicacao {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idMedicamento;
 	
 	private String nome;
 	
 	private String principioAtivo;
 	
-	 public Medicacao() {
-	
+	public Medicacao() {
+		
 	}
 
-	public Medicacao(String nome, String principioAtivo) {
-		super();
-		this.nome = nome;
-		this.principioAtivo = principioAtivo;
+	public Long getIdMedicamento() {
+		return idMedicamento;
+	}
+
+	public void setIdMedicamento(Long idMedicamento) {
+		this.idMedicamento = idMedicamento;
 	}
 
 	public String getNome() {
@@ -33,6 +43,7 @@ public class Medicacao {
 	public void setPrincipioAtivo(String principioAtivo) {
 		this.principioAtivo = principioAtivo;
 	}
-	 
+	
+	
 	
 }

@@ -1,15 +1,23 @@
 package classes;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Racoes {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idRacao;
 	
 	private String descricao;
 	
 	private String Observacao;
 	
+	
 	public Racoes() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public Racoes(String descricao, String observacao) {
