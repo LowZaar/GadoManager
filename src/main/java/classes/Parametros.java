@@ -1,72 +1,74 @@
 package classes;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
+@Entity
 public class Parametros {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idParametro;
 
-	private Long idEmpresa_Pessoa;
+	@OneToOne
+	private Empresas_Pessoas idEmpresa_Pessoa;
 
+	@Column(nullable = true)
 	private int alertaDiasSemPesar;
 
+	@Column(nullable = true)
 	private int alertaEngordaDiario;
 
 	private Double taxaEngordaDiario;
-
 	
 	public Parametros() {
-		// TODO Auto-generated constructor stub
+	
 	}
 
-
-	public Parametros(Long idEmpresa_Pessoa, int alertaDiasSemPesar, int alertaEngordaDiario,
-			Double taxaEngordaDiario) {
-		super();
-		this.idEmpresa_Pessoa = idEmpresa_Pessoa;
-		this.alertaDiasSemPesar = alertaDiasSemPesar;
-		this.alertaEngordaDiario = alertaEngordaDiario;
-		this.taxaEngordaDiario = taxaEngordaDiario;
+	public Long getIdParametro() {
+		return idParametro;
 	}
 
+	public void setIdParametro(Long idParametro) {
+		this.idParametro = idParametro;
+	}
 
-	public Long getIdEmpresa_Pessoa() {
+	public Empresas_Pessoas getIdEmpresa_Pessoa() {
 		return idEmpresa_Pessoa;
 	}
 
-
-	public void setIdEmpresa_Pessoa(Long idEmpresa_Pessoa) {
+	public void setIdEmpresa_Pessoa(Empresas_Pessoas idEmpresa_Pessoa) {
 		this.idEmpresa_Pessoa = idEmpresa_Pessoa;
 	}
-
 
 	public int getAlertaDiasSemPesar() {
 		return alertaDiasSemPesar;
 	}
 
-
 	public void setAlertaDiasSemPesar(int alertaDiasSemPesar) {
 		this.alertaDiasSemPesar = alertaDiasSemPesar;
 	}
-
 
 	public int getAlertaEngordaDiario() {
 		return alertaEngordaDiario;
 	}
 
-
 	public void setAlertaEngordaDiario(int alertaEngordaDiario) {
 		this.alertaEngordaDiario = alertaEngordaDiario;
 	}
 
-
 	public Double getTaxaEngordaDiario() {
 		return taxaEngordaDiario;
 	}
-
 
 	public void setTaxaEngordaDiario(Double taxaEngordaDiario) {
 		this.taxaEngordaDiario = taxaEngordaDiario;
 	}
 	
 	
-	
+
 }
