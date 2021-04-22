@@ -14,6 +14,7 @@ public class MainClass {
 		EntityManager em = emf.createEntityManager();
 		
 		em.find(Bovinos.class, 1L);
+		
 	}
 
 }

@@ -1,12 +1,25 @@
 package eventos;
 
-public class EventosSaudeMedicacao extends EventosSaude{
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
+import classes.Medicamentos;
+
+@Entity
+public class EventosSaudeMedicacao{
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idEventoSaudeMedicacao;
 	
-	private Long idEventoSaude;
+	@ManyToOne
+	private EventosSaude idEventoSaude;
 	
-	private Long idMedicamento;
+	@ManyToOne
+	private Medicamentos idMedicamento;
 	
 	private String lote;
 	
@@ -22,7 +35,7 @@ public class EventosSaudeMedicacao extends EventosSaude{
 	
 	}
 
-	public EventosSaudeMedicacao(Long idEventoSaude, Long idMedicamento, String lote, String tipoAplicacao,
+	public EventosSaudeMedicacao(EventosSaude idEventoSaude, Medicamentos idMedicamento, String lote, String tipoAplicacao,
 			int diasTratamento, String posologia, String observacoes) {
 		super();
 		this.idEventoSaude = idEventoSaude;
@@ -34,19 +47,19 @@ public class EventosSaudeMedicacao extends EventosSaude{
 		this.observacoes = observacoes;
 	}
 
-	public Long getIdEventoSaude() {
+	public EventosSaude getIdEventoSaude() {
 		return idEventoSaude;
 	}
 
-	public void setIdEventoSaude(Long idEventoSaude) {
+	public void setIdEventoSaude(EventosSaude idEventoSaude) {
 		this.idEventoSaude = idEventoSaude;
 	}
 
-	public Long getIdMedicamento() {
+	public Medicamentos getIdMedicamento() {
 		return idMedicamento;
 	}
 
-	public void setIdMedicamento(Long idMedicamento) {
+	public void setIdMedicamento(Medicamentos idMedicamento) {
 		this.idMedicamento = idMedicamento;
 	}
 

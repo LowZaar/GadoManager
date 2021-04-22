@@ -16,7 +16,7 @@ public class Cidades {
 	private String nome;
 	
 	@ManyToOne
-	private Estados idEstado;
+	private Estados estado;
 	
 	public Cidades() {
 	
@@ -38,12 +38,12 @@ public class Cidades {
 		this.nome = nome;
 	}
 
-	public Estados getIdEstado() {
-		return idEstado;
+	public Estados getEstado() {
+		return estado;
 	}
 
 	public void setIdEstado(Estados idEstado) {
-		this.idEstado = idEstado;
+		this.estado = idEstado;
 	}
 	
 	
