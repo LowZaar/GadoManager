@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -16,6 +17,7 @@ public class EventosSaudeOutros{
 	private Long idEventosSaudeOutros;
 	
 	@ManyToOne
+	@JoinColumn(name = "idEventoSaude")
 	private EventosSaude idEventoSaude;
 	
 	private String Observacoes;

@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -15,6 +16,7 @@ public class Parametros {
 	private Long idParametro;
 
 	@OneToOne
+	@JoinColumn(name = "idEmpresa_Pessoa")
 	private Empresas_Pessoas idEmpresa_Pessoa;
 
 	@Column(nullable = true)

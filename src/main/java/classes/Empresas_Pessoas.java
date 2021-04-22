@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 
@@ -42,8 +43,9 @@ public class Empresas_Pessoas {
 	private String endereco;
 	
 	@ManyToOne
+	@JoinColumn(name = "idCidade")
 	private Cidades idCidade;
-	
+
 	private Long idEstado;
 	
 	private String cep;

@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -22,6 +23,7 @@ public class Pesagens {
 	private String Obervacoes;
 	
 	@ManyToOne
+	@JoinColumn(name = "idBovino")
 	private Bovinos idBovino;
 	
 	public Pesagens() {

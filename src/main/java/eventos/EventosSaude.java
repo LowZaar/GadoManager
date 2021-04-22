@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import classes.Veterinario;
@@ -20,9 +21,11 @@ public class EventosSaude {
 	private Date data;
 	
 	@ManyToOne
+	@JoinColumn(name = "idTipoEvento")
 	private TiposEvento idTipoEvento;
 	
 	@ManyToOne
+	@JoinColumn(name = "idVeterinario")
 	private Veterinario idVeterinario;
 	
 	public EventosSaude() {
