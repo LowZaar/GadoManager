@@ -2,31 +2,48 @@ package classes;
 
 import java.util.Date;
 
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+@Entity
 public class Empresas_Pessoas {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idEmpresa_Pessoa;
 	
 	private String nome;
 	
 	private String tipoPessoa;
 	
+	@Column(nullable = true)
 	private String cpf;
 	
+	@Column(nullable = true)
 	private String rg;
 	
 	private Date dataNascimento;
 	
+	@Column(nullable = true)
 	private String cnpj;
 	
+	@Column(nullable = true)
 	private String ie;
 	
+	@Column(nullable = true)
 	private String im;
 	
 	private String endereco;
 	
-	private Long idCidade;
+	@ManyToOne
+	private Cidades idCidade;
 	
-	private Long idEstado;
+	private Estados idEstado;
 	
 	private String cep;
 	
@@ -34,30 +51,8 @@ public class Empresas_Pessoas {
 		
 	private String email;
 	
-	
 	public Empresas_Pessoas() {
-	
-	}
-
-
-	public Empresas_Pessoas(String nome, String tipoPessoa, String cpf, String rg, Date dataNascimento, String cnpj,
-			String ie, String im, String endereco, Long idCidade, Long idEstado, String cep, String telefone,
-			String email) {
-		super();
-		this.nome = nome;
-		this.tipoPessoa = tipoPessoa;
-		this.cpf = cpf;
-		this.rg = rg;
-		this.dataNascimento = dataNascimento;
-		this.cnpj = cnpj;
-		this.ie = ie;
-		this.im = im;
-		this.endereco = endereco;
-		this.idCidade = idCidade;
-		this.idEstado = idEstado;
-		this.cep = cep;
-		this.telefone = telefone;
-		this.email = email;
+		
 	}
 
 
@@ -161,23 +156,23 @@ public class Empresas_Pessoas {
 	}
 
 
-	public Long getIdCidade() {
+	public Cidades getIdCidade() {
 		return idCidade;
 	}
 
 
-	public void setIdCidade(Long idCidade) {
+	public void setIdCidade(Cidades idCidade) {
 		this.idCidade = idCidade;
 	}
 
 
-	public Long getIdEstado() {
+	public Estados getIdEstado() {
 		return idEstado;
 	}
 
 
-	public void setIdEstado(Long idEstado) {
-		this.idEstado = idEstado;
+	public void setIdEstado(int idEstado) {
+		this.idEstado = this.idCidade.getIdEstado();
 	}
 
 
@@ -209,10 +204,5 @@ public class Empresas_Pessoas {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
-	
-	
-	
-	
 	
 }

@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+
 @Entity
 public class Bovinos {
 	
@@ -17,13 +18,19 @@ public class Bovinos {
 	@OneToMany(mappedBy = "idBovino")
 	private Long idBovino;
 	
-	@Column(name = "Nome")
+	@Column(nullable = true)
+	private Long idAssociacao;
+	
+	@Column(nullable = true)
+	private Long idBrinco;
+	
 	private String nome;
 	
-	@ManyToOne(targetEntity = Rebanhos.class)
-	private Long idRebanho;
+	@ManyToOne
+	private Rebanhos idRebanho;
 	
-	private Long idRaca;
+	@ManyToOne
+	private Racas idRaca;
 	
 	private String categoria;
 	
@@ -33,31 +40,18 @@ public class Bovinos {
 	
 	private Double pesoNascimento;
 	
+	@Column(nullable = true)
 	private Date dataMorte;
 	
-	@ManyToOne(optional = true, targetEntity = Bovinos.class)
-	private Long idBovino_mae;
+	@ManyToOne
+	private Bovinos idBovino_mae;
 	
-	@ManyToOne(optional = true, targetEntity = Bovinos.class)
-	private Long idBovino_pai;
+	@ManyToOne
+	private Bovinos idBovino_pai;
 	
 
-	 public Bovinos() {
-		// TODO Auto-generated constructor stub
-	}
-
-
-	public Bovinos(String nome, String categoria, char sexo, Date dataNascimento, Double pesoNascimento, Date dataMorte,
-			Long idBovino_mae, Long idBovino_pai) {
-		super();
-		this.nome = nome;
-		this.categoria = categoria;
-		this.sexo = sexo;
-		this.dataNascimento = dataNascimento;
-		this.pesoNascimento = pesoNascimento;
-		this.dataMorte = dataMorte;
-		this.idBovino_mae = idBovino_mae;
-		this.idBovino_pai = idBovino_pai;
+	public Bovinos() {
+	
 	}
 
 
@@ -81,22 +75,22 @@ public class Bovinos {
 	}
 
 
-	public Long getIdRebanho() {
+	public Rebanhos getIdRebanho() {
 		return idRebanho;
 	}
 
 
-	public void setIdRebanho(Long idRebanho) {
+	public void setIdRebanho(Rebanhos idRebanho) {
 		this.idRebanho = idRebanho;
 	}
 
 
-	public Long getIdRaca() {
+	public Racas getIdRaca() {
 		return idRaca;
 	}
 
 
-	public void setIdRaca(Long idRaca) {
+	public void setIdRaca(Racas idRaca) {
 		this.idRaca = idRaca;
 	}
 
@@ -151,25 +145,25 @@ public class Bovinos {
 	}
 
 
-	public Long getIdBovino_mae() {
+	public Bovinos getIdBovino_mae() {
 		return idBovino_mae;
 	}
 
 
-	public void setIdBovino_mae(Long idBovino_mae) {
+	public void setIdBovino_mae(Bovinos idBovino_mae) {
 		this.idBovino_mae = idBovino_mae;
 	}
 
 
-	public Long getIdBovino_pai() {
+	public Bovinos getIdBovino_pai() {
 		return idBovino_pai;
 	}
 
 
-	public void setIdBovino_pai(Long idBovino_pai) {
+	public void setIdBovino_pai(Bovinos idBovino_pai) {
 		this.idBovino_pai = idBovino_pai;
 	}
-	 
+	
 	
 }
 

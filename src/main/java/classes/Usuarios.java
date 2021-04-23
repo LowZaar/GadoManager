@@ -1,7 +1,16 @@
 package classes;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+@Entity
 public class Usuarios {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idUsuario;
 	
 	private String nome;
@@ -14,21 +23,19 @@ public class Usuarios {
 	
 	private boolean usuarioMestre;
 	
-	private Long idEmpresas_Pessoa;
+	@ManyToOne
+	private Empresas_Pessoas idEmpresas_Pessoa;
 	
 	public Usuarios() {
-	
+		
 	}
 
-	public Usuarios(String nome, String email, String usuario, String senha, boolean usuarioMestre,
-			Long idEmpresas_Pessoa) {
-		super();
-		this.nome = nome;
-		this.email = email;
-		this.usuario = usuario;
-		this.senha = senha;
-		this.usuarioMestre = usuarioMestre;
-		this.idEmpresas_Pessoa = idEmpresas_Pessoa;
+	public Long getIdUsuario() {
+		return idUsuario;
+	}
+
+	public void setIdUsuario(Long idUsuario) {
+		this.idUsuario = idUsuario;
 	}
 
 	public String getNome() {
@@ -71,11 +78,11 @@ public class Usuarios {
 		this.usuarioMestre = usuarioMestre;
 	}
 
-	public Long getIdEmpresas_Pessoa() {
+	public Empresas_Pessoas getIdEmpresas_Pessoa() {
 		return idEmpresas_Pessoa;
 	}
 
-	public void setIdEmpresas_Pessoa(Long idEmpresas_Pessoa) {
+	public void setIdEmpresas_Pessoa(Empresas_Pessoas idEmpresas_Pessoa) {
 		this.idEmpresas_Pessoa = idEmpresas_Pessoa;
 	}
 	

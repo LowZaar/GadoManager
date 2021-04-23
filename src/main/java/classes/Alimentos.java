@@ -1,42 +1,59 @@
 package classes;
 
 import java.util.Date;
+import java.util.List;
 
+<<<<<<< HEAD
 import javax.persistence.Id;
 
 public class Alimentos {
 
 	@Id
+=======
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+@Entity
+public class Alimentos {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+>>>>>>> 6c3da58715db03a6b8b637a1fa58551b5a90a6c2
 	private Long idAlimento;
 	
-	private Long idRebanho;
+	@OneToMany
+	private List<Rebanhos> idRebanho;
 	
 	private Date dataInicio;
 	
 	private Date dataTermino;
 	
-	private Long idracao;
+	@ManyToOne
+	private Racoes idracao;
 	
 	private String observacoes;
 	
 	public Alimentos() {
-		// TODO Auto-generated constructor stub
+	
 	}
 
-	public Alimentos(Long idRebanho, Date dataInicio, Date dataTermino, Long idracao, String observacoes) {
-		super();
-		this.idRebanho = idRebanho;
-		this.dataInicio = dataInicio;
-		this.dataTermino = dataTermino;
-		this.idracao = idracao;
-		this.observacoes = observacoes;
+	public Long getIdAlimento() {
+		return idAlimento;
 	}
 
-	public Long getIdRebanho() {
+	public void setIdAlimento(Long idAlimento) {
+		this.idAlimento = idAlimento;
+	}
+
+	public List<Rebanhos> getIdRebanho() {
 		return idRebanho;
 	}
 
-	public void setIdRebanho(Long idRebanho) {
+	public void setIdRebanho(List<Rebanhos> idRebanho) {
 		this.idRebanho = idRebanho;
 	}
 
@@ -56,11 +73,11 @@ public class Alimentos {
 		this.dataTermino = dataTermino;
 	}
 
-	public Long getIdracao() {
+	public Racoes getIdracao() {
 		return idracao;
 	}
 
-	public void setIdracao(Long idracao) {
+	public void setIdracao(Racoes idracao) {
 		this.idracao = idracao;
 	}
 
@@ -73,5 +90,5 @@ public class Alimentos {
 	}
 	
 	
-	
+
 }

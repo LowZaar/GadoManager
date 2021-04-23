@@ -2,31 +2,35 @@ package classes;
 
 import java.sql.Date;
 
+<<<<<<< HEAD
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+=======
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
+@Entity
+>>>>>>> 6c3da58715db03a6b8b637a1fa58551b5a90a6c2
 public class BCS {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idBCS;
 	
-	private Long idBovino;
+	@OneToOne
+	private Bovinos idBovino;
 	
 	private Date data;
 	
 	private Double IndiceBCS;
 	
 	public BCS() {
-		// TODO Auto-generated constructor stub
-	}
-
-	public BCS(Long idBovino, Date data, Double indiceBCS) {
-		super();
-		this.idBovino = idBovino;
-		this.data = data;
-		IndiceBCS = indiceBCS;
+	
 	}
 
 	public Long getIdBCS() {
@@ -37,11 +41,11 @@ public class BCS {
 		this.idBCS = idBCS;
 	}
 
-	public Long getIdBovino() {
+	public Bovinos getIdBovino() {
 		return idBovino;
 	}
 
-	public void setIdBovino(Long idBovino) {
+	public void setIdBovino(Bovinos idBovino) {
 		this.idBovino = idBovino;
 	}
 
@@ -60,7 +64,6 @@ public class BCS {
 	public void setIndiceBCS(Double indiceBCS) {
 		IndiceBCS = indiceBCS;
 	}
-	
 	
 	
 }
