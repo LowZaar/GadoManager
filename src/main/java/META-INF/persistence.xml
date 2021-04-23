@@ -18,12 +18,12 @@
 		<class>classes.Vacina</class>
 		<class>classes.Veterinario</class>
 	
-		<class>eventos.EventoSaude</class>
+		<class>eventos.EventosSaude</class>
 		<class>eventos.TiposEvento</class>
-		<class>eventos.EventosSaudeBovinos</class>
+		<class>eventos.EventoSaudeBovinos</class>
 		<class>eventos.EventosSaudeMedicacao</class>
 		<class>eventos.EventosSaudeVacina</class>
-		<class>eventos.EventoSaudeOutros</class>
+		<class>eventos.EventosSaudeOutros</class>
 		
 	
 	<properties>

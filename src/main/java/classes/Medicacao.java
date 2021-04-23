@@ -1,7 +1,10 @@
 package classes;
 
+import javax.persistence.OneToMany;
+
 public class Medicacao {
 	
+	@OneToMany (targetEntity = "idMedicamento")
 	private Long idMedicamento;
 	
 	private String nome;

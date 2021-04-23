@@ -1,7 +1,10 @@
 package classes;
 
+import javax.persistence.OneToMany;
+
 public class Veterinario {
 	
+	@OneToMany (mappedBy = "idVeterinario")
 	private Long idVeterinario;
 	
 	private String nome;

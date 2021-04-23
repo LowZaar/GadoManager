@@ -2,12 +2,27 @@ package eventos;
 
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+import classes.Veterinario;
+
+@Entity
 public class EventosSaudeOutros  extends EventosSaude{
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idEventosSaudeOutros;
 	
-	private Long idEventoSaude;
+	@ManyToOne(targetEntity = EventosSaude.class)
+	@Column(name = "IdEventoSaude", nullable = false)
+	private EventosSaude idEventoSaude;
 	
+	@Column (nullable = true)
 	private String Observacoes;
 	
 	
@@ -16,7 +31,7 @@ public class EventosSaudeOutros  extends EventosSaude{
 	}
 
 
-	public EventosSaudeOutros(Date data, Long idTipoEvento, Long idVeterinario, Long idEventoSaude,
+	public EventosSaudeOutros(Date data, TiposEvento idTipoEvento, Veterinario idVeterinario, EventosSaude idEventoSaude,
 			String observacoes) {
 		super(data, idTipoEvento, idVeterinario);
 		this.idEventoSaude = idEventoSaude;

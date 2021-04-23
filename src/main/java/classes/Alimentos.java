@@ -2,8 +2,11 @@ package classes;
 
 import java.util.Date;
 
+import javax.persistence.Id;
+
 public class Alimentos {
 
+	@Id
 	private Long idAlimento;
 	
 	private Long idRebanho;

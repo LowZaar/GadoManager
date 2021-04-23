@@ -1,21 +1,42 @@
 package eventos;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+import classes.Medicacao;
+
+@Entity
 public class EventosSaudeMedicacao extends EventosSaude{
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idEventoSaudeMedicacao;
 	
-	private Long idEventoSaude;
+	@Column(name = "IdEventoSaude", nullable = false)
+	@ManyToOne (targetEntity = EventosSaude.class)
+	private EventosSaude idEventoSaude;
+
+	@ManyToOne (targetEntity = Medicacao.class)
+	@Column (name = "IdMedicamento" , nullable = false)
+	private Medicacao idMedicamento;
 	
-	private Long idMedicamento;
-	
+	@Column(name = "Lote", nullable = true)
 	private String lote;
 	
+	@Column(name = "TipoDeAplicacao", nullable = true)
 	private String tipoAplicacao;
 	
+	@Column(name = "DiasDeTratamento", nullable = true)
 	private int diasTratamento;
 	
+	@Column(name = "Posologia", nullable = true)
 	private String posologia;
 	
+	@Column(name = "Observacoes", nullable = true)
 	private String observacoes;
 	
 	public EventosSaudeMedicacao() {

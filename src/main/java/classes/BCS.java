@@ -2,8 +2,14 @@ package classes;
 
 import java.sql.Date;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 public class BCS {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idBCS;
 	
 	private Long idBovino;

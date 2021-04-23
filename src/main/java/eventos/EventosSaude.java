@@ -2,21 +2,40 @@ package eventos;
 
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+import classes.Veterinario;
+
+@Entity
 public class EventosSaude {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@OneToMany (mappedBy = "idEventoSaude")
 	private Long idEvento_Saude;
 	
+	@Column(name = "Data")
 	private Date data;
 	
-	private Long idTipoEvento;
+	@Column(name = "TipoEvento")
+	@ManyToOne(targetEntity = TiposEvento.class)
+	private TiposEvento idTipoEvento;
 	
-	private Long idVeterinario;
+	@Column(name = "IdVeterinario")
+	@ManyToOne (targetEntity = Veterinario.class)
+	private Veterinario idVeterinario;
 	
 	public EventosSaude() {
 	
 	}
 
-	public EventosSaude(Date data, Long idTipoEvento, Long idVeterinario) {
+	public EventosSaude(Date data, TiposEvento idTipoEvento, Veterinario idVeterinario) {
 		super();
 		this.data = data;
 		this.idTipoEvento = idTipoEvento;

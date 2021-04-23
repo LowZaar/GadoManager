@@ -1,11 +1,25 @@
 package eventos;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+@Entity
 public class TiposEvento {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column (name = "IdTipoEvento", nullable = false)
+	@OneToMany(mappedBy = "idTipoEvento")
 	private Long idTipoEvento;
 	
+	@Column (name = "Descrição", nullable = true)
 	private String descricao;
 	
+	@Column (name = "Tag", nullable = true)
 	private char tag;
 	
 	public TiposEvento() {

@@ -1,7 +1,10 @@
 package classes;
 
+import javax.persistence.OneToMany;
+
 public class Vacina {
 	
+	@OneToMany(mappedBy = "idVacina")
 	private Long idVacina;
 	
 	private String descricao;
