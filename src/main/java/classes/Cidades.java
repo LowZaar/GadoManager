@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -16,7 +17,8 @@ public class Cidades {
 	private String nome;
 	
 	@ManyToOne
-	private Estados idEstado;
+	@JoinColumn(name = "idEstado")
+	private Estados estado;
 	
 	public Cidades() {
 	
@@ -38,12 +40,12 @@ public class Cidades {
 		this.nome = nome;
 	}
 
-	public Estados getIdEstado() {
-		return idEstado;
+	public Estados getEstado() {
+		return estado;
 	}
 
 	public void setIdEstado(Estados idEstado) {
-		this.idEstado = idEstado;
+		this.estado = idEstado;
 	}
 	
 	

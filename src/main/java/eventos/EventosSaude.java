@@ -2,25 +2,49 @@ package eventos;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import classes.Veterinario;
+
+@Entity
 public class EventosSaude {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idEvento_Saude;
 	
 	private Date data;
 	
-	private Long idTipoEvento;
+	@ManyToOne
+	@JoinColumn(name = "idTipoEvento")
+	private TiposEvento idTipoEvento;
 	
-	private Long idVeterinario;
+	@ManyToOne
+	@JoinColumn(name = "idVeterinario")
+	private Veterinario idVeterinario;
 	
 	public EventosSaude() {
 	
 	}
 
-	public EventosSaude(Date data, Long idTipoEvento, Long idVeterinario) {
+	public EventosSaude(Date data, TiposEvento idTipoEvento, Veterinario idVeterinario) {
 		super();
 		this.data = data;
 		this.idTipoEvento = idTipoEvento;
 		this.idVeterinario = idVeterinario;
+	}
+
+	public Long getIdEvento_Saude() {
+		return idEvento_Saude;
+	}
+
+	public void setIdEvento_Saude(Long idEvento_Saude) {
+		this.idEvento_Saude = idEvento_Saude;
 	}
 
 	public Date getData() {
@@ -31,19 +55,19 @@ public class EventosSaude {
 		this.data = data;
 	}
 
-	public Long getIdTipoEvento() {
+	public TiposEvento getIdTipoEvento() {
 		return idTipoEvento;
 	}
 
-	public void setIdTipoEvento(Long idTipoEvento) {
+	public void setIdTipoEvento(TiposEvento idTipoEvento) {
 		this.idTipoEvento = idTipoEvento;
 	}
 
-	public Long getIdVeterinario() {
+	public Veterinario getIdVeterinario() {
 		return idVeterinario;
 	}
 
-	public void setIdVeterinario(Long idVeterinario) {
+	public void setIdVeterinario(Veterinario idVeterinario) {
 		this.idVeterinario = idVeterinario;
 	}
 	

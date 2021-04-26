@@ -1,9 +1,11 @@
 package classes;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -11,6 +13,7 @@ public class Rebanhos {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "idRebanho")
 	private Long idRebanho;
 	
 	private String nome;
@@ -18,6 +21,7 @@ public class Rebanhos {
 	private String descricao;
 	
 	@ManyToOne
+	@JoinColumn(name = "idEmpresa_Pessoa")
 	private Empresas_Pessoas idEmpresaPessoa;
 	
 	public Rebanhos() {

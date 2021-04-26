@@ -8,7 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
 
 @Entity
 public class Empresas_Pessoas {
@@ -41,9 +43,10 @@ public class Empresas_Pessoas {
 	private String endereco;
 	
 	@ManyToOne
+	@JoinColumn(name = "idCidade")
 	private Cidades idCidade;
-	
-	private Estados idEstado;
+
+	private Long idEstado;
 	
 	private String cep;
 	
@@ -55,6 +58,8 @@ public class Empresas_Pessoas {
 		
 	}
 
+	
+	
 
 	public Long getIdEmpresa_Pessoa() {
 		return idEmpresa_Pessoa;
@@ -166,13 +171,13 @@ public class Empresas_Pessoas {
 	}
 
 
-	public Estados getIdEstado() {
+	public Long getIdEstado() {
 		return idEstado;
 	}
 
 
-	public void setIdEstado(int idEstado) {
-		this.idEstado = this.idCidade.getIdEstado();
+	public void setIdEstado(Estados idEstado) {
+		this.idEstado = idCidade.getEstado().getIdEstado();
 	}
 
 

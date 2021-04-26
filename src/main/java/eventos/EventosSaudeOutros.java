@@ -2,11 +2,23 @@ package eventos;
 
 import java.util.Date;
 
-public class EventosSaudeOutros  extends EventosSaude{
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
+@Entity
+public class EventosSaudeOutros{
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idEventosSaudeOutros;
 	
-	private Long idEventoSaude;
+	@ManyToOne
+	@JoinColumn(name = "idEventoSaude")
+	private EventosSaude idEventoSaude;
 	
 	private String Observacoes;
 	
@@ -16,10 +28,9 @@ public class EventosSaudeOutros  extends EventosSaude{
 	}
 
 
-	public EventosSaudeOutros(Date data, Long idTipoEvento, Long idVeterinario, Long idEventoSaude,
+	public EventosSaudeOutros(Date data, Long idTipoEvento, Long idVeterinario, EventosSaude idEventoSaude,
 			String observacoes) {
-		super(data, idTipoEvento, idVeterinario);
-		this.idEventoSaude = idEventoSaude;
+		this.setIdEventoSaude(idEventoSaude);
 		Observacoes = observacoes;
 	}
 
@@ -31,6 +42,16 @@ public class EventosSaudeOutros  extends EventosSaude{
 
 	public void setIdEventosSaudeOutros(Long idEventosSaudeOutros) {
 		this.idEventosSaudeOutros = idEventosSaudeOutros;
+	}
+
+
+	public EventosSaude getIdEventoSaude() {
+		return idEventoSaude;
+	}
+
+
+	public void setIdEventoSaude(EventosSaude idEventoSaude) {
+		this.idEventoSaude = idEventoSaude;
 	}
 
 

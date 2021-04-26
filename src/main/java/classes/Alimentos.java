@@ -1,14 +1,13 @@
 package classes;
 
 import java.util.Date;
-import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+
 
 @Entity
 public class Alimentos {
@@ -17,14 +16,16 @@ public class Alimentos {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idAlimento;
 	
-	@OneToMany
-	private List<Rebanhos> idRebanho;
+	@ManyToOne
+	@JoinColumn(name = "idRebanho")
+	private Rebanhos idRebanho;
 	
 	private Date dataInicio;
 	
 	private Date dataTermino;
 	
 	@ManyToOne
+	@JoinColumn(name = "idRacao")
 	private Racoes idracao;
 	
 	private String observacoes;
@@ -41,11 +42,11 @@ public class Alimentos {
 		this.idAlimento = idAlimento;
 	}
 
-	public List<Rebanhos> getIdRebanho() {
+	public Rebanhos getIdRebanho() {
 		return idRebanho;
 	}
 
-	public void setIdRebanho(List<Rebanhos> idRebanho) {
+	public void setIdRebanho(Rebanhos idRebanho) {
 		this.idRebanho = idRebanho;
 	}
 

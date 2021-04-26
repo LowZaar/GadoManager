@@ -6,7 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Medicacao {
+public class Medicamentos {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,7 +16,7 @@ public class Medicacao {
 	
 	private String principioAtivo;
 	
-	public Medicacao() {
+	public Medicamentos() {
 		
 	}
 

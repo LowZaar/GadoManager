@@ -2,13 +2,28 @@ package eventos;
 
 import java.util.Date;
 
-public class EventosSaudeVacina extends EventosSaude{
-	
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import classes.Vacina;
+
+@Entity
+public class EventosSaudeVacina {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idEventoSaudeVacina;
 	
-	private Long idEvento_Saude;
+	@ManyToOne
+	@JoinColumn(name = "idEventoSaude")
+	private	EventosSaude idEventoSaude;
 	
-	private Long idVacina;
+	@ManyToOne
+	@JoinColumn(name = "idVacina")
+	private Vacina idVacina;
 	
 	private String Lote;
 	
@@ -18,14 +33,15 @@ public class EventosSaudeVacina extends EventosSaude{
 	
 	
 	public EventosSaudeVacina() {
-		// TODO Auto-generated constructor stub
+	
+		
 	}
 
 
-	public EventosSaudeVacina(Date data, Long idTipoEvento, Long idVeterinario, Long idEvento_Saude, Long idVacina,
+	public EventosSaudeVacina(Date data, Long idTipoEvento, Long idVeterinario, EventosSaude idEvento_Saude, Vacina idVacina,
 			String lote, String tipoAplicacao, String observacoes) {
-		super(data, idTipoEvento, idVeterinario);
-		this.idEvento_Saude = idEvento_Saude;
+
+		this.setIdEventoSaude(idEvento_Saude);
 		this.idVacina = idVacina;
 		Lote = lote;
 		this.tipoAplicacao = tipoAplicacao;
@@ -43,12 +59,22 @@ public class EventosSaudeVacina extends EventosSaude{
 	}
 
 
-	public Long getIdVacina() {
+	public EventosSaude getIdEvento_Saude() {
+		return idEventoSaude;
+	}
+
+
+	public void setIdEventoSaude(EventosSaude idEvento_Saude) {
+		this.idEventoSaude = idEvento_Saude;
+	}
+
+
+	public Vacina getIdVacina() {
 		return idVacina;
 	}
 
 
-	public void setIdVacina(Long idVacina) {
+	public void setIdVacina(Vacina idVacina) {
 		this.idVacina = idVacina;
 	}
 

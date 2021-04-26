@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 
@@ -25,9 +26,11 @@ public class Bovinos {
 	private String nome;
 	
 	@ManyToOne
+	@JoinColumn(name = "idRebanho")
 	private Rebanhos idRebanho;
 	
 	@ManyToOne
+	@JoinColumn(name = "idRaca")
 	private Racas idRaca;
 	
 	private String categoria;
@@ -42,9 +45,11 @@ public class Bovinos {
 	private Date dataMorte;
 	
 	@ManyToOne
+	@JoinColumn(name = "idBovino_mae")
 	private Bovinos idBovino_mae;
 	
 	@ManyToOne
+	@JoinColumn(name = "idBovino_pai")
 	private Bovinos idBovino_pai;
 	
 
