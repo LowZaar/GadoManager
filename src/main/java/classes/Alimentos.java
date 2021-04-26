@@ -19,6 +19,7 @@ public class Alimentos {
 	private Long idAlimento;
 	
 	@OneToMany
+	@JoinColumn(name = "idRebanho")
 	private List<Rebanhos> idRebanho;
 	
 	private Date dataInicio;
