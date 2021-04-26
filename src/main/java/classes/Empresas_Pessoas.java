@@ -176,8 +176,8 @@ public class Empresas_Pessoas {
 	}
 
 
-	public void setIdEstado(Estados idEstado) {
-		this.idEstado = idCidade.getEstado().getIdEstado();
+	public void setIdEstado(Cidades idEstado) {
+		this.idEstado = idEstado.getEstado().getIdEstado();
 	}
 
 
