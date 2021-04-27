@@ -27,16 +27,30 @@ public class EventosSaudeBovinos{
 	@JoinColumn(name = "idBovino")
 	private Bovinos idBovino;
 	
+	private Date data;
+	
+	private String observacoes;
+
+	
 	public EventosSaudeBovinos() {
 	
 	}
 
-	public EventosSaudeBovinos(Date data, Long idTipoEvento, Long idVeterinario, Rebanhos idRebanho, Bovinos idBovino) {
+	
+
+	public EventosSaudeBovinos(Rebanhos idRebanho, Bovinos idBovino, Date data, String observacoes) {
+		super();
 		this.idRebanho = idRebanho;
 		this.idBovino = idBovino;
+		this.data = data;
+		this.observacoes = observacoes;
 	}
 
-	
+
+
+
+
+
 	public Long getIdEventosSaudeBovinos() {
 		return idEventosSaudeBovinos;
 	}
@@ -61,6 +75,27 @@ public class EventosSaudeBovinos{
 		this.idBovino = idBovino;
 	}
 
+
+	public Date getData() {
+		return data;
+	}
+
+
+	public void setData(Date data) {
+		this.data = data;
+	}
+
+
+	public String getObservacoes() {
+		return observacoes;
+	}
+
+
+	public void setObservacoes(String observacoes) {
+		this.observacoes = observacoes;
+	}
+
+	
 	
 	
 	
