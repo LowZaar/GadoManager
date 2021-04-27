@@ -10,9 +10,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 
 @Entity
+@Table(name = "Empresas_Pessoas")
 public class Empresas_Pessoas {
 	
 	@Id
@@ -57,8 +59,6 @@ public class Empresas_Pessoas {
 	public Empresas_Pessoas() {
 		
 	}
-
-	
 	
 
 	public Long getIdEmpresa_Pessoa() {

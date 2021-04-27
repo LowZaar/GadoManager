@@ -8,9 +8,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 
 @Entity
+@Table(name = "Bovinos")
 public class Bovinos {
 	
 	@Id
@@ -43,6 +45,9 @@ public class Bovinos {
 	
 	@Column(nullable = true)
 	private Date dataMorte;
+	
+	@ManyToOne
+	private Empresas_Pessoas idEmpresaPessoas;
 	
 	@ManyToOne
 	@JoinColumn(name = "idBovino_mae")
