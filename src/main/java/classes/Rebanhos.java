@@ -30,6 +30,16 @@ public class Rebanhos {
 		
 	}
 
+	
+	public Rebanhos(String nome, String descricao, Empresas_Pessoas idEmpresaPessoa) {
+		super();
+		this.nome = nome;
+		this.descricao = descricao;
+		this.idEmpresaPessoa = idEmpresaPessoa;
+	}
+
+
+
 	public Long getIdRebanho() {
 		return idRebanho;
 	}

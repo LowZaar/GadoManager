@@ -60,6 +60,32 @@ public class Empresas_Pessoas {
 		
 	}
 	
+	
+	
+	
+
+	public Empresas_Pessoas(String nome, String tipoPessoa, String cpf, String rg,
+			Date dataNascimento, String cnpj, String ie, String im, String endereco, Cidades idCidade, String cep,
+			String telefone, String email) {
+		this.nome = nome;
+		this.tipoPessoa = tipoPessoa;
+		this.cpf = cpf;
+		this.rg = rg;
+		this.dataNascimento = dataNascimento;
+		this.cnpj = cnpj;
+		this.ie = ie;
+		this.im = im;
+		this.endereco = endereco;
+		this.idCidade = idCidade;
+		this.idEstado = idCidade.getEstado().getIdEstado();
+		this.cep = cep;
+		this.telefone = telefone;
+		this.email = email;
+	}
+
+
+
+
 
 	public Long getIdEmpresa_Pessoa() {
 		return idEmpresa_Pessoa;

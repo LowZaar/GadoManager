@@ -20,6 +20,15 @@ public class Racas {
 		
 	}
 
+	
+	
+	public Racas(String nomeRaca) {
+		super();
+		this.nomeRaca = nomeRaca;
+	}
+
+
+
 	public Long getIdRaca() {
 		return idRaca;
 	}

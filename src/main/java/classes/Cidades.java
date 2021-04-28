@@ -25,6 +25,15 @@ public class Cidades {
 	public Cidades() {
 	
 	}
+	
+
+	public Cidades(String nome, Estados estado) {
+		super();
+		this.nome = nome;
+		this.estado = estado;
+	}
+
+
 
 	public Long getIdCidade() {
 		return idCidade;

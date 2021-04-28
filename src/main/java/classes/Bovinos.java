@@ -28,7 +28,7 @@ public class Bovinos {
 	private String nome;
 	
 	@ManyToOne
-	@JoinColumn(name = "idRebanho")
+	@JoinColumn(name = "idRebanho", nullable = true)
 	private Rebanhos idRebanho;
 	
 	@ManyToOne
@@ -61,7 +61,40 @@ public class Bovinos {
 	public Bovinos() {
 	
 	}
+	
+	public Bovinos(Long idAssociacao, Long idBrinco, String nome, Rebanhos idRebanho, Racas idRaca, String categoria,
+			char sexo, Date dataNascimento, Double pesoNascimento, Date dataMorte, Empresas_Pessoas idEmpresaPessoas,
+			Bovinos idBovino_mae, Bovinos idBovino_pai) {
+		this.idAssociacao = idAssociacao;
+		this.idBrinco = idBrinco;
+		this.nome = nome;
+		this.idRebanho = idRebanho;
+		this.idRaca = idRaca;
+		this.categoria = categoria;
+		this.sexo = sexo;
+		this.dataNascimento = dataNascimento;
+		this.pesoNascimento = pesoNascimento;
+		this.dataMorte = dataMorte;
+		this.idEmpresaPessoas = idEmpresaPessoas;
+		this.idBovino_mae = idBovino_mae;
+		this.idBovino_pai = idBovino_pai;
+	}
 
+
+	public Bovinos(Long idAssociacao, Long idBrinco, String nome, Rebanhos idRebanho, Racas idRaca, String categoria,
+			char sexo, Date dataNascimento, Double pesoNascimento, Empresas_Pessoas idEmpresaPessoas) {
+		super();
+		this.idAssociacao = idAssociacao;
+		this.idBrinco = idBrinco;
+		this.nome = nome;
+		this.idRebanho = idRebanho;
+		this.idRaca = idRaca;
+		this.categoria = categoria;
+		this.sexo = sexo;
+		this.dataNascimento = dataNascimento;
+		this.pesoNascimento = pesoNascimento;
+		this.idEmpresaPessoas = idEmpresaPessoas;
+	}
 
 	public Long getIdBovino() {
 		return idBovino;
