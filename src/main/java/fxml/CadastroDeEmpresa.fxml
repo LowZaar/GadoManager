@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<GridPane maxHeight="601.0" maxWidth="780.0" minHeight="601.0" minWidth="780.0" prefHeight="601.0" prefWidth="780.0" style="-fx-background-color: #000; -fx-border-radius: 5; -fx-border-insets: 5; -fx-border-color: #00FF00;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="249.0" minWidth="10.0" prefWidth="248.0" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="280.0" minWidth="10.0" prefWidth="270.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="391.0" minWidth="10.0" prefWidth="250.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <Button alignment="BOTTOM_LEFT" mnemonicParsing="false" style="-fx-background-color: #000; -fx-border-color: #0F0;" text="Salvar" textAlignment="CENTER" textFill="LIME" GridPane.rowIndex="3">
+         <GridPane.margin>
+            <Insets left="50.0" top="100.0" />
+         </GridPane.margin>
+      </Button>
+      <Label alignment="TOP_CENTER" text="Cadastro de Empresas" textAlignment="CENTER" textFill="WHITE" GridPane.columnSpan="3">
+         <font>
+            <Font size="38.0" />
+         </font>
+         <GridPane.margin>
+            <Insets left="200.0" />
+         </GridPane.margin>
+      </Label>
+      <Button cancelButton="true" mnemonicParsing="false" style="-fx-background-color: #000; -fx-border-color: #0F0;" text="Cancelar" textAlignment="CENTER" textFill="LIME" GridPane.columnIndex="2" GridPane.rowIndex="3">
+         <opaqueInsets>
+            <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+         </opaqueInsets>
+         <GridPane.margin>
+            <Insets left="150.0" top="100.0" />
+         </GridPane.margin>
+      </Button>
+      <TextField GridPane.columnIndex="2" GridPane.rowIndex="1">
+         <GridPane.margin>
+            <Insets bottom="100.0" left="50.0" right="50.0" />
+         </GridPane.margin>
+      </TextField>
+      <TextField GridPane.columnIndex="1">
+         <GridPane.margin>
+            <Insets left="50.0" right="50.0" top="200.0" />
+         </GridPane.margin>
+      </TextField>
+      <Label alignment="TOP_CENTER" text="CEP" textFill="WHITE" GridPane.columnIndex="2" GridPane.columnSpan="2">
+         <font>
+            <Font size="20.0" />
+         </font>
+         <GridPane.margin>
+            <Insets left="50.0" top="150.0" />
+         </GridPane.margin>
+      </Label>
+      <Label alignment="TOP_CENTER" text="Endereço" textFill="WHITE" GridPane.columnIndex="1">
+         <font>
+            <Font size="20.0" />
+         </font>
+         <GridPane.margin>
+            <Insets left="50.0" right="100.0" top="150.0" />
+         </GridPane.margin>
+      </Label>
+      <TextField GridPane.rowIndex="1">
+         <GridPane.margin>
+            <Insets left="100.0" top="50.0" />
+         </GridPane.margin>
+      </TextField>
+      <Label alignment="TOP_CENTER" text="CNPJ" textFill="WHITE" GridPane.columnSpan="2" GridPane.rowIndex="1">
+         <font>
+            <Font size="20.0" />
+         </font>
+         <GridPane.margin>
+            <Insets left="50.0" right="50.0" top="50.0" />
+         </GridPane.margin>
+      </Label>
+      <Label alignment="TOP_CENTER" text="CPF" textFill="WHITE" GridPane.rowIndex="1">
+         <font>
+            <Font size="20.0" />
+         </font>
+         <GridPane.margin>
+            <Insets left="50.0" right="50.0" top="200.0" />
+         </GridPane.margin>
+      </Label>
+      <PasswordField GridPane.rowIndex="1">
+         <GridPane.margin>
+            <Insets left="100.0" top="200.0" />
+         </GridPane.margin>
+      </PasswordField>
+      <Label alignment="TOP_CENTER" text="Data de Nascimento" textFill="WHITE" GridPane.columnSpan="2" GridPane.rowIndex="1">
+         <font>
+            <Font size="20.0" />
+         </font>
+         <GridPane.margin>
+            <Insets left="50.0" right="50.0" top="300.0" />
+         </GridPane.margin>
+      </Label>
+      <TextField GridPane.columnIndex="1" GridPane.rowIndex="1">
+         <GridPane.margin>
+            <Insets left="50.0" right="50.0" top="350.0" />
+         </GridPane.margin>
+      </TextField>
+      <Label alignment="TOP_CENTER" text="Insc. Municipal" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
+         <font>
+            <Font size="20.0" />
+         </font>
+         <GridPane.margin>
+            <Insets left="50.0" top="300.0" />
+         </GridPane.margin>
+      </Label>
+      <DatePicker GridPane.rowIndex="2">
+         <GridPane.margin>
+            <Insets left="50.0" top="50.0" />
+         </GridPane.margin>
+      </DatePicker>
+      <Label alignment="TOP_CENTER" text="Email" textFill="WHITE" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="3">
+         <font>
+            <Font size="20.0" />
+         </font>
+         <GridPane.margin>
+            <Insets bottom="50.0" left="50.0" right="50.0" />
+         </GridPane.margin>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </Label>
+      <PasswordField GridPane.columnIndex="1" GridPane.rowIndex="3">
+         <GridPane.margin>
+            <Insets left="50.0" right="50.0" />
+         </GridPane.margin>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </PasswordField>
+      <Label alignment="TOP_CENTER" text="Estado" textFill="WHITE" GridPane.columnIndex="1">
+         <font>
+            <Font size="20.0" />
+         </font>
+         <GridPane.margin>
+            <Insets left="50.0" right="50.0" top="300.0" />
+         </GridPane.margin>
+      </Label>
+      <TextField GridPane.columnIndex="1" GridPane.rowIndex="1">
+         <GridPane.margin>
+            <Insets left="50.0" right="50.0" top="200.0" />
+         </GridPane.margin>
+      </TextField>
+      <Label alignment="TOP_CENTER" text="Incs. Estadual" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
+         <font>
+            <Font size="20.0" />
+         </font>
+         <GridPane.margin>
+            <Insets left="50.0" right="50.0" top="150.0" />
+         </GridPane.margin>
+      </Label>
+      <TextField GridPane.rowIndex="1">
+         <GridPane.margin>
+            <Insets bottom="100.0" left="50.0" />
+         </GridPane.margin>
+      </TextField>
+      <Label alignment="TOP_CENTER" text="Nome" textFill="WHITE" GridPane.rowIndex="1">
+         <font>
+            <Font size="20.0" />
+         </font>
+         <GridPane.margin>
+            <Insets bottom="150.0" left="50.0" right="50.0" />
+         </GridPane.margin>
+      </Label>
+      <TextField GridPane.columnIndex="2" GridPane.rowIndex="1">
+         <GridPane.margin>
+            <Insets left="50.0" right="50.0" top="50.0" />
+         </GridPane.margin>
+      </TextField>
+      <Label alignment="TOP_CENTER" text="RG" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="1">
+         <font>
+            <Font size="20.0" />
+         </font>
+         <GridPane.margin>
+            <Insets left="50.0" right="50.0" />
+         </GridPane.margin>
+      </Label>
+      <TextField GridPane.columnIndex="2" GridPane.rowIndex="1">
+         <GridPane.margin>
+            <Insets left="50.0" right="50.0" top="200.0" />
+         </GridPane.margin>
+      </TextField>
+      <Label alignment="TOP_CENTER" text="Telefone" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="1">
+         <font>
+            <Font size="20.0" />
+         </font>
+         <GridPane.margin>
+            <Insets left="50.0" right="50.0" top="150.0" />
+         </GridPane.margin>
+      </Label>
+      <TextField GridPane.columnIndex="2" GridPane.rowIndex="1">
+         <GridPane.margin>
+            <Insets left="50.0" right="150.0" top="350.0" />
+         </GridPane.margin>
+      </TextField>
+      <Label alignment="TOP_CENTER" text="Tipo Pessoa" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="1">
+         <font>
+            <Font size="20.0" />
+         </font>
+         <GridPane.margin>
+            <Insets left="50.0" right="50.0" top="300.0" />
+         </GridPane.margin>
+      </Label>
+      <Label alignment="TOP_CENTER" text="Cidade" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="3">
+         <font>
+            <Font size="20.0" />
+         </font>
+         <GridPane.margin>
+            <Insets bottom="50.0" left="50.0" right="50.0" />
+         </GridPane.margin>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </Label>
+      <ComboBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+         <GridPane.margin>
+            <Insets left="50.0" top="50.0" />
+         </GridPane.margin>
+      </ComboBox>
+      <ComboBox prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
+         <GridPane.margin>
+            <Insets left="50.0" />
+         </GridPane.margin>
+      </ComboBox>
+   </children>
+</GridPane>

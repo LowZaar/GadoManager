@@ -30,6 +30,10 @@ public class Usuarios {
 	@JoinColumn(name = "idEmpresa_Pessoa")
 	private Empresas_Pessoas idEmpresas_Pessoa;
 	
+
+	
+	
+	
 	public Usuarios() {
 		
 	}

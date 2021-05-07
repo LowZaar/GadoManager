@@ -8,6 +8,8 @@ import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
 public class DAOHibernate <E> {
+
+	
 	
 	private static EntityManagerFactory emf;
 	private EntityManager em;
