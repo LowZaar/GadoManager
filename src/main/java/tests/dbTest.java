@@ -30,8 +30,13 @@ public class dbTest {
 		
 		Cidades cidade = new Cidades("Erechim", Estado.get(0));
 		
-		Empresas_Pessoas emp1 = new Empresas_Pessoas("Nome", "PF", "cpf1", "RG1", new Date(),
-				"cnpj", "ie", "im", "Endereço 1", cidade, "CEPCEPCEP", "123495123", "email@user.com");
+//		Empresas_Pessoas emp1 = new Empresas_Pessoas("Nome", "PF", "cpf1", "RG1", new Date(),
+//				"cnpj", "ie", "im", "Endereço 1", cidade, "CEPCEPCEP", "123495123", "email@user.com");
+		
+		Empresas_Pessoas emp1 = new Empresas_Pessoas();
+		
+		emp1.createPJ("Nome", new Date(), "cnpj", "ie", "im", "Endereço 1", cidade, cidade.getEstado().getIdEstado(), 
+				"CEPCEPCEP", "123495123", "email@user.com");
 		
 		Rebanhos reb1 = new Rebanhos("Rebanho 1 ", "Rebanho teste", emp1);
 		

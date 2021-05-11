@@ -1,19 +1,31 @@
 package controllers;
 
+import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
+import java.util.List;
 
 import classes.Cidades;
+import classes.Empresas_Pessoas;
 import classes.Estados;
+import classes.Usuarios;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import utils.DAOHibernate;
 
 public class cadastroEmpresaController {
 
@@ -36,7 +48,7 @@ public class cadastroEmpresaController {
 	private TextField txtCEP;
 
 	@FXML
-	private ComboBox<Estados> comboEstado;
+	private ComboBox<String> comboEstado;
 
 	@FXML
 	private TextField txtIE;
@@ -66,7 +78,77 @@ public class cadastroEmpresaController {
 	private Button btnCancelar;
 
 	@FXML
-	public void Salvar() {
+	private RadioButton radioTipoFisica;
+
+	@FXML
+	private RadioButton radioTipoJuridica;
+
+	@FXML
+	private PasswordField passSenha;
+
+	@FXML
+	public void Salvar() throws Exception {
+
+		String nomeEmp = txtNome.getText();
+		String cnpjEmp = txtCNPJ.getText();
+		String cpfEmp = passCPF.getText();
+		Date dataEmp = localDateToDate(dateDataNascimento.getValue());
+		String enderecoEmp = txtEndereco.getText();
+		String cepEmp = txtCEP.getText();
+		String estadoEmp = comboEstado.getValue();
+		String ieEmp = txtIE.getText();
+		String imEmp = txtIM.getText();
+		String emailEmp = passEmail.getText();
+		String senhaEmp = passSenha.getText();
+		String rgEmp = txtRG.getText();
+		String telefoneEmp = txtTelefone.getText();
+		Cidades cidadeEmp = comboCidade.getValue();
+
+		DAOHibernate<Empresas_Pessoas> daoEmp = new DAOHibernate<>();
+
+		if (txtTP.equals("PF")) {
+
+			Empresas_Pessoas empPF = new Empresas_Pessoas();
+			
+			Long estadoId = (long) comboEstado.getItems().indexOf(estadoEmp);
+
+			empPF = empPF.createPF(nomeEmp, cpfEmp, rgEmp, dataEmp, enderecoEmp, cidadeEmp, estadoId, cepEmp,
+					telefoneEmp, emailEmp);
+
+			daoEmp.beginTransaction().save(empPF).commitTransaction().closeAll();
+
+			createUser(nomeEmp, emailEmp, senhaEmp, empPF);
+
+			URL fxmlFile = getClass().getResource("/fxml/Login.fxml");
+
+			GridPane loginGrid = FXMLLoader.load(fxmlFile);
+
+			Stage window = (Stage) btnSalvar.getScene().getWindow();
+
+			window.setScene(new Scene(loginGrid));
+
+		} else if (txtTP.equals("PJ")) {
+
+			Empresas_Pessoas empPJ = new Empresas_Pessoas();
+			
+			Long estadoId = (long) comboEstado.getItems().indexOf(estadoEmp);
+
+			empPJ = empPJ.createPJ(nomeEmp, dataEmp, cnpjEmp, ieEmp, imEmp, enderecoEmp, cidadeEmp, estadoId, cepEmp,
+					telefoneEmp, emailEmp);
+
+			daoEmp.beginTransaction().save(empPJ).commitTransaction().closeAll();
+
+			createUser(nomeEmp, emailEmp, senhaEmp, empPJ);
+
+			URL fxmlFile = getClass().getResource("/fxml/Login.fxml");
+
+			GridPane loginGrid = FXMLLoader.load(fxmlFile);
+
+			Stage window = (Stage) btnSalvar.getScene().getWindow();
+
+			window.setScene(new Scene(loginGrid));
+
+		}
 
 	}
 
@@ -82,4 +164,56 @@ public class cadastroEmpresaController {
 		window.setScene(new Scene(loginGrid));
 	}
 
+	public Date localDateToDate(LocalDate data) {
+		ZoneId zoneidDefault = ZoneId.systemDefault();
+
+		return Date.from(data.atStartOfDay(zoneidDefault).toInstant());
+	}
+
+	public void createUser(String nomeEmpresa, String email, String senha, Empresas_Pessoas empresa) {
+
+		DAOHibernate<Usuarios> daoUser = new DAOHibernate<>();
+
+		String nome = nomeEmpresa.replaceAll(" ", "").toLowerCase();
+
+		Usuarios user1 = new Usuarios(nomeEmpresa, email, nome, senha, true, empresa);
+
+		daoUser.beginTransaction().save(user1).closeAll();
+
+		Alert alertuser = new Alert(AlertType.CONFIRMATION);
+
+		alertuser.setContentText("Usuario mestre criado para empresa " + nomeEmpresa + " \n" + "Login de usuario : "
+				+ user1.getNome() + " \n" + "Senha do usuario : " + user1.getSenha());
+	}
+
+	public void PFChecked() {
+		if (radioTipoFisica.isSelected() == true) {
+			radioTipoJuridica.setSelected(false);
+			
+		}
+	}
+
+	public void PJChecked() {
+		if (radioTipoJuridica.isSelected() == true) {
+			radioTipoFisica.setSelected(false);
+		}
+	}
+
+	public void estadoCombo() {
+
+		DAOHibernate<Estados> daoE = new DAOHibernate<>();
+		
+		List<Estados> list = daoE.getAllByNamedQuery("selectEstados");
+		
+		System.out.println(list);
+		
+		for (Estados estados : list) {
+			comboEstado.getItems().add(estados.getSigla());
+			
+		}
+
+	}
+
+	
+	
 }

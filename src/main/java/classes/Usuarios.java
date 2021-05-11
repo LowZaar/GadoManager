@@ -38,6 +38,21 @@ public class Usuarios {
 		
 	}
 
+	
+	public Usuarios(String nome, String email, String usuario, String senha, boolean usuarioMestre,
+			Empresas_Pessoas idEmpresas_Pessoa) {
+		super();
+		this.nome = nome;
+		this.email = email;
+		this.usuario = usuario;
+		this.senha = senha;
+		this.usuarioMestre = usuarioMestre;
+		this.idEmpresas_Pessoa = idEmpresas_Pessoa;
+	}
+
+
+
+
 	public Long getIdUsuario() {
 		return idUsuario;
 	}

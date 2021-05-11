@@ -10,7 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import classes.Bovinos;
-import classes.Rebanhos;
+
 
 @Entity
 public class EventosSaudeBovinos{
@@ -20,8 +20,8 @@ public class EventosSaudeBovinos{
 	private Long idEventosSaudeBovinos;
 	
 	@ManyToOne
-	@JoinColumn(name = "idRebanho")
-	private Rebanhos idRebanho;
+	@JoinColumn(name = "idEventoSaude")
+	private EventosSaude idEventoSaude;
 	
 	@ManyToOne
 	@JoinColumn(name = "idBovino")
@@ -36,17 +36,16 @@ public class EventosSaudeBovinos{
 	
 	}
 
-	
 
-	public EventosSaudeBovinos(Rebanhos idRebanho, Bovinos idBovino, Date data, String observacoes) {
+
+
+	public EventosSaudeBovinos(EventosSaude idEventoSaude, Bovinos idBovino, Date data, String observacoes) {
 		super();
-		this.idRebanho = idRebanho;
+		this.idEventoSaude = idEventoSaude;
 		this.idBovino = idBovino;
 		this.data = data;
 		this.observacoes = observacoes;
 	}
-
-
 
 
 
@@ -59,13 +58,18 @@ public class EventosSaudeBovinos{
 		this.idEventosSaudeBovinos = idEventosSaudeBovinos;
 	}
 
-	public Rebanhos getIdRebanho() {
-		return idRebanho;
+
+	public EventosSaude getIdEventoSaude() {
+		return idEventoSaude;
 	}
 
-	public void setIdRebanho(Rebanhos idRebanho) {
-		this.idRebanho = idRebanho;
+
+
+	public void setIdEventoSaude(EventosSaude idEventoSaude) {
+		this.idEventoSaude = idEventoSaude;
 	}
+
+
 
 	public Bovinos getIdBovino() {
 		return idBovino;

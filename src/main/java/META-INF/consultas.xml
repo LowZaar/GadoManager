@@ -10,5 +10,11 @@
 		</query>
 	</named-query>
 
+	<named-query name="selectEstados">
+		<query>
+			SELECT e from Estados e ORDER BY e.Sigla
+		</query>
+	</named-query>
+
 
 </entity-mappings>

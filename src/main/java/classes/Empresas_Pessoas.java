@@ -59,33 +59,64 @@ public class Empresas_Pessoas {
 	public Empresas_Pessoas() {
 		
 	}
-	
-	
-	
-	
 
-	public Empresas_Pessoas(String nome, String tipoPessoa, String cpf, String rg,
-			Date dataNascimento, String cnpj, String ie, String im, String endereco, Cidades idCidade, String cep,
-			String telefone, String email) {
+	//Pessoa Fisica
+	
+	public Empresas_Pessoas createPF(String nome,String cpf, String rg, Date dataNascimento,
+			String endereco, Cidades idCidade, Long idEstado, String cep, String telefone, String email){
+		
+		Empresas_Pessoas empPF = new Empresas_Pessoas(nome, "PF", cpf, rg, dataNascimento,
+				endereco, idCidade, idEstado, cep, telefone, email);
+		
+		return empPF;
+	}
+	
+	
+	private Empresas_Pessoas(String nome, String tipoPessoa, String cpf, String rg, Date dataNascimento,
+			String endereco, Cidades idCidade, Long idEstado, String cep, String telefone, String email) {
 		this.nome = nome;
 		this.tipoPessoa = tipoPessoa;
 		this.cpf = cpf;
 		this.rg = rg;
+		this.dataNascimento = dataNascimento;
+		this.endereco = endereco;
+		this.idCidade = idCidade;
+		this.idEstado = idEstado;
+		this.cep = cep;
+		this.telefone = telefone;
+		this.email = email;
+	}
+	
+	// Pessoa Juridica;
+	
+	public Empresas_Pessoas createPJ(String nome, Date dataNascimento, String cnpj, String ie, String im,
+			String endereco, Cidades idCidade, Long idEstado, String cep, String telefone, String email) {
+	
+		Empresas_Pessoas empPJ = new Empresas_Pessoas(nome, "PJ", dataNascimento, cnpj, 
+				ie, im, endereco, idCidade, idEstado, cep, telefone, email);
+		
+		return empPJ;
+	}
+	
+	
+	
+
+	private Empresas_Pessoas(String nome, String tipoPessoa, Date dataNascimento, String cnpj, String ie, String im,
+			String endereco, Cidades idCidade, Long idEstado, String cep, String telefone, String email) {
+		super();
+		this.nome = nome;
+		this.tipoPessoa = tipoPessoa;
 		this.dataNascimento = dataNascimento;
 		this.cnpj = cnpj;
 		this.ie = ie;
 		this.im = im;
 		this.endereco = endereco;
 		this.idCidade = idCidade;
-		this.idEstado = idCidade.getEstado().getIdEstado();
+		this.idEstado = idEstado;
 		this.cep = cep;
 		this.telefone = telefone;
 		this.email = email;
 	}
-
-
-
-
 
 	public Long getIdEmpresa_Pessoa() {
 		return idEmpresa_Pessoa;
