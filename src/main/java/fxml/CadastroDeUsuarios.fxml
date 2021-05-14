@@ -64,38 +64,38 @@
             <Insets left="50.0" right="50.0" top="50.0" />
          </GridPane.margin>
       </Label>
-      <PasswordField GridPane.rowIndex="1">
+      <PasswordField GridPane.columnIndex="1" GridPane.rowIndex="2">
          <GridPane.margin>
-            <Insets left="50.0" right="100.0" top="100.0" />
+            <Insets bottom="50.0" left="50.0" right="50.0" />
          </GridPane.margin>
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
       </PasswordField>
-      <TextField GridPane.rowIndex="1">
+      <TextField GridPane.rowIndex="2">
          <GridPane.margin>
-            <Insets left="50.0" right="50.0" top="250.0" />
+            <Insets bottom="50.0" left="50.0" right="50.0" />
          </GridPane.margin>
       </TextField>
-      <Label alignment="TOP_CENTER" text="Email" textFill="WHITE" GridPane.columnSpan="2" GridPane.rowIndex="1">
+      <Label alignment="TOP_CENTER" text="Email" textFill="WHITE" GridPane.columnSpan="2" GridPane.rowIndex="2">
          <font>
             <Font size="20.0" />
          </font>
          <GridPane.margin>
-            <Insets left="50.0" top="200.0" />
+            <Insets bottom="100.0" left="50.0" />
          </GridPane.margin>
       </Label>
-      <TextField GridPane.columnIndex="1" GridPane.rowIndex="1">
+      <TextField GridPane.rowIndex="1">
          <GridPane.margin>
-            <Insets left="50.0" right="50.0" top="250.0" />
+            <Insets left="50.0" right="50.0" top="100.0" />
          </GridPane.margin>
       </TextField>
-      <Label alignment="TOP_CENTER" text="Senha" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
+      <Label alignment="TOP_CENTER" text="Senha" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="2">
          <font>
             <Font size="20.0" />
          </font>
          <GridPane.margin>
-            <Insets left="50.0" top="200.0" />
+            <Insets bottom="100.0" left="50.0" />
          </GridPane.margin>
       </Label>
       <Label alignment="TOP_CENTER" text="Usuario Mestre" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">

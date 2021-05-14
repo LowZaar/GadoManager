@@ -7,6 +7,8 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
+import org.hibernate.query.NativeQuery;
+
 public class DAOHibernate <E> {
 
 	
@@ -99,6 +101,7 @@ public class DAOHibernate <E> {
 		
 		return query.getResultList();
 	}
+	
 	
 	public E getFirst(String queryName, Object... params) {
 		List<E> lista = getAllByNamedQuery(queryName, params);

@@ -16,5 +16,13 @@
 		</query>
 	</named-query>
 
+	
+
+
+	<named-query name="selectCidadebyEstado">
+		<query>
+			SELECT c from Cidades c where c.estado = :idEstado
+		</query>
+	</named-query>
 
 </entity-mappings>

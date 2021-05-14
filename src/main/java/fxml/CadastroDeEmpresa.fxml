@@ -79,7 +79,7 @@
             <Insets left="100.0" top="50.0" />
          </GridPane.margin>
       </TextField>
-      <Label alignment="TOP_CENTER" text="CNPJ" textFill="WHITE" GridPane.columnSpan="2" GridPane.rowIndex="1">
+      <Label fx:id="LabelCNPJ" alignment="TOP_CENTER" text="CNPJ" textFill="WHITE" GridPane.columnSpan="2" GridPane.rowIndex="1">
          <font>
             <Font size="20.0" />
          </font>
@@ -87,7 +87,7 @@
             <Insets left="50.0" right="50.0" top="50.0" />
          </GridPane.margin>
       </Label>
-      <Label alignment="TOP_CENTER" text="CPF" textFill="WHITE" GridPane.rowIndex="1">
+      <Label fx:id="LabelCPF" alignment="TOP_CENTER" text="CPF" textFill="WHITE" GridPane.rowIndex="1">
          <font>
             <Font size="20.0" />
          </font>
@@ -95,11 +95,6 @@
             <Insets left="50.0" right="50.0" top="200.0" />
          </GridPane.margin>
       </Label>
-      <PasswordField fx:id="passCPF" GridPane.rowIndex="1">
-         <GridPane.margin>
-            <Insets left="100.0" top="200.0" />
-         </GridPane.margin>
-      </PasswordField>
       <Label alignment="TOP_CENTER" text="Data de Nascimento" textFill="WHITE" GridPane.columnSpan="2" GridPane.rowIndex="1">
          <font>
             <Font size="20.0" />
@@ -137,14 +132,6 @@
             <Insets />
          </opaqueInsets>
       </Label>
-      <PasswordField fx:id="txtEmail" GridPane.columnIndex="1" GridPane.rowIndex="3">
-         <GridPane.margin>
-            <Insets left="50.0" right="50.0" />
-         </GridPane.margin>
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-      </PasswordField>
       <Label alignment="TOP_CENTER" text="Estado" textFill="WHITE" GridPane.columnIndex="1">
          <font>
             <Font size="20.0" />
@@ -221,12 +208,12 @@
             <Insets left="50.0" top="50.0" />
          </GridPane.margin>
       </ComboBox>
-      <RadioButton fx:id="radioTipoFisica" mnemonicParsing="false" onAction="#PFChecked" text="Pessoa Fisica" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="2">
+      <RadioButton fx:id="radioTipoFisica" mnemonicParsing="false" onMouseClicked="#radioCheck" text="Pessoa Fisica" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets left="50.0" />
          </GridPane.margin>
       </RadioButton>
-      <RadioButton fx:id="radioTipoJuridica" layoutX="584.0" layoutY="376.0" mnemonicParsing="false" onAction="#PJChecked" text="Pessoa Juridica" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="2">
+      <RadioButton fx:id="radioTipoJuridica" layoutX="584.0" layoutY="376.0" mnemonicParsing="false" onMouseClicked="#radioCheck" text="Pessoa Juridica" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets left="50.0" top="50.0" />
          </GridPane.margin>
@@ -244,10 +231,20 @@
             <Insets left="50.0" />
          </GridPane.margin>
       </PasswordField>
-      <TextField fx:id="txtCidade" GridPane.columnIndex="2" GridPane.rowIndex="3">
+      <TextField fx:id="txtCPF" GridPane.rowIndex="2">
+         <GridPane.margin>
+            <Insets bottom="100.0" left="100.0" />
+         </GridPane.margin>
+      </TextField>
+      <TextField fx:id="txtEmail" GridPane.columnIndex="1" GridPane.rowIndex="3">
          <GridPane.margin>
             <Insets left="50.0" right="50.0" />
          </GridPane.margin>
       </TextField>
+      <ComboBox fx:id="comboCidade" onAction="#populateCidade" onMouseClicked="#populateCidade" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
+         <GridPane.margin>
+            <Insets left="50.0" right="50.0" />
+         </GridPane.margin>
+      </ComboBox>
    </children>
 </GridPane>

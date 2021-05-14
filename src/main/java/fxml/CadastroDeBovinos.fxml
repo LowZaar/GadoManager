@@ -45,12 +45,12 @@
             <Insets left="135.0" top="100.0" />
          </GridPane.margin>
       </Button>
-      <TextField>
+      <TextField fx:id="txtCategoria">
          <GridPane.margin>
             <Insets left="50.0" top="200.0" />
          </GridPane.margin>
       </TextField>
-      <TextField GridPane.columnIndex="1">
+      <TextField fx:id="txtNome" GridPane.columnIndex="1">
          <GridPane.margin>
             <Insets left="50.0" right="50.0" top="200.0" />
          </GridPane.margin>
@@ -71,11 +71,6 @@
             <Insets left="50.0" right="100.0" top="150.0" />
          </GridPane.margin>
       </Label>
-      <TextField GridPane.columnIndex="2" GridPane.rowIndex="2">
-         <GridPane.margin>
-            <Insets left="50.0" right="50.0" top="50.0" />
-         </GridPane.margin>
-      </TextField>
       <Label alignment="TOP_CENTER" text="Data Morte" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="2">
          <font>
             <Font size="20.0" />
@@ -100,7 +95,7 @@
             <Insets bottom="150.0" left="50.0" right="50.0" />
          </GridPane.margin>
       </Label>
-      <TextField GridPane.rowIndex="3">
+      <TextField fx:id="txtPesoNascimento" GridPane.rowIndex="3">
          <GridPane.margin>
             <Insets left="50.0" right="50.0" />
          </GridPane.margin>
@@ -113,7 +108,7 @@
             <Insets bottom="50.0" left="50.0" />
          </GridPane.margin>
       </Label>
-      <DatePicker GridPane.rowIndex="2">
+      <DatePicker fx:id="dateDataNascimento" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets bottom="100.0" left="50.0" />
          </GridPane.margin>
@@ -129,7 +124,7 @@
             <Insets />
          </opaqueInsets>
       </Label>
-      <TextField GridPane.columnIndex="1">
+      <TextField fx:id="txtSexo" GridPane.columnIndex="1">
          <GridPane.margin>
             <Insets left="100.0" right="50.0" top="350.0" />
          </GridPane.margin>
@@ -158,11 +153,6 @@
             <Insets bottom="150.0" left="50.0" right="50.0" />
          </GridPane.margin>
       </Label>
-      <TextField GridPane.columnIndex="2" GridPane.rowIndex="1">
-         <GridPane.margin>
-            <Insets left="50.0" right="50.0" top="50.0" />
-         </GridPane.margin>
-      </TextField>
       <Label alignment="TOP_CENTER" text="Raça" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="1">
          <font>
             <Font size="20.0" />
@@ -171,11 +161,6 @@
             <Insets left="50.0" right="50.0" />
          </GridPane.margin>
       </Label>
-      <TextField GridPane.columnIndex="2" GridPane.rowIndex="1">
-         <GridPane.margin>
-            <Insets left="50.0" right="50.0" top="200.0" />
-         </GridPane.margin>
-      </TextField>
       <Label alignment="TOP_CENTER" text="Rebanho" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="1">
          <font>
             <Font size="20.0" />
@@ -195,30 +180,45 @@
             <Insets />
          </opaqueInsets>
       </Label>
-      <ComboBox prefWidth="150.0" GridPane.rowIndex="1">
+      <ComboBox fx:id="comboAssociacao" prefWidth="150.0" GridPane.rowIndex="1">
          <GridPane.margin>
             <Insets left="50.0" top="50.0" />
          </GridPane.margin>
       </ComboBox>
-      <ComboBox prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+      <ComboBox fx:id="comboEmpresa" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
          <GridPane.margin>
             <Insets bottom="100.0" left="50.0" />
          </GridPane.margin>
       </ComboBox>
-      <ComboBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+      <ComboBox fx:id="comboBrinco" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets bottom="100.0" left="50.0" />
          </GridPane.margin>
       </ComboBox>
-      <ComboBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+      <ComboBox fx:id="comboBovinoPai" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
          <GridPane.margin>
             <Insets left="50.0" />
          </GridPane.margin>
       </ComboBox>
-      <ComboBox prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
+      <ComboBox fx:id="comboBovinoMae" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
          <GridPane.margin>
             <Insets left="50.0" />
          </GridPane.margin>
       </ComboBox>
+      <ComboBox fx:id="comboRaca" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+         <GridPane.margin>
+            <Insets left="50.0" top="50.0" />
+         </GridPane.margin>
+      </ComboBox>
+      <ComboBox fx:id="comboRebanho" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+         <GridPane.margin>
+            <Insets bottom="100.0" left="50.0" />
+         </GridPane.margin>
+      </ComboBox>
+      <DatePicker fx:id="dateDataMorte" GridPane.columnIndex="2" GridPane.rowIndex="2">
+         <GridPane.margin>
+            <Insets left="50.0" right="50.0" top="50.0" />
+         </GridPane.margin>
+      </DatePicker>
    </children>
 </GridPane>

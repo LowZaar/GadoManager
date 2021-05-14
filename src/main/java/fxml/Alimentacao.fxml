@@ -86,27 +86,27 @@
             <Insets left="50.0" top="100.0" />
          </GridPane.margin>
       </Label>
-      <DatePicker>
+      <DatePicker fx:id="DateInicio">
          <GridPane.margin>
             <Insets left="50.0" top="150.0" />
          </GridPane.margin>
       </DatePicker>
-      <DatePicker GridPane.columnIndex="1">
+      <DatePicker fx:id="DateFinal" GridPane.columnIndex="1">
          <GridPane.margin>
             <Insets left="50.0" top="150.0" />
          </GridPane.margin>
       </DatePicker>
-      <ComboBox prefWidth="150.0" GridPane.rowIndex="2">
+      <ComboBox fx:id="ComboRebanho" prefWidth="150.0" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets bottom="50.0" left="50.0" />
          </GridPane.margin>
       </ComboBox>
-      <ComboBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+      <ComboBox fx:id="ComboRacao" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets bottom="50.0" right="50.0" />
          </GridPane.margin>
       </ComboBox>
-      <TextArea prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="1">
+      <TextArea fx:id="txtObservacoes" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="1">
          <GridPane.margin>
             <Insets left="50.0" right="50.0" top="75.0" />
          </GridPane.margin>

@@ -1,6 +1,5 @@
 package controllers;
 
-import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -11,7 +10,6 @@ import classes.Cidades;
 import classes.Empresas_Pessoas;
 import classes.Estados;
 import classes.Usuarios;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -20,6 +18,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
@@ -30,13 +29,19 @@ import utils.DAOHibernate;
 public class cadastroEmpresaController {
 
 	@FXML
+	private Label LabelCPF;
+
+	@FXML
+	private Label LabelCNPJ;
+
+	@FXML
 	private TextField txtNome;
 
 	@FXML
 	private TextField txtCNPJ;
 
 	@FXML
-	private PasswordField passCPF;
+	private TextField txtCPF;
 
 	@FXML
 	private DatePicker dateDataNascimento;
@@ -57,7 +62,7 @@ public class cadastroEmpresaController {
 	private TextField txtIM;
 
 	@FXML
-	private PasswordField passEmail;
+	private TextField txtEmail;
 
 	@FXML
 	private TextField txtRG;
@@ -67,9 +72,9 @@ public class cadastroEmpresaController {
 
 	@FXML
 	private TextField txtTP;
-
+	
 	@FXML
-	private ComboBox<Cidades> comboCidade;
+	private ComboBox<String> comboCidade;
 
 	@FXML
 	private Button btnSalvar;
@@ -91,28 +96,32 @@ public class cadastroEmpresaController {
 
 		String nomeEmp = txtNome.getText();
 		String cnpjEmp = txtCNPJ.getText();
-		String cpfEmp = passCPF.getText();
+		String cpfEmp = txtCPF.getText();
 		Date dataEmp = localDateToDate(dateDataNascimento.getValue());
 		String enderecoEmp = txtEndereco.getText();
 		String cepEmp = txtCEP.getText();
 		String estadoEmp = comboEstado.getValue();
 		String ieEmp = txtIE.getText();
 		String imEmp = txtIM.getText();
-		String emailEmp = passEmail.getText();
+		String emailEmp = txtEmail.getText();
 		String senhaEmp = passSenha.getText();
 		String rgEmp = txtRG.getText();
 		String telefoneEmp = txtTelefone.getText();
-		Cidades cidadeEmp = comboCidade.getValue();
+		int cidadeEmp = comboCidade.getValue().indexOf(comboCidade.getValue());
 
 		DAOHibernate<Empresas_Pessoas> daoEmp = new DAOHibernate<>();
 
-		if (txtTP.equals("PF")) {
+		if (radioTipoFisica.isSelected()) {
+
+			System.out.println("User PF");
 
 			Empresas_Pessoas empPF = new Empresas_Pessoas();
-			
+
 			Long estadoId = (long) comboEstado.getItems().indexOf(estadoEmp);
 
-			empPF = empPF.createPF(nomeEmp, cpfEmp, rgEmp, dataEmp, enderecoEmp, cidadeEmp, estadoId, cepEmp,
+			Cidades cidadeObj = findCidade(cidadeEmp);
+
+			empPF = empPF.createPF(nomeEmp, cpfEmp, rgEmp, dataEmp, enderecoEmp, cidadeObj, estadoId, cepEmp,
 					telefoneEmp, emailEmp);
 
 			daoEmp.beginTransaction().save(empPF).commitTransaction().closeAll();
@@ -127,13 +136,17 @@ public class cadastroEmpresaController {
 
 			window.setScene(new Scene(loginGrid));
 
-		} else if (txtTP.equals("PJ")) {
+		} else if (radioTipoJuridica.isSelected()) {
+
+			System.out.println("User PJ");
 
 			Empresas_Pessoas empPJ = new Empresas_Pessoas();
-			
+
 			Long estadoId = (long) comboEstado.getItems().indexOf(estadoEmp);
 
-			empPJ = empPJ.createPJ(nomeEmp, dataEmp, cnpjEmp, ieEmp, imEmp, enderecoEmp, cidadeEmp, estadoId, cepEmp,
+			Cidades cidadeObj = findCidade(cidadeEmp);
+			
+			empPJ = empPJ.createPJ(nomeEmp, dataEmp, cnpjEmp, ieEmp, imEmp, enderecoEmp, cidadeObj, estadoId, cepEmp,
 					telefoneEmp, emailEmp);
 
 			daoEmp.beginTransaction().save(empPJ).commitTransaction().closeAll();
@@ -186,34 +199,83 @@ public class cadastroEmpresaController {
 				+ user1.getNome() + " \n" + "Senha do usuario : " + user1.getSenha());
 	}
 
-	public void PFChecked() {
-		if (radioTipoFisica.isSelected() == true) {
-			radioTipoJuridica.setSelected(false);
+	public void radioCheck() {
+		if (radioTipoFisica.isSelected()) {
 			
-		}
-	}
-
-	public void PJChecked() {
-		if (radioTipoJuridica.isSelected() == true) {
+			radioTipoJuridica.setSelected(false);
+			txtCNPJ.setVisible(false);
+			LabelCNPJ.setVisible(false);
+			
+		}else if (radioTipoJuridica.isSelected()) {
 			radioTipoFisica.setSelected(false);
+			txtCPF.setVisible(false);
+			LabelCPF.setVisible(false);
+		}else if(!radioTipoFisica.isSelected() && !radioTipoJuridica.isSelected()){
+			
+			txtCPF.setVisible(true);
+			LabelCPF.setVisible(true);
+			
+			txtCNPJ.setVisible(true);
+			LabelCNPJ.setVisible(true);
 		}
+		
 	}
-
+	
+	
 	public void estadoCombo() {
 
 		DAOHibernate<Estados> daoE = new DAOHibernate<>();
-		
+
 		List<Estados> list = daoE.getAllByNamedQuery("selectEstados");
-		
+
 		System.out.println(list);
 		
+		comboEstado.getItems().add("Selecione...");
 		for (Estados estados : list) {
 			comboEstado.getItems().add(estados.getSigla());
-			
-		}
 
+		}
+		
+		daoE.closeAll();
+	}
+
+	public Cidades findCidade(int cidadeIndex) {
+		
+		DAOHibernate<Cidades> daoCity = new DAOHibernate<>();
+
+		Cidades cidadeObj = daoCity.getAllById(cidadeIndex);
+		
+		daoCity.closeAll();
+		return cidadeObj;
 	}
 
 	
-	
+	public void populateCidade() {
+		
+		comboEstado.getItems().add("Selecione...");
+		
+		System.out.println("populating cidades");
+		System.out.println();
+		
+		DAOHibernate<Cidades> daoCidadeEstado = new DAOHibernate<>();
+		
+		int idEstado = comboEstado.getSelectionModel().getSelectedIndex();
+			
+		System.out.println(idEstado);
+		
+		DAOHibernate<Estados> daoE = new DAOHibernate<>();
+		
+		Estados estadoObj = daoE.getAllById(idEstado);
+		
+		List<Cidades> list = daoCidadeEstado.getAllByNamedQuery("selectCidadebyEstado", idEstado);
+		
+		System.out.println(list);
+		
+		
+		for (Cidades cidades : list) {
+			comboCidade.getItems().add(cidades.getNome());
+		}
+		
+	}
+
 }

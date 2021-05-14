@@ -11,9 +11,10 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<GridPane maxHeight=519.0 maxWidth="297.0" minHeight="519.0" minWidth="297.0" prefHeight="519.0" prefWidth="297.0" style="-fx-background-color: #000; -fx-border-radius: 5; -fx-border-insets: 5; -fx-border-color: #00FF00;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<GridPane maxHeight="519.0" maxWidth="297.0" minHeight="519.0" minWidth="297.0" prefHeight="519.0" prefWidth="297.0" style="-fx-background-color: #000; -fx-border-radius: 5; -fx-border-insets: 5; -fx-border-color: #00FF00;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+      <ColumnConstraints />
   </columnConstraints>
   <rowConstraints>
     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -34,7 +35,7 @@
             <Insets bottom="50.0" left="35.0" />
          </GridPane.margin>
       </Label>
-      <TextField GridPane.columnSpan="2" GridPane.rowIndex="1">
+      <TextField fx:id="txtIndiceBCS" GridPane.columnSpan="2" GridPane.rowIndex="1">
          <GridPane.margin>
             <Insets bottom="200.0" left="50.0" right="60.0" />
          </GridPane.margin>
@@ -63,12 +64,12 @@
             <Insets left="50.0" top="100.0" />
          </GridPane.margin>
       </Label>
-      <DatePicker GridPane.columnSpan="2" GridPane.rowIndex="1">
+      <DatePicker fx:id="dateData" GridPane.columnSpan="2" GridPane.rowIndex="1">
          <GridPane.margin>
             <Insets bottom="50.0" left="50.0" />
          </GridPane.margin>
       </DatePicker>
-      <ComboBox prefWidth="150.0" GridPane.rowIndex="2">
+      <ComboBox fx:id="ComboBovino" prefWidth="150.0" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets bottom="190.0" left="50.0" />
          </GridPane.margin>
