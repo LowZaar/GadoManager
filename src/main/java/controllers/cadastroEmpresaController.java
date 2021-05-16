@@ -92,13 +92,13 @@ public class cadastroEmpresaController {
 	private PasswordField passSenha;
 
 	public cadastroEmpresaController() {
-		
+
 	}
 
 	public void initialize() {
 		estadoCombo();
 	}
-	
+
 	@FXML
 	public void Salvar() throws Exception {
 
@@ -232,15 +232,11 @@ public class cadastroEmpresaController {
 	@FXML
 	public void estadoCombo() {
 		List<Estados> list = prepareEstadoList();
-		comboEstado.getItems().clear();
-		if (!list.isEmpty()) {
-			comboEstado.getItems().add("Selecione...");
-			for (Estados estados : list) {
-				comboEstado.getItems().add(estados.getSigla());
 
-			}
-		} else {
-			System.out.println("list already full");
+		comboEstado.getItems().clear();
+		comboEstado.getItems().add("Selecione...");
+		for (Estados estados : list) {
+			comboEstado.getItems().add(estados.getSigla());
 		}
 	}
 
