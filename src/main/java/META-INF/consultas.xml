@@ -21,7 +21,7 @@
 
 	<named-query name="selectCidadebyEstado">
 		<query>
-			SELECT c from Cidades c where c.estado = :idEstado
+			SELECT c from Cidades c where c.estado.idEstado = :idEstado
 		</query>
 	</named-query>
 

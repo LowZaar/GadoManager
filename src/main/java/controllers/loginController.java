@@ -74,7 +74,6 @@ public class loginController {
 		Stage window = (Stage) btnCadastrar.getScene().getWindow();
 
 		window.setScene(new Scene(cadastroEmpresa));
-
 	}
 
 }

@@ -72,7 +72,7 @@ public class cadastroEmpresaController {
 
 	@FXML
 	private TextField txtTP;
-	
+
 	@FXML
 	private ComboBox<String> comboCidade;
 
@@ -91,6 +91,14 @@ public class cadastroEmpresaController {
 	@FXML
 	private PasswordField passSenha;
 
+	public cadastroEmpresaController() {
+		
+	}
+
+	public void initialize() {
+		estadoCombo();
+	}
+	
 	@FXML
 	public void Salvar() throws Exception {
 
@@ -145,7 +153,7 @@ public class cadastroEmpresaController {
 			Long estadoId = (long) comboEstado.getItems().indexOf(estadoEmp);
 
 			Cidades cidadeObj = findCidade(cidadeEmp);
-			
+
 			empPJ = empPJ.createPJ(nomeEmp, dataEmp, cnpjEmp, ieEmp, imEmp, enderecoEmp, cidadeObj, estadoId, cepEmp,
 					telefoneEmp, emailEmp);
 
@@ -201,81 +209,86 @@ public class cadastroEmpresaController {
 
 	public void radioCheck() {
 		if (radioTipoFisica.isSelected()) {
-			
+
 			radioTipoJuridica.setSelected(false);
 			txtCNPJ.setVisible(false);
 			LabelCNPJ.setVisible(false);
-			
-		}else if (radioTipoJuridica.isSelected()) {
+
+		} else if (radioTipoJuridica.isSelected()) {
 			radioTipoFisica.setSelected(false);
 			txtCPF.setVisible(false);
 			LabelCPF.setVisible(false);
-		}else if(!radioTipoFisica.isSelected() && !radioTipoJuridica.isSelected()){
-			
+		} else if (!radioTipoFisica.isSelected() && !radioTipoJuridica.isSelected()) {
+
 			txtCPF.setVisible(true);
 			LabelCPF.setVisible(true);
-			
+
 			txtCNPJ.setVisible(true);
 			LabelCNPJ.setVisible(true);
 		}
-		
+
 	}
-	
-	
+
+	@FXML
 	public void estadoCombo() {
+		List<Estados> list = prepareEstadoList();
+		comboEstado.getItems().clear();
+		if (!list.isEmpty()) {
+			comboEstado.getItems().add("Selecione...");
+			for (Estados estados : list) {
+				comboEstado.getItems().add(estados.getSigla());
 
-		DAOHibernate<Estados> daoE = new DAOHibernate<>();
-
-		List<Estados> list = daoE.getAllByNamedQuery("selectEstados");
-
-		System.out.println(list);
-		
-		comboEstado.getItems().add("Selecione...");
-		for (Estados estados : list) {
-			comboEstado.getItems().add(estados.getSigla());
-
+			}
+		} else {
+			System.out.println("list already full");
 		}
-		
-		daoE.closeAll();
 	}
 
 	public Cidades findCidade(int cidadeIndex) {
-		
+
 		DAOHibernate<Cidades> daoCity = new DAOHibernate<>();
 
 		Cidades cidadeObj = daoCity.getAllById(cidadeIndex);
-		
+
 		daoCity.closeAll();
 		return cidadeObj;
 	}
 
-	
-	public void populateCidade() {
-		
-		comboEstado.getItems().add("Selecione...");
-		
-		System.out.println("populating cidades");
-		System.out.println();
-		
-		DAOHibernate<Cidades> daoCidadeEstado = new DAOHibernate<>();
-		
-		int idEstado = comboEstado.getSelectionModel().getSelectedIndex();
-			
-		System.out.println(idEstado);
-		
+	public static List<Estados> prepareEstadoList() {
 		DAOHibernate<Estados> daoE = new DAOHibernate<>();
-		
-		Estados estadoObj = daoE.getAllById(idEstado);
-		
-		List<Cidades> list = daoCidadeEstado.getAllByNamedQuery("selectCidadebyEstado", idEstado);
-		
-		System.out.println(list);
-		
-		
-		for (Cidades cidades : list) {
-			comboCidade.getItems().add(cidades.getNome());
+		List<Estados> list = null;
+		if (list == null) {
+			list = daoE.getAllByNamedQuery("selectEstados");
 		}
-		
+
+		daoE.closeAll();
+
+		return list;
 	}
 
+	public void populateCidade() {
+		List<Cidades> list = null;
+		comboCidade.getItems().clear();
+		comboCidade.getItems().add("Selecione...");
+
+		System.out.println("populating cidades");
+		System.out.println();
+
+		DAOHibernate<Cidades> daoCidadeEstado = new DAOHibernate<>();
+
+		Long idEstado = (long) comboEstado.getSelectionModel().getSelectedIndex();
+
+		System.out.println(idEstado);
+
+		try {
+			list = daoCidadeEstado.getAllByNamedQuery("selectCidadebyEstado", "idEstado", idEstado);
+		} catch (Exception e) {
+			list = null;
+		} finally {
+			for (Cidades cidades : list) {
+				comboCidade.getItems().add(cidades.getNome());
+			}
+
+		}
+	}
 }
