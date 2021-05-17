@@ -108,7 +108,7 @@
             <Insets left="50.0" right="50.0" top="350.0" />
          </GridPane.margin>
       </TextField>
-      <Label alignment="TOP_CENTER" text="Insc. Municipal" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
+      <Label fx:id="LabelIM" alignment="TOP_CENTER" text="Insc. Municipal" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
          <font>
             <Font size="20.0" />
          </font>
@@ -145,7 +145,7 @@
             <Insets left="50.0" right="50.0" top="200.0" />
          </GridPane.margin>
       </TextField>
-      <Label alignment="TOP_CENTER" text="Incs. Estadual" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
+      <Label fx:id="LabelIE" alignment="TOP_CENTER" text="Incs. Estadual" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
          <font>
             <Font size="20.0" />
          </font>
@@ -171,14 +171,6 @@
             <Insets left="50.0" right="50.0" top="50.0" />
          </GridPane.margin>
       </TextField>
-      <Label alignment="TOP_CENTER" text="RG" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="1">
-         <font>
-            <Font size="20.0" />
-         </font>
-         <GridPane.margin>
-            <Insets left="50.0" right="50.0" />
-         </GridPane.margin>
-      </Label>
       <TextField fx:id="txtTelefone" GridPane.columnIndex="2" GridPane.rowIndex="1">
          <GridPane.margin>
             <Insets left="50.0" right="50.0" top="200.0" />
@@ -203,7 +195,7 @@
             <Insets />
          </opaqueInsets>
       </Label>
-      <ComboBox fx:id="comboEstado" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+      <ComboBox fx:id="comboEstado" onMouseClicked="#estadoCombo" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
          <GridPane.margin>
             <Insets left="50.0" top="50.0" />
          </GridPane.margin>
@@ -241,10 +233,18 @@
             <Insets left="50.0" right="50.0" />
          </GridPane.margin>
       </TextField>
-      <ComboBox fx:id="comboCidade" onAction="#populateCidade" onMouseClicked="#populateCidade" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
+      <ComboBox fx:id="comboCidade" onMouseClicked="#populateCidade" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
          <GridPane.margin>
             <Insets left="50.0" right="50.0" />
          </GridPane.margin>
       </ComboBox>
+      <Label fx:id="LabelRG" alignment="TOP_CENTER" text="RG" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="1">
+         <font>
+            <Font size="20.0" />
+         </font>
+         <GridPane.margin>
+            <Insets left="50.0" right="50.0" />
+         </GridPane.margin>
+      </Label>
    </children>
 </GridPane>

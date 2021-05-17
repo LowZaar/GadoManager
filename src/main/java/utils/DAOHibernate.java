@@ -68,6 +68,7 @@ public class DAOHibernate <E> {
 		return this;
 	}
 
+	
 	public E getAllById(Object id) {
 		return em.find(classe, id);
 	}

@@ -1,10 +1,13 @@
 package controllers;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
+
+import org.controlsfx.control.Notifications;
 
 import classes.Cidades;
 import classes.Empresas_Pessoas;
@@ -13,8 +16,6 @@ import classes.Usuarios;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -34,6 +35,15 @@ public class cadastroEmpresaController {
 	@FXML
 	private Label LabelCNPJ;
 
+	@FXML
+	private Label LabelRG;
+	
+	@FXML
+	private Label LabelIE;
+	
+	@FXML
+	private Label LabelIM;
+	
 	@FXML
 	private TextField txtNome;
 
@@ -95,10 +105,6 @@ public class cadastroEmpresaController {
 
 	}
 
-	public void initialize() {
-		estadoCombo();
-	}
-
 	@FXML
 	public void Salvar() throws Exception {
 
@@ -115,7 +121,8 @@ public class cadastroEmpresaController {
 		String senhaEmp = passSenha.getText();
 		String rgEmp = txtRG.getText();
 		String telefoneEmp = txtTelefone.getText();
-		int cidadeEmp = comboCidade.getValue().indexOf(comboCidade.getValue());
+		String cidadeNome = comboCidade.getValue();
+		
 
 		DAOHibernate<Empresas_Pessoas> daoEmp = new DAOHibernate<>();
 
@@ -127,7 +134,7 @@ public class cadastroEmpresaController {
 
 			Long estadoId = (long) comboEstado.getItems().indexOf(estadoEmp);
 
-			Cidades cidadeObj = findCidade(cidadeEmp);
+			Cidades cidadeObj = findCidade(cidadeNome);
 
 			empPF = empPF.createPF(nomeEmp, cpfEmp, rgEmp, dataEmp, enderecoEmp, cidadeObj, estadoId, cepEmp,
 					telefoneEmp, emailEmp);
@@ -152,18 +159,24 @@ public class cadastroEmpresaController {
 
 			Long estadoId = (long) comboEstado.getItems().indexOf(estadoEmp);
 
-			Cidades cidadeObj = findCidade(cidadeEmp);
+			Cidades cidadeObj = findCidade(cidadeNome);
 
 			empPJ = empPJ.createPJ(nomeEmp, dataEmp, cnpjEmp, ieEmp, imEmp, enderecoEmp, cidadeObj, estadoId, cepEmp,
 					telefoneEmp, emailEmp);
-
+			System.out.println(empPJ);
 			daoEmp.beginTransaction().save(empPJ).commitTransaction().closeAll();
 
 			createUser(nomeEmp, emailEmp, senhaEmp, empPJ);
-
+			
 			URL fxmlFile = getClass().getResource("/fxml/Login.fxml");
 
-			GridPane loginGrid = FXMLLoader.load(fxmlFile);
+			GridPane loginGrid = null;
+			try {
+				loginGrid = FXMLLoader.load(fxmlFile);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
 			Stage window = (Stage) btnSalvar.getScene().getWindow();
 
@@ -193,36 +206,61 @@ public class cadastroEmpresaController {
 
 	public void createUser(String nomeEmpresa, String email, String senha, Empresas_Pessoas empresa) {
 
-		DAOHibernate<Usuarios> daoUser = new DAOHibernate<>();
+		DAOHibernate<Usuarios> daoUser = new DAOHibernate<>(Usuarios.class);
 
 		String nome = nomeEmpresa.replaceAll(" ", "").toLowerCase();
 
-		Usuarios user1 = new Usuarios(nomeEmpresa, email, nome, senha, true, empresa);
+		Usuarios user = new Usuarios(nomeEmpresa, email, nome, senha, true, empresa);
 
-		daoUser.beginTransaction().save(user1).closeAll();
+		daoUser.beginTransaction().save(user).commitTransaction().closeAll();
 
-		Alert alertuser = new Alert(AlertType.CONFIRMATION);
+		Notifications
+				.create().title("Alerta de Login").text("Usuario mestre criado para empresa " + nomeEmpresa + " \n"
+						+ "Login de usuario : " + user.getUsuario() + " \n" + "Senha do usuario : " + user.getSenha())
+				.showConfirm();
 
-		alertuser.setContentText("Usuario mestre criado para empresa " + nomeEmpresa + " \n" + "Login de usuario : "
-				+ user1.getNome() + " \n" + "Senha do usuario : " + user1.getSenha());
 	}
 
 	public void radioCheck() {
 		if (radioTipoFisica.isSelected()) {
-
 			radioTipoJuridica.setSelected(false);
+			
 			txtCNPJ.setVisible(false);
 			LabelCNPJ.setVisible(false);
-
+			
+			txtRG.setVisible(true);
+			LabelRG.setVisible(true);
+			
+			txtIE.setVisible(false);
+			LabelIE.setVisible(false);
+			
+			txtIM.setVisible(false);
+			LabelIM.setVisible(false);
+			
 		} else if (radioTipoJuridica.isSelected()) {
 			radioTipoFisica.setSelected(false);
+			
 			txtCPF.setVisible(false);
 			LabelCPF.setVisible(false);
+			
+			txtRG.setVisible(true);
+			LabelRG.setVisible(true);
+			
+			
 		} else if (!radioTipoFisica.isSelected() && !radioTipoJuridica.isSelected()) {
 
 			txtCPF.setVisible(true);
 			LabelCPF.setVisible(true);
-
+			
+			txtRG.setVisible(true);
+			LabelRG.setVisible(true);
+			
+			txtIE.setVisible(true);
+			LabelIE.setVisible(true);
+			
+			txtIM.setVisible(true);
+			LabelIM.setVisible(true);
+			
 			txtCNPJ.setVisible(true);
 			LabelCNPJ.setVisible(true);
 		}
@@ -234,17 +272,20 @@ public class cadastroEmpresaController {
 		List<Estados> list = prepareEstadoList();
 
 		comboEstado.getItems().clear();
+
 		comboEstado.getItems().add("Selecione...");
 		for (Estados estados : list) {
 			comboEstado.getItems().add(estados.getSigla());
 		}
+
 	}
 
-	public Cidades findCidade(int cidadeIndex) {
+	public Cidades findCidade(String cidadeNome) {
 
-		DAOHibernate<Cidades> daoCity = new DAOHibernate<>();
+		DAOHibernate<Cidades> daoCity = new DAOHibernate<>(Cidades.class);
 
-		Cidades cidadeObj = daoCity.getAllById(cidadeIndex);
+		daoCity.beginTransaction();
+		Cidades cidadeObj = daoCity.getFirst("findCidadeid", "nome", cidadeNome);
 
 		daoCity.closeAll();
 		return cidadeObj;
@@ -263,28 +304,22 @@ public class cadastroEmpresaController {
 	}
 
 	public void populateCidade() {
-		List<Cidades> list = null;
-		comboCidade.getItems().clear();
 		comboCidade.getItems().add("Selecione...");
 
 		System.out.println("populating cidades");
-		System.out.println();
 
 		DAOHibernate<Cidades> daoCidadeEstado = new DAOHibernate<>();
 
-		Long idEstado = (long) comboEstado.getSelectionModel().getSelectedIndex();
+		Long idEstado = (long) comboEstado.getItems().indexOf(comboEstado.getValue());
 
 		System.out.println(idEstado);
 
-		try {
-			list = daoCidadeEstado.getAllByNamedQuery("selectCidadebyEstado", "idEstado", idEstado);
-		} catch (Exception e) {
-			list = null;
-		} finally {
-			for (Cidades cidades : list) {
-				comboCidade.getItems().add(cidades.getNome());
-			}
+		List<Cidades> list = daoCidadeEstado.getAllByNamedQuery("selectCidadebyEstado", "idEstado", idEstado);
+		for (Cidades cidades : list) {
+
+			comboCidade.getItems().add(cidades.getNome());
 
 		}
 	}
+	
 }

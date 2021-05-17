@@ -95,11 +95,21 @@ public class Empresas_Pessoas {
 		Empresas_Pessoas empPJ = new Empresas_Pessoas(nome, "PJ", dataNascimento, cnpj, 
 				ie, im, endereco, idCidade, idEstado, cep, telefone, email);
 		
+
+		
 		return empPJ;
 	}
 	
 	
 	
+
+	@Override
+	public String toString() {
+		return "Empresas_Pessoas [nome=" + nome + ", tipoPessoa=" + tipoPessoa + ", cpf=" + cpf + ", rg=" + rg
+				+ ", dataNascimento=" + dataNascimento + ", cnpj=" + cnpj + ", ie=" + ie + ", im=" + im + ", endereco="
+				+ endereco + ", idCidade=" + idCidade + ", idEstado=" + idEstado + ", cep=" + cep + ", telefone="
+				+ telefone + ", email=" + email + "]";
+	}
 
 	private Empresas_Pessoas(String nome, String tipoPessoa, Date dataNascimento, String cnpj, String ie, String im,
 			String endereco, Cidades idCidade, Long idEstado, String cep, String telefone, String email) {

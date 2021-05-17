@@ -16,8 +16,13 @@
 		</query>
 	</named-query>
 
+	<named-query name="findCidadeid">
+		<query>
+			SELECT c FROM Cidades c where c.nome = :nome
+		</query>
+	</named-query>
 	
-
+	
 
 	<named-query name="selectCidadebyEstado">
 		<query>
