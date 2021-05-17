@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings version="2.2"
+	xmlns="http://xmlns.jcp.org/xml/ns/persistence/orm"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence/orm http://xmlns.jcp.org/xml/ns/persistence/orm_2_2.xsd">
+
+	<named-query name="loginCheck">
+		<query>
+			SELECT u FROM Usuarios u WHERE u.usuario = :usuario AND u.senha = :senha
+		</query>
+	</named-query>
+
+	<named-query name="selectEstados">
+		<query>
+			SELECT e from Estados e ORDER BY e.Sigla
+		</query>
+	</named-query>
+
+	<named-query name="findCidadeid">
+		<query>
+			SELECT c FROM Cidades c where c.nome = :nome
+		</query>
+	</named-query>
+	
+	
+
+	<named-query name="selectCidadebyEstado">
+		<query>
+			SELECT c from Cidades c where c.estado.idEstado = :idEstado
+		</query>
+	</named-query>
+
+</entity-mappings>

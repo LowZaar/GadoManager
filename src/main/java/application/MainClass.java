@@ -1,20 +1,34 @@
 package application;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import java.net.URL;
 
-import classes.Bovinos;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 
-public class MainClass {
+public class MainClass extends Application {
 
-	public static void main(String[] args) {
+	
+	@Override
+	public void start(Stage primaryStage) throws Exception {
 		
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("GadoManager");
-		EntityManager em = emf.createEntityManager();
+		URL fxmlFile = getClass().getResource("/fxml/Login.fxml");
 		
-		em.find(Bovinos.class, 1L);
+		GridPane loginGrid = FXMLLoader.load(fxmlFile);
+	
+		Scene mainScene = new Scene(loginGrid);
+		
+		primaryStage.setResizable(false);
+		primaryStage.setTitle("Login - GadoManager");
+		primaryStage.setScene(mainScene);
+		primaryStage.show();
+		System.out.println("test");
 		
 	}
-
+	
+	public static void main(String[] args) {
+		launch(args);
+	}
 }

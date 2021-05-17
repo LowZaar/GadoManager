@@ -6,8 +6,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "Cidades")
 public class Cidades {
 	
 	@Id
@@ -23,6 +25,15 @@ public class Cidades {
 	public Cidades() {
 	
 	}
+	
+
+	public Cidades(String nome, Estados estado) {
+		super();
+		this.nome = nome;
+		this.estado = estado;
+	}
+
+
 
 	public Long getIdCidade() {
 		return idCidade;

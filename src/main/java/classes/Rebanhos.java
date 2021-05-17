@@ -7,8 +7,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "Rebanhos")
 public class Rebanhos {
 	
 	@Id
@@ -27,6 +29,16 @@ public class Rebanhos {
 	public Rebanhos() {
 		
 	}
+
+	
+	public Rebanhos(String nome, String descricao, Empresas_Pessoas idEmpresaPessoa) {
+		super();
+		this.nome = nome;
+		this.descricao = descricao;
+		this.idEmpresaPessoa = idEmpresaPessoa;
+	}
+
+
 
 	public Long getIdRebanho() {
 		return idRebanho;

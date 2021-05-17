@@ -6,8 +6,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "Usuarios")
 public class Usuarios {
 	
 	@Id
@@ -28,9 +30,28 @@ public class Usuarios {
 	@JoinColumn(name = "idEmpresa_Pessoa")
 	private Empresas_Pessoas idEmpresas_Pessoa;
 	
+
+	
+	
+	
 	public Usuarios() {
 		
 	}
+
+	
+	public Usuarios(String nome, String email, String usuario, String senha, boolean usuarioMestre,
+			Empresas_Pessoas idEmpresas_Pessoa) {
+		super();
+		this.nome = nome;
+		this.email = email;
+		this.usuario = usuario;
+		this.senha = senha;
+		this.usuarioMestre = usuarioMestre;
+		this.idEmpresas_Pessoa = idEmpresas_Pessoa;
+	}
+
+
+
 
 	public Long getIdUsuario() {
 		return idUsuario;
