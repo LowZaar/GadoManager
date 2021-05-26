@@ -1,14 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
+<?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.effect.GaussianBlur?>
+<?import javafx.scene.effect.Shadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<GridPane maxHeight="600.0" maxWidth="800.0" minHeight="600.0" minWidth="800.0" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #000; -fx-border-color: #00ff00; -fx-border-insets: 5; -fx-border-radius: 5;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/16">
+<GridPane maxHeight="500.0" maxWidth="500.0" minHeight="500.0" minWidth="500.0" prefHeight="500.0" prefWidth="500.0" style="-fx-background-color: #FFF; -fx-border-color: #000; -fx-border-insets: 5; -fx-border-radius: 5;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mainMenuController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="526.0" minWidth="10.0" prefWidth="401.0" />
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="387.0" minWidth="10.0" prefWidth="387.0" />
@@ -18,133 +26,84 @@
     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <Label text="Menu Principal" textFill="LIME" underline="true" wrapText="true" GridPane.columnSpan="2">
+      <Label contentDisplay="RIGHT" graphicTextGap="10.0" rotate="-41.6" text="Gado" wrapText="true" GridPane.columnSpan="2">
          <font>
-            <Font size="35.0" />
+            <Font name="Bookman Old Style" size="50.0" />
          </font>
          <GridPane.margin>
-            <Insets bottom="150.0" left="300.0" />
+            <Insets bottom="50.0" left="50.0" />
          </GridPane.margin>
+         <effect>
+            <Shadow blurType="ONE_PASS_BOX" height="1.0" radius="0.0" width="0.0">
+               <input>
+                  <GaussianBlur radius="0.25" />
+               </input>
+            </Shadow>
+         </effect>
       </Label>
-      <Button mnemonicParsing="false" prefWidth="150.0" text="Bovinos">
-         <font>
-            <Font size="20.0" />
-         </font>
+      <MenuBar GridPane.columnSpan="2">
+        <menus>
+          <Menu mnemonicParsing="false" text="Bovinos">
+            <items>
+              <MenuItem fx:id="menuBovino" mnemonicParsing="false" text="Bovinos" />
+                  <MenuItem fx:id="menuRacas" mnemonicParsing="false" text="Raças" />
+                  <MenuItem fx:id="menuRebanhos" mnemonicParsing="false" text="Rebanhos" />
+                  <MenuItem fx:id="menuBCS" mnemonicParsing="false" text="BCS" />
+                  <MenuItem fx:id="menuPesagens" mnemonicParsing="false" text="Pesagens" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Saude">
+            <items>
+              <MenuItem fx:id="menuSaude" mnemonicParsing="false" text="Saude" />
+                  <MenuItem fx:id="menuMedicacao" mnemonicParsing="false" text="Medicação" />
+                  <MenuItem fx:id="menuVacinas" mnemonicParsing="false" text="Vacinas" />
+                  <MenuItem fx:id="menuRacoes" mnemonicParsing="false" text="Rações" />
+                  <MenuItem fx:id="menuAlimentacao" mnemonicParsing="false" text="Alimentação" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Usuario">
+            <items>
+              <MenuItem fx:id="menuUsuarios" mnemonicParsing="false" text="Usuarios" />
+                  <MenuItem fx:id="menuVeterinarios" mnemonicParsing="false" text="Veterinarios" />
+                  <MenuItem fx:id="menuParams" mnemonicParsing="false" text="Parâmetros" />
+            </items>
+          </Menu>
+        </menus>
          <GridPane.margin>
-            <Insets left="75.0" />
+            <Insets bottom="220.0" />
          </GridPane.margin>
-      </Button>
-      <Button mnemonicParsing="false" prefWidth="150.0" text="Raças">
-         <font>
-            <Font size="20.0" />
-         </font>
+      </MenuBar>
+      <ImageView blendMode="DARKEN" cache="true" cacheHint="QUALITY" fitHeight="300.0" fitWidth="450.0" focusTraversable="true" pickOnBounds="true" preserveRatio="true">
          <GridPane.margin>
-            <Insets left="75.0" top="150.0" />
+            <Insets left="100.0" top="250.0" />
          </GridPane.margin>
-      </Button>
-      <Button mnemonicParsing="false" prefWidth="150.0" text="Rebanhos" GridPane.rowIndex="1">
+         <image>
+            <Image url="@../../../../CowVexel.png" />
+         </image>
+         <effect>
+            <Blend opacity="0.95">
+               <topInput>
+                  <GaussianBlur radius="24.65" />
+               </topInput>
+            </Blend>
+         </effect>
+         <viewport>
+            <Rectangle2D />
+         </viewport>
+      </ImageView>
+      <Label contentDisplay="RIGHT" graphicTextGap="10.0" rotate="-52.4" text="Manager" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
          <font>
-            <Font size="20.0" />
+            <Font name="Bookman Old Style" size="50.0" />
          </font>
+         <effect>
+            <Shadow blurType="ONE_PASS_BOX" height="0.0" radius="0.0" width="0.0" />
+         </effect>
          <GridPane.margin>
-            <Insets bottom="275.0" left="75.0" />
+            <Insets bottom="50.0" />
          </GridPane.margin>
-      </Button>
-      <Button mnemonicParsing="false" prefWidth="150.0" text="Usuários" GridPane.columnIndex="1">
-         <font>
-            <Font size="20.0" />
-         </font>
-         <GridPane.margin>
-            <Insets left="150.0" />
-         </GridPane.margin>
-      </Button>
-      <Button mnemonicParsing="false" prefWidth="150.0" text="Empresas" GridPane.columnIndex="1">
-         <font>
-            <Font size="20.0" />
-         </font>
-         <GridPane.margin>
-            <Insets left="150.0" top="150.0" />
-         </GridPane.margin>
-      </Button>
-      <Button mnemonicParsing="false" prefWidth="150.0" text="Cidades" GridPane.columnIndex="1" GridPane.rowIndex="1">
-         <font>
-            <Font size="20.0" />
-         </font>
-         <GridPane.margin>
-            <Insets bottom="275.0" left="150.0" />
-         </GridPane.margin>
-      </Button>
-      <Button mnemonicParsing="false" prefWidth="150.0" text="Veterinários" GridPane.columnIndex="1" GridPane.rowIndex="1">
-         <font>
-            <Font size="20.0" />
-         </font>
-         <GridPane.margin>
-            <Insets bottom="120.0" left="150.0" />
-         </GridPane.margin>
-      </Button>
-      <Button mnemonicParsing="false" prefWidth="150.0" text="Pesagens" GridPane.rowIndex="1">
-         <font>
-            <Font size="20.0" />
-         </font>
-         <GridPane.margin>
-            <Insets left="75.0" top="150.0" />
-         </GridPane.margin>
-      </Button>
-      <Button mnemonicParsing="false" prefWidth="150.0" text="Alimentação" GridPane.columnIndex="1" GridPane.rowIndex="1">
-         <font>
-            <Font size="20.0" />
-         </font>
-         <GridPane.margin>
-            <Insets left="150.0" top="150.0" />
-         </GridPane.margin>
-      </Button>
-      <Button mnemonicParsing="false" prefWidth="150.0" text="Rações" GridPane.columnSpan="2" GridPane.rowIndex="1">
-         <font>
-            <Font size="20.0" />
-         </font>
-         <GridPane.margin>
-            <Insets left="300.0" top="150.0" />
-         </GridPane.margin>
-      </Button>
-      <Button mnemonicParsing="false" prefWidth="150.0" text="BCS" GridPane.rowIndex="1">
-         <font>
-            <Font size="20.0" />
-         </font>
-         <GridPane.margin>
-            <Insets bottom="125.0" left="75.0" />
-         </GridPane.margin>
-      </Button>
-      <Button mnemonicParsing="false" prefWidth="150.0" text="Saude" GridPane.columnSpan="2">
-         <font>
-            <Font size="20.0" />
-         </font>
-         <GridPane.margin>
-            <Insets left="300.0" />
-         </GridPane.margin>
-      </Button>
-      <Button mnemonicParsing="false" prefWidth="150.0" text="Medicação" GridPane.columnSpan="2">
-         <font>
-            <Font size="20.0" />
-         </font>
-         <GridPane.margin>
-            <Insets left="300.0" top="150.0" />
-         </GridPane.margin>
-      </Button>
-      <Button mnemonicParsing="false" prefWidth="150.0" text="Vacinas" GridPane.columnSpan="2" GridPane.rowIndex="1">
-         <font>
-            <Font size="20.0" />
-         </font>
-         <GridPane.margin>
-            <Insets bottom="275.0" left="300.0" />
-         </GridPane.margin>
-      </Button>
-      <Button mnemonicParsing="false" prefWidth="150.0" text="Parâmetros" GridPane.columnSpan="2" GridPane.rowIndex="1">
-         <font>
-            <Font size="20.0" />
-         </font>
-         <GridPane.margin>
-            <Insets bottom="125.0" left="300.0" />
-         </GridPane.margin>
-      </Button>
+         <padding>
+            <Insets right="15.0" />
+         </padding>
+      </Label>
    </children>
 </GridPane>

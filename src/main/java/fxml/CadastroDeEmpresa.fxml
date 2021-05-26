@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<GridPane maxHeight="601.0" maxWidth="780.0" minHeight="601.0" minWidth="780.0" prefHeight="601.0" prefWidth="780.0" style="-fx-background-color: #000; -fx-border-radius: 5; -fx-border-insets: 5; -fx-border-color: #00FF00;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.cadastroEmpresaController">
+<GridPane maxHeight="601.0" maxWidth="780.0" minHeight="601.0" minWidth="780.0" prefHeight="601.0" prefWidth="780.0" style="-fx-background-color: #fff; -fx-border-radius: 5; -fx-border-insets: 5; -fx-border-color: #000;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.cadastroEmpresaController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="249.0" minWidth="10.0" prefWidth="248.0" />
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="280.0" minWidth="10.0" prefWidth="270.0" />
@@ -27,12 +27,12 @@
       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <Button fx:id="btnSalvar" alignment="BOTTOM_LEFT" mnemonicParsing="false" onAction="#Salvar" style="-fx-background-color: #000; -fx-border-color: #0F0;" text="Salvar" textAlignment="CENTER" textFill="LIME" GridPane.rowIndex="3">
+      <Button fx:id="btnSalvar" alignment="BOTTOM_LEFT" mnemonicParsing="false" onAction="#Salvar" style="-fx-background-color: #fff; -fx-border-color: #000;" text="Salvar" textAlignment="CENTER" GridPane.rowIndex="3">
          <GridPane.margin>
             <Insets left="50.0" top="100.0" />
          </GridPane.margin>
       </Button>
-      <Label alignment="TOP_CENTER" text="Cadastro de Empresas" textAlignment="CENTER" textFill="WHITE" GridPane.columnSpan="3">
+      <Label alignment="TOP_CENTER" text="Cadastro de Empresas" textAlignment="CENTER" GridPane.columnSpan="3">
          <font>
             <Font size="38.0" />
          </font>
@@ -40,7 +40,7 @@
             <Insets left="200.0" />
          </GridPane.margin>
       </Label>
-      <Button fx:id="btnCancelar" cancelButton="true" mnemonicParsing="false" onAction="#Cancelar" style="-fx-background-color: #000; -fx-border-color: #0F0;" text="Cancelar" textAlignment="CENTER" textFill="LIME" GridPane.columnIndex="2" GridPane.rowIndex="3">
+      <Button fx:id="btnCancelar" cancelButton="true" mnemonicParsing="false" onAction="#Cancelar" style="-fx-background-color: #fff; -fx-border-color: #000;" text="Cancelar" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="3">
          <opaqueInsets>
             <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
          </opaqueInsets>
@@ -48,17 +48,17 @@
             <Insets left="150.0" top="100.0" />
          </GridPane.margin>
       </Button>
-      <TextField fx:id="txtCEP" GridPane.columnIndex="2" GridPane.rowIndex="1">
+      <TextField fx:id="txtCEP" style="-fx-border-color: #000;" GridPane.columnIndex="2" GridPane.rowIndex="1">
          <GridPane.margin>
             <Insets bottom="100.0" left="50.0" right="50.0" />
          </GridPane.margin>
       </TextField>
-      <TextField fx:id="txtEndereco" GridPane.columnIndex="1">
+      <TextField fx:id="txtEndereco" style="-fx-border-color: #000;" GridPane.columnIndex="1">
          <GridPane.margin>
             <Insets left="50.0" right="50.0" top="200.0" />
          </GridPane.margin>
       </TextField>
-      <Label alignment="TOP_CENTER" text="CEP" textFill="WHITE" GridPane.columnIndex="2" GridPane.columnSpan="2">
+      <Label alignment="TOP_CENTER" text="CEP" GridPane.columnIndex="2" GridPane.columnSpan="2">
          <font>
             <Font size="20.0" />
          </font>
@@ -66,7 +66,7 @@
             <Insets left="50.0" top="150.0" />
          </GridPane.margin>
       </Label>
-      <Label alignment="TOP_CENTER" text="Endereço" textFill="WHITE" GridPane.columnIndex="1">
+      <Label alignment="TOP_CENTER" text="Endereço" GridPane.columnIndex="1">
          <font>
             <Font size="20.0" />
          </font>
@@ -74,28 +74,20 @@
             <Insets left="50.0" right="100.0" top="150.0" />
          </GridPane.margin>
       </Label>
-      <TextField fx:id="txtCNPJ" GridPane.rowIndex="1">
+      <TextField fx:id="txtCNPJ" style="-fx-border-color: #000;" GridPane.rowIndex="1">
          <GridPane.margin>
-            <Insets left="100.0" top="50.0" />
+            <Insets left="50.0" top="200.0" />
          </GridPane.margin>
       </TextField>
-      <Label fx:id="LabelCNPJ" alignment="TOP_CENTER" text="CNPJ" textFill="WHITE" GridPane.columnSpan="2" GridPane.rowIndex="1">
+      <Label fx:id="LabelCNPJ" alignment="TOP_CENTER" text="CPF/CNPJ" GridPane.columnSpan="2" GridPane.rowIndex="1">
          <font>
             <Font size="20.0" />
          </font>
          <GridPane.margin>
-            <Insets left="50.0" right="50.0" top="50.0" />
+            <Insets left="50.0" right="50.0" top="150.0" />
          </GridPane.margin>
       </Label>
-      <Label fx:id="LabelCPF" alignment="TOP_CENTER" text="CPF" textFill="WHITE" GridPane.rowIndex="1">
-         <font>
-            <Font size="20.0" />
-         </font>
-         <GridPane.margin>
-            <Insets left="50.0" right="50.0" top="200.0" />
-         </GridPane.margin>
-      </Label>
-      <Label alignment="TOP_CENTER" text="Data de Nascimento" textFill="WHITE" GridPane.columnSpan="2" GridPane.rowIndex="1">
+      <Label alignment="TOP_CENTER" text="Data de Nascimento" GridPane.columnSpan="2" GridPane.rowIndex="1">
          <font>
             <Font size="20.0" />
          </font>
@@ -103,12 +95,12 @@
             <Insets left="50.0" right="50.0" top="300.0" />
          </GridPane.margin>
       </Label>
-      <TextField fx:id="txtIM" GridPane.columnIndex="1" GridPane.rowIndex="1">
+      <TextField fx:id="txtIM" style="-fx-border-color: #000;" GridPane.columnIndex="1" GridPane.rowIndex="1">
          <GridPane.margin>
             <Insets left="50.0" right="50.0" top="350.0" />
          </GridPane.margin>
       </TextField>
-      <Label fx:id="LabelIM" alignment="TOP_CENTER" text="Insc. Municipal" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
+      <Label alignment="TOP_CENTER" text="Insc. Municipal" GridPane.columnIndex="1" GridPane.rowIndex="1">
          <font>
             <Font size="20.0" />
          </font>
@@ -116,12 +108,12 @@
             <Insets left="50.0" top="300.0" />
          </GridPane.margin>
       </Label>
-      <DatePicker fx:id="dateDataNascimento" GridPane.rowIndex="2">
+      <DatePicker fx:id="dateDataNascimento" style="-fx-border-color: #000;" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets left="50.0" top="50.0" />
          </GridPane.margin>
       </DatePicker>
-      <Label alignment="TOP_CENTER" text="Email" textFill="WHITE" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="3">
+      <Label alignment="TOP_CENTER" text="Email" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="3">
          <font>
             <Font size="20.0" />
          </font>
@@ -132,7 +124,7 @@
             <Insets />
          </opaqueInsets>
       </Label>
-      <Label alignment="TOP_CENTER" text="Estado" textFill="WHITE" GridPane.columnIndex="1">
+      <Label alignment="TOP_CENTER" text="Estado" GridPane.columnIndex="1">
          <font>
             <Font size="20.0" />
          </font>
@@ -140,12 +132,12 @@
             <Insets left="50.0" right="50.0" top="300.0" />
          </GridPane.margin>
       </Label>
-      <TextField fx:id="txtIE" GridPane.columnIndex="1" GridPane.rowIndex="1">
+      <TextField fx:id="txtIE" style="-fx-border-color: #000;" GridPane.columnIndex="1" GridPane.rowIndex="1">
          <GridPane.margin>
             <Insets left="50.0" right="50.0" top="200.0" />
          </GridPane.margin>
       </TextField>
-      <Label fx:id="LabelIE" alignment="TOP_CENTER" text="Incs. Estadual" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
+      <Label alignment="TOP_CENTER" text="Incs. Estadual" GridPane.columnIndex="1" GridPane.rowIndex="1">
          <font>
             <Font size="20.0" />
          </font>
@@ -153,30 +145,38 @@
             <Insets left="50.0" right="50.0" top="150.0" />
          </GridPane.margin>
       </Label>
-      <TextField fx:id="txtNome" GridPane.rowIndex="1">
+      <TextField fx:id="txtNome" style="-fx-border-color: #000;" GridPane.rowIndex="1">
          <GridPane.margin>
-            <Insets bottom="100.0" left="50.0" />
+            <Insets bottom="100.0" left="50.0" top="150.0" />
          </GridPane.margin>
       </TextField>
-      <Label alignment="TOP_CENTER" text="Nome" textFill="WHITE" GridPane.rowIndex="1">
+      <Label alignment="TOP_CENTER" prefHeight="30.0" prefWidth="179.0" text="Nome/Razão Social" GridPane.rowIndex="1">
          <font>
             <Font size="20.0" />
          </font>
          <GridPane.margin>
-            <Insets bottom="150.0" left="50.0" right="50.0" />
+            <Insets left="50.0" />
          </GridPane.margin>
       </Label>
-      <TextField fx:id="txtRG" GridPane.columnIndex="2" GridPane.rowIndex="1">
+      <TextField fx:id="txtRG" style="-fx-border-color: #000;" GridPane.columnIndex="2" GridPane.rowIndex="1">
          <GridPane.margin>
             <Insets left="50.0" right="50.0" top="50.0" />
          </GridPane.margin>
       </TextField>
-      <TextField fx:id="txtTelefone" GridPane.columnIndex="2" GridPane.rowIndex="1">
+      <Label alignment="TOP_CENTER" text="RG" GridPane.columnIndex="2" GridPane.rowIndex="1">
+         <font>
+            <Font size="20.0" />
+         </font>
+         <GridPane.margin>
+            <Insets left="50.0" right="50.0" />
+         </GridPane.margin>
+      </Label>
+      <TextField fx:id="txtTelefone" style="-fx-border-color: #000;" GridPane.columnIndex="2" GridPane.rowIndex="1">
          <GridPane.margin>
             <Insets left="50.0" right="50.0" top="200.0" />
          </GridPane.margin>
       </TextField>
-      <Label alignment="TOP_CENTER" text="Telefone" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="1">
+      <Label alignment="TOP_CENTER" text="Telefone" GridPane.columnIndex="2" GridPane.rowIndex="1">
          <font>
             <Font size="20.0" />
          </font>
@@ -184,7 +184,7 @@
             <Insets left="50.0" right="50.0" top="150.0" />
          </GridPane.margin>
       </Label>
-      <Label alignment="TOP_CENTER" text="Cidade" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="3">
+      <Label alignment="TOP_CENTER" text="Cidade" GridPane.columnIndex="2" GridPane.rowIndex="3">
          <font>
             <Font size="20.0" />
          </font>
@@ -195,22 +195,22 @@
             <Insets />
          </opaqueInsets>
       </Label>
-      <ComboBox fx:id="comboEstado" onMouseClicked="#estadoCombo" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+      <ComboBox fx:id="comboEstado" prefWidth="150.0" style="-fx-border-color: #000;" GridPane.columnIndex="1" GridPane.rowIndex="1">
          <GridPane.margin>
             <Insets left="50.0" top="50.0" />
          </GridPane.margin>
       </ComboBox>
-      <RadioButton fx:id="radioTipoFisica" mnemonicParsing="false" onMouseClicked="#radioCheck" text="Pessoa Fisica" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="2">
+      <RadioButton fx:id="radioTipoFisica" mnemonicParsing="false" onMouseClicked="#radioCheck" text="Pessoa Fisica" GridPane.rowIndex="1">
          <GridPane.margin>
-            <Insets left="50.0" />
+            <Insets bottom="100.0" left="50.0" />
          </GridPane.margin>
       </RadioButton>
-      <RadioButton fx:id="radioTipoJuridica" layoutX="584.0" layoutY="376.0" mnemonicParsing="false" onMouseClicked="#radioCheck" text="Pessoa Juridica" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="2">
+      <RadioButton fx:id="radioTipoJuridica" layoutX="584.0" layoutY="376.0" mnemonicParsing="false" onMouseClicked="#radioCheck" text="Pessoa Juridica" GridPane.columnSpan="2" GridPane.rowIndex="1">
          <GridPane.margin>
-            <Insets left="50.0" top="50.0" />
+            <Insets bottom="100.0" left="150.0" />
          </GridPane.margin>
       </RadioButton>
-      <Label alignment="TOP_CENTER" text="Senha" textFill="WHITE" GridPane.rowIndex="3">
+      <Label alignment="TOP_CENTER" text="Senha" GridPane.rowIndex="3">
          <font>
             <Font size="20.0" />
          </font>
@@ -218,33 +218,20 @@
             <Insets bottom="50.0" left="50.0" />
          </GridPane.margin>
       </Label>
-      <PasswordField fx:id="passSenha" GridPane.rowIndex="3">
+      <PasswordField fx:id="passSenha" style="-fx-border-color: #000;" GridPane.rowIndex="3">
          <GridPane.margin>
             <Insets left="50.0" />
          </GridPane.margin>
       </PasswordField>
-      <TextField fx:id="txtCPF" GridPane.rowIndex="2">
-         <GridPane.margin>
-            <Insets bottom="100.0" left="100.0" />
-         </GridPane.margin>
-      </TextField>
-      <TextField fx:id="txtEmail" GridPane.columnIndex="1" GridPane.rowIndex="3">
+      <TextField fx:id="txtEmail" style="-fx-border-color: #000;" GridPane.columnIndex="1" GridPane.rowIndex="3">
          <GridPane.margin>
             <Insets left="50.0" right="50.0" />
          </GridPane.margin>
       </TextField>
-      <ComboBox fx:id="comboCidade" onMouseClicked="#populateCidade" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
+      <ComboBox fx:id="comboCidade" onAction="#populateCidade" onMouseClicked="#populateCidade" prefWidth="150.0" style="-fx-border-color: #000;" GridPane.columnIndex="2" GridPane.rowIndex="3">
          <GridPane.margin>
             <Insets left="50.0" right="50.0" />
          </GridPane.margin>
       </ComboBox>
-      <Label fx:id="LabelRG" alignment="TOP_CENTER" text="RG" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="1">
-         <font>
-            <Font size="20.0" />
-         </font>
-         <GridPane.margin>
-            <Insets left="50.0" right="50.0" />
-         </GridPane.margin>
-      </Label>
    </children>
 </GridPane>

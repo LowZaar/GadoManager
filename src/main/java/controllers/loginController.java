@@ -7,6 +7,7 @@ import org.controlsfx.control.Notifications;
 import classes.Usuarios;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
@@ -49,18 +50,35 @@ public class loginController {
 		if (query == null) {
 			Notifications.create().title("Alerta de Login").text("Usuario ou senha incorreto").showWarning();
 
-			System.out.println("logged in");
+			
 		} else {
 			Notifications.create().title("Alerta de Login").text("Login bem sucedido").showConfirm();
 
 			URL fxmlMainMenu = getClass().getResource("/fxml/MenuPrincipal.fxml");
+			
+			System.out.println("logged in");
 
-			GridPane mainMenuGrid = FXMLLoader.load(fxmlMainMenu);
+			FXMLLoader loader = new FXMLLoader(fxmlMainMenu);
 
+			Parent mainMenuP = loader.load();
+
+			Stage mainMenu = new Stage();
+			
+			Scene mainMenuScene = new Scene(mainMenuP);
+			
+			mainMenu.setScene(mainMenuScene);
+			
+			
 			Stage window = (Stage) btnLogin.getScene().getWindow();
-
-			window.setScene(new Scene(mainMenuGrid));
-
+			
+			window.close();
+			mainMenu.show();
+			
+			mainMenuController mainMenuController = loader.getController();
+			
+			mainMenuController.setUserLogin(query);
+			
+			
 		}
 	}
 

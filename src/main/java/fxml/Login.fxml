@@ -13,7 +13,7 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<GridPane maxHeight="450.0" maxWidth="450.0" minHeight="450.0" minWidth="450.0" prefHeight="450.0" prefWidth="450.0" style="-fx-background-color: #000000; -fx-border-color: #00FF00; -fx-border-insets: 5;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.loginController">
+<GridPane maxHeight="450.0" maxWidth="450.0" minHeight="450.0" minWidth="450.0" prefHeight="450.0" prefWidth="450.0" style="-fx-background-color: #fff; -fx-border-color: #000; -fx-border-insets: 5;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.loginController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -30,7 +30,7 @@
       <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
    </padding>
    <children>
-      <Label alignment="CENTER" contentDisplay="TOP" graphicTextGap="0.0" nodeOrientation="LEFT_TO_RIGHT" text="GadoManager" textAlignment="CENTER" textFill="WHITE" underline="true" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+      <Label alignment="CENTER" contentDisplay="TOP" graphicTextGap="0.0" nodeOrientation="LEFT_TO_RIGHT" text="GadoManager" textAlignment="CENTER" underline="true" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
          <font>
             <Font name="Impact" size="50.0" />
          </font>
@@ -44,12 +44,12 @@
                <stops>
                   <Stop>
                      <color>
-                        <Color red="0.018799999728798866" green="0.9399999976158142" blue="0.1109199970960617" opacity="0.7434782385826111" />
+                        <Color red="1.0" green="1.0" blue="1.0" opacity="0.7400000095367432" />
                      </color>
                   </Stop>
                   <Stop offset="1.0">
                      <color>
-                        <Color red="1.0" green="1.0" blue="1.0" />
+                        <Color opacity="0.7400000095367432" />
                      </color>
                   </Stop>
                </stops>
@@ -59,7 +59,7 @@
             <Insets top="75.0" />
          </padding>
       </Label>
-      <Label text="Senha" underline="true" GridPane.rowIndex="1">
+      <Label text="Senha" GridPane.rowIndex="1">
          <font>
             <Font size="24.0" />
          </font>
@@ -68,12 +68,12 @@
                <stops>
                   <Stop>
                      <color>
-                        <Color red="0.018799999728798866" green="0.9399999976158142" blue="0.1109199970960617" opacity="0.7434782385826111" />
+                        <Color red="1.0" green="1.0" blue="1.0" opacity="0.7400000095367432" />
                      </color>
                   </Stop>
                   <Stop offset="1.0">
                      <color>
-                        <Color red="1.0" green="1.0" blue="1.0" />
+                        <Color opacity="0.7400000095367432" />
                      </color>
                   </Stop>
                </stops>
@@ -86,12 +86,12 @@
             <Insets top="75.0" />
          </padding>
       </Label>
-      <TextField fx:id="userLogin" GridPane.columnSpan="2" GridPane.rowIndex="1">
+      <TextField fx:id="userLogin" style="-fx-border-color: #000;" GridPane.columnSpan="2" GridPane.rowIndex="1">
          <GridPane.margin>
             <Insets left="75.0" right="75.0" top="75.0" />
          </GridPane.margin>
       </TextField>
-      <PasswordField fx:id="passwordLogin" GridPane.columnSpan="2" GridPane.rowIndex="2">
+      <PasswordField fx:id="passwordLogin" style="-fx-border-color: #000;" GridPane.columnSpan="2" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets bottom="50.0" left="75.0" right="70.0" />
          </GridPane.margin>
@@ -105,7 +105,7 @@
                <stops>
                   <Stop>
                      <color>
-                        <Color red="0.018799999728798866" green="0.9399999976158142" blue="0.1109199970960617" opacity="0.7434782385826111" />
+                        <Color />
                      </color>
                   </Stop>
                   <Stop offset="1.0">
@@ -120,12 +120,12 @@
             <Insets left="110.0" top="100.0" />
          </GridPane.margin>
       </Label>
-      <Button fx:id="btnLogin" mnemonicParsing="false" onAction="#login" text="Login" GridPane.rowIndex="2">
+      <Button fx:id="btnLogin" mnemonicParsing="false" onAction="#login" style="-fx-border-color: #000; -fx-background-color: #fff;" text="Login" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets left="150.0" top="75.0" />
          </GridPane.margin>
       </Button>
-      <Button fx:id="btnCadastrar" mnemonicParsing="false" onAction="#cadastrar" text="Cadastrar" GridPane.columnIndex="1" GridPane.rowIndex="2">
+      <Button fx:id="btnCadastrar" mnemonicParsing="false" onAction="#cadastrar" style="-fx-border-color: #000; -fx-background-color: #fff;" text="Cadastrar" GridPane.columnIndex="1" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets top="75.0" />
          </GridPane.margin>
