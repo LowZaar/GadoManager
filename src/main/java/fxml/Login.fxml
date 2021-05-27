@@ -8,9 +8,6 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.paint.Color?>
-<?import javafx.scene.paint.LinearGradient?>
-<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
 <GridPane maxHeight="450.0" maxWidth="450.0" minHeight="450.0" minWidth="450.0" prefHeight="450.0" prefWidth="450.0" style="-fx-background-color: #fff; -fx-border-color: #000; -fx-border-insets: 5;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.loginController">
@@ -35,50 +32,18 @@
             <Font name="Impact" size="50.0" />
          </font>
       </Label>
-      <Label contentDisplay="RIGHT" graphicTextGap="8.0" text="Login" textOverrun="CLIP" wrapText="true" GridPane.rowIndex="1">
+      <Label contentDisplay="RIGHT" graphicTextGap="8.0" text="Login" textFill="#080808" textOverrun="CLIP" wrapText="true" GridPane.rowIndex="1">
          <font>
             <Font size="24.0" />
          </font>
-         <textFill>
-            <LinearGradient endX="1.0" endY="1.0">
-               <stops>
-                  <Stop>
-                     <color>
-                        <Color red="1.0" green="1.0" blue="1.0" opacity="0.7400000095367432" />
-                     </color>
-                  </Stop>
-                  <Stop offset="1.0">
-                     <color>
-                        <Color opacity="0.7400000095367432" />
-                     </color>
-                  </Stop>
-               </stops>
-            </LinearGradient>
-         </textFill>
          <padding>
             <Insets top="75.0" />
          </padding>
       </Label>
-      <Label text="Senha" GridPane.rowIndex="1">
+      <Label text="Senha" textFill="#0a0a0a" GridPane.rowIndex="1">
          <font>
             <Font size="24.0" />
          </font>
-         <textFill>
-            <LinearGradient endX="1.0" endY="1.0">
-               <stops>
-                  <Stop>
-                     <color>
-                        <Color red="1.0" green="1.0" blue="1.0" opacity="0.7400000095367432" />
-                     </color>
-                  </Stop>
-                  <Stop offset="1.0">
-                     <color>
-                        <Color opacity="0.7400000095367432" />
-                     </color>
-                  </Stop>
-               </stops>
-            </LinearGradient>
-         </textFill>
          <GridPane.margin>
             <Insets top="150.0" />
          </GridPane.margin>
@@ -96,26 +61,10 @@
             <Insets bottom="50.0" left="75.0" right="70.0" />
          </GridPane.margin>
       </PasswordField>
-      <Label alignment="CENTER" contentDisplay="TOP" graphicTextGap="0.0" nodeOrientation="LEFT_TO_RIGHT" text="Seja Bem Vindo!" textAlignment="CENTER" underline="true" wrapText="true" GridPane.columnSpan="2">
+      <Label alignment="CENTER" contentDisplay="TOP" graphicTextGap="0.0" nodeOrientation="LEFT_TO_RIGHT" text="Seja Bem Vindo!" textAlignment="CENTER" textFill="#070707" underline="true" wrapText="true" GridPane.columnSpan="2">
          <font>
             <Font name="Impact" size="29.0" />
          </font>
-         <textFill>
-            <LinearGradient endX="1.0" endY="1.0" startX="0.680952380952381" startY="0.3142857142857143">
-               <stops>
-                  <Stop>
-                     <color>
-                        <Color />
-                     </color>
-                  </Stop>
-                  <Stop offset="1.0">
-                     <color>
-                        <Color red="1.0" green="1.0" blue="1.0" />
-                     </color>
-                  </Stop>
-               </stops>
-            </LinearGradient>
-         </textFill>
          <GridPane.margin>
             <Insets left="110.0" top="100.0" />
          </GridPane.margin>

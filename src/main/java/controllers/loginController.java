@@ -12,7 +12,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import utils.DAOHibernate;
 
@@ -59,12 +58,12 @@ public class loginController {
 			System.out.println("logged in");
 
 			FXMLLoader loader = new FXMLLoader(fxmlMainMenu);
-
+			
 			Parent mainMenuP = loader.load();
 
-			Stage mainMenu = new Stage();
-			
 			Scene mainMenuScene = new Scene(mainMenuP);
+
+			Stage mainMenu = new Stage();
 			
 			mainMenu.setScene(mainMenuScene);
 			
@@ -86,12 +85,20 @@ public class loginController {
 	private void cadastrar() throws Exception {
 
 		URL fxmlCadastro = getClass().getResource("/fxml/CadastroDeEmpresa.fxml");
-
-		GridPane cadastroEmpresa = FXMLLoader.load(fxmlCadastro);
+		
+		FXMLLoader loader = new FXMLLoader(fxmlCadastro);
+		
+		Parent cadastroEmpresaP = loader.load();
+		
+		Scene cadastroEmpresaScene = new Scene(cadastroEmpresaP);
 
 		Stage window = (Stage) btnCadastrar.getScene().getWindow();
-
-		window.setScene(new Scene(cadastroEmpresa));
+		
+		cadastroEmpresaController cadastroEmpresaController = loader.getController();
+		cadastroEmpresaController.estadoCombo();
+		
+		window.setScene(cadastroEmpresaScene);
+		
 	}
 
 }

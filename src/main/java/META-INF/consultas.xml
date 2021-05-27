@@ -30,4 +30,17 @@
 		</query>
 	</named-query>
 
+	<named-query name="selectBovinobyEmpresa">
+		<query>
+			SELECT b from Bovinos b where b.idEmpresaPessoas = :empresa
+		</query>
+	</named-query>
+
+	<named-query name="selectRebanhobyEmpresa">
+		<query>
+			SELECT r from Rebanhos r where r.idEmpresaPessoa = :empresa
+		</query>
+	</named-query>
+
+
 </entity-mappings>

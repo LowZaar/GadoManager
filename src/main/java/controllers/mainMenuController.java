@@ -29,10 +29,14 @@ public class mainMenuController {
 		FXMLLoader loader = new FXMLLoader(fxmlBovino);
 
 		Parent bovinoP = loader.load();
-
+		
 		Stage cadastroBovino = new Stage();
 		Scene bovinoScene = new Scene(bovinoP);
 		cadastroBovino.setScene(bovinoScene);
+		
+		cadastroBovinoController cadastroBovinoController = loader.getController();
+		cadastroBovinoController.setUser(userLogin);
+		cadastroBovinoController.populateCombos();
 		cadastroBovino.show();
 
 	}
@@ -84,6 +88,9 @@ public class mainMenuController {
 		Scene bcsScene = new Scene(bcsP);
 
 		cadastroBCS.setScene(bcsScene);
+		cadastroBCSController cadastroBCSController = loader.getController();
+		cadastroBCSController.setUser(userLogin);
+		cadastroBCSController.populateCombo();
 		cadastroBCS.show();
 
 	}
@@ -100,6 +107,9 @@ public class mainMenuController {
 		Scene pesagemScene = new Scene(pesagemP);
 
 		cadastroPesagem.setScene(pesagemScene);
+		cadastroPesagemController cadastroPesagemController = loader.getController();
+		cadastroPesagemController.setUser(userLogin);
+		cadastroPesagemController.populateCombo();
 		cadastroPesagem.show();
 
 	}

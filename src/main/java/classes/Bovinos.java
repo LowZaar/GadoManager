@@ -47,6 +47,7 @@ public class Bovinos {
 	private Date dataMorte;
 	
 	@ManyToOne
+	@JoinColumn(name = "idEmpresaPessoa")
 	private Empresas_Pessoas idEmpresaPessoas;
 	
 	@ManyToOne

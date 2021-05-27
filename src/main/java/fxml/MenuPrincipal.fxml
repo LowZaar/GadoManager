@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<GridPane maxHeight="500.0" maxWidth="500.0" minHeight="500.0" minWidth="500.0" prefHeight="500.0" prefWidth="500.0" style="-fx-background-color: #FFF; -fx-border-color: #000; -fx-border-insets: 5; -fx-border-radius: 5;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mainMenuController">
+<GridPane maxHeight="500.0" maxWidth="500.0" minHeight="500.0" minWidth="500.0" prefHeight="500.0" prefWidth="500.0" style="-fx-background-color: #FFF; -fx-border-color: #000; -fx-border-insets: 5; -fx-border-radius: 5;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.mainMenuController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="526.0" minWidth="10.0" prefWidth="401.0" />
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="387.0" minWidth="10.0" prefWidth="387.0" />
@@ -45,27 +45,27 @@
         <menus>
           <Menu mnemonicParsing="false" text="Bovinos">
             <items>
-              <MenuItem fx:id="menuBovino" mnemonicParsing="false" text="Bovinos" />
-                  <MenuItem fx:id="menuRacas" mnemonicParsing="false" text="Raças" />
-                  <MenuItem fx:id="menuRebanhos" mnemonicParsing="false" text="Rebanhos" />
-                  <MenuItem fx:id="menuBCS" mnemonicParsing="false" text="BCS" />
-                  <MenuItem fx:id="menuPesagens" mnemonicParsing="false" text="Pesagens" />
+              <MenuItem fx:id="menuBovino" mnemonicParsing="false" onAction="#abrirBovino" text="Bovinos" />
+                  <MenuItem fx:id="menuRacas" mnemonicParsing="false" onAction="#abrirRacas" text="Raças" />
+                  <MenuItem fx:id="menuRebanhos" mnemonicParsing="false" onAction="#abrirRebanho" text="Rebanhos" />
+                  <MenuItem fx:id="menuBCS" mnemonicParsing="false" onAction="#abrirBCS" text="BCS" />
+                  <MenuItem fx:id="menuPesagens" mnemonicParsing="false" onAction="#abrirPesagens" text="Pesagens" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Saude">
             <items>
               <MenuItem fx:id="menuSaude" mnemonicParsing="false" text="Saude" />
-                  <MenuItem fx:id="menuMedicacao" mnemonicParsing="false" text="Medicação" />
-                  <MenuItem fx:id="menuVacinas" mnemonicParsing="false" text="Vacinas" />
-                  <MenuItem fx:id="menuRacoes" mnemonicParsing="false" text="Rações" />
-                  <MenuItem fx:id="menuAlimentacao" mnemonicParsing="false" text="Alimentação" />
+                  <MenuItem fx:id="menuMedicacao" mnemonicParsing="false" onAction="#abrirMedicacao" text="Medicação" />
+                  <MenuItem fx:id="menuVacinas" mnemonicParsing="false" onAction="#abrirVacina" text="Vacinas" />
+                  <MenuItem fx:id="menuRacoes" mnemonicParsing="false" onAction="#abrirRacao" text="Rações" />
+                  <MenuItem fx:id="menuAlimentacao" mnemonicParsing="false" onAction="#abrirAlimentacao" text="Alimentação" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Usuario">
             <items>
-              <MenuItem fx:id="menuUsuarios" mnemonicParsing="false" text="Usuarios" />
-                  <MenuItem fx:id="menuVeterinarios" mnemonicParsing="false" text="Veterinarios" />
-                  <MenuItem fx:id="menuParams" mnemonicParsing="false" text="Parâmetros" />
+              <MenuItem fx:id="menuUsuarios" mnemonicParsing="false" onAction="#abrirUsuario" text="Usuarios" />
+                  <MenuItem fx:id="menuVeterinarios" mnemonicParsing="false" onAction="#abrirVeterinario" text="Veterinarios" />
+                  <MenuItem fx:id="menuParams" mnemonicParsing="false" onAction="#abrirParams" text="Parâmetros" />
             </items>
           </Menu>
         </menus>

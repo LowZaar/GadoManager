@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<GridPane maxHeight="519.0" maxWidth="297.0" minHeight="519.0" minWidth="297.0" prefHeight="519.0" prefWidth="297.0" style="-fx-background-color: #fff; -fx-border-radius: 5; -fx-border-insets: 5; -fx-border-color: #000;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<GridPane maxHeight="519.0" maxWidth="297.0" minHeight="519.0" minWidth="297.0" prefHeight="519.0" prefWidth="297.0" style="-fx-background-color: #fff; -fx-border-radius: 5; -fx-border-insets: 5; -fx-border-color: #000;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.cadastroBCSController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
       <ColumnConstraints />
@@ -22,11 +22,6 @@
     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <Button alignment="BOTTOM_LEFT" mnemonicParsing="false" style="-fx-background-color: #fff; -fx-border-color: #000;" text="Salvar" textAlignment="CENTER" GridPane.rowIndex="2">
-         <GridPane.margin>
-            <Insets left="50.0" top="50.0" />
-         </GridPane.margin>
-      </Button>
       <Label alignment="TOP_CENTER" text="Cadastro de BCS" textAlignment="CENTER" GridPane.columnSpan="2">
          <font>
             <Font size="30.0" />
@@ -56,6 +51,11 @@
             <Insets bottom="100.0" left="50.0" right="50.0" />
          </GridPane.margin>
       </Label>
+      <DatePicker fx:id="dateData" style="-fx-border-color: #000;" GridPane.columnSpan="2" GridPane.rowIndex="1">
+         <GridPane.margin>
+            <Insets bottom="50.0" left="50.0" />
+         </GridPane.margin>
+      </DatePicker>
       <Label alignment="TOP_CENTER" text="Bovino" GridPane.columnSpan="2" GridPane.rowIndex="1">
          <font>
             <Font size="20.0" />
@@ -64,17 +64,17 @@
             <Insets left="50.0" top="100.0" />
          </GridPane.margin>
       </Label>
-      <DatePicker fx:id="dateData" style="-fx-border-color: #000;" GridPane.columnSpan="2" GridPane.rowIndex="1">
-         <GridPane.margin>
-            <Insets bottom="50.0" left="50.0" />
-         </GridPane.margin>
-      </DatePicker>
-      <ComboBox fx:id="ComboBovino" prefWidth="150.0" style="-fx-border-color: #000;" GridPane.rowIndex="2">
+      <ComboBox fx:id="comboBovino" prefWidth="150.0" style="-fx-border-color: #000;" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets bottom="190.0" left="50.0" />
          </GridPane.margin>
       </ComboBox>
-      <Button alignment="BOTTOM_LEFT" mnemonicParsing="false" style="-fx-background-color: #fff; -fx-border-color: #000;" text="Cancelar" textAlignment="CENTER" GridPane.rowIndex="2">
+      <Button fx:id="btnSalvar" alignment="BOTTOM_LEFT" mnemonicParsing="false" style="-fx-background-color: #fff; -fx-border-color: #000;" text="Salvar" textAlignment="CENTER" GridPane.rowIndex="2">
+         <GridPane.margin>
+            <Insets left="50.0" top="50.0" />
+         </GridPane.margin>
+      </Button>
+      <Button fx:id="btnCancelar" alignment="BOTTOM_LEFT" mnemonicParsing="false" style="-fx-background-color: #fff; -fx-border-color: #000;" text="Cancelar" textAlignment="CENTER" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets left="200.0" top="50.0" />
          </GridPane.margin>
