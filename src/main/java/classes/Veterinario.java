@@ -23,8 +23,18 @@ public class Veterinario {
 	private String rg;
 	
 	public Veterinario() {
-		// TODO Auto-generated constructor stub
+		
 	}
+	
+	public Veterinario(String nome, String crmv, String cpf, String rg) {
+		
+		this.nome = nome;
+		this.crmv = crmv;
+		this.cpf = cpf;
+		this.rg = rg;
+	}
+
+
 
 	public Long getIdVeterinario() {
 		return idVeterinario;

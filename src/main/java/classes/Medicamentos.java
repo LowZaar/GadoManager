@@ -21,6 +21,14 @@ public class Medicamentos {
 	public Medicamentos() {
 		
 	}
+	
+	public Medicamentos(String nome, String principioAtivo) {
+		super();
+		this.nome = nome;
+		this.principioAtivo = principioAtivo;
+	}
+
+
 
 	public Long getIdMedicamento() {
 		return idMedicamento;

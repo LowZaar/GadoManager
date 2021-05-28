@@ -20,6 +20,12 @@ public class Vacina {
 		
 	}
 
+	public Vacina(String descricao) {
+		this.descricao = descricao;
+	}
+
+
+
 	public Long getIdVacina() {
 		return idVacina;
 	}

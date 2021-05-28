@@ -19,7 +19,7 @@ public class Parametros {
 
 	@OneToOne
 	@JoinColumn(name = "idEmpresa_Pessoa")
-	private Empresas_Pessoas idEmpresa_Pessoa;
+	private Empresas_Pessoas idEmpresaPessoa;
 
 	@Column(nullable = true)
 	private int alertaDiasSemPesar;
@@ -32,6 +32,17 @@ public class Parametros {
 	public Parametros() {
 	
 	}
+	
+	public Parametros(Empresas_Pessoas idEmpresa_Pessoa, int alertaDiasSemPesar, int alertaEngordaDiario,
+			Double taxaEngordaDiario) {
+		
+		this.idEmpresaPessoa = idEmpresa_Pessoa;
+		this.alertaDiasSemPesar = alertaDiasSemPesar;
+		this.alertaEngordaDiario = alertaEngordaDiario;
+		this.taxaEngordaDiario = taxaEngordaDiario;
+	}
+
+
 
 	public Long getIdParametro() {
 		return idParametro;
@@ -42,11 +53,11 @@ public class Parametros {
 	}
 
 	public Empresas_Pessoas getIdEmpresa_Pessoa() {
-		return idEmpresa_Pessoa;
+		return idEmpresaPessoa;
 	}
 
 	public void setIdEmpresa_Pessoa(Empresas_Pessoas idEmpresa_Pessoa) {
-		this.idEmpresa_Pessoa = idEmpresa_Pessoa;
+		this.idEmpresaPessoa = idEmpresa_Pessoa;
 	}
 
 	public int getAlertaDiasSemPesar() {

@@ -51,7 +51,6 @@ public class loginController {
 
 			
 		} else {
-			Notifications.create().title("Alerta de Login").text("Login bem sucedido").showConfirm();
 
 			URL fxmlMainMenu = getClass().getResource("/fxml/MenuPrincipal.fxml");
 			
@@ -77,6 +76,7 @@ public class loginController {
 			
 			mainMenuController.setUserLogin(query);
 			
+			Notifications.create().title("Alerta de Login").text("Login bem sucedido").showConfirm();
 			
 		}
 	}

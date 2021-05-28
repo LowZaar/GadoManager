@@ -1,6 +1,5 @@
 package controllers;
 
-import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -12,9 +11,11 @@ import org.controlsfx.control.Notifications;
 import classes.Cidades;
 import classes.Empresas_Pessoas;
 import classes.Estados;
+import classes.Parametros;
 import classes.Usuarios;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -139,18 +140,15 @@ public class cadastroEmpresaController {
 			empPF = empPF.createPF(nomeEmp, cpfEmp, rgEmp, dataEmp, enderecoEmp, cidadeObj, estadoId, cepEmp,
 					telefoneEmp, emailEmp);
 
-			daoEmp.beginTransaction().save(empPF).commitTransaction().closeAll();
+			
 
 			createUser(nomeEmp, emailEmp, senhaEmp, empPF);
-
-			URL fxmlFile = getClass().getResource("/fxml/Login.fxml");
-
-			GridPane loginGrid = FXMLLoader.load(fxmlFile);
-
-			Stage window = (Stage) btnSalvar.getScene().getWindow();
-
-			window.setScene(new Scene(loginGrid));
-
+			
+			DAOHibernate<Parametros> daoParams = new DAOHibernate<>(Parametros.class);
+			Parametros paramObj = new Parametros(empPF,0,0,0.00);
+			daoEmp.beginTransaction().save(empPF).commitTransaction().closeAll();
+			daoParams.beginTransaction().save(paramObj).commitTransaction().closeAll();
+			
 		} else if (radioTipoJuridica.isSelected()) {
 
 			System.out.println("User PJ");
@@ -164,26 +162,27 @@ public class cadastroEmpresaController {
 			empPJ = empPJ.createPJ(nomeEmp, dataEmp, cnpjEmp, ieEmp, imEmp, enderecoEmp, cidadeObj, estadoId, cepEmp,
 					telefoneEmp, emailEmp);
 			System.out.println(empPJ);
-			daoEmp.beginTransaction().save(empPJ).commitTransaction().closeAll();
+			
 
 			createUser(nomeEmp, emailEmp, senhaEmp, empPJ);
 			
-			URL fxmlFile = getClass().getResource("/fxml/Login.fxml");
-
-			GridPane loginGrid = null;
-			try {
-				loginGrid = FXMLLoader.load(fxmlFile);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-			Stage window = (Stage) btnSalvar.getScene().getWindow();
-
-			window.setScene(new Scene(loginGrid));
-
+			DAOHibernate<Parametros> daoParams = new DAOHibernate<>(Parametros.class);
+			Parametros paramObj = new Parametros(empPJ,0,0,0.00);
+			
+			daoEmp.beginTransaction().save(empPJ).commitTransaction().closeAll();
+			daoParams.beginTransaction().save(paramObj).commitTransaction().closeAll();
+			
 		}
 
+		URL fxmlLogin = getClass().getResource("/fxml/Login.fxml");
+		
+		FXMLLoader loader = new FXMLLoader(fxmlLogin);
+		
+		Parent loginP = loader.load();
+		
+		Stage window = (Stage) btnSalvar.getScene().getWindow();
+		Scene loginScene = new Scene(loginP);
+		window.setScene(loginScene);
 	}
 
 	@FXML

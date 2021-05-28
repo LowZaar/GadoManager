@@ -29,11 +29,11 @@ public class mainMenuController {
 		FXMLLoader loader = new FXMLLoader(fxmlBovino);
 
 		Parent bovinoP = loader.load();
-		
+
 		Stage cadastroBovino = new Stage();
 		Scene bovinoScene = new Scene(bovinoP);
 		cadastroBovino.setScene(bovinoScene);
-		
+
 		cadastroBovinoController cadastroBovinoController = loader.getController();
 		cadastroBovinoController.setUser(userLogin);
 		cadastroBovinoController.populateCombos();
@@ -158,6 +158,7 @@ public class mainMenuController {
 		Scene racaoScene = new Scene(racaoP);
 
 		cadastroRacao.setScene(racaoScene);
+
 		cadastroRacao.show();
 
 	}
@@ -174,6 +175,9 @@ public class mainMenuController {
 		Scene alimentacaoScene = new Scene(alimentacaoP);
 
 		cadastroAlimentacao.setScene(alimentacaoScene);
+		cadastroAlimentacaoController cadastroAlimentacaoController = loader.getController();
+		cadastroAlimentacaoController.setUser(userLogin);
+		cadastroAlimentacaoController.populateCombos();
 		cadastroAlimentacao.show();
 
 	}
@@ -192,6 +196,8 @@ public class mainMenuController {
 			Scene usuarioScene = new Scene(usuarioP);
 
 			cadastroUsuario.setScene(usuarioScene);
+			cadastroUsuarioController cadastroUsuarioController = loader.getController();
+			cadastroUsuarioController.setUser(userLogin);
 			cadastroUsuario.show();
 		} else {
 			Notifications.create().title("Alerta").text(userLogin.getUsuario() + " não é um Usuario Mestre")
@@ -199,39 +205,45 @@ public class mainMenuController {
 		}
 
 	}
-	
+
 	public void abrirVeterinario() throws Exception {
-		
+
 		URL fxmlVeterinario = getClass().getResource("/fxml/CadastroDeVeterinario.fxml");
-		
+
 		FXMLLoader loader = new FXMLLoader(fxmlVeterinario);
-		
+
 		Parent veterinarioP = loader.load();
-		
+
 		Stage cadastroVeterinario = new Stage();
 		Scene veterinarioScene = new Scene(veterinarioP);
-		
+
 		cadastroVeterinario.setScene(veterinarioScene);
 		cadastroVeterinario.show();
-		
+
 	}
 
 	public void abrirParams() throws Exception {
-		// needs user
-		
-		
-		URL fxmlParams = getClass().getResource("/fxml/Parametros.fxml");
-		
-		FXMLLoader loader = new FXMLLoader(fxmlParams);
-		
-		Parent paramsP = loader.load();
-		
-		Stage paramsStage = new Stage();
-		Scene paramsScene = new Scene(paramsP);
-		
-		paramsStage.setScene(paramsScene);
-		paramsStage.show();
-		
+		if (userLogin.isUsuarioMestre()) {
+
+			URL fxmlParams = getClass().getResource("/fxml/Parametros.fxml");
+
+			FXMLLoader loader = new FXMLLoader(fxmlParams);
+
+			Parent paramsP = loader.load();
+
+			Stage paramsStage = new Stage();
+			Scene paramsScene = new Scene(paramsP);
+
+			paramsStage.setScene(paramsScene);
+			cadastroParamsController cadastroParamsController = loader.getController();
+			cadastroParamsController.setUser(userLogin);
+			cadastroParamsController.populateParams();
+			paramsStage.show();
+		} else {
+
+			Notifications.create().title("Alerta").text(userLogin.getUsuario() + " não é um Usuario Mestre")
+					.showWarning();
+		}
 	}
-	
+
 }

@@ -22,8 +22,6 @@
 		</query>
 	</named-query>
 	
-	
-
 	<named-query name="selectCidadebyEstado">
 		<query>
 			SELECT c from Cidades c where c.estado.idEstado = :idEstado
@@ -42,5 +40,10 @@
 		</query>
 	</named-query>
 
+	<named-query name="selectParamsbyEmpresa">
+		<query>
+			SELECT p from Parametros p where p.idEmpresaPessoa = :empresa
+		</query>
+	</named-query>
 
 </entity-mappings>
