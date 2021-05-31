@@ -79,7 +79,7 @@
             <Insets left="50.0" right="50.0" />
          </GridPane.margin>
       </Label>
-      <TextField fx:id="txtCategoria" style="-fx-border-color: #000;" GridPane.rowIndex="1">
+      <TextField fx:id="txtAssociacao" style="-fx-border-color: #000;" GridPane.rowIndex="1">
          <GridPane.margin>
             <Insets left="50.0" top="50.0" />
          </GridPane.margin>

@@ -197,7 +197,7 @@ public class cadastroEmpresaController {
 		window.setScene(new Scene(loginGrid));
 	}
 
-	public Date localDateToDate(LocalDate data) {
+	private Date localDateToDate(LocalDate data) {
 		ZoneId zoneidDefault = ZoneId.systemDefault();
 
 		return Date.from(data.atStartOfDay(zoneidDefault).toInstant());
@@ -244,7 +244,6 @@ public class cadastroEmpresaController {
 			
 			txtRG.setVisible(true);
 			LabelRG.setVisible(true);
-			
 			
 		} else if (!radioTipoFisica.isSelected() && !radioTipoJuridica.isSelected()) {
 

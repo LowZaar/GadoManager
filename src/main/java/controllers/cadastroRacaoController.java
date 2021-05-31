@@ -24,7 +24,7 @@ public class cadastroRacaoController {
 	@FXML
 	private Button btnCancelar;
 	
-	
+	@FXML
 	public void salvar() {
 		
 		String observacao = txtObservacao.getText();
@@ -40,6 +40,7 @@ public class cadastroRacaoController {
 		Notifications.create().title("Alerta").text("Nova Racão adicionada com sucesso!").showConfirm();
 	}
 	
+	@FXML
 	public void cancelar() {
 		
 		Stage window = (Stage) btnCancelar.getScene().getWindow();

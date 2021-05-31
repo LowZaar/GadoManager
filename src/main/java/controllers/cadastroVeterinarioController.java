@@ -29,6 +29,7 @@ public class cadastroVeterinarioController {
 	@FXML
 	private Button btnCancelar;
 	
+	@FXML
 	public void salvar() {
 		
 		String nome = txtNome.getText();
@@ -44,6 +45,8 @@ public class cadastroVeterinarioController {
 		Notifications.create().title("Alerta").text("Veterinario(a) criado com sucesso!").showConfirm();
 	}
 	
+	
+	@FXML
 	public void cancelar() {
 		
 		Stage window = (Stage) btnCancelar.getScene().getWindow();

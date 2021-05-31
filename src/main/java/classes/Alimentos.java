@@ -35,6 +35,16 @@ public class Alimentos {
 	public Alimentos() {
 	
 	}
+	
+	public Alimentos(Rebanhos idRebanho, Date dataInicio, Date dataTermino, Racoes idracao, String observacoes) {
+		this.idRebanho = idRebanho;
+		this.dataInicio = dataInicio;
+		this.dataTermino = dataTermino;
+		this.idracao = idracao;
+		this.observacoes = observacoes;
+	}
+
+
 
 	public Long getIdAlimento() {
 		return idAlimento;

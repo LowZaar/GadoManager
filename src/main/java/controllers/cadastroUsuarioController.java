@@ -45,6 +45,7 @@ public class cadastroUsuarioController {
 		this.user = user;
 	}
 
+	@FXML
 	public void salvar() {
 
 		String nome = txtNome.getText();
@@ -67,6 +68,7 @@ public class cadastroUsuarioController {
 				+ user.getUsuario() + "\n" + "Senha = " + user.getSenha()).showConfirm();
 	}
 	
+	@FXML
 	public void cancelar() {
 		
 		Stage window = (Stage) btnCancelar.getScene().getWindow();

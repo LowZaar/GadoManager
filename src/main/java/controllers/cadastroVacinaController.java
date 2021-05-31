@@ -21,7 +21,7 @@ public class cadastroVacinaController {
 	private Button btnCancelar;
 	
 	
-	
+	@FXML
 	public void Salvar() {
 		
 		String Descricao = txtADescricao.getText();
@@ -37,6 +37,7 @@ public class cadastroVacinaController {
 		txtADescricao.clear();
 	}
 	
+	@FXML
 	public void cancelar() {
 		
 		Stage window = (Stage) btnCancelar.getScene().getWindow();

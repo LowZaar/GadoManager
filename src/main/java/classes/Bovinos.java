@@ -15,6 +15,31 @@ import javax.persistence.Table;
 @Table(name = "Bovinos")
 public class Bovinos {
 	
+	public Long getIdAssociacao() {
+		return idAssociacao;
+	}
+
+	public void setIdAssociacao(Long idAssociacao) {
+		this.idAssociacao = idAssociacao;
+	}
+
+	public Long getIdBrinco() {
+		return idBrinco;
+	}
+
+	public void setIdBrinco(Long idBrinco) {
+		this.idBrinco = idBrinco;
+	}
+
+	public Empresas_Pessoas getIdEmpresaPessoas() {
+		return idEmpresaPessoas;
+	}
+
+	public void setIdEmpresaPessoas(Empresas_Pessoas idEmpresaPessoas) {
+		this.idEmpresaPessoas = idEmpresaPessoas;
+	}
+
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idBovino;

@@ -1,6 +1,6 @@
 package classes;
 
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -29,6 +29,14 @@ public class BCS {
 	public BCS() {
 	
 	}
+	
+	public BCS(Bovinos idBovino, Date data, Double indiceBCS) {
+		this.idBovino = idBovino;
+		this.data = data;
+		this.IndiceBCS = indiceBCS;
+	}
+
+
 
 	public Long getIdBCS() {
 		return idBCS;

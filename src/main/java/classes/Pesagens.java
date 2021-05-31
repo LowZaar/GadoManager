@@ -31,6 +31,16 @@ public class Pesagens {
 	public Pesagens() {
 		
 	}
+	
+	public Pesagens(Date dataPesagem, Double peso, String obervacoes, Bovinos idBovino) {
+		
+		this.dataPesagem = dataPesagem;
+		this.peso = peso;
+		this.Obervacoes = obervacoes;
+		this.idBovino = idBovino;
+	}
+
+
 
 	public Long getIdPesagem() {
 		return idPesagem;

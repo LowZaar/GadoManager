@@ -21,7 +21,7 @@
 			SELECT c FROM Cidades c where c.nome = :nome
 		</query>
 	</named-query>
-	
+
 	<named-query name="selectCidadebyEstado">
 		<query>
 			SELECT c from Cidades c where c.estado.idEstado = :idEstado
@@ -34,15 +34,39 @@
 		</query>
 	</named-query>
 
+	<named-query name="selectBovinobyNomeEmpresa">
+		<query>
+			SELECT b from Bovinos b where b.nome = :nome AND b.idEmpresaPessoas = :empresa
+		</query>
+	</named-query>
+
 	<named-query name="selectRebanhobyEmpresa">
 		<query>
 			SELECT r from Rebanhos r where r.idEmpresaPessoa = :empresa
 		</query>
 	</named-query>
 
+	<named-query name="selectRebanhobyNomeEmpresa">
+		<query>
+			SELECT r from Rebanhos r where r.nome = :nome AND r.idEmpresaPessoa = :empresa
+		</query>
+	</named-query>
+
 	<named-query name="selectParamsbyEmpresa">
 		<query>
 			SELECT p from Parametros p where p.idEmpresaPessoa = :empresa
+		</query>
+	</named-query>
+
+	<named-query name="selectRacasbyNome">
+		<query>
+		SELECT r from Racas r where r.nomeRaca = :nome
+		</query>
+	</named-query>
+
+	<named-query name="selectRacaobyDescricao">
+		<query>
+			SELECT r from Racoes r where r.descricao = :descricao
 		</query>
 	</named-query>
 

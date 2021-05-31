@@ -36,6 +36,7 @@ public class cadastroRebanhoController {
 		this.user = user;
 	}
 	
+	@FXML
 	public void salvar() {
 		
 		String nome = txtNome.getText();
@@ -64,6 +65,7 @@ public class cadastroRebanhoController {
 		
 	}
 	
+	@FXML
 	public void cancelar() {
 		
 		Stage currentStage = (Stage) btnCancelar.getScene().getWindow();
