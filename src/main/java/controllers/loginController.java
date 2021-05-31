@@ -95,6 +95,7 @@ public class loginController {
 		Stage window = (Stage) btnCadastrar.getScene().getWindow();
 		
 		cadastroEmpresaController cadastroEmpresaController = loader.getController();
+		cadastroEmpresaController.pfChecked();
 		cadastroEmpresaController.estadoCombo();
 		
 		window.setScene(cadastroEmpresaScene);

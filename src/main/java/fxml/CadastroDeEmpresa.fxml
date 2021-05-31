@@ -200,12 +200,12 @@
             <Insets left="50.0" top="50.0" />
          </GridPane.margin>
       </ComboBox>
-      <RadioButton fx:id="radioTipoFisica" mnemonicParsing="false" onMouseClicked="#radioCheck" text="Pessoa Fisica" GridPane.rowIndex="1">
+      <RadioButton fx:id="radioTipoFisica" mnemonicParsing="false" onAction="#pfChecked" selected="true" text="Pessoa Fisica" GridPane.rowIndex="1">
          <GridPane.margin>
             <Insets bottom="100.0" left="50.0" />
          </GridPane.margin>
       </RadioButton>
-      <RadioButton fx:id="radioTipoJuridica" layoutX="584.0" layoutY="376.0" mnemonicParsing="false" onMouseClicked="#radioCheck" text="Pessoa Juridica" GridPane.columnSpan="2" GridPane.rowIndex="1">
+      <RadioButton fx:id="radioTipoJuridica" layoutX="584.0" layoutY="376.0" mnemonicParsing="false" onAction="#pjChecked" text="Pessoa Juridica" GridPane.columnSpan="2" GridPane.rowIndex="1">
          <GridPane.margin>
             <Insets bottom="100.0" left="150.0" />
          </GridPane.margin>

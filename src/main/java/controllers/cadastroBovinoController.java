@@ -169,8 +169,7 @@ public class cadastroBovinoController {
 		bovino.setIdAssociacao(associacao);
 		
 		String sex = comboSexo.getValue();
-		char sexo =  sex.charAt(0);
-		bovino.setSexo(sexo);
+		bovino.setSexo(sex.charAt(0));
 		
 		Racas raca = findRaca(comboRaca.getValue());
 		bovino.setIdRaca(raca);

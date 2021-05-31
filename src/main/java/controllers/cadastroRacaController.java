@@ -24,7 +24,6 @@ public class cadastroRacaController {
 		DAOHibernate<Racas> daoRa = new DAOHibernate<>(Racas.class);
 		
 		daoRa.beginTransaction().save(new Racas(txtNome.getText())).commitTransaction().closeAll();
-		
 	}
 	
 	@FXML

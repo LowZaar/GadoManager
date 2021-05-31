@@ -111,7 +111,6 @@ public class cadastroEmpresaController {
 
 		String nomeEmp = txtNome.getText();
 		String cnpjEmp = txtCNPJ.getText();
-		String cpfEmp = txtCPF.getText();
 		Date dataEmp = localDateToDate(dateDataNascimento.getValue());
 		String enderecoEmp = txtEndereco.getText();
 		String cepEmp = txtCEP.getText();
@@ -137,7 +136,7 @@ public class cadastroEmpresaController {
 
 			Cidades cidadeObj = findCidade(cidadeNome);
 
-			empPF = empPF.createPF(nomeEmp, cpfEmp, rgEmp, dataEmp, enderecoEmp, cidadeObj, estadoId, cepEmp,
+			empPF = empPF.createPF(nomeEmp, cnpjEmp, rgEmp, dataEmp, enderecoEmp, cidadeObj, estadoId, cepEmp,
 					telefoneEmp, emailEmp);
 
 			
@@ -220,50 +219,59 @@ public class cadastroEmpresaController {
 
 	}
 
-	public void radioCheck() {
-		if (radioTipoFisica.isSelected()) {
-			radioTipoJuridica.setSelected(false);
-			
-			txtCNPJ.setVisible(false);
-			LabelCNPJ.setVisible(false);
-			
-			txtRG.setVisible(true);
-			LabelRG.setVisible(true);
-			
-			txtIE.setVisible(false);
-			LabelIE.setVisible(false);
-			
-			txtIM.setVisible(false);
-			LabelIM.setVisible(false);
-			
-		} else if (radioTipoJuridica.isSelected()) {
-			radioTipoFisica.setSelected(false);
-			
-			txtCPF.setVisible(false);
-			LabelCPF.setVisible(false);
-			
-			txtRG.setVisible(true);
-			LabelRG.setVisible(true);
-			
-		} else if (!radioTipoFisica.isSelected() && !radioTipoJuridica.isSelected()) {
-
-			txtCPF.setVisible(true);
-			LabelCPF.setVisible(true);
-			
-			txtRG.setVisible(true);
-			LabelRG.setVisible(true);
-			
-			txtIE.setVisible(true);
-			LabelIE.setVisible(true);
-			
-			txtIM.setVisible(true);
-			LabelIM.setVisible(true);
-			
-			txtCNPJ.setVisible(true);
-			LabelCNPJ.setVisible(true);
-		}
-
+	@FXML
+	public void pfChecked() {
+		radioTipoJuridica.setSelected(false);
+				
+		txtRG.setDisable(false);
+		
+		txtIE.setDisable(true);
+		
+		txtIM.setDisable(true);
 	}
+
+	@FXML
+	public void pjChecked() {
+		
+		txtIE.setDisable(false);
+
+		txtIM.setDisable(false);
+		
+		radioTipoFisica.setSelected(false);
+		
+		txtRG.setDisable(true);
+		
+	}
+	
+//	public void radioCheck() {
+//		if (radioTipoFisica.isSelected()) {
+//			radioTipoJuridica.setSelected(false);
+//			
+//			txtCNPJ.setDisable(false);
+//			
+//			txtRG.setDisable(true);
+//			
+//			txtIE.setDisable(false);
+//			
+//			txtIM.setDisable(false);
+//			
+//		} else if (radioTipoJuridica.isSelected()) {
+//			
+//			radioTipoFisica.setSelected(false);
+//						
+//			txtRG.setDisable(true);
+//			
+//		} else if (!radioTipoFisica.isSelected() && !radioTipoJuridica.isSelected()) {
+//			
+//			txtRG.setDisable(true);
+//			
+//			txtIE.setDisable(true);
+//			
+//			txtIM.setDisable(true);
+//			
+//			txtCNPJ.setDisable(true);
+//		}
+//	}
 
 	@FXML
 	public void estadoCombo() {

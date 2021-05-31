@@ -83,12 +83,12 @@
             <Insets left="50.0" right="50.0" top="250.0" />
          </GridPane.margin>
       </TextField>
-      <Button fx:id="btnSalvar" alignment="BOTTOM_LEFT" mnemonicParsing="false" style="-fx-background-color: #fff; -fx-border-color: #000;" text="Salvar" textAlignment="CENTER" GridPane.rowIndex="2">
+      <Button fx:id="btnSalvar" alignment="BOTTOM_LEFT" mnemonicParsing="false" onAction="#salvar" style="-fx-background-color: #fff; -fx-border-color: #000;" text="Salvar" textAlignment="CENTER" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets left="50.0" top="50.0" />
          </GridPane.margin>
       </Button>
-      <Button fx:id="btnCancelar" cancelButton="true" mnemonicParsing="false" style="-fx-background-color: #fff; -fx-border-color: #000;" text="Cancelar" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2">
+      <Button fx:id="btnCancelar" cancelButton="true" mnemonicParsing="false" onAction="#cancelar" style="-fx-background-color: #fff; -fx-border-color: #000;" text="Cancelar" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2">
          <opaqueInsets>
             <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
          </opaqueInsets>
