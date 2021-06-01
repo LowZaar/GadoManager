@@ -38,13 +38,13 @@ public class cadastroEmpresaController {
 
 	@FXML
 	private Label LabelRG;
-	
+
 	@FXML
 	private Label LabelIE;
-	
+
 	@FXML
 	private Label LabelIM;
-	
+
 	@FXML
 	private TextField txtNome;
 
@@ -110,11 +110,11 @@ public class cadastroEmpresaController {
 	public void Salvar() throws Exception {
 
 		String nomeEmp = txtNome.getText();
-		String cnpjEmp = txtCNPJ.getText();
+		String cpfcnpjEmp = txtCNPJ.getText();
 		Date dataEmp = localDateToDate(dateDataNascimento.getValue());
 		String enderecoEmp = txtEndereco.getText();
 		String cepEmp = txtCEP.getText();
-		String estadoEmp = comboEstado.getValue();
+//		String estadoEmp = comboEstado.getValue();
 		String ieEmp = txtIE.getText();
 		String imEmp = txtIM.getText();
 		String emailEmp = txtEmail.getText();
@@ -122,66 +122,70 @@ public class cadastroEmpresaController {
 		String rgEmp = txtRG.getText();
 		String telefoneEmp = txtTelefone.getText();
 		String cidadeNome = comboCidade.getValue();
-		
 
-		DAOHibernate<Empresas_Pessoas> daoEmp = new DAOHibernate<>();
+//		Long estadoId = (long) comboEstado.getItems().indexOf(estadoEmp);
+		Cidades cidadeObj = findCidade(cidadeNome);
+
+		DAOHibernate<Empresas_Pessoas> daoEmp = new DAOHibernate<>(Empresas_Pessoas.class);
+
+		Empresas_Pessoas empresa = new Empresas_Pessoas();
+
+		empresa.setNome(nomeEmp);
 
 		if (radioTipoFisica.isSelected()) {
-
 			System.out.println("User PF");
 
-			Empresas_Pessoas empPF = new Empresas_Pessoas();
+			empresa.setCpf(cpfcnpjEmp);
+			empresa.setRg(rgEmp);
 
-			Long estadoId = (long) comboEstado.getItems().indexOf(estadoEmp);
-
-			Cidades cidadeObj = findCidade(cidadeNome);
-
-			empPF = empPF.createPF(nomeEmp, cnpjEmp, rgEmp, dataEmp, enderecoEmp, cidadeObj, estadoId, cepEmp,
-					telefoneEmp, emailEmp);
-
-			
-
-			createUser(nomeEmp, emailEmp, senhaEmp, empPF);
-			
-			DAOHibernate<Parametros> daoParams = new DAOHibernate<>(Parametros.class);
-			Parametros paramObj = new Parametros(empPF,0,0,0.00);
-			daoEmp.beginTransaction().save(empPF).commitTransaction().closeAll();
-			daoParams.beginTransaction().save(paramObj).commitTransaction().closeAll();
-			
 		} else if (radioTipoJuridica.isSelected()) {
-
 			System.out.println("User PJ");
 
-			Empresas_Pessoas empPJ = new Empresas_Pessoas();
-
-			Long estadoId = (long) comboEstado.getItems().indexOf(estadoEmp);
-
-			Cidades cidadeObj = findCidade(cidadeNome);
-
-			empPJ = empPJ.createPJ(nomeEmp, dataEmp, cnpjEmp, ieEmp, imEmp, enderecoEmp, cidadeObj, estadoId, cepEmp,
-					telefoneEmp, emailEmp);
-			System.out.println(empPJ);
-			
-
-			createUser(nomeEmp, emailEmp, senhaEmp, empPJ);
-			
-			DAOHibernate<Parametros> daoParams = new DAOHibernate<>(Parametros.class);
-			Parametros paramObj = new Parametros(empPJ,0,0,0.00);
-			
-			daoEmp.beginTransaction().save(empPJ).commitTransaction().closeAll();
-			daoParams.beginTransaction().save(paramObj).commitTransaction().closeAll();
-			
+			empresa.setCnpj(cpfcnpjEmp);
+			empresa.setIe(ieEmp);
+			empresa.setIm(imEmp);
 		}
 
+		empresa.setDataNascimento(dataEmp);
+		empresa.setEndereco(enderecoEmp);
+		empresa.setEmail(emailEmp);
+		empresa.setCep(cepEmp);
+		empresa.setIdCidade(cidadeObj);
+		empresa.setIdEstado(cidadeObj);
+		empresa.setTelefone(telefoneEmp);
+
+		daoEmp.beginTransaction().save(empresa).commitTransaction().closeAll();
+
+		DAOHibernate<Usuarios> daoUser = new DAOHibernate<>(Usuarios.class);
+
+		String nome = empresa.getNome().replaceAll(" ", "").toLowerCase();
+
+		Usuarios user = new Usuarios(empresa.getNome(), empresa.getEmail(), nome, senhaEmp, true, empresa);
+
+		daoUser.beginTransaction().save(user).commitTransaction().closeAll();
+
+		DAOHibernate<Parametros> daoParams = new DAOHibernate<>(Parametros.class);
+
+		Parametros paramObj = new Parametros(empresa, 0, 0, 0.00);
+
+		daoParams.beginTransaction().save(paramObj).commitTransaction().closeAll();
+
 		URL fxmlLogin = getClass().getResource("/fxml/Login.fxml");
-		
+
 		FXMLLoader loader = new FXMLLoader(fxmlLogin);
-		
+
 		Parent loginP = loader.load();
-		
+
 		Stage window = (Stage) btnSalvar.getScene().getWindow();
 		Scene loginScene = new Scene(loginP);
-		window.setScene(loginScene);
+		loginController loginController = loader.getController();
+		try {
+			Thread.sleep(5000);
+		} finally {
+			window.setScene(loginScene);
+			loginController.notifyCadastro(user, empresa);
+		}
+
 	}
 
 	@FXML
@@ -202,76 +206,30 @@ public class cadastroEmpresaController {
 		return Date.from(data.atStartOfDay(zoneidDefault).toInstant());
 	}
 
-	public void createUser(String nomeEmpresa, String email, String senha, Empresas_Pessoas empresa) {
-
-		DAOHibernate<Usuarios> daoUser = new DAOHibernate<>(Usuarios.class);
-
-		String nome = nomeEmpresa.replaceAll(" ", "").toLowerCase();
-
-		Usuarios user = new Usuarios(nomeEmpresa, email, nome, senha, true, empresa);
-
-		daoUser.beginTransaction().save(user).commitTransaction().closeAll();
-
-		Notifications
-				.create().title("Alerta de Login").text("Usuario mestre criado para empresa " + nomeEmpresa + " \n"
-						+ "Login de usuario : " + user.getUsuario() + " \n" + "Senha do usuario : " + user.getSenha())
-				.showConfirm();
-
-	}
-
+	
 	@FXML
 	public void pfChecked() {
 		radioTipoJuridica.setSelected(false);
-				
+
 		txtRG.setDisable(false);
-		
+
 		txtIE.setDisable(true);
-		
+
 		txtIM.setDisable(true);
 	}
 
 	@FXML
 	public void pjChecked() {
-		
+
 		txtIE.setDisable(false);
 
 		txtIM.setDisable(false);
-		
+
 		radioTipoFisica.setSelected(false);
-		
+
 		txtRG.setDisable(true);
-		
+
 	}
-	
-//	public void radioCheck() {
-//		if (radioTipoFisica.isSelected()) {
-//			radioTipoJuridica.setSelected(false);
-//			
-//			txtCNPJ.setDisable(false);
-//			
-//			txtRG.setDisable(true);
-//			
-//			txtIE.setDisable(false);
-//			
-//			txtIM.setDisable(false);
-//			
-//		} else if (radioTipoJuridica.isSelected()) {
-//			
-//			radioTipoFisica.setSelected(false);
-//						
-//			txtRG.setDisable(true);
-//			
-//		} else if (!radioTipoFisica.isSelected() && !radioTipoJuridica.isSelected()) {
-//			
-//			txtRG.setDisable(true);
-//			
-//			txtIE.setDisable(true);
-//			
-//			txtIM.setDisable(true);
-//			
-//			txtCNPJ.setDisable(true);
-//		}
-//	}
 
 	@FXML
 	public void estadoCombo() {
@@ -327,5 +285,5 @@ public class cadastroEmpresaController {
 
 		}
 	}
-	
+
 }

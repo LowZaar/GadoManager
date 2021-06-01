@@ -4,6 +4,7 @@ import java.net.URL;
 
 import org.controlsfx.control.Notifications;
 
+import classes.Empresas_Pessoas;
 import classes.Usuarios;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -99,7 +100,12 @@ public class loginController {
 		cadastroEmpresaController.estadoCombo();
 		
 		window.setScene(cadastroEmpresaScene);
-		
+		window.setTitle("Menu Principal");
 	}
 
+	public void notifyCadastro(Usuarios user, Empresas_Pessoas empresa) {
+		Notifications.create().title("Alerta de Login").text("Usuario mestre criado para empresa " + empresa.getNome()
+		+ " \n" + "Login de usuario : " + user.getUsuario() + " \n" + "Senha do usuario : " + user.getSenha())
+		.showConfirm();
+	}
 }

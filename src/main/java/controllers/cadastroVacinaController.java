@@ -22,7 +22,7 @@ public class cadastroVacinaController {
 	
 	
 	@FXML
-	public void Salvar() {
+	public void salvar() {
 		
 		String Descricao = txtADescricao.getText();
 		
