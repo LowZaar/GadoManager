@@ -1,5 +1,7 @@
 package controllers;
 
+import org.controlsfx.control.Notifications;
+
 import classes.Racas;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -23,7 +25,19 @@ public class cadastroRacaController {
 		
 		DAOHibernate<Racas> daoRa = new DAOHibernate<>(Racas.class);
 		
-		daoRa.beginTransaction().save(new Racas(txtNome.getText())).commitTransaction().closeAll();
+		if (txtNome.getText().isEmpty()) {
+			
+			Notifications.create().title("Cadastro de Raças").text("Nome de raça vazio!!").showError();
+		
+		}else {
+			
+			daoRa.beginTransaction().save(new Racas(txtNome.getText())).commitTransaction().closeAll();
+			
+			Notifications.create().title("Cadastro de Raças").text("Raça "+ txtNome.getText() + " adicionada com sucesso!").showConfirm();
+			
+			txtNome.clear();
+		}
+		
 	}
 	
 	@FXML

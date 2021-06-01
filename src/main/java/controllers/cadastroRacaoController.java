@@ -13,10 +13,10 @@ import utils.DAOHibernate;
 public class cadastroRacaoController {
 
 	@FXML
-	private TextField txtObservacao;
+	private TextArea txtAObservacao;
 	
 	@FXML
-	private TextArea txtADescricao;
+	private TextField txtDescricao;
 	
 	@FXML
 	private Button btnSalvar;
@@ -27,9 +27,9 @@ public class cadastroRacaoController {
 	@FXML
 	public void salvar() {
 		
-		String observacao = txtObservacao.getText();
+		String observacao = txtAObservacao.getText();
 		
-		String descricao = txtADescricao.getText();
+		String descricao = txtDescricao.getText();
 		
 		DAOHibernate<Racoes> daoR = new DAOHibernate<>(Racoes.class);
 		

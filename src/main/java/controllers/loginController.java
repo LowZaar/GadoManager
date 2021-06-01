@@ -50,35 +50,33 @@ public class loginController {
 		if (query == null) {
 			Notifications.create().title("Alerta de Login").text("Usuario ou senha incorreto").showWarning();
 
-			
 		} else {
 
 			URL fxmlMainMenu = getClass().getResource("/fxml/MenuPrincipal.fxml");
-			
+
 			System.out.println("logged in");
 
 			FXMLLoader loader = new FXMLLoader(fxmlMainMenu);
-			
+
 			Parent mainMenuP = loader.load();
 
 			Scene mainMenuScene = new Scene(mainMenuP);
 
 			Stage mainMenu = new Stage();
-			
+
 			mainMenu.setScene(mainMenuScene);
-			
-			
+
 			Stage window = (Stage) btnLogin.getScene().getWindow();
-			
+
 			window.close();
 			mainMenu.show();
-			
+
 			mainMenuController mainMenuController = loader.getController();
-			
+
 			mainMenuController.setUserLogin(query);
-			
+
 			Notifications.create().title("Alerta de Login").text("Login bem sucedido").showConfirm();
-			
+
 		}
 	}
 
@@ -86,26 +84,28 @@ public class loginController {
 	private void cadastrar() throws Exception {
 
 		URL fxmlCadastro = getClass().getResource("/fxml/CadastroDeEmpresa.fxml");
-		
+
 		FXMLLoader loader = new FXMLLoader(fxmlCadastro);
-		
+
 		Parent cadastroEmpresaP = loader.load();
-		
+
 		Scene cadastroEmpresaScene = new Scene(cadastroEmpresaP);
 
 		Stage window = (Stage) btnCadastrar.getScene().getWindow();
-		
+
 		cadastroEmpresaController cadastroEmpresaController = loader.getController();
 		cadastroEmpresaController.pfChecked();
 		cadastroEmpresaController.estadoCombo();
-		
+
 		window.setScene(cadastroEmpresaScene);
 		window.setTitle("Menu Principal");
 	}
 
 	public void notifyCadastro(Usuarios user, Empresas_Pessoas empresa) {
 		Notifications.create().title("Alerta de Login").text("Usuario mestre criado para empresa " + empresa.getNome()
-		+ " \n" + "Login de usuario : " + user.getUsuario() + " \n" + "Senha do usuario : " + user.getSenha())
-		.showConfirm();
+				+ " \n" + "Login de usuario : " + user.getUsuario() + " \n" + "Senha do usuario : " + user.getSenha())
+				.showConfirm();
 	}
+
+
 }

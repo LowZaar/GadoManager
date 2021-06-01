@@ -76,17 +76,20 @@ public class cadastroBovinoController {
 	public void populateCombos() {
 		// Combo Sexo
 		comboSexo.getItems().addAll("M", "F");
-
+		char masc = 'M';
+		char fem = 'F';
 		// Combo Bovino Pai e Mãe
 		DAOHibernate<Bovinos> daoB = new DAOHibernate<Bovinos>(Bovinos.class);
 		List<Bovinos> queryB = daoB.getAllByNamedQuery("selectBovinobyEmpresa", "empresa", user.getIdEmpresas_Pessoa());
 		daoB.closeAll();
+		queryB.toString();
 		comboBovinoPai.getItems().add("Selecione...");
 		comboBovinoMae.getItems().add("Selecione...");
 		for (Bovinos bovinos : queryB) {
-			if (bovinos.getSexo() == 'M') {
+			Character sexo = bovinos.getSexo();
+			if (sexo.equals(masc)) {
 				comboBovinoPai.getItems().add(bovinos.getNome());
-			} else if (bovinos.getSexo() == 'F') {
+			} else if (sexo.equals(fem)) {
 				comboBovinoMae.getItems().add(bovinos.getNome());
 			}
 		}
@@ -136,74 +139,96 @@ public class cadastroBovinoController {
 			return raca;
 		}
 	}
-	
+
 	private Bovinos findBovino(String bovinoNome) {
 		DAOHibernate<Bovinos> daoB = new DAOHibernate<Bovinos>(Bovinos.class);
-		Bovinos bovino = daoB.getFirst("selectBovinobyNomeEmpresa", "nome", bovinoNome, "empresa", user.getIdEmpresas_Pessoa());
+		Bovinos bovino = daoB.getFirst("selectBovinobyNomeEmpresa", "nome", bovinoNome, "empresa",
+				user.getIdEmpresas_Pessoa());
 		if (bovino == null) {
 			return null;
 		} else {
 			return bovino;
 		}
 	}
-	
+
 	@FXML
 	public void salvar() {
-		
+
 		Date dataNow = new Date();
-		
+
 		Bovinos bovino = new Bovinos();
 
 		String categoria = txtCategoria.getText();
 		bovino.setCategoria(categoria);
-		
+
 		String nome = txtNome.getText();
 		bovino.setNome(nome);
-		
-		Date dataMorte = localDateToDate(dateDataMorte.getValue());
-		if (dataMorte.before(dataNow)) {
-			bovino.setDataMorte(dataMorte);
-		}
 
+		if (!(dateDataMorte.getValue() == null)) {
+			Date dataMorte = localDateToDate(dateDataMorte.getValue());
+			if (dataMorte.before(dataNow)) {
+				bovino.setDataMorte(dataMorte);
+			}
+		}
 		Long associacao = Long.parseLong(txtAssociacao.getText());
 		bovino.setIdAssociacao(associacao);
-		
+
 		String sex = comboSexo.getValue();
 		bovino.setSexo(sex.charAt(0));
-		
+
 		Racas raca = findRaca(comboRaca.getValue());
 		bovino.setIdRaca(raca);
-		
-		Date dataNascimento = localDateToDate(dateDataNascimento.getValue());
-		bovino.setDataNascimento(dataNascimento);
-		
+
+		if (dateDataNascimento.getValue() == null) {
+			Notifications.create().title("Alerta!").text("Data de nascimento vazia!").showError();
+			return;
+		}else {
+			Date dataNascimento = localDateToDate(dateDataNascimento.getValue());
+			bovino.setDataNascimento(dataNascimento);
+		}
+
 		Long brinco = Long.parseLong(txtBrinco.getText());
 		bovino.setIdBrinco(brinco);
-		
+
 		Rebanhos rebanho = findRebanho(comboRebanho.getValue());
 		bovino.setIdRebanho(rebanho);
-		
+
 		Double pesoNascimento = Double.parseDouble(txtPesoNascimento.getText());
 		bovino.setPesoNascimento(pesoNascimento);
-		
+
 		Bovinos bovinoPai = findBovino(comboBovinoPai.getValue());
 		bovino.setIdBovino_pai(bovinoPai);
-		
+
 		Bovinos bovinoMae = findBovino(comboBovinoMae.getValue());
 		bovino.setIdBovino_mae(bovinoMae);
 		
+		bovino.setIdEmpresaPessoas(user.getIdEmpresas_Pessoa());
+		
 		DAOHibernate<Bovinos> daoBovino = new DAOHibernate<>(Bovinos.class);
 		daoBovino.beginTransaction().save(bovino).commitTransaction().closeAll();
+
+		txtCategoria.clear();
+		txtNome.clear();
+		txtAssociacao.clear();
+		txtBrinco.clear();
+		txtPesoNascimento.clear();
+		dateDataNascimento.setValue(null);
+		dateDataMorte.setValue(null);
+		comboRaca.getItems().clear();
+		comboRebanho.getItems().clear();
+		comboSexo.getItems().clear();
+		comboBovinoPai.getItems().clear();
+		comboBovinoMae.getItems().clear();
 		
-		Notifications.create().title("Alerta").text("Bovino Criado com sucesso!"
-				+ "\n"
-				+ "Nome: " + bovino.getNome()
-				+"\n"
-				+"Sexo: " + bovino.getSexo()
-				+"\n"
-				+"Brinco: #" + bovino.getIdBrinco()
-				+"Rebanho: " + bovino.getIdRebanho().getNome());
-				
+		populateCombos();
+		
+		Notifications.create().title("Alerta")
+		.text("Bovino Criado com sucesso!" + "\n" 
+				+ "Nome: " + bovino.getNome() 
+				+ "\n" + "Sexo: "
+				+ bovino.getSexo() + "\n" 
+				+ "Brinco: #" + bovino.getIdBrinco() + "\n" 
+				+ "Rebanho: "+ bovino.getIdRebanho().getNome()).showConfirm();
 	}
 
 	@FXML
