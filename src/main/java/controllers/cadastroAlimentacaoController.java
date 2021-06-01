@@ -22,10 +22,10 @@ import utils.DAOHibernate;
 public class cadastroAlimentacaoController {
 
 	@FXML
-	private DatePicker dateInicio;
+	private DatePicker dateDataInicio;
 
 	@FXML
-	private DatePicker dateFinal;
+	private DatePicker dateDataFinal;
 
 	@FXML
 	private ComboBox<String> comboRebanho;
@@ -105,8 +105,8 @@ public class cadastroAlimentacaoController {
 	@FXML
 	public void salvar() {
 			
-		Date dateIni = localDateToDate(dateInicio.getValue());
-		Date dateFim = localDateToDate(dateFinal.getValue());
+		Date dateIni = localDateToDate(dateDataInicio.getValue());
+		Date dateFim = localDateToDate(dateDataFinal.getValue());
 		Rebanhos rebanho = findRebanho(comboRebanho.getValue());
 		Racoes racao = findRacao(comboRacao.getValue());
 		String observacao = txtObservacoes.getText(); 
@@ -118,6 +118,12 @@ public class cadastroAlimentacaoController {
 		
 		Notifications.create().title("Alerta").text("Nova rotina de Alimentação adicionada com sucesso!")
 		.showConfirm();
+		
+		dateDataInicio.setValue(null);
+		dateDataFinal.setValue(null);
+		comboRebanho.setValue(null);
+		comboRacao.setValue(null);
+		txtObservacoes.clear();
 	}
 
 	@FXML

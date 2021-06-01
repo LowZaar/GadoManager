@@ -27,11 +27,6 @@
       <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
    </padding>
    <children>
-      <Label alignment="TOP_LEFT" contentDisplay="TOP" graphicTextGap="0.0" nodeOrientation="LEFT_TO_RIGHT" text="GadoManager" textAlignment="CENTER" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-         <font>
-            <Font name="Arial" size="50.0" />
-         </font>
-      </Label>
       <Label contentDisplay="RIGHT" graphicTextGap="8.0" text="Login" textFill="#080808" textOverrun="CLIP" wrapText="true" GridPane.rowIndex="1">
          <font>
             <Font size="24.0" />
@@ -79,5 +74,10 @@
             <Insets top="75.0" />
          </GridPane.margin>
       </Button>
+      <Label fx:id="labelTitulo" alignment="TOP_LEFT" contentDisplay="TOP" graphicTextGap="0.0" nodeOrientation="LEFT_TO_RIGHT" text="GadoManager" textAlignment="CENTER" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+         <font>
+            <Font name="Arial" size="50.0" />
+         </font>
+      </Label>
    </children>
 </GridPane>

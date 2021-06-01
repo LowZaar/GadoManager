@@ -11,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -30,6 +31,10 @@ public class loginController {
 	@FXML
 	private Button btnCadastrar;
 
+	@FXML
+	private Label labelTitulo;
+	
+	
 	private DAOHibernate<Usuarios> createCon() {
 
 		DAOHibernate<Usuarios> dao = new DAOHibernate<>();
@@ -38,9 +43,9 @@ public class loginController {
 
 	@FXML
 	private void login() throws Exception {
-
+		
 		DAOHibernate<Usuarios> dao = createCon();
-
+		
 		String usuario = userLogin.getText();
 
 		String senha = passwordLogin.getText();
@@ -97,13 +102,16 @@ public class loginController {
 		cadastroEmpresaController.pfChecked();
 		cadastroEmpresaController.estadoCombo();
 
-		window.setScene(cadastroEmpresaScene);
 		window.setTitle("Menu Principal");
+		window.setScene(cadastroEmpresaScene);
 	}
 
 	public void notifyCadastro(Usuarios user, Empresas_Pessoas empresa) {
-		Notifications.create().title("Alerta de Login").text("Usuario mestre criado para empresa " + empresa.getNome()
-				+ " \n" + "Login de usuario : " + user.getUsuario() + " \n" + "Senha do usuario : " + user.getSenha())
+		Notifications.create().title("Alerta de Login").text("Usuario mestre criado para empresa " + empresa.getNome() 
+				+"\n" 
+				+ "Login de usuario : " + user.getUsuario() 
+				+ "\n" 
+				+ "Senha do usuario : " + user.getSenha())
 				.showConfirm();
 	}
 
