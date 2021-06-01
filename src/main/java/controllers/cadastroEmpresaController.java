@@ -178,12 +178,9 @@ public class cadastroEmpresaController {
 		Stage window = (Stage) btnSalvar.getScene().getWindow();
 		Scene loginScene = new Scene(loginP);
 		loginController loginController = loader.getController();
-		try {
-			Thread.sleep(5000);
-		} finally {
-			window.setScene(loginScene);
-			loginController.notifyCadastro(user, empresa);
-		}
+		
+		window.setScene(loginScene);
+		loginController.notifyCadastro(user, empresa);
 
 	}
 
