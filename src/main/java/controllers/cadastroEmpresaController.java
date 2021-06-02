@@ -264,6 +264,7 @@ public class cadastroEmpresaController {
 	}
 
 	public void populateCidade() {
+		comboCidade.getItems().clear();
 		comboCidade.getItems().add("Selecione...");
 
 		System.out.println("populating cidades");

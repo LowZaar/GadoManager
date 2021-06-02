@@ -69,12 +69,12 @@
             <Insets left="110.0" top="100.0" />
          </GridPane.margin>
       </Label>
-      <Button fx:id="btnLogin" mnemonicParsing="false" onAction="#login" style="-fx-border-color: #000; -fx-background-color: #fff;" text="Login" GridPane.rowIndex="2">
+      <Button fx:id="btnLogin" mnemonicParsing="false" onAction="#login" text="Login" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets left="150.0" top="75.0" />
          </GridPane.margin>
       </Button>
-      <Button fx:id="btnCadastrar" mnemonicParsing="false" onAction="#cadastrar" style="-fx-border-color: #000; -fx-background-color: #fff;" text="Cadastrar" GridPane.columnIndex="1" GridPane.rowIndex="2">
+      <Button fx:id="btnCadastrar" mnemonicParsing="false" onAction="#cadastrar" text="Cadastrar" GridPane.columnIndex="1" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets top="75.0" />
          </GridPane.margin>

@@ -37,7 +37,7 @@ public class cadastroRacaoController {
 		
 		daoR.beginTransaction().save(racao).commitTransaction().closeAll();
 		
-		Notifications.create().title("Alerta").text("Nova Racão adicionada com sucesso!").showConfirm();
+		Notifications.create().title("Alerta").text("Nova Ração adicionada com sucesso!").showConfirm();
 	}
 	
 	@FXML
