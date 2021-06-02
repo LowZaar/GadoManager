@@ -104,14 +104,17 @@ public class cadastroAlimentacaoController {
 	
 	@FXML
 	public void salvar() {
-			
-		Date dateIni = localDateToDate(dateDataInicio.getValue());
-		Date dateFim = localDateToDate(dateDataFinal.getValue());
+		
+		LocalDate dataInicial = dateDataInicio.getValue();
+		LocalDate dataFinal = dateDataFinal.getValue();
+		
+		Date date1 = localDateToDate(dataInicial);
+		Date date2 = localDateToDate(dataFinal);
 		Rebanhos rebanho = findRebanho(comboRebanho.getValue());
 		Racoes racao = findRacao(comboRacao.getValue());
 		String observacao = txtObservacoes.getText(); 
 		
-		Alimentos alimento = new Alimentos(rebanho, dateIni, dateFim, racao, observacao);
+		Alimentos alimento = new Alimentos(rebanho, date1, date2, racao, observacao);
 		
 		DAOHibernate<Alimentos> daoA = new DAOHibernate<>(Alimentos.class);
 		daoA.beginTransaction().save(alimento).commitTransaction().closeAll();
