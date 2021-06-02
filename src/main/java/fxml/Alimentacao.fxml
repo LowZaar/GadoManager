@@ -41,7 +41,7 @@
             <Insets left="50.0" top="100.0" />
          </GridPane.margin>
       </Label>
-      <DatePicker fx:id="dateInicio" style="-fx-border-color: #000;">
+      <DatePicker fx:id="dateDataInicio" style="-fx-border-color: #000;">
          <GridPane.margin>
             <Insets left="50.0" top="150.0" />
          </GridPane.margin>
@@ -54,7 +54,7 @@
             <Insets left="50.0" top="100.0" />
          </GridPane.margin>
       </Label>
-      <DatePicker fx:id="dateFInal" style="-fx-border-color: #000;" GridPane.columnIndex="1">
+      <DatePicker fx:id="dateDataFinal" style="-fx-border-color: #000;" GridPane.columnIndex="1">
          <GridPane.margin>
             <Insets left="50.0" top="150.0" />
          </GridPane.margin>
