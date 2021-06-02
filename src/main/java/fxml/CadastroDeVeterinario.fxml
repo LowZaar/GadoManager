@@ -28,7 +28,7 @@
             <Insets left="100.0" />
          </GridPane.margin>
       </Label>
-      <Label alignment="TOP_CENTER" text="Nome" GridPane.columnSpan="2">
+      <Label alignment="TOP_CENTER" text="Nome Completo" GridPane.columnSpan="2">
          <font>
             <Font size="20.0" />
          </font>
@@ -36,7 +36,7 @@
             <Insets left="50.0" right="50.0" top="200.0" />
          </GridPane.margin>
       </Label>
-      <TextField fx:id="txtNome" style="-fx-border-color: #000;">
+      <TextField fx:id="txtNome" style="-fx-border-color: #000;" GridPane.columnSpan="2">
          <GridPane.margin>
             <Insets left="50.0" right="50.0" top="250.0" />
          </GridPane.margin>

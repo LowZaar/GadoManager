@@ -30,12 +30,12 @@
             <Insets bottom="50.0" left="35.0" />
          </GridPane.margin>
       </Label>
-      <TextField fx:id="txtIndiceBCS" style="-fx-border-color: #000;" GridPane.columnSpan="2" GridPane.rowIndex="1">
+      <TextField fx:id="txtIndiceBCS" style="-fx-border-color: #000;" GridPane.columnSpan="2" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets bottom="200.0" left="50.0" right="60.0" />
          </GridPane.margin>
       </TextField>
-      <Label alignment="TOP_CENTER" text="Indice do BCS" GridPane.columnSpan="2" GridPane.rowIndex="1">
+      <Label alignment="TOP_CENTER" text="Indice do BCS" GridPane.columnSpan="2" GridPane.rowIndex="2">
          <font>
             <Font size="20.0" />
          </font>
@@ -56,7 +56,7 @@
             <Insets bottom="50.0" left="50.0" />
          </GridPane.margin>
       </DatePicker>
-      <Label alignment="TOP_CENTER" text="Bovino" GridPane.columnSpan="2" GridPane.rowIndex="1">
+      <Label alignment="TOP_CENTER" text="Bovino" GridPane.columnSpan="2">
          <font>
             <Font size="20.0" />
          </font>
@@ -64,9 +64,9 @@
             <Insets left="50.0" top="100.0" />
          </GridPane.margin>
       </Label>
-      <ComboBox fx:id="comboBovino" prefWidth="150.0" style="-fx-border-color: #000;" GridPane.rowIndex="2">
+      <ComboBox fx:id="comboBovino" prefWidth="150.0" style="-fx-border-color: #000;">
          <GridPane.margin>
-            <Insets bottom="190.0" left="50.0" />
+            <Insets left="50.0" top="150.0" />
          </GridPane.margin>
       </ComboBox>
       <Button fx:id="btnSalvar" alignment="BOTTOM_LEFT" mnemonicParsing="false" onAction="#salvar" style="-fx-background-color: #fff; -fx-border-color: #000;" text="Salvar" textAlignment="CENTER" GridPane.rowIndex="2">

@@ -42,12 +42,12 @@
             <Font size="20.0" />
          </font>
          <GridPane.margin>
-            <Insets bottom="100.0" left="50.0" />
+            <Insets bottom="150.0" left="50.0" />
          </GridPane.margin>
       </Label>
       <TextField fx:id="txtDescricao" style="-fx-border-color: #000;" GridPane.columnSpan="2" GridPane.rowIndex="2">
          <GridPane.margin>
-            <Insets bottom="50.0" left="50.0" right="60.0" />
+            <Insets bottom="100.0" left="50.0" right="60.0" />
          </GridPane.margin>
       </TextField>
       <TextArea fx:id="txtAObservacao" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #000;" GridPane.columnSpan="2" GridPane.rowIndex="1">

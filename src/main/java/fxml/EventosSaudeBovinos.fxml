@@ -49,15 +49,15 @@
             <Font size="20.0" />
          </font>
          <GridPane.margin>
-            <Insets bottom="200.0" left="50.0" />
+            <Insets left="50.0" top="150.0" />
          </GridPane.margin>
       </Label>
-      <Label alignment="TOP_CENTER" text="Bovino" GridPane.columnSpan="2" GridPane.rowIndex="2">
+      <Label alignment="TOP_CENTER" text="Bovino" GridPane.columnSpan="2" GridPane.rowIndex="1">
          <font>
             <Font size="20.0" />
          </font>
          <GridPane.margin>
-            <Insets bottom="100.0" left="50.0" />
+            <Insets bottom="200.0" left="50.0" />
          </GridPane.margin>
       </Label>
       <Label alignment="TOP_CENTER" text="Data" textOverrun="CENTER_ELLIPSIS" GridPane.columnSpan="2" GridPane.rowIndex="1">
@@ -65,51 +65,48 @@
             <Font size="20.0" />
          </font>
          <GridPane.margin>
-            <Insets left="50.0" top="100.0" />
+            <Insets bottom="50.0" left="50.0" />
          </GridPane.margin>
-         <padding>
-            <Insets bottom="50.0" />
-         </padding>
       </Label>
       <Label alignment="TOP_CENTER" text="Rebanho" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1">
          <font>
             <Font size="20.0" />
          </font>
          <GridPane.margin>
-            <Insets left="50.0" top="50.0" />
+            <Insets bottom="50.0" left="50.0" />
          </GridPane.margin>
       </Label>
       <DatePicker fx:id="dateData" style="-fx-border-color: #000;" GridPane.rowIndex="1">
          <GridPane.margin>
-            <Insets left="50.0" top="100.0" />
+            <Insets left="50.0" />
          </GridPane.margin>
       </DatePicker>
-      <Label alignment="TOP_CENTER" text="Evento" GridPane.columnIndex="1" GridPane.rowIndex="2">
+      <Label alignment="TOP_CENTER" text="Evento" GridPane.columnIndex="1" GridPane.rowIndex="1">
          <font>
             <Font size="20.0" />
          </font>
          <GridPane.margin>
-            <Insets bottom="100.0" left="50.0" />
+            <Insets bottom="200.0" left="50.0" />
          </GridPane.margin>
       </Label>
-      <TextArea fx:id="txtObservacoes" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #000;" GridPane.columnSpan="2" GridPane.rowIndex="1">
+      <TextArea fx:id="txtObservacoes" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #000;" GridPane.columnSpan="2" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets bottom="90.0" left="50.0" right="50.0" />
          </GridPane.margin>
       </TextArea>
       <ComboBox fx:id="comboRebanhos" prefWidth="150.0" style="-fx-border-color: #000;" GridPane.columnIndex="1" GridPane.rowIndex="1">
          <GridPane.margin>
-            <Insets left="50.0" top="100.0" />
+            <Insets left="50.0" />
          </GridPane.margin>
       </ComboBox>
-      <ComboBox fx:id="comboBovino" prefWidth="150.0" style="-fx-border-color: #000;" GridPane.rowIndex="2">
+      <ComboBox fx:id="comboBovino" prefWidth="150.0" style="-fx-border-color: #000;" GridPane.rowIndex="1">
          <GridPane.margin>
-            <Insets bottom="50.0" left="50.0" />
+            <Insets bottom="150.0" left="50.0" />
          </GridPane.margin>
       </ComboBox>
-      <ComboBox fx:id="comboEvento" prefWidth="150.0" style="-fx-border-color: #000;" GridPane.columnIndex="1" GridPane.rowIndex="2">
+      <ComboBox fx:id="comboEvento" prefWidth="150.0" style="-fx-border-color: #000;" GridPane.columnIndex="1" GridPane.rowIndex="1">
          <GridPane.margin>
-            <Insets bottom="50.0" left="50.0" />
+            <Insets bottom="150.0" left="50.0" />
          </GridPane.margin>
       </ComboBox>
    </children>

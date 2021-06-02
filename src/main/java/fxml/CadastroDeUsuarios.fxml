@@ -32,7 +32,7 @@
       </Label>
       <CheckBox fx:id="checkboxMestre" mnemonicParsing="false" prefHeight="17.0" prefWidth="273.0" selected="true" text="Usuario Mestre" GridPane.columnIndex="1" GridPane.rowIndex="1">
          <GridPane.margin>
-            <Insets bottom="131.0" left="5.0" />
+            <Insets left="5.0" />
          </GridPane.margin>
       </CheckBox>
       <Label alignment="TOP_CENTER" text="Nome" GridPane.columnSpan="2">
@@ -43,7 +43,7 @@
             <Insets left="50.0" right="50.0" top="200.0" />
          </GridPane.margin>
       </Label>
-      <TextField fx:id="txtNome" style="-fx-border-color: #000;">
+      <TextField fx:id="txtNome" style="-fx-border-color: #000;" GridPane.columnSpan="2">
          <GridPane.margin>
             <Insets left="50.0" right="50.0" top="250.0" />
          </GridPane.margin>
@@ -85,7 +85,7 @@
             <Insets bottom="100.0" left="50.0" />
          </GridPane.margin>
       </Label>
-      <TextField fx:id="txtEmail" style="-fx-border-color: #000;" GridPane.rowIndex="2">
+      <TextField fx:id="txtEmail" style="-fx-border-color: #000;" GridPane.columnSpan="2" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets bottom="50.0" left="50.0" right="50.0" />
          </GridPane.margin>

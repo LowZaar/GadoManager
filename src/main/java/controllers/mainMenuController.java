@@ -33,7 +33,6 @@ public class mainMenuController {
 		Stage cadastroBovino = new Stage();
 		Scene bovinoScene = new Scene(bovinoP);
 		cadastroBovino.setScene(bovinoScene);
-
 		cadastroBovinoController cadastroBovinoController = loader.getController();
 		cadastroBovinoController.setUser(userLogin);
 		cadastroBovinoController.populateCombos();

@@ -16,17 +16,18 @@
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
   </columnConstraints>
   <rowConstraints>
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="204.0" minHeight="10.0" prefHeight="173.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="245.0" minHeight="0.0" prefHeight="51.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="225.0" minHeight="10.0" prefHeight="131.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="181.0" minHeight="10.0" prefHeight="150.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <Button fx:id="btnSalvar" alignment="BOTTOM_LEFT" mnemonicParsing="false" onAction="#salvar" style="-fx-background-color: #fff; -fx-border-color: #000;" text="Salvar" textAlignment="CENTER" GridPane.rowIndex="2">
+      <Button fx:id="btnSalvar" alignment="BOTTOM_LEFT" mnemonicParsing="false" onAction="#salvar" style="-fx-background-color: #fff; -fx-border-color: #000;" text="Salvar" textAlignment="CENTER" GridPane.rowIndex="3">
          <GridPane.margin>
             <Insets left="50.0" top="50.0" />
          </GridPane.margin>
       </Button>
-      <Button fx:id="btnCancelar" cancelButton="true" mnemonicParsing="false" onAction="#cancelar" style="-fx-background-color: #fff; -fx-border-color: #000;" text="Cancelar" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2">
+      <Button fx:id="btnCancelar" cancelButton="true" mnemonicParsing="false" onAction="#cancelar" style="-fx-background-color: #fff; -fx-border-color: #000;" text="Cancelar" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3">
          <opaqueInsets>
             <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
          </opaqueInsets>
@@ -42,17 +43,17 @@
             <Insets left="50.0" />
          </GridPane.margin>
       </Label>
-      <Label alignment="TOP_CENTER" text="Nome" GridPane.columnSpan="2" GridPane.rowIndex="1">
+      <Label alignment="TOP_CENTER" text="Nome" GridPane.columnSpan="2">
          <font>
             <Font size="20.0" />
          </font>
          <GridPane.margin>
-            <Insets left="50.0" top="100.0" />
+            <Insets left="50.0" top="150.0" />
          </GridPane.margin>
       </Label>
-      <TextField fx:id="txtNome" style="-fx-border-color: #000;" GridPane.columnSpan="2" GridPane.rowIndex="1">
+      <TextField fx:id="txtNome" style="-fx-border-color: #000;" GridPane.columnSpan="2">
          <GridPane.margin>
-            <Insets left="50.0" right="60.0" top="150.0" />
+            <Insets left="50.0" right="60.0" top="200.0" />
          </GridPane.margin>
       </TextField>
       <Label alignment="TOP_CENTER" text="Descrição" GridPane.columnSpan="2" GridPane.rowIndex="1">
@@ -60,12 +61,12 @@
             <Font size="20.0" />
          </font>
          <GridPane.margin>
-            <Insets bottom="200.0" left="50.0" />
+            <Insets left="50.0" top="120.0" />
          </GridPane.margin>
       </Label>
-      <TextArea fx:id="txtADescricao" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #000;" GridPane.columnSpan="2" GridPane.rowIndex="1">
+      <TextArea fx:id="txtADescricao" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #000;" GridPane.columnSpan="2" GridPane.rowIndex="2" GridPane.rowSpan="2">
          <GridPane.margin>
-            <Insets bottom="50.0" left="50.0" right="50.0" />
+            <Insets bottom="100.0" left="50.0" right="50.0" top="50.0" />
          </GridPane.margin>
       </TextArea>
    </children>
