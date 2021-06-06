@@ -51,10 +51,21 @@
 			SELECT r from Rebanhos r where r.nome = :nome AND r.idEmpresaPessoa = :empresa
 		</query>
 	</named-query>
+	<named-query name="selectRebanhobyId">
+		<query>
+			SELECT r from Rebanhos r where r.idRebanho = :id
+		</query>
+	</named-query>
 
 	<named-query name="selectParamsbyEmpresa">
 		<query>
 			SELECT p from Parametros p where p.idEmpresaPessoa = :empresa
+		</query>
+	</named-query>
+
+	<named-query name="selectRacabyId">
+		<query>
+			SELECT r from Racas r where r.idRaca = :id
 		</query>
 	</named-query>
 
@@ -63,10 +74,16 @@
 		SELECT r from Racas r where r.nomeRaca = :nome
 		</query>
 	</named-query>
-
+	
 	<named-query name="selectRacaobyDescricao">
 		<query>
 			SELECT r from Racoes r where r.descricao = :descricao
+		</query>
+	</named-query>
+
+	<named-query name="selectUserbyEmpresa">
+		<query>
+			SELECT u from Usuarios u where u.idEmpresas_Pessoa = :empresa
 		</query>
 	</named-query>
 

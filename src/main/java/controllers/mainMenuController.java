@@ -244,5 +244,23 @@ public class mainMenuController {
 					.showWarning();
 		}
 	}
-
+	
+	public void abrirConsultas() throws Exception {
+		
+		System.out.println("consultas");
+		
+		URL fxmlConsultas = getClass().getResource("/fxml/Consulta.fxml");
+		
+		FXMLLoader loader = new FXMLLoader(fxmlConsultas);
+		
+		Parent consultasP = loader.load();
+		
+		Stage consultaStage = new Stage();
+		Scene consultaScene = new Scene(consultasP);
+		
+		consultaStage.setScene(consultaScene);
+		consultaController consultaController = loader.getController();
+		consultaController.setUser(userLogin);
+		consultaStage.show();
+	}
 }

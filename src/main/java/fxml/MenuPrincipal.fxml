@@ -49,6 +49,11 @@
                   <MenuItem fx:id="menuParams" mnemonicParsing="false" onAction="#abrirParams" text="Parâmetros" />
             </items>
           </Menu>
+            <Menu mnemonicParsing="false" text="Consultas">
+               <items>
+                  <MenuItem fx:id="menuConsultas" mnemonicParsing="false" onAction="#abrirConsultas" text="Abrir Consulta" />
+               </items>
+            </Menu>
         </menus>
          <GridPane.margin>
             <Insets bottom="220.0" />

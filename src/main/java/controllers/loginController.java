@@ -4,6 +4,8 @@ import java.net.URL;
 
 import org.controlsfx.control.Notifications;
 
+
+
 import classes.Empresas_Pessoas;
 import classes.Usuarios;
 import javafx.fxml.FXML;
@@ -14,7 +16,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import utils.DAOHibernate;
 
@@ -41,7 +44,14 @@ public class loginController {
 		DAOHibernate<Usuarios> dao = new DAOHibernate<>();
 		return dao;
 	}
-
+	
+	@FXML
+	private void loginOnEnter(KeyEvent e) throws Exception {
+		if (e.getCode() == KeyCode.ENTER) {
+			login();
+		}
+	}
+	
 	@FXML
 	private void login() throws Exception {
 		

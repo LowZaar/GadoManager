@@ -4,12 +4,12 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SplitMenuButton?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import org.controlsfx.control.tableview2.TableView2?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/16">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.consultaController">
   <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="147.0" minWidth="10.0" prefWidth="147.0" />
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="258.0" minWidth="10.0" prefWidth="232.0" />
@@ -27,34 +27,34 @@
       <RowConstraints maxHeight="72.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <TableView prefHeight="569.0" prefWidth="729.0" GridPane.columnSpan="3" GridPane.rowIndex="1" GridPane.rowSpan="7" />
-      <SplitMenuButton alignment="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="142.0" text="Consulta">
-        <items>
-          <MenuItem mnemonicParsing="false" text="Action 1" />
-          <MenuItem mnemonicParsing="false" text="Action 2" />
-        </items>
-         <GridPane.margin>
-            <Insets left="3.0" />
-         </GridPane.margin>
-      </SplitMenuButton>
-      <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" text="Filtro" GridPane.columnIndex="1">
-         <GridPane.margin>
-            <Insets left="170.0" />
-         </GridPane.margin>
-      </Button>
-      <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" text="Editar" GridPane.columnIndex="2">
+      <Button fx:id="btnEditar" mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" text="Editar" GridPane.columnIndex="2">
          <GridPane.margin>
             <Insets left="50.0" />
          </GridPane.margin>
       </Button>
-      <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" text="Excluir" GridPane.columnIndex="2">
+      <Button fx:id="btnExcluir" mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" text="Excluir" GridPane.columnIndex="2">
          <GridPane.margin>
             <Insets left="170.0" />
          </GridPane.margin>
       </Button>
-      <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" text="Fechar" GridPane.columnIndex="2">
+      <Button fx:id="btnFechar" mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" text="Fechar" GridPane.columnIndex="2">
          <GridPane.margin>
             <Insets left="290.0" />
+         </GridPane.margin>
+      </Button>
+      <TableView2 fx:id="tableConsulta" GridPane.columnSpan="4" GridPane.rowIndex="1" GridPane.rowSpan="6" />
+      <SplitMenuButton fx:id="menuConsulta" mnemonicParsing="false" text="Consulta">
+        <items>
+          <MenuItem fx:id="menuConsultaBovino" mnemonicParsing="false" onAction="#bovinoClick" text="Bovinos" />
+          <MenuItem fx:id="menuConsultaUsuarios" mnemonicParsing="false" onAction="#consultarUsuarios" text="Usuarios" />
+        </items>
+         <GridPane.margin>
+            <Insets left="5.0" />
+         </GridPane.margin>
+      </SplitMenuButton>
+      <Button fx:id="btnEditar1" mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" text="Filtrar" GridPane.columnIndex="1">
+         <GridPane.margin>
+            <Insets left="160.0" />
          </GridPane.margin>
       </Button>
    </children>
