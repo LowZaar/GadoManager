@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="307.0" prefWidth="455.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="308.0" maxWidth="455.0" minHeight="307.0" minWidth="455.0" prefHeight="307.0" prefWidth="455.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label layoutX="109.0" layoutY="14.0" text="Filtro de Bovino">
          <font>
@@ -43,7 +43,7 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <ComboBox layoutX="115.0" layoutY="184.0" prefHeight="25.0" prefWidth="114.0" />
+      <ComboBox layoutX="111.0" layoutY="184.0" prefHeight="25.0" prefWidth="114.0" />
       <Label layoutX="256.0" layoutY="183.0" text="Raça:">
          <font>
             <Font size="18.0" />
