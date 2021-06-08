@@ -1,5 +1,6 @@
 package controllers.filtros;
 
+import java.net.URL;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +12,7 @@ import controllers.consultaController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
@@ -160,8 +162,10 @@ public class filtroBovinoController {
 			result.add(racaNome.getNomeRaca());
 		}
 		
+		URL consultaFXML = getClass().getResource("/fxml/Consulta.fxml");
 		
-		consultaController consultaController = new consultaController();
+		FXMLLoader loader = new FXMLLoader(consultaFXML);
+		consultaController consultaController = loader.getController();
 		consultaController.setPerspectiveList(result);
 		consultaController.consultarBovino();
 		
