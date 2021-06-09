@@ -24,7 +24,6 @@ public class MainClass extends Application {
 		primaryStage.setTitle("Login - GadoManager");
 		primaryStage.setScene(mainScene);
 		primaryStage.show();
-		System.out.println("test");
 		
 	}
 	

@@ -194,10 +194,11 @@ public class mainMenuController {
 			Stage cadastroUsuario = new Stage();
 			Scene usuarioScene = new Scene(usuarioP);
 
-			cadastroUsuario.setScene(usuarioScene);
 			cadastroUsuarioController cadastroUsuarioController = loader.getController();
 			cadastroUsuarioController.setUser(userLogin);
+			cadastroUsuario.setScene(usuarioScene);
 			cadastroUsuario.show();
+			
 		} else {
 			Notifications.create().title("Alerta").text(userLogin.getUsuario() + " não é um Usuario Mestre")
 					.showWarning();
@@ -248,7 +249,7 @@ public class mainMenuController {
 	public void abrirConsultas() throws Exception {
 		
 		System.out.println("consultas");
-		
+		System.out.println(userLogin.toString());
 		URL fxmlConsultas = getClass().getResource("/fxml/Consulta.fxml");
 		
 		FXMLLoader loader = new FXMLLoader(fxmlConsultas);
@@ -258,9 +259,9 @@ public class mainMenuController {
 		Stage consultaStage = new Stage();
 		Scene consultaScene = new Scene(consultasP);
 		
-		consultaStage.setScene(consultaScene);
 		consultaController consultaController = loader.getController();
 		consultaController.setUser(userLogin);
+		consultaStage.setScene(consultaScene);
 		consultaStage.show();
 	}
 }

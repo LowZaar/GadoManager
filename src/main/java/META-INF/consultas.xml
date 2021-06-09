@@ -87,4 +87,10 @@
 		</query>
 	</named-query>
 
+	<named-query name="selectUserbyNomeEmpresa">
+		<query>
+			SELECT u from Usuarios u where  u.nome = :nome and u.idEmpresas_Pessoa = :empresa
+		</query>
+	</named-query>
+
 </entity-mappings>

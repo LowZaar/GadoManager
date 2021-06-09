@@ -26,9 +26,6 @@ public class DAOFactory {
 			final String url = prop.get(1);
 			final String usuario = prop.get(2);
 			final String senha = prop.get(3);
-			System.out.println(url);
-			System.out.println(usuario);
-			System.out.println(senha);
 			return DriverManager.getConnection(url, usuario, senha);
 		} catch (SQLException e) {
 			throw new RuntimeException(e);

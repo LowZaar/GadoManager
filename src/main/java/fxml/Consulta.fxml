@@ -9,11 +9,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import org.controlsfx.control.tableview2.TableView2?>
 
-<<<<<<< HEAD
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.consultaController">
-=======
-<GridPane maxHeight="600.0" maxWidth="800.0" minHeight="600.0" minWidth="800.0" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
->>>>>>> b0ed2b703e345b4d375b5e3dd5c97d43f103c3f1
+<GridPane maxHeight="600.0" maxWidth="800.0" minHeight="600.0" minWidth="800.0" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.consultaController">
   <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="147.0" minWidth="10.0" prefWidth="147.0" />
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="258.0" minWidth="10.0" prefWidth="232.0" />
@@ -31,35 +27,36 @@
       <RowConstraints maxHeight="72.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <Button fx:id="btnEditar" mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" text="Editar" GridPane.columnIndex="2">
+      <SplitMenuButton fx:id="menuConsulta" alignment="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="142.0" text="Consulta">
+        <items>
+          <MenuItem fx:id="menuConsultaBovino" mnemonicParsing="false" onAction="#bovinoClick" text="Bovinos" />
+          <MenuItem fx:id="menuConsultaUsuarios" mnemonicParsing="false" onAction="#usuarioClick" text="Usuarios" />
+            <MenuItem fx:id="menuConsultaVeterinarios" mnemonicParsing="false" onAction="#veterinariosClick" text="Veterinários" />
+        </items>
          <GridPane.margin>
-            <Insets left="50.0" />
+            <Insets left="3.0" />
          </GridPane.margin>
-      </Button>
-      <Button fx:id="btnExcluir" mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" text="Excluir" GridPane.columnIndex="2">
+      </SplitMenuButton>
+      <Button fx:id="btnFiltro" mnemonicParsing="false" onAction="#filtrar" prefHeight="25.0" prefWidth="70.0" text="Filtro" GridPane.columnIndex="1">
          <GridPane.margin>
             <Insets left="170.0" />
          </GridPane.margin>
       </Button>
-      <Button fx:id="btnFechar" mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" text="Fechar" GridPane.columnIndex="2">
+      <Button fx:id="btnEditar" mnemonicParsing="false" onAction="#editar" prefHeight="25.0" prefWidth="70.0" text="Editar" GridPane.columnIndex="2">
+         <GridPane.margin>
+            <Insets left="50.0" />
+         </GridPane.margin>
+      </Button>
+      <Button fx:id="btnExcluir" mnemonicParsing="false" onAction="#excluir" prefHeight="25.0" prefWidth="70.0" text="Excluir" GridPane.columnIndex="2">
+         <GridPane.margin>
+            <Insets left="170.0" />
+         </GridPane.margin>
+      </Button>
+      <Button fx:id="btnFechar" mnemonicParsing="false" onAction="#fechar" prefHeight="25.0" prefWidth="70.0" text="Fechar" GridPane.columnIndex="2">
          <GridPane.margin>
             <Insets left="290.0" />
          </GridPane.margin>
       </Button>
-      <TableView2 fx:id="tableConsulta" GridPane.columnSpan="4" GridPane.rowIndex="1" GridPane.rowSpan="6" />
-      <SplitMenuButton fx:id="menuConsulta" mnemonicParsing="false" text="Consulta">
-        <items>
-          <MenuItem fx:id="menuConsultaBovino" mnemonicParsing="false" onAction="#bovinoClick" text="Bovinos" />
-          <MenuItem fx:id="menuConsultaUsuarios" mnemonicParsing="false" onAction="#consultarUsuarios" text="Usuarios" />
-        </items>
-         <GridPane.margin>
-            <Insets left="5.0" />
-         </GridPane.margin>
-      </SplitMenuButton>
-      <Button fx:id="btnEditar1" mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" text="Filtrar" GridPane.columnIndex="1">
-         <GridPane.margin>
-            <Insets left="160.0" />
-         </GridPane.margin>
-      </Button>
+      <TableView2 fx:id="tableConsulta" GridPane.columnSpan="4" GridPane.rowIndex="1" GridPane.rowSpan="7" />
    </children>
 </GridPane>

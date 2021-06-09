@@ -35,7 +35,21 @@ public class cadastroUsuarioController {
 	@FXML
 	private Button btnCancelar;
 
+	@FXML
+	private Button btnAtualizar;
+	
 	private Usuarios user;
+
+	private Usuarios userEdit;
+	
+	
+	public Usuarios getUserEdit() {
+		return userEdit;
+	}
+
+	public void setUserEdit(Usuarios userEdit) {
+		this.userEdit = userEdit;
+	}
 
 	public Usuarios getUser() {
 		return user;
@@ -66,6 +80,49 @@ public class cadastroUsuarioController {
 
 		Notifications.create().title("Alerta").text("Usuario criado com sucesso! " + "\n" + "Nome de usuario = "
 				+ user.getUsuario() + "\n" + "Senha = " + user.getSenha()).showConfirm();
+	}
+	
+	public void populateFields(Usuarios user) {
+		btnSalvar.setDisable(false);
+		
+		txtNome.setText(user.getNome());
+		txtUsuario.setText(user.getUsuario());
+		passSenha.setText(user.getSenha());
+		txtEmail.setText(user.getEmail());
+		if (user.isUsuarioMestre()) {
+			checkboxMestre.setSelected(true);
+		}
+	}
+	
+	@FXML
+	public Boolean atualizar() {
+		
+		userEdit = this.getUserEdit();
+		
+		DAOHibernate<Usuarios> daoUser = new DAOHibernate<>(Usuarios.class);
+		
+		Usuarios editedUser = daoUser.getAllById(userEdit.getIdUsuario());
+		
+		String nome = txtNome.getText();
+		editedUser.setNome(nome);
+		String usuario = txtUsuario.getText();
+		editedUser.setUsuario(usuario);
+		String senha = passSenha.getText();
+		editedUser.setSenha(senha);
+		String email = txtEmail.getText();
+		editedUser.setEmail(email);
+		boolean usuarioMestre = false;
+		if (checkboxMestre.isSelected()) {
+			usuarioMestre = true;
+			
+		}
+		editedUser.setUsuarioMestre(usuarioMestre);
+		
+		daoUser.beginTransaction().update(editedUser).commitTransaction().closeAll();
+		
+		Stage window = (Stage) btnCancelar.getScene().getWindow();
+		window.close();
+		return true;
 	}
 	
 	@FXML
