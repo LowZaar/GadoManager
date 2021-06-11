@@ -304,20 +304,14 @@ public class consultaController {
 			Scene filtroScene = new Scene(filtroP);
 			filtroBovinoController filtroBovinoController = loader.getController();
 			filtroBovinoController.setUser(user);
+			filtroBovinoController.setConsultaController(this);
 			filtroBovinoController.populateCombos();
 			filtroStage.initModality(Modality.APPLICATION_MODAL);
 			filtroStage.setScene(filtroScene);
 			filtroStage.showAndWait();
 
-			ObservableList<Object> resultQuery = filtroBovinoController.filtrar();
-			if (!(resultQuery == null)) {
-
-				setPerspectiveList(resultQuery);
-				consultarBovino();
-
-			} else {
-
-				System.out.println("query nula");
+			if (getPerspectiveList().isEmpty()) {
+				getBovinos();
 			}
 		}
 		if (perspectiva == "Usuarios") {
@@ -326,18 +320,14 @@ public class consultaController {
 			Parent filtroP = loader.load();
 			Scene filtroScene = new Scene(filtroP);
 			filtroUsuarioController filtroUsuarioController = loader.getController();
+			filtroUsuarioController.setUser(user);
+			filtroUsuarioController.setConsultaController(this);
 			filtroStage.initModality(Modality.APPLICATION_MODAL);
 			filtroStage.setScene(filtroScene);
 			filtroStage.showAndWait();
-			ObservableList<Object> resultQuery = filtroUsuarioController.filtrar();
-			if (!(resultQuery == null)) {
-
-				setPerspectiveList(resultQuery);
-				consultarUsuarios();
-
-			} else {
-
-				System.out.println("query nula");
+			
+			if (getPerspectiveList().isEmpty()) {
+				setPerspectiveList(getUsuarios());
 			}
 
 		}
@@ -347,17 +337,14 @@ public class consultaController {
 			Parent filtroP = loader.load();
 			Scene filtroScene = new Scene(filtroP);
 			filtroVeterinarioController filtroVeterinarioController = loader.getController();
+			filtroVeterinarioController.setConsultaController(this);
 			filtroStage.initModality(Modality.APPLICATION_MODAL);
 			filtroStage.setScene(filtroScene);
 			filtroStage.showAndWait();
-			ObservableList<Object> resultQuery = filtroVeterinarioController.filtrar();
-			if (!(resultQuery == null)) {
-				setPerspectiveList(resultQuery);
-				consultarVeterinarios();
-			} else {
-				System.out.println("query nula");
+			
+			if (getPerspectiveList().isEmpty()) {
+				setPerspectiveList(getVeterinarios());
 			}
-
 		}
 	}
 

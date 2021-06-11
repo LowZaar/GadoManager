@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 
 import classes.Usuarios;
-
+import controllers.consultaController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -33,37 +33,43 @@ public class filtroUsuarioController {
 	@FXML
 	private Button btnCancelar;
 
+	private consultaController consultaController;
+	
+	private Usuarios user;
+	
+	public void setConsultaController(consultaController consultaController) {
+		this.consultaController = consultaController;
+	}
+	
+	public void setUser(Usuarios user) {
+		this.user = user;
+	}
+	
 	@FXML
-	public ObservableList<Object> filtrar() throws SQLException {
+	public void filtrar() throws SQLException {
 
 		String nome = txtNome.getText();
 		String usuario = txtUsuario.getText();
 		String email = txtEmail.getText();
 
 		String sql = "SELECT * from usuarios ";
-		Boolean validSQL = false;
 		
 
 		if (!nome.isEmpty()) {
-			validSQL = true;
 			sql += "WHERE usuarios.nome LIKE '%" + nome + "%' AND ";
 
 		}
 		if (!usuario.isEmpty()) {
-			validSQL = true;
 
 			sql += "WHERE usuarios.usuario LIKE '%" + usuario + "%' AND ";
 
 		}
 		if (!email.isEmpty()) {
-			validSQL = true;
 
 			sql += "WHERE usuarios.email like '%" + email + "%' AND ";
 		}
-		if (validSQL) {
-
-			sql += "1=1";
-		}
+		
+		sql += "WHERE usuarios.idEmpresa_Pessoa = " + user.getIdEmpresas_Pessoa().getIdEmpresa_Pessoa()+ "";
 
 		DAODatabase daoJDBC = new DAODatabase();
 		ResultSet queryResult = daoJDBC.selectLazy(sql);
@@ -95,7 +101,7 @@ public class filtroUsuarioController {
 
 		Stage window = (Stage) btnFiltrar.getScene().getWindow();
 		window.close();
-		return result;
+		consultaController.setPerspectiveList(result);
 	}
 
 	@FXML

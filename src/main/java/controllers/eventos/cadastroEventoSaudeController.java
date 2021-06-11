@@ -133,11 +133,7 @@ public class cadastroEventoSaudeController {
 
 		if (comboEvento.getValue() == "Bovinos") {
 			setEvento("Bovinos");
-			
-			eventoBov = new EventosSaudeBovinos();
-			
-			System.out.println("BOV");
-
+						
 			fxmlEvento = getClass().getResource("/fxml/EventosSaudeBovinos.fxml");
 			loader.setLocation(fxmlEvento);
 			Parent eventoP = loader.load();
@@ -159,7 +155,6 @@ public class cadastroEventoSaudeController {
 		} else if (comboEvento.getValue() == "Medicação") {
 			setEvento("Medicação");
 
-			System.out.println("MED");
 
 			fxmlEvento = getClass().getResource("/fxml/EventosSaudeMedicacao.fxml");
 			loader.setLocation(fxmlEvento);
@@ -179,7 +174,8 @@ public class cadastroEventoSaudeController {
 
 		} else if (comboEvento.getValue() == "Vacina") {
 			setEvento("Vacina");
-
+			
+			
 			fxmlEvento = getClass().getResource("/fxml/EventosSaudeVacina.fxml");
 			loader.setLocation(fxmlEvento);
 			Parent eventoP = loader.load();
@@ -234,13 +230,13 @@ public class cadastroEventoSaudeController {
 			DAOHibernate<EventosSaudeBovinos> daoSB = new DAOHibernate<>(EventosSaudeBovinos.class);
 			daoSB.beginTransaction().save(eventoBov).commitTransaction().closeAll();
 
-		} else if (evento == "Medicação") {
+		} else if (evento == "Medicação" && !(eventoMed == null)) {
 
 			eventoMed.setIdEventoSaude(eventosSaude);
 			DAOHibernate<EventosSaudeMedicacao> daoSM = new DAOHibernate<>(EventosSaudeMedicacao.class);
 			daoSM.beginTransaction().save(eventoMed).commitTransaction().closeAll();
 
-		} else if (evento == "Vacina") {
+		} else if (evento == "Vacina" && !(eventoVac == null)) {
 
 			eventoVac.setIdEventoSaude(eventosSaude);
 			DAOHibernate<EventosSaudeVacina> daoSV = new DAOHibernate<>(EventosSaudeVacina.class);

@@ -3,6 +3,7 @@ package controllers.filtros;
 import java.sql.ResultSet;
 
 import classes.Veterinario;
+import controllers.consultaController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -31,8 +32,14 @@ public class filtroVeterinarioController {
 	@FXML
 	private Button btnFiltrar;
 
+	private consultaController consultaController;
+	
+	public void setConsultaController(consultaController consultaController) {
+		this.consultaController = consultaController;
+	}
+	
 	@FXML
-	public ObservableList<Object> filtrar() throws Exception {
+	public void filtrar() throws Exception {
 		String nome = txtNome.getText();
 		String rg = txtRG.getText();
 		String cpf = txtCPF.getText();
@@ -99,7 +106,7 @@ public class filtroVeterinarioController {
 
 		Stage window = (Stage) btnFiltrar.getScene().getWindow();
 		window.close();
-		return result;
+		consultaController.setPerspectiveList(result);
 	}
 
 	@FXML

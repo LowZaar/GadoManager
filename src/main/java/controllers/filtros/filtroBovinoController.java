@@ -8,7 +8,7 @@ import classes.Bovinos;
 import classes.Racas;
 import classes.Rebanhos;
 import classes.Usuarios;
-
+import controllers.consultaController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -45,6 +45,8 @@ public class filtroBovinoController {
 	@FXML
 	private Button btnFiltrar;
 
+	private consultaController consultaController;
+	
 	private Usuarios user;
 
 	public Usuarios getUser() {
@@ -53,6 +55,10 @@ public class filtroBovinoController {
 
 	public void setUser(Usuarios user) {
 		this.user = user;
+	}
+
+	public void setConsultaController(consultaController consultaController) {
+		this.consultaController = consultaController;
 	}
 
 	public void populateCombos() {
@@ -77,7 +83,7 @@ public class filtroBovinoController {
 	}
 
 	@FXML
-	public ObservableList<Object> filtrar() throws Exception {
+	public void filtrar() throws Exception {
 
 		boolean validSQL = false;
 		String sql = "select nome," + "idAssociacao," + "idBrinco," + "sexo," + "idRebanho," + "idRaca," + "categoria,"
@@ -200,7 +206,7 @@ public class filtroBovinoController {
 
 		Stage window = (Stage) btnFiltrar.getScene().getWindow();
 		window.close();
-		return result;
+		consultaController.setPerspectiveList(result);
 	}
 
 	@FXML
