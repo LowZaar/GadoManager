@@ -33,17 +33,14 @@ public class eventoVacinaController {
 	private TextArea txtAObservacoes;
 
 	@FXML
-	private Button btnSalvar;
-
-	@FXML
-	private Button btnCancelar;
+	private Button btnFechar;
 
 	private cadastroEventoSaudeController cadastroEventoSaudeController;
 
 	public void setCadastroEventoSaudeController(cadastroEventoSaudeController cadastroEventoSaudeController) {
 		this.cadastroEventoSaudeController = cadastroEventoSaudeController;
 	}
-	
+
 	public void populateTable() {
 
 		ObservableList<Vacina> list = FXCollections.observableArrayList();
@@ -53,7 +50,7 @@ public class eventoVacinaController {
 		list.addAll(query);
 
 		tableVacina.setItems(list);
-		
+
 		// Colunas
 		TableColumn<Vacina, Long> idVacinaCol = new TableColumn<>("ID");
 		idVacinaCol.setCellValueFactory(new PropertyValueFactory<>("idVacina"));
@@ -62,36 +59,39 @@ public class eventoVacinaController {
 		TableColumn<Vacina, String> descricaoVacinaCol = new TableColumn<>("Descrição");
 		descricaoVacinaCol.setCellValueFactory(new PropertyValueFactory<>("descricao"));
 		tableVacina.getColumns().add(descricaoVacinaCol);
+
+	}
+
+	public Vacina getVacina() {
 		
+		int index = tableVacina.getSelectionModel().getSelectedIndex();
+
+		Vacina vacina = tableVacina.getItems().get(index);
+
+		if (!vacina.equals(null)) {
+			return vacina;
+		} else {
+			return null;
+		}
+
 	}
 
 	@FXML
-	public void salvar() {
-		int index = tableVacina.getSelectionModel().getSelectedIndex();
-		
+	public void fechar() {
 		
 		EventosSaudeVacina eventosSaudeVacina = new EventosSaudeVacina();
 		
-		Vacina vacina = tableVacina.getItems().get(index);
-		eventosSaudeVacina.setIdVacina(vacina);
-		
+		eventosSaudeVacina.setIdVacina(getVacina());
+
 		String lote = txtLote.getText();
 		eventosSaudeVacina.setLote(lote);
-		
+
 		String observacoes = txtAObservacoes.getText();
 		eventosSaudeVacina.setObservacoes(observacoes);
-		
-		Stage window = (Stage) btnCancelar.getScene().getWindow();
-		window.close();
-		
-		cadastroEventoSaudeController.setEventoVac(eventosSaudeVacina);
-	}
 
-	@FXML
-	public void cancelar() {
-		
-		Stage window = (Stage) btnCancelar.getScene().getWindow();
+		cadastroEventoSaudeController.setEventoVac(eventosSaudeVacina);
+
+		Stage window = (Stage) btnFechar.getScene().getWindow();
 		window.close();
 	}
-	
 }

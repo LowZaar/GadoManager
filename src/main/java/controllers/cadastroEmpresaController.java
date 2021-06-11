@@ -98,8 +98,6 @@ public class cadastroEmpresaController {
 	@FXML
 	private PasswordField passSenha;
 
-
-
 	@FXML
 	public void Salvar() throws Exception {
 
@@ -200,7 +198,7 @@ public class cadastroEmpresaController {
 	@FXML
 	public void pfChecked() {
 		txtCNPJ.clear();
-		
+
 		radioTipoJuridica.setSelected(false);
 
 		txtRG.setDisable(false);
@@ -215,7 +213,7 @@ public class cadastroEmpresaController {
 	public void pjChecked() {
 
 		txtCNPJ.clear();
-		
+
 		txtIE.setDisable(false);
 
 		txtIM.setDisable(false);
@@ -253,10 +251,7 @@ public class cadastroEmpresaController {
 	public static List<Estados> prepareEstadoList() {
 		DAOHibernate<Estados> daoE = new DAOHibernate<>();
 		List<Estados> list = null;
-		if (list == null) {
-			list = daoE.getAllByNamedQuery("selectEstados");
-		}
-
+		list = daoE.getAllByNamedQuery("selectEstados");
 		daoE.closeAll();
 
 		return list;
@@ -295,7 +290,7 @@ public class cadastroEmpresaController {
 
 	@FXML
 	private void formatCPFCPNJ() {
-		
+
 		if (radioTipoFisica.isSelected()) {
 			TextFieldFormatter CPFmask = new TextFieldFormatter();
 			CPFmask.setMask("###.###.###-##");
@@ -303,8 +298,8 @@ public class cadastroEmpresaController {
 			CPFmask.setTf(txtCNPJ);
 			CPFmask.formatter();
 
-		} else if (radioTipoJuridica.isSelected()){
-			
+		} else if (radioTipoJuridica.isSelected()) {
+
 			TextFieldFormatter CNPJmask = new TextFieldFormatter();
 			CNPJmask.setMask("##.###.###.###/####-##");
 			CNPJmask.setCaracteresValidos("0123456789");
@@ -316,7 +311,7 @@ public class cadastroEmpresaController {
 
 	@FXML
 	private void formatPhone() {
-		
+
 		TextFieldFormatter TelefoneMask = new TextFieldFormatter();
 		TelefoneMask.setMask("(##)#####-####");
 		TelefoneMask.setCaracteresValidos("0123456789");
@@ -326,7 +321,7 @@ public class cadastroEmpresaController {
 
 	@FXML
 	private void formatRG() {
-		
+
 		TextFieldFormatter RGmask = new TextFieldFormatter();
 		RGmask.setMask("###########");
 		RGmask.setCaracteresValidos("0123456789");

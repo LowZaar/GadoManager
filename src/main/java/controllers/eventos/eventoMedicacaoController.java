@@ -34,10 +34,7 @@ public class eventoMedicacaoController {
 	private TextArea txtAObservacoes;
 
 	@FXML
-	private Button btnSalvar;
-
-	@FXML
-	private Button btnCancelar;
+	private Button btnFechar;
 
 	@FXML
 	private TextField txtDiasTratamento;
@@ -77,17 +74,23 @@ public class eventoMedicacaoController {
 
 	}
 
-	public void salvar() {
-
+	public Medicamentos getMedicamento() {
+		
 		int index = tableMedicamento.getSelectionModel().getSelectedIndex();
 
 		Medicamentos medicacao = tableMedicamento.getItems().get(index);
+		
+		return medicacao;
+	}
+	
+	@FXML
+	public void fechar() {
 
 		EventosSaudeMedicacao eventoMedicacao = new EventosSaudeMedicacao();
 		if (!txtDiasTratamento.getText().isEmpty()) {
 			eventoMedicacao.setDiasTratamento(Integer.parseInt(txtDiasTratamento.getText()));
 		}
-		eventoMedicacao.setIdMedicamento(medicacao);
+		eventoMedicacao.setIdMedicamento(getMedicamento());
 		eventoMedicacao.setLote(txtLote.getText());
 		eventoMedicacao.setPosologia(txtPosologia.getText());
 		eventoMedicacao.setTipoAplicacao(txtTipoAplicação.getText());
@@ -95,14 +98,14 @@ public class eventoMedicacaoController {
 
 		cadastroEventoSaudeController.setEventoMed(eventoMedicacao);
 		
-		Stage window = (Stage) btnCancelar.getScene().getWindow();
+		Stage window = (Stage) btnFechar.getScene().getWindow();
 		window.close();
 	}
 
 	@FXML
 	public void cancelar() {
 
-		Stage window = (Stage) btnCancelar.getScene().getWindow();
+		Stage window = (Stage) btnFechar.getScene().getWindow();
 		window.close();
 	}
 }

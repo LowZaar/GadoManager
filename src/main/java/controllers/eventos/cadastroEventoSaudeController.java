@@ -245,7 +245,6 @@ public class cadastroEventoSaudeController {
 		} else {
 
 			eventoOutro.setIdEventoSaude(eventosSaude);
-			eventoOutro.setObservacoes(txtObservacoes.getText());
 			DAOHibernate<EventosSaudeOutros> daoOutro = new DAOHibernate<>(EventosSaudeOutros.class);
 			daoOutro.beginTransaction().save(eventoOutro).commitTransaction().closeAll();
 		}
