@@ -5,6 +5,7 @@ import java.net.URL;
 import org.controlsfx.control.Notifications;
 
 import classes.Usuarios;
+import controllers.eventos.cadastroEventoSaudeController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -113,6 +114,23 @@ public class mainMenuController {
 
 	}
 
+	public void abrirEventoSaude() throws Exception {
+		URL fxmlEventoSaude = getClass().getResource("/fxml/CadastroEventoSaude.fxml");
+		
+		FXMLLoader loader = new FXMLLoader(fxmlEventoSaude);
+		
+		Parent eventoSaude = loader.load();
+		
+		Stage cadastroEventoSaude = new Stage();
+		Scene medicacaoScene = new Scene(eventoSaude);
+		
+		cadastroEventoSaude.setScene(medicacaoScene);
+		cadastroEventoSaudeController cadastroEventoSaudeController = loader.getController();
+		cadastroEventoSaudeController.setUser(userLogin);
+		cadastroEventoSaudeController.populateCombos();
+		cadastroEventoSaude.show();
+	}
+	
 	public void abrirMedicacao() throws Exception {
 
 		URL fxmlMedicacao = getClass().getResource("/fxml/Medicamento.fxml");

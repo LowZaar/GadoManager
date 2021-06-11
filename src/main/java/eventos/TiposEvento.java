@@ -21,7 +21,6 @@ public class TiposEvento {
 	}
 
 	public TiposEvento(String descricao, char tag) {
-		super();
 		this.descricao = descricao;
 		this.tag = tag;
 	}

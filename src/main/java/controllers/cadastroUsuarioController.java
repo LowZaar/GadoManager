@@ -122,6 +122,7 @@ public class cadastroUsuarioController {
 		
 		Stage window = (Stage) btnCancelar.getScene().getWindow();
 		window.close();
+		
 		return true;
 	}
 	

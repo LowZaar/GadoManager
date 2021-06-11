@@ -154,7 +154,7 @@ public class consultaController {
 			return new ReadOnlyStringWrapper(resultado);
 		});
 		tableConsulta.getColumns().add(bovinoMaeCol);
-		
+
 		TableColumn<Object, Date> morteCol = new TableColumn<>("Data Morte");
 		morteCol.setCellValueFactory(new PropertyValueFactory<>("dataMorte"));
 		tableConsulta.getColumns().add(morteCol);
@@ -364,8 +364,7 @@ public class consultaController {
 	@FXML
 	public void editar() throws Exception {
 		int index = tableConsulta.getSelectionModel().getSelectedIndex();
-		
-		
+
 		URL fxmledit;
 		FXMLLoader loader = new FXMLLoader();
 		Stage editStage = new Stage();
@@ -373,7 +372,7 @@ public class consultaController {
 
 		if (perspectiva == "Bovinos") {
 			Bovinos bovino = (Bovinos) tableConsulta.getItems().get(index);
-			
+
 			fxmledit = getClass().getResource("/fxml/CadastroDeBovinos.fxml");
 			loader.setLocation(fxmledit);
 			Parent editP = loader.load();
@@ -381,21 +380,22 @@ public class consultaController {
 			cadastroBovinoController cadastroBovinoController = loader.getController();
 			cadastroBovinoController.setUser(user);
 			DAOHibernate<Bovinos> daoB = new DAOHibernate<>(Bovinos.class);
-			Bovinos bovinoEdit = daoB.getFirst("selectBovinobyNomeEmpresa", "nome", bovino.getNome(), "empresa", user.getIdEmpresas_Pessoa());
+			Bovinos bovinoEdit = daoB.getFirst("selectBovinobyNomeEmpresa", "nome", bovino.getNome(), "empresa",
+					user.getIdEmpresas_Pessoa());
 			cadastroBovinoController.setBovino(bovinoEdit);
 			cadastroBovinoController.populateFields(bovino);
 			editStage.initModality(Modality.APPLICATION_MODAL);
 			editStage.setScene(editScene);
 			editStage.showAndWait();
-			
+
 			Boolean bovinoEditted = cadastroBovinoController.atualizar();
 			if (bovinoEditted) {
 				setPerspectiveList(getBovinos());
 				consultarBovino();
 			}
-		}else if (perspectiva == "Usuarios") {
+		} else if (perspectiva == "Usuarios") {
 			Usuarios usuario = (Usuarios) tableConsulta.getItems().get(index);
-			
+
 			fxmledit = getClass().getResource("/fxml/CadastroDeUsuarios.fxml");
 			loader.setLocation(fxmledit);
 			Parent editP = loader.load();
@@ -407,26 +407,45 @@ public class consultaController {
 			editStage.initModality(Modality.APPLICATION_MODAL);
 			editStage.setScene(editScene);
 			editStage.showAndWait();
-			
+
 			boolean userEdit = cadastroUsuarioController.atualizar();
-			if (userEdit) { 
+			if (userEdit) {
 				setPerspectiveList(getUsuarios());
 				consultarUsuarios();
 			}
+		} else if (perspectiva == "Veterinarios") {
+			Veterinario vet = (Veterinario) tableConsulta.getItems().get(index);
+
+			fxmledit = getClass().getResource("/fxml/CadastroDeVeterinarios.fxml");
+			loader.setLocation(fxmledit);
+			Parent edtitP = loader.load();
+			Scene editScene = new Scene(edtitP);
+			cadastroVeterinarioController cadastroVeterinarioController = loader.getController();
+			cadastroVeterinarioController.populateFields(vet);
+			editStage.initModality(Modality.APPLICATION_MODAL);
+			editStage.setScene(editScene);
+			editStage.showAndWait();
+
+			boolean vetEdit = cadastroVeterinarioController.atualizar();
+			if (vetEdit) {
+				setPerspectiveList(getVeterinarios());
+				consultarVeterinarios();
+			}
+
 		}
 	}
-	
+
 	@FXML
 	public void excluir() {
 		int index = tableConsulta.getSelectionModel().getSelectedIndex();
 		String perspectiva = getCurrentPerspective();
-		
+
 		if (perspectiva == "Bovinos") {
 			Bovinos bovino = (Bovinos) tableConsulta.getItems().get(index);
 			DAOHibernate<Bovinos> daoB = new DAOHibernate<>(Bovinos.class);
 			Bovinos bovinoDel = daoB.getAllById(bovino.getIdBovino());
 			daoB.beginTransaction().delete(bovinoDel).commitTransaction().closeAll();
-			
+
 			setPerspectiveList(getBovinos());
 			consultarBovino();
 		}
@@ -435,13 +454,24 @@ public class consultaController {
 			DAOHibernate<Usuarios> daoUser = new DAOHibernate<>(Usuarios.class);
 			Usuarios userDel = daoUser.getAllById(user.getIdUsuario());
 			daoUser.beginTransaction().delete(userDel).commitTransaction().closeAll();
-			
+
 			setPerspectiveList(getUsuarios());
 			consultarUsuarios();
 		}
+		if (perspectiva == "Veterinarios") {
+
+			btnExcluir.setDisable(true);
+
+//			Veterinario vet = (Veterinario) tableConsulta.getItems().get(index);
+//			DAOHibernate<Veterinario> daoVet = new DAOHibernate<Veterinario>(Veterinario.class);
+//			Veterinario vetDel = daoVet.getAllById(vet.getIdVeterinario());
+//			daoVet.beginTransaction().delete(vetDel).commitTransaction().closeAll();
+//			
+//			setPerspectiveList(getVeterinarios());
+//			consultarVeterinarios();
+		}
 	}
-	
-	
+
 	@FXML
 	public void fechar() {
 

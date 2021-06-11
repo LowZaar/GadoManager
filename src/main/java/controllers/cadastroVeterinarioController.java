@@ -30,6 +30,20 @@ public class cadastroVeterinarioController {
 	private Button btnCancelar;
 	
 	@FXML
+	private Button btnAtualizar;
+	
+	private Veterinario veterinario;
+	
+	
+	public Veterinario getVeterinario() {
+		return veterinario;
+	}
+
+	public void setVeterinario(Veterinario veterinario) {
+		this.veterinario = veterinario;
+	}
+
+	@FXML
 	public void salvar() {
 		
 		String nome = txtNome.getText();
@@ -45,6 +59,43 @@ public class cadastroVeterinarioController {
 		Notifications.create().title("Alerta").text("Veterinario(a) criado com sucesso!").showConfirm();
 	}
 	
+	public void populateFields(Veterinario vet) {
+		
+		setVeterinario(vet);
+		
+		btnSalvar.setDisable(true);
+		
+		txtNome.setText(vet.getNome());
+		txtRG.setText(vet.getRg());
+		txtCPF.setText(vet.getCpf());
+		txtCRMV.setText(vet.getCrmv());
+		
+		
+	}
+	
+	@FXML
+	public Boolean atualizar() {
+		
+		DAOHibernate<Veterinario> daoVet = new DAOHibernate<Veterinario>(Veterinario.class);
+		
+		Veterinario vetEdit = daoVet.getAllById(veterinario.getIdVeterinario());
+		
+		String nome = txtNome.getText();
+		vetEdit.setNome(nome);
+		
+		String rg = txtRG.getText();
+		vetEdit.setRg(rg);
+		
+		String cpf = txtCPF.getText();
+		vetEdit.setCpf(cpf);
+		
+		String crmv = txtCRMV.getText();
+		vetEdit.setCrmv(crmv);
+		
+		daoVet.beginTransaction().update(vetEdit).commitTransaction().closeAll();
+		
+		return true;
+	}
 	
 	@FXML
 	public void cancelar() {

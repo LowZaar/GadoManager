@@ -36,6 +36,7 @@
           <Menu mnemonicParsing="false" text="Saude">
             <items>
               <MenuItem fx:id="menuSaude" mnemonicParsing="false" text="Saude" />
+                  <MenuItem fx:id="menuEventoSaude" mnemonicParsing="false" onAction="#abrirEventoSaude" text="Eventos de Saúde" />
                   <MenuItem fx:id="menuMedicacao" mnemonicParsing="false" onAction="#abrirMedicacao" text="Medicação" />
                   <MenuItem fx:id="menuVacinas" mnemonicParsing="false" onAction="#abrirVacina" text="Vacinas" />
                   <MenuItem fx:id="menuRacoes" mnemonicParsing="false" onAction="#abrirRacao" text="Rações" />

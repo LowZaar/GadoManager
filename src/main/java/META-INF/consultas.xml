@@ -34,6 +34,12 @@
 		</query>
 	</named-query>
 
+	<named-query name="selectBovinobyRebanho">
+		<query>
+		SELECT b from Bovinos b where b.idRebanho = :rebanho 
+		</query>
+	</named-query>
+
 	<named-query name="selectBovinobyNomeEmpresa">
 		<query>
 			SELECT b from Bovinos b where b.nome = :nome AND b.idEmpresaPessoas = :empresa
@@ -90,6 +96,18 @@
 	<named-query name="selectUserbyNomeEmpresa">
 		<query>
 			SELECT u from Usuarios u where  u.nome = :nome and u.idEmpresas_Pessoa = :empresa
+		</query>
+	</named-query>
+
+	<named-query name="selectTipoEventobyTag">
+		<query>
+			SELECT te from TiposEvento te where te.tag = :tag
+		</query>
+	</named-query>
+
+	<named-query name="selectVeterinariobyNome">
+		<query>
+			SELECT vet from Veterinario vet where vet.nome = :nome
 		</query>
 	</named-query>
 
