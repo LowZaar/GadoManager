@@ -16,6 +16,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
@@ -76,14 +77,15 @@ public class loginController {
 
 			Parent mainMenuP = loader.load();
 
+			
 			Scene mainMenuScene = new Scene(mainMenuP);
 
 			Stage mainMenu = new Stage();
+			mainMenu.getIcons().add(new Image(getClass().getResourceAsStream("/taskIcon/taskIcon.png")));
 
 			mainMenu.setScene(mainMenuScene);
-
+			mainMenu.setTitle("Menu Principal");
 			Stage window = (Stage) btnLogin.getScene().getWindow();
-
 			window.close();
 			mainMenu.show();
 

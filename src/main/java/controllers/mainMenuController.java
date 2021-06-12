@@ -9,6 +9,7 @@ import controllers.eventos.cadastroEventoSaudeController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class mainMenuController {
@@ -38,6 +39,7 @@ public class mainMenuController {
 		cadastroBovinoController.setUser(userLogin);
 		cadastroBovinoController.setEdit(false);
 		cadastroBovinoController.populateCombos();
+		cadastroBovino.getIcons().add(new Image(getClass().getResourceAsStream("/taskIcon/taskIcon.png")));
 		cadastroBovino.show();
 
 	}
@@ -54,6 +56,7 @@ public class mainMenuController {
 		Scene racaScene = new Scene(racaP);
 
 		cadastroRaca.setScene(racaScene);
+		cadastroRaca.getIcons().add(new Image(getClass().getResourceAsStream("/taskIcon/taskIcon.png")));
 		cadastroRaca.show();
 
 	}
@@ -73,6 +76,7 @@ public class mainMenuController {
 		cadastroRebanhoController rebanhoController = loader.getController();
 		rebanhoController.setUser(userLogin);
 
+		cadastroRebanho.getIcons().add(new Image(getClass().getResourceAsStream("/taskIcon/taskIcon.png")));
 		cadastroRebanho.show();
 
 	}
@@ -92,6 +96,7 @@ public class mainMenuController {
 		cadastroBCSController cadastroBCSController = loader.getController();
 		cadastroBCSController.setUser(userLogin);
 		cadastroBCSController.populateCombo();
+		cadastroBCS.getIcons().add(new Image(getClass().getResourceAsStream("/taskIcon/taskIcon.png")));
 		cadastroBCS.show();
 
 	}
@@ -111,6 +116,7 @@ public class mainMenuController {
 		cadastroPesagemController cadastroPesagemController = loader.getController();
 		cadastroPesagemController.setUser(userLogin);
 		cadastroPesagemController.populateCombo();
+		cadastroPesagem.getIcons().add(new Image(getClass().getResourceAsStream("/taskIcon/taskIcon.png")));
 		cadastroPesagem.show();
 
 	}
@@ -129,6 +135,7 @@ public class mainMenuController {
 		cadastroEventoSaudeController cadastroEventoSaudeController = loader.getController();
 		cadastroEventoSaudeController.setUser(userLogin);
 		cadastroEventoSaudeController.populateCombos();
+		cadastroEventoSaude.getIcons().add(new Image(getClass().getResourceAsStream("/taskIcon/taskIcon.png")));
 		cadastroEventoSaude.show();
 	}
 	
@@ -144,6 +151,7 @@ public class mainMenuController {
 		Scene medicacaoScene = new Scene(medicacaoP);
 
 		cadastroMedicacao.setScene(medicacaoScene);
+		cadastroMedicacao.getIcons().add(new Image(getClass().getResourceAsStream("/taskIcon/taskIcon.png")));
 		cadastroMedicacao.show();
 
 	}
@@ -160,6 +168,7 @@ public class mainMenuController {
 		Scene vacinaScene = new Scene(vacinaP);
 
 		cadastroVacina.setScene(vacinaScene);
+		cadastroVacina.getIcons().add(new Image(getClass().getResourceAsStream("/taskIcon/taskIcon.png")));
 		cadastroVacina.show();
 
 	}
@@ -176,7 +185,7 @@ public class mainMenuController {
 		Scene racaoScene = new Scene(racaoP);
 
 		cadastroRacao.setScene(racaoScene);
-
+		cadastroRacao.getIcons().add(new Image(getClass().getResourceAsStream("/taskIcon/taskIcon.png")));
 		cadastroRacao.show();
 
 	}
@@ -196,6 +205,7 @@ public class mainMenuController {
 		cadastroAlimentacaoController cadastroAlimentacaoController = loader.getController();
 		cadastroAlimentacaoController.setUser(userLogin);
 		cadastroAlimentacaoController.populateCombos();
+		cadastroAlimentacao.getIcons().add(new Image(getClass().getResourceAsStream("/taskIcon/taskIcon.png")));
 		cadastroAlimentacao.show();
 
 	}
@@ -217,6 +227,7 @@ public class mainMenuController {
 			cadastroUsuarioController.setUser(userLogin);
 			cadastroUsuarioController.setEdit(false);
 			cadastroUsuario.setScene(usuarioScene);
+			cadastroUsuario.getIcons().add(new Image(getClass().getResourceAsStream("/taskIcon/taskIcon.png")));
 			cadastroUsuario.show();
 			
 		} else {
@@ -239,6 +250,7 @@ public class mainMenuController {
 		cadastroVeterinarioController cadastroVeterinarioController = loader.getController();
 		cadastroVeterinarioController.setEdit(false);
 		cadastroVeterinario.setScene(veterinarioScene);
+		cadastroVeterinario.getIcons().add(new Image(getClass().getResourceAsStream("/taskIcon/taskIcon.png")));
 		cadastroVeterinario.show();
 
 	}
@@ -259,6 +271,7 @@ public class mainMenuController {
 			cadastroParamsController cadastroParamsController = loader.getController();
 			cadastroParamsController.setUser(userLogin);
 			cadastroParamsController.populateParams();
+			paramsStage.getIcons().add(new Image(getClass().getResourceAsStream("/taskIcon/taskIcon.png")));
 			paramsStage.show();
 		} else {
 
@@ -283,6 +296,7 @@ public class mainMenuController {
 		consultaController consultaController = loader.getController();
 		consultaController.setUser(userLogin);
 		consultaStage.setScene(consultaScene);
+		consultaStage.getIcons().add(new Image(getClass().getResourceAsStream("/taskIcon/taskIcon.png")));
 		consultaStage.show();
 	}
 }
