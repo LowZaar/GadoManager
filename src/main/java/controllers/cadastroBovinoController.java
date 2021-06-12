@@ -87,6 +87,17 @@ public class cadastroBovinoController {
 		this.user = user;
 	}
 
+	public void setEdit(boolean EditMode) {
+		if (EditMode) {
+			btnAtualizar.setVisible(true);
+			btnSalvar.setDisable(true);
+			
+		}else {
+			btnAtualizar.setVisible(false);
+			btnSalvar.setDisable(false);
+		}
+	}
+	
 	public void populateCombos() {
 		// Combo Sexo
 		comboSexo.getItems().addAll("M", "F");
@@ -246,7 +257,6 @@ public class cadastroBovinoController {
 	}
 
 	public void populateFields(Bovinos bovino) {
-		btnSalvar.setDisable(true);
 		populateCombos();
 
 		txtCategoria.setText(bovino.getCategoria());

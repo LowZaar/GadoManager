@@ -194,7 +194,7 @@ public class cadastroEventoSaudeController {
 		} else {
 
 			setEvento("Outros");
-
+			labelStatus.setText("");
 			EventosSaudeOutros evento = new EventosSaudeOutros();
 			evento.setObservacoes(txtObservacoes.getText());
 

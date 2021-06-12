@@ -370,6 +370,7 @@ public class consultaController {
 			Bovinos bovinoEdit = daoB.getFirst("selectBovinobyNomeEmpresa", "nome", bovino.getNome(), "empresa",
 					user.getIdEmpresas_Pessoa());
 			cadastroBovinoController.setBovino(bovinoEdit);
+			cadastroBovinoController.setEdit(true);
 			cadastroBovinoController.populateFields(bovino);
 			editStage.initModality(Modality.APPLICATION_MODAL);
 			editStage.setScene(editScene);

@@ -36,6 +36,7 @@ public class mainMenuController {
 		cadastroBovino.setScene(bovinoScene);
 		cadastroBovinoController cadastroBovinoController = loader.getController();
 		cadastroBovinoController.setUser(userLogin);
+		cadastroBovinoController.setEdit(false);
 		cadastroBovinoController.populateCombos();
 		cadastroBovino.show();
 
@@ -214,6 +215,7 @@ public class mainMenuController {
 
 			cadastroUsuarioController cadastroUsuarioController = loader.getController();
 			cadastroUsuarioController.setUser(userLogin);
+			cadastroUsuarioController.setEdit(false);
 			cadastroUsuario.setScene(usuarioScene);
 			cadastroUsuario.show();
 			
@@ -234,7 +236,8 @@ public class mainMenuController {
 
 		Stage cadastroVeterinario = new Stage();
 		Scene veterinarioScene = new Scene(veterinarioP);
-
+		cadastroVeterinarioController cadastroVeterinarioController = loader.getController();
+		cadastroVeterinarioController.setEdit(false);
 		cadastroVeterinario.setScene(veterinarioScene);
 		cadastroVeterinario.show();
 
