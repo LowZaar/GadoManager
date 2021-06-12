@@ -390,6 +390,7 @@ public class consultaController {
 			Scene editScene = new Scene(editP);
 			cadastroUsuarioController cadastroUsuarioController = loader.getController();
 			cadastroUsuarioController.setUser(user);
+			cadastroUsuarioController.setEdit(true);
 			cadastroUsuarioController.setUserEdit(usuario);
 			cadastroUsuarioController.populateFields(usuario);
 			editStage.initModality(Modality.APPLICATION_MODAL);
@@ -450,6 +451,8 @@ public class consultaController {
 
 			btnExcluir.setDisable(true);
 
+			
+			// Excluir veterinarios??
 //			Veterinario vet = (Veterinario) tableConsulta.getItems().get(index);
 //			DAOHibernate<Veterinario> daoVet = new DAOHibernate<Veterinario>(Veterinario.class);
 //			Veterinario vetDel = daoVet.getAllById(vet.getIdVeterinario());
