@@ -100,10 +100,8 @@ public class filtroUsuarioController {
 			result.add(user);
 
 		}
-		System.out.println(result.toString());
-		consultaController.setPerspectiveList(result);
 		
-		consultaController.consultarUsuarios();
+		consultaController.setPerspectiveList(result);
 		
 		
 		Stage window = (Stage) btnFiltrar.getScene().getWindow();
