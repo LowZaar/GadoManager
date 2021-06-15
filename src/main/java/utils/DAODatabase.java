@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+
 public class DAODatabase {
 
 	private Connection conexao;
@@ -39,6 +40,10 @@ public class DAODatabase {
 			} else if(atributo instanceof Integer) {
 				stmt.setInt(indice, (Integer) atributo);
 			}
+			else if(atributo instanceof Long) {
+				stmt.setLong(indice, (long) atributo);
+			}
+
 			indice++;
 		}
 	}
@@ -83,9 +88,20 @@ public class DAODatabase {
 	public ResultSet select(String sql, Object... atributos) {
 		try {
 			PreparedStatement stmt = getConexao().prepareStatement(sql);
+			ResultSet query = stmt.executeQuery();
 			adicionarAtributos(stmt, atributos);
-			return stmt.executeQuery();
+			return query;
 		} catch(SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
+	public ResultSet selectLazy(String sql) {
+		try {
+			PreparedStatement stmt = getConexao().prepareStatement(sql);
+			ResultSet query = stmt.executeQuery();
+			return query;
+		} catch(SQLException e ) {
 			throw new RuntimeException(e);
 		}
 	}

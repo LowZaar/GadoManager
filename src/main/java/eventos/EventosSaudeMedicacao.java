@@ -40,7 +40,6 @@ public class EventosSaudeMedicacao{
 
 	public EventosSaudeMedicacao(EventosSaude idEventoSaude, Medicamentos idMedicamento, String lote, String tipoAplicacao,
 			int diasTratamento, String posologia, String observacoes) {
-		super();
 		this.idEventoSaude = idEventoSaude;
 		this.idMedicamento = idMedicamento;
 		this.lote = lote;

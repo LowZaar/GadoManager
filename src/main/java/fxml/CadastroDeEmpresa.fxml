@@ -48,7 +48,7 @@
             <Insets left="150.0" top="100.0" />
          </GridPane.margin>
       </Button>
-      <TextField fx:id="txtCEP" style="-fx-border-color: #000;" GridPane.columnIndex="2" GridPane.rowIndex="2">
+      <TextField fx:id="txtCEP" onKeyReleased="#formatCEP" style="-fx-border-color: #000;" GridPane.columnIndex="2" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets left="50.0" right="50.0" top="50.0" />
          </GridPane.margin>
@@ -74,7 +74,7 @@
             <Insets left="50.0" right="100.0" top="150.0" />
          </GridPane.margin>
       </Label>
-      <TextField fx:id="txtCNPJ" style="-fx-border-color: #000;" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1">
+      <TextField fx:id="txtCNPJ" onKeyReleased="#formatCPFCPNJ" style="-fx-border-color: #000;" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1">
          <GridPane.margin>
             <Insets left="200.0" right="50.0" top="50.0" />
          </GridPane.margin>
@@ -158,7 +158,7 @@
             <Insets left="50.0" />
          </GridPane.margin>
       </Label>
-      <TextField fx:id="txtRG" style="-fx-border-color: #000;" GridPane.columnIndex="2" GridPane.rowIndex="2">
+      <TextField fx:id="txtRG" onKeyReleased="#formatRG" style="-fx-border-color: #000;" GridPane.columnIndex="2" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets bottom="100.0" left="50.0" right="50.0" />
          </GridPane.margin>
@@ -171,7 +171,7 @@
             <Insets bottom="150.0" left="50.0" right="50.0" />
          </GridPane.margin>
       </Label>
-      <TextField fx:id="txtTelefone" style="-fx-border-color: #000;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+      <TextField fx:id="txtTelefone" onKeyReleased="#formatPhone" style="-fx-border-color: #000;" GridPane.columnIndex="1" GridPane.rowIndex="1">
          <GridPane.margin>
             <Insets left="50.0" right="50.0" top="350.0" />
          </GridPane.margin>

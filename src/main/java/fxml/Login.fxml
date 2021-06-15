@@ -56,7 +56,7 @@
             <Insets left="75.0" right="75.0" top="75.0" />
          </GridPane.margin>
       </TextField>
-      <PasswordField fx:id="passwordLogin" style="-fx-border-color: #000;" GridPane.columnSpan="2" GridPane.rowIndex="2">
+      <PasswordField fx:id="passwordLogin" onKeyPressed="#loginOnEnter" style="-fx-border-color: #000;" GridPane.columnSpan="2" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets bottom="50.0" left="75.0" right="70.0" />
          </GridPane.margin>

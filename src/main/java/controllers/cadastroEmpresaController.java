@@ -6,7 +6,6 @@ import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 
-
 import classes.Cidades;
 import classes.Empresas_Pessoas;
 import classes.Estados;
@@ -26,6 +25,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import utils.DAOHibernate;
+import utils.TextFieldFormatter;
 
 public class cadastroEmpresaController {
 
@@ -49,9 +49,6 @@ public class cadastroEmpresaController {
 
 	@FXML
 	private TextField txtCNPJ;
-
-	@FXML
-	private TextField txtCPF;
 
 	@FXML
 	private DatePicker dateDataNascimento;
@@ -100,10 +97,6 @@ public class cadastroEmpresaController {
 
 	@FXML
 	private PasswordField passSenha;
-
-	public cadastroEmpresaController() {
-
-	}
 
 	@FXML
 	public void Salvar() throws Exception {
@@ -178,7 +171,7 @@ public class cadastroEmpresaController {
 		Stage window = (Stage) btnSalvar.getScene().getWindow();
 		Scene loginScene = new Scene(loginP);
 		loginController loginController = loader.getController();
-		
+
 		window.setScene(loginScene);
 		loginController.notifyCadastro(user, empresa);
 
@@ -202,9 +195,10 @@ public class cadastroEmpresaController {
 		return Date.from(data.atStartOfDay(zoneidDefault).toInstant());
 	}
 
-	
 	@FXML
 	public void pfChecked() {
+		txtCNPJ.clear();
+
 		radioTipoJuridica.setSelected(false);
 
 		txtRG.setDisable(false);
@@ -212,10 +206,13 @@ public class cadastroEmpresaController {
 		txtIE.setDisable(true);
 
 		txtIM.setDisable(true);
+
 	}
 
 	@FXML
 	public void pjChecked() {
+
+		txtCNPJ.clear();
 
 		txtIE.setDisable(false);
 
@@ -254,10 +251,7 @@ public class cadastroEmpresaController {
 	public static List<Estados> prepareEstadoList() {
 		DAOHibernate<Estados> daoE = new DAOHibernate<>();
 		List<Estados> list = null;
-		if (list == null) {
-			list = daoE.getAllByNamedQuery("selectEstados");
-		}
-
+		list = daoE.getAllByNamedQuery("selectEstados");
 		daoE.closeAll();
 
 		return list;
@@ -281,6 +275,58 @@ public class cadastroEmpresaController {
 			comboCidade.getItems().add(cidades.getNome());
 
 		}
+	}
+
+	@FXML
+	private void formatCEP() {
+
+		TextFieldFormatter CEPmask = new TextFieldFormatter();
+		CEPmask.setMask("#####-###");
+		CEPmask.setCaracteresValidos("0123456789");
+		CEPmask.setTf(txtCEP);
+		CEPmask.formatter();
+
+	}
+
+	@FXML
+	private void formatCPFCPNJ() {
+
+		if (radioTipoFisica.isSelected()) {
+			TextFieldFormatter CPFmask = new TextFieldFormatter();
+			CPFmask.setMask("###.###.###-##");
+			CPFmask.setCaracteresValidos("0123456789");
+			CPFmask.setTf(txtCNPJ);
+			CPFmask.formatter();
+
+		} else if (radioTipoJuridica.isSelected()) {
+
+			TextFieldFormatter CNPJmask = new TextFieldFormatter();
+			CNPJmask.setMask("##.###.###.###/####-##");
+			CNPJmask.setCaracteresValidos("0123456789");
+			CNPJmask.setTf(txtCNPJ);
+			CNPJmask.formatter();
+		}
+
+	}
+
+	@FXML
+	private void formatPhone() {
+
+		TextFieldFormatter TelefoneMask = new TextFieldFormatter();
+		TelefoneMask.setMask("(##)#####-####");
+		TelefoneMask.setCaracteresValidos("0123456789");
+		TelefoneMask.setTf(txtTelefone);
+		TelefoneMask.formatter();
+	}
+
+	@FXML
+	private void formatRG() {
+
+		TextFieldFormatter RGmask = new TextFieldFormatter();
+		RGmask.setMask("###########");
+		RGmask.setCaracteresValidos("0123456789");
+		RGmask.setTf(txtRG);
+		RGmask.formatter();
 	}
 
 }

@@ -5,9 +5,11 @@ import java.net.URL;
 import org.controlsfx.control.Notifications;
 
 import classes.Usuarios;
+import controllers.eventos.cadastroEventoSaudeController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class mainMenuController {
@@ -35,7 +37,9 @@ public class mainMenuController {
 		cadastroBovino.setScene(bovinoScene);
 		cadastroBovinoController cadastroBovinoController = loader.getController();
 		cadastroBovinoController.setUser(userLogin);
+		cadastroBovinoController.setEdit(false);
 		cadastroBovinoController.populateCombos();
+		cadastroBovino.getIcons().add(new Image(getClass().getResourceAsStream("/taskIcon/taskIcon.png")));
 		cadastroBovino.show();
 
 	}
@@ -52,6 +56,7 @@ public class mainMenuController {
 		Scene racaScene = new Scene(racaP);
 
 		cadastroRaca.setScene(racaScene);
+		cadastroRaca.getIcons().add(new Image(getClass().getResourceAsStream("/taskIcon/taskIcon.png")));
 		cadastroRaca.show();
 
 	}
@@ -71,6 +76,7 @@ public class mainMenuController {
 		cadastroRebanhoController rebanhoController = loader.getController();
 		rebanhoController.setUser(userLogin);
 
+		cadastroRebanho.getIcons().add(new Image(getClass().getResourceAsStream("/taskIcon/taskIcon.png")));
 		cadastroRebanho.show();
 
 	}
@@ -90,6 +96,7 @@ public class mainMenuController {
 		cadastroBCSController cadastroBCSController = loader.getController();
 		cadastroBCSController.setUser(userLogin);
 		cadastroBCSController.populateCombo();
+		cadastroBCS.getIcons().add(new Image(getClass().getResourceAsStream("/taskIcon/taskIcon.png")));
 		cadastroBCS.show();
 
 	}
@@ -109,10 +116,29 @@ public class mainMenuController {
 		cadastroPesagemController cadastroPesagemController = loader.getController();
 		cadastroPesagemController.setUser(userLogin);
 		cadastroPesagemController.populateCombo();
+		cadastroPesagem.getIcons().add(new Image(getClass().getResourceAsStream("/taskIcon/taskIcon.png")));
 		cadastroPesagem.show();
 
 	}
 
+	public void abrirEventoSaude() throws Exception {
+		URL fxmlEventoSaude = getClass().getResource("/fxml/CadastroEventoSaude.fxml");
+		
+		FXMLLoader loader = new FXMLLoader(fxmlEventoSaude);
+		
+		Parent eventoSaude = loader.load();
+		
+		Stage cadastroEventoSaude = new Stage();
+		Scene medicacaoScene = new Scene(eventoSaude);
+		
+		cadastroEventoSaude.setScene(medicacaoScene);
+		cadastroEventoSaudeController cadastroEventoSaudeController = loader.getController();
+		cadastroEventoSaudeController.setUser(userLogin);
+		cadastroEventoSaudeController.populateCombos();
+		cadastroEventoSaude.getIcons().add(new Image(getClass().getResourceAsStream("/taskIcon/taskIcon.png")));
+		cadastroEventoSaude.show();
+	}
+	
 	public void abrirMedicacao() throws Exception {
 
 		URL fxmlMedicacao = getClass().getResource("/fxml/Medicamento.fxml");
@@ -125,6 +151,7 @@ public class mainMenuController {
 		Scene medicacaoScene = new Scene(medicacaoP);
 
 		cadastroMedicacao.setScene(medicacaoScene);
+		cadastroMedicacao.getIcons().add(new Image(getClass().getResourceAsStream("/taskIcon/taskIcon.png")));
 		cadastroMedicacao.show();
 
 	}
@@ -141,6 +168,7 @@ public class mainMenuController {
 		Scene vacinaScene = new Scene(vacinaP);
 
 		cadastroVacina.setScene(vacinaScene);
+		cadastroVacina.getIcons().add(new Image(getClass().getResourceAsStream("/taskIcon/taskIcon.png")));
 		cadastroVacina.show();
 
 	}
@@ -157,7 +185,7 @@ public class mainMenuController {
 		Scene racaoScene = new Scene(racaoP);
 
 		cadastroRacao.setScene(racaoScene);
-
+		cadastroRacao.getIcons().add(new Image(getClass().getResourceAsStream("/taskIcon/taskIcon.png")));
 		cadastroRacao.show();
 
 	}
@@ -177,6 +205,7 @@ public class mainMenuController {
 		cadastroAlimentacaoController cadastroAlimentacaoController = loader.getController();
 		cadastroAlimentacaoController.setUser(userLogin);
 		cadastroAlimentacaoController.populateCombos();
+		cadastroAlimentacao.getIcons().add(new Image(getClass().getResourceAsStream("/taskIcon/taskIcon.png")));
 		cadastroAlimentacao.show();
 
 	}
@@ -194,10 +223,13 @@ public class mainMenuController {
 			Stage cadastroUsuario = new Stage();
 			Scene usuarioScene = new Scene(usuarioP);
 
-			cadastroUsuario.setScene(usuarioScene);
 			cadastroUsuarioController cadastroUsuarioController = loader.getController();
 			cadastroUsuarioController.setUser(userLogin);
+			cadastroUsuarioController.setEdit(false);
+			cadastroUsuario.setScene(usuarioScene);
+			cadastroUsuario.getIcons().add(new Image(getClass().getResourceAsStream("/taskIcon/taskIcon.png")));
 			cadastroUsuario.show();
+			
 		} else {
 			Notifications.create().title("Alerta").text(userLogin.getUsuario() + " não é um Usuario Mestre")
 					.showWarning();
@@ -215,8 +247,10 @@ public class mainMenuController {
 
 		Stage cadastroVeterinario = new Stage();
 		Scene veterinarioScene = new Scene(veterinarioP);
-
+		cadastroVeterinarioController cadastroVeterinarioController = loader.getController();
+		cadastroVeterinarioController.setEdit(false);
 		cadastroVeterinario.setScene(veterinarioScene);
+		cadastroVeterinario.getIcons().add(new Image(getClass().getResourceAsStream("/taskIcon/taskIcon.png")));
 		cadastroVeterinario.show();
 
 	}
@@ -237,6 +271,7 @@ public class mainMenuController {
 			cadastroParamsController cadastroParamsController = loader.getController();
 			cadastroParamsController.setUser(userLogin);
 			cadastroParamsController.populateParams();
+			paramsStage.getIcons().add(new Image(getClass().getResourceAsStream("/taskIcon/taskIcon.png")));
 			paramsStage.show();
 		} else {
 
@@ -244,5 +279,24 @@ public class mainMenuController {
 					.showWarning();
 		}
 	}
-
+	
+	public void abrirConsultas() throws Exception {
+		
+		System.out.println("consultas");
+		System.out.println(userLogin.toString());
+		URL fxmlConsultas = getClass().getResource("/fxml/Consulta.fxml");
+		
+		FXMLLoader loader = new FXMLLoader(fxmlConsultas);
+		
+		Parent consultasP = loader.load();
+		
+		Stage consultaStage = new Stage();
+		Scene consultaScene = new Scene(consultasP);
+		
+		consultaController consultaController = loader.getController();
+		consultaController.setUser(userLogin);
+		consultaStage.setScene(consultaScene);
+		consultaStage.getIcons().add(new Image(getClass().getResourceAsStream("/taskIcon/taskIcon.png")));
+		consultaStage.show();
+	}
 }

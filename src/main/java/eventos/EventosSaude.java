@@ -11,6 +11,7 @@ import javax.persistence.ManyToOne;
 
 import classes.Veterinario;
 
+
 @Entity
 public class EventosSaude {
 	
@@ -33,7 +34,7 @@ public class EventosSaude {
 	}
 
 	public EventosSaude(Date data, TiposEvento idTipoEvento, Veterinario idVeterinario) {
-		super();
+	
 		this.data = data;
 		this.idTipoEvento = idTipoEvento;
 		this.idVeterinario = idVeterinario;
@@ -71,6 +72,7 @@ public class EventosSaude {
 		this.idVeterinario = idVeterinario;
 	}
 	
+
 	
 	
 

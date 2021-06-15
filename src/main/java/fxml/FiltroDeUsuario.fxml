@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="308.0" maxWidth="455.0" minHeight="307.0" minWidth="455.0" prefHeight="307.0" prefWidth="455.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="308.0" maxWidth="455.0" minHeight="307.0" minWidth="455.0" prefHeight="307.0" prefWidth="455.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.filtros.filtroUsuarioController">
    <children>
       <Label layoutX="100.0" layoutY="14.0" text="Filtro de Usuário">
          <font>
@@ -18,20 +18,20 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <TextField layoutX="89.0" layoutY="84.0" prefHeight="25.0" prefWidth="262.0" />
-      <TextField layoutX="92.0" layoutY="133.0" prefHeight="25.0" prefWidth="262.0" />
+      <TextField fx:id="txtNome" layoutX="89.0" layoutY="84.0" prefHeight="25.0" prefWidth="262.0" />
       <Label layoutX="24.0" layoutY="132.0" text="Usuário:">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
+      <TextField fx:id="txtUsuario" layoutX="92.0" layoutY="133.0" prefHeight="25.0" prefWidth="262.0" />
       <Label layoutX="24.0" layoutY="183.0" text="E-mail:">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Button layoutX="364.0" layoutY="258.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="75.0" text="Cancelar" />
-      <Button layoutX="278.0" layoutY="258.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="75.0" text="Filtrar" />
-      <TextField layoutX="92.0" layoutY="184.0" prefHeight="25.0" prefWidth="262.0" />
+      <TextField fx:id="txtEmail" layoutX="92.0" layoutY="184.0" prefHeight="25.0" prefWidth="262.0" />
+      <Button fx:id="btnFiltrar" layoutX="278.0" layoutY="258.0" mnemonicParsing="false" onAction="#filtrar" prefHeight="25.0" prefWidth="75.0" text="Filtrar" />
+      <Button fx:id="btnCancelar" layoutX="364.0" layoutY="258.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="25.0" prefWidth="75.0" text="Cancelar" />
    </children>
 </Pane>

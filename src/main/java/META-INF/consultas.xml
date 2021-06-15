@@ -34,6 +34,12 @@
 		</query>
 	</named-query>
 
+	<named-query name="selectBovinobyRebanho">
+		<query>
+		SELECT b from Bovinos b where b.idRebanho = :rebanho 
+		</query>
+	</named-query>
+
 	<named-query name="selectBovinobyNomeEmpresa">
 		<query>
 			SELECT b from Bovinos b where b.nome = :nome AND b.idEmpresaPessoas = :empresa
@@ -51,10 +57,21 @@
 			SELECT r from Rebanhos r where r.nome = :nome AND r.idEmpresaPessoa = :empresa
 		</query>
 	</named-query>
+	<named-query name="selectRebanhobyId">
+		<query>
+			SELECT r from Rebanhos r where r.idRebanho = :id
+		</query>
+	</named-query>
 
 	<named-query name="selectParamsbyEmpresa">
 		<query>
 			SELECT p from Parametros p where p.idEmpresaPessoa = :empresa
+		</query>
+	</named-query>
+
+	<named-query name="selectRacabyId">
+		<query>
+			SELECT r from Racas r where r.idRaca = :id
 		</query>
 	</named-query>
 
@@ -63,10 +80,34 @@
 		SELECT r from Racas r where r.nomeRaca = :nome
 		</query>
 	</named-query>
-
+	
 	<named-query name="selectRacaobyDescricao">
 		<query>
 			SELECT r from Racoes r where r.descricao = :descricao
+		</query>
+	</named-query>
+
+	<named-query name="selectUserbyEmpresa">
+		<query>
+			SELECT u from Usuarios u where u.idEmpresas_Pessoa = :empresa
+		</query>
+	</named-query>
+
+	<named-query name="selectUserbyNomeEmpresa">
+		<query>
+			SELECT u from Usuarios u where  u.nome = :nome and u.idEmpresas_Pessoa = :empresa
+		</query>
+	</named-query>
+
+	<named-query name="selectTipoEventobyTag">
+		<query>
+			SELECT te from TiposEvento te where te.tag = :tag
+		</query>
+	</named-query>
+
+	<named-query name="selectVeterinariobyNome">
+		<query>
+			SELECT vet from Veterinario vet where vet.nome = :nome
 		</query>
 	</named-query>
 
