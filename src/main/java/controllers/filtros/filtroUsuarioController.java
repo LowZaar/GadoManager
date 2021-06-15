@@ -54,23 +54,25 @@ public class filtroUsuarioController {
 
 		String sql = "SELECT * from usuarios ";
 		
-
+		sql += "WHERE 1=1 ";
 		if (!nome.isEmpty()) {
-			sql += "WHERE usuarios.nome LIKE '%" + nome + "%' AND ";
+			sql += "AND usuarios.nome LIKE '%" + nome + "%' ";
 
 		}
 		if (!usuario.isEmpty()) {
 
-			sql += "WHERE usuarios.usuario LIKE '%" + usuario + "%' AND ";
+			sql += "AND usuarios.usuario LIKE '%" + usuario + "%' ";
 
 		}
 		if (!email.isEmpty()) {
 
-			sql += "WHERE usuarios.email like '%" + email + "%' AND ";
+			sql += "AND usuarios.email like '%" + email + "%' ";
 		}
 		
-		sql += "WHERE usuarios.idEmpresa_Pessoa = " + user.getIdEmpresas_Pessoa().getIdEmpresa_Pessoa()+ "";
+		sql += "AND usuarios.idEmpresa_Pessoa = " + user.getIdEmpresas_Pessoa().getIdEmpresa_Pessoa()+ "";
 
+		System.out.println(sql);
+		
 		DAODatabase daoJDBC = new DAODatabase();
 		ResultSet queryResult = daoJDBC.selectLazy(sql);
 		ObservableList<Object> result = FXCollections.observableArrayList();
@@ -94,14 +96,19 @@ public class filtroUsuarioController {
 
 			Boolean usuarioMestre = queryResult.getBoolean("usuarioMestre");
 			user.setUsuarioMestre(usuarioMestre);
-
+			
 			result.add(user);
 
 		}
-
+		System.out.println(result.toString());
+		consultaController.setPerspectiveList(result);
+		
+		consultaController.consultarUsuarios();
+		
+		
 		Stage window = (Stage) btnFiltrar.getScene().getWindow();
 		window.close();
-		consultaController.setPerspectiveList(result);
+		
 	}
 
 	@FXML

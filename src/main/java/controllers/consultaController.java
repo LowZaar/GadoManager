@@ -183,7 +183,7 @@ public class consultaController {
 
 	@FXML
 	public void consultarUsuarios() {
-
+		System.out.println("consultar user");
 		setCurrentPerspective("Usuarios");
 		tableConsulta.getColumns().clear();
 		tableConsulta.getItems().clear();
@@ -216,7 +216,7 @@ public class consultaController {
 			if (userMestre) {
 				resultado = "Sim";
 			} else {
-				resultado = "NÃ£o";
+				resultado = "Não";
 			}
 			return new ReadOnlyStringWrapper(resultado);
 		});
@@ -325,11 +325,7 @@ public class consultaController {
 			filtroStage.initModality(Modality.APPLICATION_MODAL);
 			filtroStage.setScene(filtroScene);
 			filtroStage.showAndWait();
-			
-			if (getPerspectiveList().isEmpty()) {
-				setPerspectiveList(getUsuarios());
-			}
-
+			consultarUsuarios();
 		}
 		if (perspectiva == "Veterinarios") {
 			fxmlFiltro = getClass().getResource("/fxml/FiltroDeVeterinario.fxml");

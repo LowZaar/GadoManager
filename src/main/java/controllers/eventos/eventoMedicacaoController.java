@@ -28,7 +28,7 @@ public class eventoMedicacaoController {
 	private TextField txtLote;
 
 	@FXML
-	private TextField txtTipoAplicação;
+	private TextField txtTipoAplicacao;
 
 	@FXML
 	private TextArea txtAObservacoes;
@@ -93,7 +93,7 @@ public class eventoMedicacaoController {
 		eventoMedicacao.setIdMedicamento(getMedicamento());
 		eventoMedicacao.setLote(txtLote.getText());
 		eventoMedicacao.setPosologia(txtPosologia.getText());
-		eventoMedicacao.setTipoAplicacao(txtTipoAplicação.getText());
+		eventoMedicacao.setTipoAplicacao(txtTipoAplicacao.getText());
 		eventoMedicacao.setObservacoes(txtAObservacoes.getText());
 
 		cadastroEventoSaudeController.setEventoMed(eventoMedicacao);

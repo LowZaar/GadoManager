@@ -27,7 +27,7 @@ public class eventoVacinaController {
 	private TextField txtLote;
 
 	@FXML
-	private TextField txtTipoAplicação;
+	private TextField txtTipoAplicacao;
 
 	@FXML
 	private TextArea txtAObservacoes;
