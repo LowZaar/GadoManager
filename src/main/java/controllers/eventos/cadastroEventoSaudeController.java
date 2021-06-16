@@ -219,40 +219,44 @@ public class cadastroEventoSaudeController {
 		eventosSaude.setData(data);
 		eventosSaude.setIdTipoEvento(tipoEvento);
 		eventosSaude.setIdVeterinario(vet);
-
+		
+		DAOHibernate<EventosSaude> daoEvento = new DAOHibernate<>(EventosSaude.class);
+		daoEvento.beginTransaction().save(eventosSaude).commitTransaction().closeAll();
+		
 		String evento = getEvento();
 		if (evento == "Bovinos" && !(eventoBov == null)) {
 			
 			eventoBov.setObservacoes(txtObservacoes.getText());
 			eventoBov.setIdEventoSaude(eventosSaude);
 			eventoBov.setData(data);
-
 			DAOHibernate<EventosSaudeBovinos> daoSB = new DAOHibernate<>(EventosSaudeBovinos.class);
 			daoSB.beginTransaction().save(eventoBov).commitTransaction().closeAll();
+			
+			
 
 		} else if (evento == "Medicação" && !(eventoMed == null)) {
 
 			eventoMed.setIdEventoSaude(eventosSaude);
 			DAOHibernate<EventosSaudeMedicacao> daoSM = new DAOHibernate<>(EventosSaudeMedicacao.class);
 			daoSM.beginTransaction().save(eventoMed).commitTransaction().closeAll();
+			
 
 		} else if (evento == "Vacina" && !(eventoVac == null)) {
 
 			eventoVac.setIdEventoSaude(eventosSaude);
 			DAOHibernate<EventosSaudeVacina> daoSV = new DAOHibernate<>(EventosSaudeVacina.class);
 			daoSV.beginTransaction().save(eventoVac).commitTransaction().closeAll();
+			
 
 		} else {
 
 			eventoOutro.setIdEventoSaude(eventosSaude);
 			DAOHibernate<EventosSaudeOutros> daoOutro = new DAOHibernate<>(EventosSaudeOutros.class);
 			daoOutro.beginTransaction().save(eventoOutro).commitTransaction().closeAll();
+			
 		}
-
-		DAOHibernate<EventosSaude> daoEvento = new DAOHibernate<>(EventosSaude.class);
-
-		daoEvento.beginTransaction().save(eventosSaude).commitTransaction().closeAll();
-
+		
+		
 	}
 
 	@FXML

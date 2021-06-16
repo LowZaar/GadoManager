@@ -45,29 +45,24 @@ public class filtroVeterinarioController {
 		String cpf = txtCPF.getText();
 		String crmv = txtCRMV.getText();
 
-		boolean validSQL = false;
 		String sql = "SELECT * from veterinarios ";
 
+		sql += "WHERE 1=1 ";
 		if (!nome.isEmpty()) {
-			validSQL = true;
-			sql += "WHERE veterinarios.nome LIKE '%" + nome + "%' AND ";
+			sql += "AND veterinarios.nome LIKE '%" + nome + "%' ";
 		}
 		if (!rg.isEmpty()) {
-			validSQL = true;
-			sql += "WHERE veterinarios.rg = " + rg + " AND";
+			sql += "AND veterinarios.rg = " + rg + " ";
 		}
 		if (!cpf.isEmpty()) {
-			validSQL = true;
-			sql += "WHERE veterinarios.cpf = " + cpf + " AND";
+			sql += "AND veterinarios.cpf = " + cpf + " ";
 		}
 		if (!crmv.isEmpty()) {
-			validSQL = true;
-			sql += "WHERE veterinarios.crmv = " + crmv + " AND";
-		}
-		if (validSQL) {
-			sql += " 1=1";
+			sql += "AND veterinarios.crmv = " + crmv + " ";
 		}
 
+		System.out.println(sql);
+		
 		DAODatabase daoJDBC = new DAODatabase();
 		ResultSet queryResult = null;
 		try {
@@ -99,14 +94,14 @@ public class filtroVeterinarioController {
 
 			}
 
+			Stage window = (Stage) btnFiltrar.getScene().getWindow();
+			window.close();
+			consultaController.setPerspectiveList(result);
+			
 		} else {
 			Stage window = (Stage) btnFiltrar.getScene().getWindow();
 			window.close();
 		}
-
-		Stage window = (Stage) btnFiltrar.getScene().getWindow();
-		window.close();
-		consultaController.setPerspectiveList(result);
 	}
 
 	@FXML

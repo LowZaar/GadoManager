@@ -71,6 +71,8 @@ public class cadastroBovinoController {
 
 	private Bovinos bovino;
 
+	private Boolean editMode;
+
 	public Bovinos getBovino() {
 		return bovino;
 	}
@@ -89,15 +91,12 @@ public class cadastroBovinoController {
 
 	public void setEdit(boolean EditMode) {
 		if (EditMode) {
-			btnAtualizar.setVisible(true);
-			btnSalvar.setDisable(true);
-			
-		}else {
-			btnAtualizar.setVisible(false);
-			btnSalvar.setDisable(false);
+			this.editMode = true;
+		} else {
+			this.editMode = false;
 		}
 	}
-	
+
 	public void populateCombos() {
 		// Combo Sexo
 		comboSexo.getItems().addAll("M", "F");
@@ -181,79 +180,143 @@ public class cadastroBovinoController {
 	@FXML
 	public void salvar() {
 
-		Date dataNow = new Date();
+		if (editMode) {
 
-		Bovinos bovino = new Bovinos();
+			bovino = this.getBovino();
 
-		String categoria = txtCategoria.getText();
-		bovino.setCategoria(categoria);
+			Date dataNow = new Date();
 
-		String nome = txtNome.getText();
-		bovino.setNome(nome);
+			DAOHibernate<Bovinos> daoB = new DAOHibernate<>(Bovinos.class);
 
-		if (!(dateDataMorte.getValue() == null)) {
-			Date dataMorte = localDateToDate(dateDataMorte.getValue());
-			if (dataMorte.before(dataNow)) {
-				bovino.setDataMorte(dataMorte);
+			Bovinos bovinoEdit = daoB.getAllById(bovino.getIdBovino());
+
+			String categoria = txtCategoria.getText();
+			bovinoEdit.setCategoria(categoria);
+
+			String nome = txtNome.getText();
+			bovinoEdit.setNome(nome);
+
+			if (!(dateDataMorte.getValue() == null)) {
+				Date dataMorte = localDateToDate(dateDataMorte.getValue());
+				if (dataMorte.before(dataNow)) {
+					bovinoEdit.setDataMorte(dataMorte);
+				}
 			}
-		}
-		Long associacao = Long.parseLong(txtAssociacao.getText());
-		bovino.setIdAssociacao(associacao);
+			Long associacao = Long.parseLong(txtAssociacao.getText());
+			bovinoEdit.setIdAssociacao(associacao);
 
-		String sex = comboSexo.getValue();
-		bovino.setSexo(sex.charAt(0));
+			String sex = comboSexo.getValue();
+			bovinoEdit.setSexo(sex.charAt(0));
 
-		Racas raca = findRaca(comboRaca.getValue());
-		bovino.setIdRaca(raca);
+			Racas raca = findRaca(comboRaca.getValue());
+			bovinoEdit.setIdRaca(raca);
 
-		if (dateDataNascimento.getValue() == null) {
-			Notifications.create().title("Alerta!").text("Data de nascimento vazia!").showError();
-			return;
+			if (dateDataNascimento.getValue() == null) {
+				Notifications.create().title("Alerta!").text("Data de nascimento vazia!").showError();
+			} else {
+				Date dataNascimento = localDateToDate(dateDataNascimento.getValue());
+				bovinoEdit.setDataNascimento(dataNascimento);
+			}
+
+			Long brinco = Long.parseLong(txtBrinco.getText());
+			bovinoEdit.setIdBrinco(brinco);
+
+			Rebanhos rebanho = findRebanho(comboRebanho.getValue());
+			bovinoEdit.setIdRebanho(rebanho);
+
+			Double pesoNascimento = Double.parseDouble(txtPesoNascimento.getText());
+			bovinoEdit.setPesoNascimento(pesoNascimento);
+
+			Bovinos bovinoPai = findBovino(comboBovinoPai.getValue());
+			bovinoEdit.setIdBovino_pai(bovinoPai);
+
+			Bovinos bovinoMae = findBovino(comboBovinoMae.getValue());
+			bovinoEdit.setIdBovino_mae(bovinoMae);
+
+			bovinoEdit.setIdEmpresaPessoas(user.getIdEmpresas_Pessoa());
+
+			daoB.beginTransaction().update(bovinoEdit).commitTransaction().closeAll();
+
+			Stage window = (Stage) btnCancelar.getScene().getWindow();
+			window.close();
+
 		} else {
-			Date dataNascimento = localDateToDate(dateDataNascimento.getValue());
-			bovino.setDataNascimento(dataNascimento);
+
+			Date dataNow = new Date();
+
+			Bovinos bovino = new Bovinos();
+
+			String categoria = txtCategoria.getText();
+			bovino.setCategoria(categoria);
+
+			String nome = txtNome.getText();
+			bovino.setNome(nome);
+
+			if (!(dateDataMorte.getValue() == null)) {
+				Date dataMorte = localDateToDate(dateDataMorte.getValue());
+				if (dataMorte.before(dataNow)) {
+					bovino.setDataMorte(dataMorte);
+				}
+			}
+			Long associacao = Long.parseLong(txtAssociacao.getText());
+			bovino.setIdAssociacao(associacao);
+
+			String sex = comboSexo.getValue();
+			bovino.setSexo(sex.charAt(0));
+
+			Racas raca = findRaca(comboRaca.getValue());
+			bovino.setIdRaca(raca);
+
+			if (dateDataNascimento.getValue() == null) {
+				Notifications.create().title("Alerta!").text("Data de nascimento vazia!").showError();
+				return;
+			} else {
+				Date dataNascimento = localDateToDate(dateDataNascimento.getValue());
+				bovino.setDataNascimento(dataNascimento);
+			}
+
+			Long brinco = Long.parseLong(txtBrinco.getText());
+			bovino.setIdBrinco(brinco);
+
+			Rebanhos rebanho = findRebanho(comboRebanho.getValue());
+			bovino.setIdRebanho(rebanho);
+
+			Double pesoNascimento = Double.parseDouble(txtPesoNascimento.getText());
+			bovino.setPesoNascimento(pesoNascimento);
+
+			Bovinos bovinoPai = findBovino(comboBovinoPai.getValue());
+			bovino.setIdBovino_pai(bovinoPai);
+
+			Bovinos bovinoMae = findBovino(comboBovinoMae.getValue());
+			bovino.setIdBovino_mae(bovinoMae);
+
+			bovino.setIdEmpresaPessoas(user.getIdEmpresas_Pessoa());
+
+			DAOHibernate<Bovinos> daoBovino = new DAOHibernate<>(Bovinos.class);
+			daoBovino.beginTransaction().save(bovino).commitTransaction().closeAll();
+
+			txtCategoria.clear();
+			txtNome.clear();
+			txtAssociacao.clear();
+			txtBrinco.clear();
+			txtPesoNascimento.clear();
+			dateDataNascimento.setValue(null);
+			dateDataMorte.setValue(null);
+			comboRaca.getItems().clear();
+			comboRebanho.getItems().clear();
+			comboSexo.getItems().clear();
+			comboBovinoPai.getItems().clear();
+			comboBovinoMae.getItems().clear();
+
+			populateCombos();
+
+			Notifications.create().title("Alerta")
+					.text("Bovino Criado com sucesso!" + "\n" + "Nome: " + bovino.getNome() + "\n" + "Sexo: "
+							+ bovino.getSexo() + "\n" + "Brinco: #" + bovino.getIdBrinco() + "\n" + "Rebanho: "
+							+ bovino.getIdRebanho().getNome())
+					.showConfirm();
 		}
 
-		Long brinco = Long.parseLong(txtBrinco.getText());
-		bovino.setIdBrinco(brinco);
-
-		Rebanhos rebanho = findRebanho(comboRebanho.getValue());
-		bovino.setIdRebanho(rebanho);
-
-		Double pesoNascimento = Double.parseDouble(txtPesoNascimento.getText());
-		bovino.setPesoNascimento(pesoNascimento);
-
-		Bovinos bovinoPai = findBovino(comboBovinoPai.getValue());
-		bovino.setIdBovino_pai(bovinoPai);
-
-		Bovinos bovinoMae = findBovino(comboBovinoMae.getValue());
-		bovino.setIdBovino_mae(bovinoMae);
-
-		bovino.setIdEmpresaPessoas(user.getIdEmpresas_Pessoa());
-
-		DAOHibernate<Bovinos> daoBovino = new DAOHibernate<>(Bovinos.class);
-		daoBovino.beginTransaction().save(bovino).commitTransaction().closeAll();
-
-		txtCategoria.clear();
-		txtNome.clear();
-		txtAssociacao.clear();
-		txtBrinco.clear();
-		txtPesoNascimento.clear();
-		dateDataNascimento.setValue(null);
-		dateDataMorte.setValue(null);
-		comboRaca.getItems().clear();
-		comboRebanho.getItems().clear();
-		comboSexo.getItems().clear();
-		comboBovinoPai.getItems().clear();
-		comboBovinoMae.getItems().clear();
-
-		populateCombos();
-
-		Notifications.create().title("Alerta")
-				.text("Bovino Criado com sucesso!" + "\n" + "Nome: " + bovino.getNome() + "\n" + "Sexo: "
-						+ bovino.getSexo() + "\n" + "Brinco: #" + bovino.getIdBrinco() + "\n" + "Rebanho: "
-						+ bovino.getIdRebanho().getNome())
-				.showConfirm();
 	}
 
 	public void populateFields(Bovinos bovino) {
@@ -280,70 +343,6 @@ public class cadastroBovinoController {
 			comboBovinoPai.getSelectionModel().select(bovino.getIdBovino_mae().getNome());
 		}
 
-	}
-
-	@FXML
-	public boolean atualizar() {
-
-		bovino = this.getBovino();
-
-		Date dataNow = new Date();
-
-		DAOHibernate<Bovinos> daoB = new DAOHibernate<>(Bovinos.class);
-
-		Bovinos bovinoEdit = daoB.getAllById(bovino.getIdBovino());
-
-		String categoria = txtCategoria.getText();
-		bovinoEdit.setCategoria(categoria);
-
-		String nome = txtNome.getText();
-		bovinoEdit.setNome(nome);
-
-		if (!(dateDataMorte.getValue() == null)) {
-			Date dataMorte = localDateToDate(dateDataMorte.getValue());
-			if (dataMorte.before(dataNow)) {
-				bovinoEdit.setDataMorte(dataMorte);
-			}
-		}
-		Long associacao = Long.parseLong(txtAssociacao.getText());
-		bovinoEdit.setIdAssociacao(associacao);
-
-		String sex = comboSexo.getValue();
-		bovinoEdit.setSexo(sex.charAt(0));
-
-		Racas raca = findRaca(comboRaca.getValue());
-		bovinoEdit.setIdRaca(raca);
-
-		if (dateDataNascimento.getValue() == null) {
-			Notifications.create().title("Alerta!").text("Data de nascimento vazia!").showError();
-		} else {
-			Date dataNascimento = localDateToDate(dateDataNascimento.getValue());
-			bovinoEdit.setDataNascimento(dataNascimento);
-		}
-
-		Long brinco = Long.parseLong(txtBrinco.getText());
-		bovinoEdit.setIdBrinco(brinco);
-
-		Rebanhos rebanho = findRebanho(comboRebanho.getValue());
-		bovinoEdit.setIdRebanho(rebanho);
-
-		Double pesoNascimento = Double.parseDouble(txtPesoNascimento.getText());
-		bovinoEdit.setPesoNascimento(pesoNascimento);
-
-		Bovinos bovinoPai = findBovino(comboBovinoPai.getValue());
-		bovinoEdit.setIdBovino_pai(bovinoPai);
-
-		Bovinos bovinoMae = findBovino(comboBovinoMae.getValue());
-		bovinoEdit.setIdBovino_mae(bovinoMae);
-
-		bovinoEdit.setIdEmpresaPessoas(user.getIdEmpresas_Pessoa());
-
-		daoB.beginTransaction().update(bovinoEdit).commitTransaction().closeAll();
-
-		Stage window = (Stage) btnCancelar.getScene().getWindow();
-		window.close();
-
-		return true;
 	}
 
 	@FXML

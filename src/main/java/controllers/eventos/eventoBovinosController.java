@@ -33,7 +33,16 @@ public class eventoBovinosController {
 	private ComboBox<String> comboRebanhos;
 
 	private cadastroEventoSaudeController cadastroEventoSaudeController;
-	
+
+	private Rebanhos rebanhoAtual;
+
+	public Rebanhos getRebanhoAtual() {
+		return rebanhoAtual;
+	}
+
+	public void setRebanhoAtual(Rebanhos rebanhoAtual) {
+		this.rebanhoAtual = rebanhoAtual;
+	}
 
 	public void setCadastroEventoSaudeController(cadastroEventoSaudeController cadastroEventoSaudeController) {
 		this.cadastroEventoSaudeController = cadastroEventoSaudeController;
@@ -75,7 +84,10 @@ public class eventoBovinosController {
 		DAOHibernate<Rebanhos> daoRE = new DAOHibernate<Rebanhos>(Rebanhos.class);
 		Rebanhos rebanho = daoRE.getFirst("selectRebanhobyNomeEmpresa", "nome", nomeRebanho, "empresa",
 				user.getIdEmpresas_Pessoa());
+		
 		daoRE.closeAll();
+		setRebanhoAtual(rebanho);
+		
 		System.out.println(rebanho.toString());
 
 		DAOHibernate<Bovinos> daoB = new DAOHibernate<>(Bovinos.class);
@@ -135,7 +147,7 @@ public class eventoBovinosController {
 		int index = tableBovinos.getSelectionModel().getSelectedIndex();
 
 		Bovinos bovino = tableBovinos.getItems().get(index);
-
+		bovino.setIdRebanho(rebanhoAtual);
 		if (!bovino.equals(null)) {
 			return bovino;
 		} else {
@@ -147,7 +159,6 @@ public class eventoBovinosController {
 	public void fechar() {
 		EventosSaudeBovinos evento = new EventosSaudeBovinos();
 		evento.setIdBovino(getBovino());
-		
 		cadastroEventoSaudeController.setEventoBov(evento);
 		
 		Stage window = (Stage) btnFechar.getScene().getWindow();

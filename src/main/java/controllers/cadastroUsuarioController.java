@@ -42,6 +42,8 @@ public class cadastroUsuarioController {
 
 	private Usuarios userEdit;
 
+	private Boolean editMode;
+
 	public Usuarios getUserEdit() {
 		return userEdit;
 	}
@@ -60,36 +62,65 @@ public class cadastroUsuarioController {
 
 	public void setEdit(boolean EditMode) {
 		if (EditMode) {
-			btnAtualizar.setVisible(true);
-			btnSalvar.setDisable(true);
-
+			this.editMode = true;
 		} else {
-			btnAtualizar.setVisible(false);
-			btnSalvar.setDisable(false);
+			this.editMode = false;
 		}
 	}
 
 	@FXML
 	public void salvar() {
 
-		String nome = txtNome.getText();
-		String usuario = txtUsuario.getText();
-		String senha = passSenha.getText();
-		String email = txtEmail.getText();
-		boolean usuarioMestre = false;
-		Empresas_Pessoas empresa = user.getIdEmpresas_Pessoa();
+		if (editMode) {
 
-		DAOHibernate<Usuarios> daoUser = new DAOHibernate<>(Usuarios.class);
+			userEdit = this.getUserEdit();
 
-		if (checkboxMestre.isSelected()) {
-			usuarioMestre = true;
+			DAOHibernate<Usuarios> daoUser = new DAOHibernate<>(Usuarios.class);
+
+			Usuarios editedUser = daoUser.getAllById(userEdit.getIdUsuario());
+
+			String nome = txtNome.getText();
+			editedUser.setNome(nome);
+			String usuario = txtUsuario.getText();
+			editedUser.setUsuario(usuario);
+			String senha = passSenha.getText();
+			editedUser.setSenha(senha);
+			String email = txtEmail.getText();
+			editedUser.setEmail(email);
+			boolean usuarioMestre = false;
+			if (checkboxMestre.isSelected()) {
+				usuarioMestre = true;
+
+			}
+			editedUser.setUsuarioMestre(usuarioMestre);
+
+			daoUser.beginTransaction().update(editedUser).commitTransaction().closeAll();
+
+			Stage window = (Stage) btnCancelar.getScene().getWindow();
+			window.close();
+
+		} else {
+
+			String nome = txtNome.getText();
+			String usuario = txtUsuario.getText();
+			String senha = passSenha.getText();
+			String email = txtEmail.getText();
+			boolean usuarioMestre = false;
+			Empresas_Pessoas empresa = user.getIdEmpresas_Pessoa();
+
+			DAOHibernate<Usuarios> daoUser = new DAOHibernate<>(Usuarios.class);
+
+			if (checkboxMestre.isSelected()) {
+				usuarioMestre = true;
+			}
+			Usuarios user = new Usuarios(nome, email, usuario, senha, usuarioMestre, empresa);
+
+			daoUser.beginTransaction().save(user).commitTransaction().closeAll();
+
+			Notifications.create().title("Alerta").text("Usuario criado com sucesso! " + "\n" + "Nome de usuario = "
+					+ user.getUsuario() + "\n" + "Senha = " + user.getSenha()).showConfirm();
 		}
-		Usuarios user = new Usuarios(nome, email, usuario, senha, usuarioMestre, empresa);
 
-		daoUser.beginTransaction().save(user).commitTransaction().closeAll();
-
-		Notifications.create().title("Alerta").text("Usuario criado com sucesso! " + "\n" + "Nome de usuario = "
-				+ user.getUsuario() + "\n" + "Senha = " + user.getSenha()).showConfirm();
 	}
 
 	public void populateFields(Usuarios user) {
@@ -101,38 +132,6 @@ public class cadastroUsuarioController {
 		if (user.isUsuarioMestre()) {
 			checkboxMestre.setSelected(true);
 		}
-	}
-
-	@FXML
-	public Boolean atualizar() {
-
-		userEdit = this.getUserEdit();
-
-		DAOHibernate<Usuarios> daoUser = new DAOHibernate<>(Usuarios.class);
-
-		Usuarios editedUser = daoUser.getAllById(userEdit.getIdUsuario());
-
-		String nome = txtNome.getText();
-		editedUser.setNome(nome);
-		String usuario = txtUsuario.getText();
-		editedUser.setUsuario(usuario);
-		String senha = passSenha.getText();
-		editedUser.setSenha(senha);
-		String email = txtEmail.getText();
-		editedUser.setEmail(email);
-		boolean usuarioMestre = false;
-		if (checkboxMestre.isSelected()) {
-			usuarioMestre = true;
-
-		}
-		editedUser.setUsuarioMestre(usuarioMestre);
-
-		daoUser.beginTransaction().update(editedUser).commitTransaction().closeAll();
-
-		Stage window = (Stage) btnCancelar.getScene().getWindow();
-		window.close();
-
-		return true;
 	}
 
 	@FXML

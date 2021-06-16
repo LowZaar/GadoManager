@@ -62,8 +62,9 @@ public class loginController {
 
 		String senha = passwordLogin.getText();
 
-		Usuarios query = dao.getFirst("loginCheck", "usuario", usuario, "senha", senha);
 
+		Usuarios query = dao.getFirst("loginCheck", "usuario", usuario, "senha", senha);
+		
 		if (query == null) {
 			Notifications.create().title("Alerta de Login").text("Usuario ou senha incorreto").showWarning();
 
@@ -74,18 +75,18 @@ public class loginController {
 			System.out.println("logged in");
 
 			FXMLLoader loader = new FXMLLoader(fxmlMainMenu);
-
+			
 			Parent mainMenuP = loader.load();
-
 			
 			Scene mainMenuScene = new Scene(mainMenuP);
 
 			Stage mainMenu = new Stage();
-			mainMenu.getIcons().add(new Image(getClass().getResourceAsStream("/taskIcon/taskIcon.png")));
+			mainMenu.getIcons().add(new Image(getClass().getResourceAsStream("/images/taskIcon.png")));
 
 			mainMenu.setScene(mainMenuScene);
 			mainMenu.setTitle("Menu Principal");
 			Stage window = (Stage) btnLogin.getScene().getWindow();
+			
 			window.close();
 			mainMenu.show();
 

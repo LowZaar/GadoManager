@@ -69,7 +69,7 @@ public class consultaController {
 	}
 
 	public void setPerspectiveList(ObservableList<Object> perspectiveList) {
-		this.perspectiveList = perspectiveList;	
+		this.perspectiveList = perspectiveList;
 	}
 
 	public Usuarios getUser() {
@@ -177,6 +177,8 @@ public class consultaController {
 		setCurrentPerspective("Bovinos");
 		menuConsulta.setText(currentPerspective);
 
+		btnEditar.setDisable(false);
+
 		setPerspectiveList(getBovinos());
 		consultarBovino();
 	}
@@ -215,7 +217,7 @@ public class consultaController {
 			if (userMestre) {
 				resultado = "Sim";
 			} else {
-				resultado = "Não";
+				resultado = "Nï¿½o";
 			}
 			return new ReadOnlyStringWrapper(resultado);
 		});
@@ -239,6 +241,8 @@ public class consultaController {
 		setCurrentPerspective("Usuarios");
 
 		menuConsulta.setText(currentPerspective);
+
+		btnEditar.setDisable(false);
 
 		setPerspectiveList(getUsuarios());
 		consultarUsuarios();
@@ -284,6 +288,8 @@ public class consultaController {
 		setCurrentPerspective("Veterinarios");
 		menuConsulta.setText(currentPerspective);
 
+		btnEditar.setDisable(true);
+
 		setPerspectiveList(getVeterinarios());
 		consultarVeterinarios();
 	}
@@ -310,7 +316,10 @@ public class consultaController {
 			filtroStage.showAndWait();
 
 			if (getPerspectiveList().isEmpty()) {
-				getBovinos();
+				setPerspectiveList(getBovinos());
+				consultarBovino();
+			} else {
+				consultarBovino();
 			}
 		}
 		if (perspectiva == "Usuarios") {
@@ -324,7 +333,12 @@ public class consultaController {
 			filtroStage.initModality(Modality.APPLICATION_MODAL);
 			filtroStage.setScene(filtroScene);
 			filtroStage.showAndWait();
-			consultarUsuarios();
+			if (getPerspectiveList().isEmpty()) {
+				setPerspectiveList(getUsuarios());
+				consultarUsuarios();
+			} else {
+				consultarUsuarios();
+			}
 		}
 		if (perspectiva == "Veterinarios") {
 			fxmlFiltro = getClass().getResource("/fxml/FiltroDeVeterinario.fxml");
@@ -336,9 +350,11 @@ public class consultaController {
 			filtroStage.initModality(Modality.APPLICATION_MODAL);
 			filtroStage.setScene(filtroScene);
 			filtroStage.showAndWait();
-			
+			consultarVeterinarios();
 			if (getPerspectiveList().isEmpty()) {
+				System.out.println("erro filtro");
 				setPerspectiveList(getVeterinarios());
+				consultarVeterinarios();
 			}
 		}
 	}
@@ -370,12 +386,8 @@ public class consultaController {
 			editStage.initModality(Modality.APPLICATION_MODAL);
 			editStage.setScene(editScene);
 			editStage.showAndWait();
-
-			Boolean bovinoEditted = cadastroBovinoController.atualizar();
-			if (bovinoEditted) {
-				setPerspectiveList(getBovinos());
-				consultarBovino();
-			}
+			setPerspectiveList(getBovinos());
+			consultarBovino();
 		} else if (perspectiva == "Usuarios") {
 			Usuarios usuario = (Usuarios) tableConsulta.getItems().get(index);
 
@@ -391,12 +403,9 @@ public class consultaController {
 			editStage.initModality(Modality.APPLICATION_MODAL);
 			editStage.setScene(editScene);
 			editStage.showAndWait();
+			setPerspectiveList(getUsuarios());
+			consultarUsuarios();
 
-			boolean userEdit = cadastroUsuarioController.atualizar();
-			if (userEdit) {
-				setPerspectiveList(getUsuarios());
-				consultarUsuarios();
-			}
 		} else if (perspectiva == "Veterinarios") {
 			Veterinario vet = (Veterinario) tableConsulta.getItems().get(index);
 
@@ -406,15 +415,12 @@ public class consultaController {
 			Scene editScene = new Scene(edtitP);
 			cadastroVeterinarioController cadastroVeterinarioController = loader.getController();
 			cadastroVeterinarioController.populateFields(vet);
+			cadastroVeterinarioController.setEdit(true);
 			editStage.initModality(Modality.APPLICATION_MODAL);
 			editStage.setScene(editScene);
 			editStage.showAndWait();
-
-			boolean vetEdit = cadastroVeterinarioController.atualizar();
-			if (vetEdit) {
-				setPerspectiveList(getVeterinarios());
-				consultarVeterinarios();
-			}
+			setPerspectiveList(getVeterinarios());
+			consultarVeterinarios();
 
 		}
 	}
@@ -446,7 +452,6 @@ public class consultaController {
 
 			btnExcluir.setDisable(true);
 
-			
 			// Excluir veterinarios??
 //			Veterinario vet = (Veterinario) tableConsulta.getItems().get(index);
 //			DAOHibernate<Veterinario> daoVet = new DAOHibernate<Veterinario>(Veterinario.class);

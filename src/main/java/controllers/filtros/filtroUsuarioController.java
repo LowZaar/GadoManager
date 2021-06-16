@@ -102,8 +102,6 @@ public class filtroUsuarioController {
 		}
 		
 		consultaController.setPerspectiveList(result);
-		
-		
 		Stage window = (Stage) btnFiltrar.getScene().getWindow();
 		window.close();
 		

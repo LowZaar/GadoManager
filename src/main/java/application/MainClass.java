@@ -20,7 +20,7 @@ public class MainClass extends Application {
 		GridPane loginGrid = FXMLLoader.load(fxmlFile);
 	
 		Scene mainScene = new Scene(loginGrid);
-		Image tskImg = new Image(getClass().getResourceAsStream("/taskIcon/taskIcon.png"));
+		Image tskImg = new Image(getClass().getResourceAsStream("/images/taskIcon.png"));
 		primaryStage.getIcons().add(tskImg);
 		
 		primaryStage.setResizable(false);
@@ -33,4 +33,5 @@ public class MainClass extends Application {
 	public static void main(String[] args) {
 		launch(args);
 	}
+	
 }
