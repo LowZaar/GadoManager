@@ -207,10 +207,5 @@
             <Insets left="135.0" top="100.0" />
          </GridPane.margin>
       </Button>
-      <Button fx:id="btnAtualizar" mnemonicParsing="false" onAction="#atualizar" text="Atualizar" GridPane.rowIndex="3">
-         <GridPane.margin>
-            <Insets left="10.0" top="100.0" />
-         </GridPane.margin>
-      </Button>
    </children>
 </GridPane>
