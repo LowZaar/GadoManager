@@ -181,11 +181,18 @@ public class filtroBovinoController {
 				Date dataMorte = queryResult.getDate("dataMorte");
 				bovino.setDataMorte(dataMorte);
 
-				Bovinos bovinoPai = (Bovinos) queryResult.getObject("idBovino_pai");
-				bovino.setIdBovino_pai(bovinoPai);
+				Long bovinoPai = queryResult.getLong("idBovino_pai");
+				
+				Long bovinoMae = queryResult.getLong("idBovino_mae");
 
-				Bovinos bovinoMae = (Bovinos) queryResult.getObject("idBovino_mae");
-				bovino.setIdBovino_pai(bovinoMae);
+				DAOHibernate<Bovinos> daoB = new DAOHibernate<>(Bovinos.class);
+				
+				Bovinos bovinoPaiObj = daoB.getAllById(bovinoPai);
+				Bovinos bovinoMaeObj = daoB.getAllById(bovinoMae);
+				
+				
+				bovino.setIdBovino_pai(bovinoPaiObj);
+				bovino.setIdBovino_mae(bovinoMaeObj);
 
 				result.add(bovino);
 			}
@@ -203,7 +210,8 @@ public class filtroBovinoController {
 
 	@FXML
 	public void cancelar() {
-
+		
+		consultaController.setPerspectiveList(null);
 		Stage window = (Stage) btnCancelar.getScene().getWindow();
 		window.close();
 	}

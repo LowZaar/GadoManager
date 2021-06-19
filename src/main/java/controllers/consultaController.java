@@ -22,6 +22,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SplitMenuButton;
 import javafx.scene.control.TableColumn;
@@ -88,7 +89,12 @@ public class consultaController {
 	public void setCurrentPerspective(String currentPerspective) {
 		this.currentPerspective = currentPerspective;
 	}
-
+	@FXML
+	public void initialize() {
+		tableConsulta.setPlaceholder(new Label("Escolha uma opção de consulta"));
+	}
+	
+	
 	public void consultarBovino() {
 
 		tableConsulta.getColumns().clear();
@@ -133,26 +139,22 @@ public class consultaController {
 		TableColumn<Object, String> bovinoPaiCol = new TableColumn<>("Bovino Pai");
 		bovinoPaiCol.setCellValueFactory(info -> {
 			Bovinos bovinoPai = ((Bovinos) info.getValue()).getIdBovino_pai();
-			String resultado;
 			if (!(bovinoPai == null)) {
-				resultado = bovinoPai.getNome();
+				return new ReadOnlyStringWrapper(bovinoPai.getNome());
 			} else {
-				resultado = "";
+				return new ReadOnlyStringWrapper(" ");
 			}
-			return new ReadOnlyStringWrapper(resultado);
 		});
 		tableConsulta.getColumns().add(bovinoPaiCol);
 
 		TableColumn<Object, String> bovinoMaeCol = new TableColumn<>("Bovino Mãe");
-		bovinoPaiCol.setCellValueFactory(info -> {
+		bovinoMaeCol.setCellValueFactory(info -> {
 			Bovinos bovinoMae = ((Bovinos) info.getValue()).getIdBovino_mae();
-			String resultado;
 			if (!(bovinoMae == null)) {
-				resultado = bovinoMae.getNome();
+				return new ReadOnlyStringWrapper(bovinoMae.getNome());
 			} else {
-				resultado = "";
+				return new ReadOnlyStringWrapper(" ");
 			}
-			return new ReadOnlyStringWrapper(resultado);
 		});
 		tableConsulta.getColumns().add(bovinoMaeCol);
 
@@ -182,6 +184,7 @@ public class consultaController {
 
 		setPerspectiveList(getBovinos());
 		consultarBovino();
+
 	}
 
 	@FXML
@@ -316,8 +319,10 @@ public class consultaController {
 			filtroStage.setScene(filtroScene);
 			filtroStage.showAndWait();
 
-			if (getPerspectiveList().isEmpty()) {
+			if (getPerspectiveList() == null) {
 				setPerspectiveList(getBovinos());
+				consultarBovino();
+			} else {
 				consultarBovino();
 			}
 		}
@@ -335,6 +340,8 @@ public class consultaController {
 			if (getPerspectiveList().isEmpty()) {
 				setPerspectiveList(getUsuarios());
 				consultarUsuarios();
+			} else {
+				consultarUsuarios();
 			}
 		}
 		if (perspectiva == "Veterinarios") {
@@ -350,6 +357,8 @@ public class consultaController {
 			consultarVeterinarios();
 			if (getPerspectiveList().isEmpty()) {
 				setPerspectiveList(getVeterinarios());
+				consultarVeterinarios();
+			} else {
 				consultarVeterinarios();
 			}
 		}
@@ -434,21 +443,21 @@ public class consultaController {
 		Stage dialogStage = new Stage();
 		dialogStage.initModality(Modality.APPLICATION_MODAL);
 		dialogStage.setScene(dialogScene);
-		
+
 		if (perspectiva == "Bovinos") {
 			Bovinos bovino = (Bovinos) tableConsulta.getItems().get(index);
 			DAOHibernate<Bovinos> daoB = new DAOHibernate<>(Bovinos.class);
 			Bovinos bovinoDel = daoB.getAllById(bovino.getIdBovino());
-			
+
 			confirmExcluirController.setClass(bovinoDel);
 			dialogStage.showAndWait();
 			Boolean excluir = confirmExcluirController.returnDelete();
 			if (excluir) {
 				daoB.beginTransaction().delete(bovinoDel).commitTransaction().closeAll();
 				setPerspectiveList(getBovinos());
-				consultarBovino();				
+				consultarBovino();
 			}
-			
+
 		}
 		if (perspectiva == "Usuarios") {
 			Usuarios user = (Usuarios) tableConsulta.getItems().get(index);
@@ -461,7 +470,7 @@ public class consultaController {
 			if (excluir) {
 				daoUser.beginTransaction().delete(userDel).commitTransaction().closeAll();
 				setPerspectiveList(getUsuarios());
-				consultarUsuarios();				
+				consultarUsuarios();
 			}
 		}
 		if (perspectiva == "Veterinarios") {

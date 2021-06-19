@@ -106,6 +106,7 @@ public class filtroVeterinarioController {
 
 	@FXML
 	public void cancelar() {
+		consultaController.setPerspectiveList(null);
 		Stage window = (Stage) btnFiltrar.getScene().getWindow();
 		window.close();
 	}
