@@ -9,6 +9,7 @@ import org.controlsfx.control.tableview2.TableView2;
 import classes.Bovinos;
 import classes.Usuarios;
 import classes.Veterinario;
+import controllers.filtros.confirmExcluirController;
 import controllers.filtros.filtroBovinoController;
 import controllers.filtros.filtroUsuarioController;
 import controllers.filtros.filtroVeterinarioController;
@@ -318,8 +319,6 @@ public class consultaController {
 			if (getPerspectiveList().isEmpty()) {
 				setPerspectiveList(getBovinos());
 				consultarBovino();
-			} else {
-				consultarBovino();
 			}
 		}
 		if (perspectiva == "Usuarios") {
@@ -336,8 +335,6 @@ public class consultaController {
 			if (getPerspectiveList().isEmpty()) {
 				setPerspectiveList(getUsuarios());
 				consultarUsuarios();
-			} else {
-				consultarUsuarios();
 			}
 		}
 		if (perspectiva == "Veterinarios") {
@@ -352,7 +349,6 @@ public class consultaController {
 			filtroStage.showAndWait();
 			consultarVeterinarios();
 			if (getPerspectiveList().isEmpty()) {
-				System.out.println("erro filtro");
 				setPerspectiveList(getVeterinarios());
 				consultarVeterinarios();
 			}
@@ -426,27 +422,47 @@ public class consultaController {
 	}
 
 	@FXML
-	public void excluir() {
+	public void excluir() throws Exception {
 		int index = tableConsulta.getSelectionModel().getSelectedIndex();
 		String perspectiva = getCurrentPerspective();
 
+		URL fxmldialog = getClass().getResource("/fxml/ExcluirDialog.fxml");
+		FXMLLoader loader = new FXMLLoader(fxmldialog);
+		Parent dialog = loader.load();
+		Scene dialogScene = new Scene(dialog);
+		confirmExcluirController confirmExcluirController = loader.getController();
+		Stage dialogStage = new Stage();
+		dialogStage.initModality(Modality.APPLICATION_MODAL);
+		dialogStage.setScene(dialogScene);
+		
 		if (perspectiva == "Bovinos") {
 			Bovinos bovino = (Bovinos) tableConsulta.getItems().get(index);
 			DAOHibernate<Bovinos> daoB = new DAOHibernate<>(Bovinos.class);
 			Bovinos bovinoDel = daoB.getAllById(bovino.getIdBovino());
-			daoB.beginTransaction().delete(bovinoDel).commitTransaction().closeAll();
-
-			setPerspectiveList(getBovinos());
-			consultarBovino();
+			
+			confirmExcluirController.setClass(bovinoDel);
+			dialogStage.showAndWait();
+			Boolean excluir = confirmExcluirController.returnDelete();
+			if (excluir) {
+				daoB.beginTransaction().delete(bovinoDel).commitTransaction().closeAll();
+				setPerspectiveList(getBovinos());
+				consultarBovino();				
+			}
+			
 		}
 		if (perspectiva == "Usuarios") {
 			Usuarios user = (Usuarios) tableConsulta.getItems().get(index);
 			DAOHibernate<Usuarios> daoUser = new DAOHibernate<>(Usuarios.class);
 			Usuarios userDel = daoUser.getAllById(user.getIdUsuario());
-			daoUser.beginTransaction().delete(userDel).commitTransaction().closeAll();
 
-			setPerspectiveList(getUsuarios());
-			consultarUsuarios();
+			confirmExcluirController.setClass(userDel);
+			dialogStage.showAndWait();
+			Boolean excluir = confirmExcluirController.returnDelete();
+			if (excluir) {
+				daoUser.beginTransaction().delete(userDel).commitTransaction().closeAll();
+				setPerspectiveList(getUsuarios());
+				consultarUsuarios();				
+			}
 		}
 		if (perspectiva == "Veterinarios") {
 

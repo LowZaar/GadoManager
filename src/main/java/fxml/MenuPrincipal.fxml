@@ -65,7 +65,7 @@
       </MenuBar>
       <ImageView fitHeight="250.0" fitWidth="350.0" opacity="0.4" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2147483647" GridPane.rowIndex="1" GridPane.rowSpan="2147483647">
          <image>
-            <Image url="@gadoimage.png" />
+            <Image url="@../images/gadoimage.png" />
          </image>
          <effect>
             <Glow level="1.0">
