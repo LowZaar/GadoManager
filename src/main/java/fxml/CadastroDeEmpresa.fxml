@@ -195,7 +195,7 @@
             <Insets />
          </opaqueInsets>
       </Label>
-      <ComboBox fx:id="comboEstado" prefWidth="150.0" style="-fx-border-color: #000;" GridPane.columnIndex="2" GridPane.rowIndex="3">
+      <ComboBox fx:id="comboEstado" onAction="#populateCidade" prefWidth="150.0" style="-fx-border-color: #000;" GridPane.columnIndex="2" GridPane.rowIndex="3">
          <GridPane.margin>
             <Insets bottom="150.0" left="50.0" top="50.0" />
          </GridPane.margin>
@@ -228,7 +228,7 @@
             <Insets left="50.0" right="50.0" />
          </GridPane.margin>
       </TextField>
-      <ComboBox fx:id="comboCidade" onAction="#populateCidade" onMouseClicked="#populateCidade" prefWidth="150.0" style="-fx-border-color: #000;" GridPane.columnIndex="2" GridPane.rowIndex="3">
+      <ComboBox fx:id="comboCidade" prefWidth="150.0" style="-fx-border-color: #000;" GridPane.columnIndex="2" GridPane.rowIndex="3">
          <GridPane.margin>
             <Insets left="50.0" right="50.0" />
          </GridPane.margin>

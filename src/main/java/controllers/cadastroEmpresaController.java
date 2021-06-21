@@ -257,6 +257,7 @@ public class cadastroEmpresaController {
 		return list;
 	}
 
+	
 	public void populateCidade() {
 		comboCidade.getItems().clear();
 		comboCidade.getItems().add("Selecione...");
@@ -265,10 +266,10 @@ public class cadastroEmpresaController {
 
 		DAOHibernate<Cidades> daoCidadeEstado = new DAOHibernate<>();
 
-		Long idEstado = (long) comboEstado.getItems().indexOf(comboEstado.getValue());
-
+		Long idEstado = Long.valueOf(comboEstado.getSelectionModel().getSelectedIndex());
+		
 		System.out.println(idEstado);
-
+		
 		List<Cidades> list = daoCidadeEstado.getAllByNamedQuery("selectCidadebyEstado", "idEstado", idEstado);
 		for (Cidades cidades : list) {
 
