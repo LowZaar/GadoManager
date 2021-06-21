@@ -1,9 +1,30 @@
 package controllers;
 
+import java.awt.Desktop;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.net.URL;
+import java.sql.Timestamp;
+import java.time.Duration;
+import java.time.Instant;
+import java.util.Date;
+import java.util.List;
 
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.CreationHelper;
+import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.IndexedColors;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.controlsfx.control.Notifications;
 
+import classes.BCS;
+import classes.Bovinos;
+import classes.Parametros;
+import classes.Pesagens;
 import classes.Usuarios;
 import controllers.eventos.cadastroEventoSaudeController;
 import javafx.fxml.FXMLLoader;
@@ -11,6 +32,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import utils.DAOHibernate;
 
 public class mainMenuController {
 
@@ -39,7 +61,7 @@ public class mainMenuController {
 		cadastroBovinoController.setUser(userLogin);
 		cadastroBovinoController.setEdit(false);
 		cadastroBovinoController.populateCombos();
-		cadastroBovino.getIcons().add(new Image(getClass().getResourceAsStream("/taskIcon/taskIcon.png")));
+		cadastroBovino.getIcons().add(new Image(getClass().getResourceAsStream("/images/taskIcon.png")));
 		cadastroBovino.show();
 
 	}
@@ -56,7 +78,7 @@ public class mainMenuController {
 		Scene racaScene = new Scene(racaP);
 
 		cadastroRaca.setScene(racaScene);
-		cadastroRaca.getIcons().add(new Image(getClass().getResourceAsStream("/taskIcon/taskIcon.png")));
+		cadastroRaca.getIcons().add(new Image(getClass().getResourceAsStream("/images/taskIcon.png")));
 		cadastroRaca.show();
 
 	}
@@ -76,7 +98,7 @@ public class mainMenuController {
 		cadastroRebanhoController rebanhoController = loader.getController();
 		rebanhoController.setUser(userLogin);
 
-		cadastroRebanho.getIcons().add(new Image(getClass().getResourceAsStream("/taskIcon/taskIcon.png")));
+		cadastroRebanho.getIcons().add(new Image(getClass().getResourceAsStream("/images/taskIcon.png")));
 		cadastroRebanho.show();
 
 	}
@@ -96,7 +118,7 @@ public class mainMenuController {
 		cadastroBCSController cadastroBCSController = loader.getController();
 		cadastroBCSController.setUser(userLogin);
 		cadastroBCSController.populateCombo();
-		cadastroBCS.getIcons().add(new Image(getClass().getResourceAsStream("/taskIcon/taskIcon.png")));
+		cadastroBCS.getIcons().add(new Image(getClass().getResourceAsStream("/images/taskIcon.png")));
 		cadastroBCS.show();
 
 	}
@@ -116,29 +138,29 @@ public class mainMenuController {
 		cadastroPesagemController cadastroPesagemController = loader.getController();
 		cadastroPesagemController.setUser(userLogin);
 		cadastroPesagemController.populateCombo();
-		cadastroPesagem.getIcons().add(new Image(getClass().getResourceAsStream("/taskIcon/taskIcon.png")));
+		cadastroPesagem.getIcons().add(new Image(getClass().getResourceAsStream("/images/taskIcon.png")));
 		cadastroPesagem.show();
 
 	}
 
 	public void abrirEventoSaude() throws Exception {
 		URL fxmlEventoSaude = getClass().getResource("/fxml/CadastroEventoSaude.fxml");
-		
+
 		FXMLLoader loader = new FXMLLoader(fxmlEventoSaude);
-		
+
 		Parent eventoSaude = loader.load();
-		
+
 		Stage cadastroEventoSaude = new Stage();
 		Scene medicacaoScene = new Scene(eventoSaude);
-		
+
 		cadastroEventoSaude.setScene(medicacaoScene);
 		cadastroEventoSaudeController cadastroEventoSaudeController = loader.getController();
 		cadastroEventoSaudeController.setUser(userLogin);
 		cadastroEventoSaudeController.populateCombos();
-		cadastroEventoSaude.getIcons().add(new Image(getClass().getResourceAsStream("/taskIcon/taskIcon.png")));
+		cadastroEventoSaude.getIcons().add(new Image(getClass().getResourceAsStream("/images/taskIcon.png")));
 		cadastroEventoSaude.show();
 	}
-	
+
 	public void abrirMedicacao() throws Exception {
 
 		URL fxmlMedicacao = getClass().getResource("/fxml/Medicamento.fxml");
@@ -151,7 +173,7 @@ public class mainMenuController {
 		Scene medicacaoScene = new Scene(medicacaoP);
 
 		cadastroMedicacao.setScene(medicacaoScene);
-		cadastroMedicacao.getIcons().add(new Image(getClass().getResourceAsStream("/taskIcon/taskIcon.png")));
+		cadastroMedicacao.getIcons().add(new Image(getClass().getResourceAsStream("/images/taskIcon.png")));
 		cadastroMedicacao.show();
 
 	}
@@ -168,7 +190,7 @@ public class mainMenuController {
 		Scene vacinaScene = new Scene(vacinaP);
 
 		cadastroVacina.setScene(vacinaScene);
-		cadastroVacina.getIcons().add(new Image(getClass().getResourceAsStream("/taskIcon/taskIcon.png")));
+		cadastroVacina.getIcons().add(new Image(getClass().getResourceAsStream("/images/taskIcon.png")));
 		cadastroVacina.show();
 
 	}
@@ -185,7 +207,7 @@ public class mainMenuController {
 		Scene racaoScene = new Scene(racaoP);
 
 		cadastroRacao.setScene(racaoScene);
-		cadastroRacao.getIcons().add(new Image(getClass().getResourceAsStream("/taskIcon/taskIcon.png")));
+		cadastroRacao.getIcons().add(new Image(getClass().getResourceAsStream("/images/taskIcon.png")));
 		cadastroRacao.show();
 
 	}
@@ -205,7 +227,7 @@ public class mainMenuController {
 		cadastroAlimentacaoController cadastroAlimentacaoController = loader.getController();
 		cadastroAlimentacaoController.setUser(userLogin);
 		cadastroAlimentacaoController.populateCombos();
-		cadastroAlimentacao.getIcons().add(new Image(getClass().getResourceAsStream("/taskIcon/taskIcon.png")));
+		cadastroAlimentacao.getIcons().add(new Image(getClass().getResourceAsStream("/images/taskIcon.png")));
 		cadastroAlimentacao.show();
 
 	}
@@ -227,9 +249,9 @@ public class mainMenuController {
 			cadastroUsuarioController.setUser(userLogin);
 			cadastroUsuarioController.setEdit(false);
 			cadastroUsuario.setScene(usuarioScene);
-			cadastroUsuario.getIcons().add(new Image(getClass().getResourceAsStream("/taskIcon/taskIcon.png")));
+			cadastroUsuario.getIcons().add(new Image(getClass().getResourceAsStream("/images/taskIcon.png")));
 			cadastroUsuario.show();
-			
+
 		} else {
 			Notifications.create().title("Alerta").text(userLogin.getUsuario() + " não é um Usuario Mestre")
 					.showWarning();
@@ -250,7 +272,7 @@ public class mainMenuController {
 		cadastroVeterinarioController cadastroVeterinarioController = loader.getController();
 		cadastroVeterinarioController.setEdit(false);
 		cadastroVeterinario.setScene(veterinarioScene);
-		cadastroVeterinario.getIcons().add(new Image(getClass().getResourceAsStream("/taskIcon/taskIcon.png")));
+		cadastroVeterinario.getIcons().add(new Image(getClass().getResourceAsStream("/images/taskIcon.png")));
 		cadastroVeterinario.show();
 
 	}
@@ -271,7 +293,7 @@ public class mainMenuController {
 			cadastroParamsController cadastroParamsController = loader.getController();
 			cadastroParamsController.setUser(userLogin);
 			cadastroParamsController.populateParams();
-			paramsStage.getIcons().add(new Image(getClass().getResourceAsStream("/taskIcon/taskIcon.png")));
+			paramsStage.getIcons().add(new Image(getClass().getResourceAsStream("/images/taskIcon.png")));
 			paramsStage.show();
 		} else {
 
@@ -279,24 +301,171 @@ public class mainMenuController {
 					.showWarning();
 		}
 	}
-	
+
 	public void abrirConsultas() throws Exception {
-		
+
 		System.out.println("consultas");
 		System.out.println(userLogin.toString());
 		URL fxmlConsultas = getClass().getResource("/fxml/Consulta.fxml");
-		
+
 		FXMLLoader loader = new FXMLLoader(fxmlConsultas);
-		
+
 		Parent consultasP = loader.load();
-		
+
 		Stage consultaStage = new Stage();
 		Scene consultaScene = new Scene(consultasP);
-		
+
 		consultaController consultaController = loader.getController();
 		consultaController.setUser(userLogin);
 		consultaStage.setScene(consultaScene);
-		consultaStage.getIcons().add(new Image(getClass().getResourceAsStream("/taskIcon/taskIcon.png")));
+		consultaStage.getIcons().add(new Image(getClass().getResourceAsStream("/images/taskIcon.png")));
 		consultaStage.show();
+	}
+
+	public void abrirRelatorioBovinos() {
+
+		System.out.println("relatorio");
+
+		DAOHibernate<Parametros> daoParams = new DAOHibernate<>(Parametros.class);
+
+		Parametros params = daoParams.getFirst("selectParamsbyEmpresa", "empresa", userLogin.getIdEmpresas_Pessoa());
+
+		File directory = new File(System.getProperty("user.home") + "/Desktop/GadoManager/");
+		directory.mkdirs();
+		if (directory.exists()) {
+
+			Timestamp inst = Timestamp.from(Instant.now());
+			String timeStamp = String.valueOf(inst.toLocalDateTime()).replace(" ", ".").replace(":", "_");
+
+			File file = new File(
+					System.getProperty("user.home") + "/Desktop/GadoManager/RelatorioBovino_" + timeStamp + ".xlsx");
+
+			System.out.println(file.getAbsolutePath());
+			try {
+
+				Workbook wb = new HSSFWorkbook();
+
+				CreationHelper createHelper = wb.getCreationHelper();
+
+				Sheet sheet = wb.createSheet("Bovinos");
+
+				Font headfont = wb.createFont();
+				headfont.setBold(true);
+				headfont.setFontHeightInPoints((short) 14);
+				headfont.setColor(IndexedColors.BLUE.getIndex());
+
+				CellStyle headStyle = wb.createCellStyle();
+				headStyle.setFont(headfont);
+
+				Row headRow = sheet.createRow(0);
+
+				String[] headCols = { "Brinco", "Associação", "Nome", "Peso Atual", "Ultima Pesagem", "Sexo",
+						"Nome Pai", "Nome Mãe","BCS", "Avisos" };
+
+				for (int i = 0; i < headCols.length; i++) {
+					Cell headcell = headRow.createCell(i);
+					headcell.setCellValue(headCols[i]);
+					headcell.setCellStyle(headStyle);
+					sheet.autoSizeColumn(i);
+				}
+
+				int rowNum = 1;
+
+				DAOHibernate<Bovinos> daoB = new DAOHibernate<>(Bovinos.class);
+				List<Bovinos> listB = daoB.getAllByNamedQuery("selectBovinobyEmpresa", "empresa",
+						userLogin.getIdEmpresas_Pessoa());
+				DAOHibernate<Pesagens> daoP = new DAOHibernate<>(Pesagens.class);
+
+				CellStyle dataStyle = wb.createCellStyle();
+				dataStyle.setDataFormat(createHelper.createDataFormat().getFormat("dd/MM/yy"));
+
+				for (Bovinos bovinos : listB) {
+					Pesagens ultimoPeso = daoP.getFirst("selectLastdateBovino", "idBovino", bovinos);
+					Row row = sheet.createRow(rowNum++);
+
+					row.createCell(0).setCellValue(String.valueOf(bovinos.getIdBrinco()));
+
+					row.createCell(1).setCellValue(String.valueOf(bovinos.getIdAssociacao()));
+
+					row.createCell(2).setCellValue(bovinos.getNome());
+
+					if (!(ultimoPeso == null)) {
+						row.createCell(3).setCellValue(ultimoPeso.getPeso());
+						Cell ultimoPesoCell = row.createCell(4);
+						ultimoPesoCell.setCellValue(ultimoPeso.getDataPesagem());
+						ultimoPesoCell.setCellStyle(dataStyle);
+
+					} else {
+						row.createCell(3).setCellValue(bovinos.getPesoNascimento());
+						Cell ultimoPesoCell = row.createCell(4);
+						ultimoPesoCell.setCellValue(bovinos.getDataNascimento());
+						ultimoPesoCell.setCellStyle(dataStyle);
+					}
+
+					if (bovinos.getNome().equals("Roberto")) {
+						row.createCell(5).setCellValue("Roberto O ++ BRABO");
+					} else {
+						row.createCell(5).setCellValue(String.valueOf(bovinos.getSexo()));
+					}
+					if (!(bovinos.getIdBovino_pai() == null)) {
+						row.createCell(6).setCellValue(bovinos.getIdBovino_pai().getNome());
+					} else {
+						row.createCell(6).setCellValue(" ");
+					}
+
+					if (!(bovinos.getIdBovino_mae() == null)) {
+						row.createCell(7).setCellValue(bovinos.getIdBovino_mae().getNome());
+					} else {
+						row.createCell(7).setCellValue(" ");
+					}
+
+					DAOHibernate<BCS> daoBCS = new DAOHibernate<>(BCS.class);
+					BCS bcs = daoBCS.getFirst("selectBCSbyBovino", "bovino", bovinos);
+					if (!(bcs == null)) {
+						row.createCell(8).setCellValue(bcs.getIndiceBCS());
+					}else {
+						row.createCell(8).setCellValue("BCS Necessário");
+					}
+					
+					
+					Instant agora = Instant.now();
+					Instant instParams = agora.minus(Duration.ofDays(params.getAlertaDiasSemPesar()));
+					Date dateParams = Date.from(instParams);
+					if (!(ultimoPeso == null)) {
+						if (ultimoPeso.getDataPesagem().before(dateParams)) {
+							String aviso = "Pesagem Necessária";
+							row.createCell(9).setCellValue(aviso);
+						}
+					} else if (bovinos.getDataNascimento().before(dateParams)) {
+						String aviso = "Pesagem Necessária";
+						row.createCell(9).setCellValue(aviso);
+					} else {
+						row.createCell(9).setCellValue(" ");
+					}
+
+					for (int j = 0; j < headCols.length; j++) {
+						sheet.autoSizeColumn(j);
+					}
+
+				}
+
+				FileOutputStream fileoutput = new FileOutputStream(file);
+
+				wb.write(fileoutput);
+				fileoutput.close();
+
+				wb.close();
+
+				Desktop desktop = null;
+				if (Desktop.isDesktopSupported()) {
+					desktop = Desktop.getDesktop();
+					desktop.open(file);
+				}
+
+			} catch (Exception e) {
+
+				e.printStackTrace();
+			}
+		}
 	}
 }

@@ -46,7 +46,7 @@ public class filtroBovinoController {
 	private Button btnFiltrar;
 
 	private consultaController consultaController;
-	
+
 	private Usuarios user;
 
 	public Usuarios getUser() {
@@ -85,34 +85,28 @@ public class filtroBovinoController {
 	@FXML
 	public void filtrar() throws Exception {
 
-		boolean validSQL = false;
-		String sql = "select nome," + "idAssociacao," + "idBrinco," + "sexo," + "idRebanho," + "idRaca," + "categoria,"
-				+ "dataNascimento, " + "dataMorte from bovinos ";
+		String sql = "SELECT * from bovinos ";
 
+		sql += "WHERE 1=1 ";
 		if (!txtNome.getText().isEmpty()) {
-			validSQL = true;
 			String nome = txtNome.getText();
-			sql += "WHERE bovinos.nome LIKE '%" + nome + "%' AND ";
+			sql += "AND bovinos.nome LIKE '%" + nome + "%' ";
 
 		}
 		if (!txtIDAssociacao.getText().isEmpty()) {
-			validSQL = true;
 			Long associacao = Long.parseLong(txtIDAssociacao.getText());
-			sql += "WHERE bovinos.idAssociacao = " + associacao + " AND ";
+			sql += "AND bovinos.idAssociacao = " + associacao + " ";
 		}
 		if (!txtIdBrinco.getText().isEmpty()) {
-			validSQL = true;
 			Long brinco = Long.parseLong(txtIdBrinco.getText());
-			sql += "WHERE bovinos.idBrinco = " + brinco + " AND ";
+			sql += "AND bovinos.idBrinco = " + brinco + " ";
 		}
 		if (!(comboSexo.getValue() == null)) {
-			validSQL = true;
 			String sexo = comboSexo.getValue();
-			sql += "WHERE bovinos.sexo = '" + sexo + "' AND ";
+			sql += "AND bovinos.sexo = '" + sexo + "' ";
 
 		}
 		if (!(comboRebanho.getValue() == null)) {
-			validSQL = true;
 
 			DAOHibernate<Rebanhos> daoRe = new DAOHibernate<>(Rebanhos.class);
 			Rebanhos rebanhoquery = daoRe.getFirst("selectRebanhobyNomeEmpresa", "nome", comboRebanho.getValue(),
@@ -120,20 +114,16 @@ public class filtroBovinoController {
 			daoRe.closeAll();
 			int rebanhoId = rebanhoquery.getIdRebanho().intValue();
 
-			sql += "WHERE bovinos.idRebanho = " + rebanhoId + " AND ";
+			sql += "AND bovinos.idRebanho = " + rebanhoId + " ";
 		}
 		if (!(comboRaca.getValue() == null)) {
-			validSQL = true;
 
 			DAOHibernate<Racas> daoRa = new DAOHibernate<>(Racas.class);
 			Racas racaQuery = daoRa.getFirst("selectRacasbyNome", "nome", comboRaca.getValue());
 			daoRa.closeAll();
 			int racaId = racaQuery.getIdRaca().intValue();
 
-			sql += "WHERE bovinos.idRaca = " + racaId + " AND ";
-		}
-		if (validSQL) {
-			sql += "1=1";
+			sql += "AND bovinos.idRaca = " + racaId + " ";
 		}
 		System.out.println(sql);
 
@@ -178,10 +168,10 @@ public class filtroBovinoController {
 				bovino.setIdRaca(racaNome);
 
 				// resto das infos nao filtradas
-				
+
 				Long idBovino = queryResult.getLong("idBovino");
 				bovino.setIdBovino(idBovino);
-				
+
 				String categoria = queryResult.getString("Categoria");
 				bovino.setCategoria(categoria);
 
@@ -191,27 +181,37 @@ public class filtroBovinoController {
 				Date dataMorte = queryResult.getDate("dataMorte");
 				bovino.setDataMorte(dataMorte);
 
-				Bovinos bovinoPai = (Bovinos) queryResult.getObject("idBovino_pai");
-				bovino.setIdBovino_pai(bovinoPai);
-
-				Bovinos bovinoMae = (Bovinos) queryResult.getObject("idBovino_mae");
-				bovino.setIdBovino_pai(bovinoMae);
+				Long bovinoPai = queryResult.getLong("idBovino_pai");
 				
+				Long bovinoMae = queryResult.getLong("idBovino_mae");
+
+				DAOHibernate<Bovinos> daoB = new DAOHibernate<>(Bovinos.class);
+				
+				Bovinos bovinoPaiObj = daoB.getAllById(bovinoPai);
+				Bovinos bovinoMaeObj = daoB.getAllById(bovinoMae);
+				
+				
+				bovino.setIdBovino_pai(bovinoPaiObj);
+				bovino.setIdBovino_mae(bovinoMaeObj);
+
 				result.add(bovino);
 			}
+
+			Stage window = (Stage) btnFiltrar.getScene().getWindow();
+			window.close();
+			consultaController.setPerspectiveList(result);
+
 		} else {
 			Stage window = (Stage) btnFiltrar.getScene().getWindow();
 			window.close();
 		}
 
-		Stage window = (Stage) btnFiltrar.getScene().getWindow();
-		window.close();
-		consultaController.setPerspectiveList(result);
 	}
 
 	@FXML
 	public void cancelar() {
-
+		
+		consultaController.setPerspectiveList(null);
 		Stage window = (Stage) btnCancelar.getScene().getWindow();
 		window.close();
 	}

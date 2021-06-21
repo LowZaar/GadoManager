@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import utils.DAOHibernate;
+import utils.TextFieldFormatter;
 
 public class cadastroVeterinarioController {
 
@@ -32,6 +33,8 @@ public class cadastroVeterinarioController {
 	@FXML
 	private Button btnAtualizar;
 
+	private Boolean editMode;
+
 	private Veterinario veterinario;
 
 	public Veterinario getVeterinario() {
@@ -44,29 +47,49 @@ public class cadastroVeterinarioController {
 
 	public void setEdit(boolean EditMode) {
 		if (EditMode) {
-			btnAtualizar.setVisible(true);
-			btnSalvar.setDisable(true);
+			this.editMode = true;
 
 		} else {
-			btnAtualizar.setVisible(false);
-			btnSalvar.setDisable(false);
+			this.editMode = false;
 		}
 	}
 
 	@FXML
 	public void salvar() {
 
-		String nome = txtNome.getText();
-		String rg = txtRG.getText();
-		String cpf = txtCPF.getText();
-		String crmv = txtCRMV.getText();
+		if (editMode) {
 
-		DAOHibernate<Veterinario> daoV = new DAOHibernate<>(Veterinario.class);
-		Veterinario vet = new Veterinario(nome, crmv, cpf, rg);
+			DAOHibernate<Veterinario> daoVet = new DAOHibernate<Veterinario>(Veterinario.class);
 
-		daoV.beginTransaction().save(vet).commitTransaction().closeAll();
+			Veterinario vetEdit = daoVet.getAllById(veterinario.getIdVeterinario());
 
-		Notifications.create().title("Alerta").text("Veterinario(a) criado com sucesso!").showConfirm();
+			String nome = txtNome.getText();
+			vetEdit.setNome(nome);
+
+			String rg = txtRG.getText();
+			vetEdit.setRg(rg);
+
+			String cpf = txtCPF.getText();
+			vetEdit.setCpf(cpf);
+
+			String crmv = txtCRMV.getText();
+			vetEdit.setCrmv(crmv);
+
+			daoVet.beginTransaction().update(vetEdit).commitTransaction().closeAll();
+		} else {
+
+			String nome = txtNome.getText();
+			String rg = txtRG.getText();
+			String cpf = txtCPF.getText();
+			String crmv = txtCRMV.getText();
+
+			DAOHibernate<Veterinario> daoV = new DAOHibernate<>(Veterinario.class);
+			Veterinario vet = new Veterinario(nome, crmv, cpf, rg);
+
+			daoV.beginTransaction().save(vet).commitTransaction().closeAll();
+
+			Notifications.create().title("Alerta").text("Veterinario(a) criado com sucesso!").showConfirm();
+		}
 	}
 
 	public void populateFields(Veterinario vet) {
@@ -80,29 +103,6 @@ public class cadastroVeterinarioController {
 
 	}
 
-	@FXML
-	public Boolean atualizar() {
-
-		DAOHibernate<Veterinario> daoVet = new DAOHibernate<Veterinario>(Veterinario.class);
-
-		Veterinario vetEdit = daoVet.getAllById(veterinario.getIdVeterinario());
-
-		String nome = txtNome.getText();
-		vetEdit.setNome(nome);
-
-		String rg = txtRG.getText();
-		vetEdit.setRg(rg);
-
-		String cpf = txtCPF.getText();
-		vetEdit.setCpf(cpf);
-
-		String crmv = txtCRMV.getText();
-		vetEdit.setCrmv(crmv);
-
-		daoVet.beginTransaction().update(vetEdit).commitTransaction().closeAll();
-
-		return true;
-	}
 
 	@FXML
 	public void cancelar() {
@@ -110,4 +110,25 @@ public class cadastroVeterinarioController {
 		Stage window = (Stage) btnCancelar.getScene().getWindow();
 		window.close();
 	}
+
+	@FXML
+	private void formatRG() {
+
+		TextFieldFormatter RGmask = new TextFieldFormatter();
+		RGmask.setMask("###########");
+		RGmask.setCaracteresValidos("0123456789");
+		RGmask.setTf(txtRG);
+		RGmask.formatter();
+	}
+
+	@FXML
+	private void formatCPF() {
+
+		TextFieldFormatter CPFmask = new TextFieldFormatter();
+		CPFmask.setMask("###.###.###-##");
+		CPFmask.setCaracteresValidos("0123456789");
+		CPFmask.setTf(txtCPF);
+		CPFmask.formatter();
+	}
+
 }

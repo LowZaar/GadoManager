@@ -102,8 +102,6 @@ public class filtroUsuarioController {
 		}
 		
 		consultaController.setPerspectiveList(result);
-		
-		
 		Stage window = (Stage) btnFiltrar.getScene().getWindow();
 		window.close();
 		
@@ -111,7 +109,7 @@ public class filtroUsuarioController {
 
 	@FXML
 	void cancelar(ActionEvent event) {
-
+		consultaController.setPerspectiveList(null);
 		Stage window = (Stage) btnFiltrar.getScene().getWindow();
 		window.close();
 	}

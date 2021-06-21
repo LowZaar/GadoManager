@@ -27,7 +27,6 @@
           <Menu mnemonicParsing="false" text="Bovinos">
             <items>
               <MenuItem fx:id="menuBovino" mnemonicParsing="false" onAction="#abrirBovino" text="Bovinos" />
-                  <MenuItem fx:id="menuRacas" mnemonicParsing="false" onAction="#abrirRacas" text="Raças" />
                   <MenuItem fx:id="menuRebanhos" mnemonicParsing="false" onAction="#abrirRebanho" text="Rebanhos" />
                   <MenuItem fx:id="menuBCS" mnemonicParsing="false" onAction="#abrirBCS" text="BCS" />
                   <MenuItem fx:id="menuPesagens" mnemonicParsing="false" onAction="#abrirPesagens" text="Pesagens" />
@@ -35,7 +34,6 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Saude">
             <items>
-              <MenuItem fx:id="menuSaude" mnemonicParsing="false" text="Saude" />
                   <MenuItem fx:id="menuEventoSaude" mnemonicParsing="false" onAction="#abrirEventoSaude" text="Eventos de Saúde" />
                   <MenuItem fx:id="menuMedicacao" mnemonicParsing="false" onAction="#abrirMedicacao" text="Medicação" />
                   <MenuItem fx:id="menuVacinas" mnemonicParsing="false" onAction="#abrirVacina" text="Vacinas" />
@@ -55,6 +53,11 @@
                   <MenuItem fx:id="menuConsultas" mnemonicParsing="false" onAction="#abrirConsultas" text="Abrir Consulta" />
                </items>
             </Menu>
+            <Menu mnemonicParsing="false" text="Relatórios">
+              <items>
+                <MenuItem fx:id="menuRelatorios" mnemonicParsing="false" onAction="#abrirRelatorioBovinos" text="Bovinos" />
+              </items>
+            </Menu>
         </menus>
          <GridPane.margin>
             <Insets bottom="220.0" />
@@ -62,7 +65,7 @@
       </MenuBar>
       <ImageView fitHeight="250.0" fitWidth="350.0" opacity="0.4" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2147483647" GridPane.rowIndex="1" GridPane.rowSpan="2147483647">
          <image>
-            <Image url="@gadoimage.png" />
+            <Image url="@../images/gadoimage.png" />
          </image>
          <effect>
             <Glow level="1.0">

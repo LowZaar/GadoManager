@@ -301,7 +301,7 @@ public class cadastroEmpresaController {
 		} else if (radioTipoJuridica.isSelected()) {
 
 			TextFieldFormatter CNPJmask = new TextFieldFormatter();
-			CNPJmask.setMask("##.###.###.###/####-##");
+			CNPJmask.setMask("##.###.###/####-##");
 			CNPJmask.setCaracteresValidos("0123456789");
 			CNPJmask.setTf(txtCNPJ);
 			CNPJmask.formatter();
@@ -313,7 +313,7 @@ public class cadastroEmpresaController {
 	private void formatPhone() {
 
 		TextFieldFormatter TelefoneMask = new TextFieldFormatter();
-		TelefoneMask.setMask("(##)#####-####");
+		TelefoneMask.setMask("(##)####-####");
 		TelefoneMask.setCaracteresValidos("0123456789");
 		TelefoneMask.setTf(txtTelefone);
 		TelefoneMask.formatter();

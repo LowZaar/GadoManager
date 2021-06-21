@@ -80,7 +80,7 @@
 		SELECT r from Racas r where r.nomeRaca = :nome
 		</query>
 	</named-query>
-	
+
 	<named-query name="selectRacaobyDescricao">
 		<query>
 			SELECT r from Racoes r where r.descricao = :descricao
@@ -108,6 +108,18 @@
 	<named-query name="selectVeterinariobyNome">
 		<query>
 			SELECT vet from Veterinario vet where vet.nome = :nome
+		</query>
+	</named-query>
+
+	<named-query name="selectLastdateBovino">
+		<query>
+			SELECT p from Pesagens p where p.idBovino = :idBovino ORDER BY p.dataPesagem DESC
+		</query>
+	</named-query>
+
+	<named-query name="selectBCSbyBovino">
+		<query>
+		SELECT b from BCS b where b.idBovino =:bovino ORDER BY b.data DESC
 		</query>
 	</named-query>
 
