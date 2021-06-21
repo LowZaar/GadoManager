@@ -202,7 +202,21 @@
             <Insets />
          </opaqueInsets>
       </Label>
+<<<<<<< HEAD
       <TextField fx:id="txtEmail" style="-fx-border-color: #000;" GridPane.columnSpan="2" GridPane.rowIndex="2">
+=======
+      <ComboBox fx:id="comboEstado" onAction="#populateCidade" prefWidth="150.0" style="-fx-border-color: #000;" GridPane.columnIndex="2" GridPane.rowIndex="3">
+         <GridPane.margin>
+            <Insets bottom="150.0" left="50.0" top="50.0" />
+         </GridPane.margin>
+      </ComboBox>
+      <RadioButton fx:id="radioTipoFisica" mnemonicParsing="false" onAction="#pfChecked" selected="true" text="Pessoa Fisica" GridPane.rowIndex="1">
+         <GridPane.margin>
+            <Insets bottom="100.0" left="50.0" />
+         </GridPane.margin>
+      </RadioButton>
+      <RadioButton fx:id="radioTipoJuridica" layoutX="584.0" layoutY="376.0" mnemonicParsing="false" onAction="#pjChecked" text="Pessoa Juridica" GridPane.columnSpan="2" GridPane.rowIndex="1">
+>>>>>>> f89950be85970cdf8b4cdb7698bdfc2dc2515521
          <GridPane.margin>
             <Insets bottom="160.0" left="30.0" right="170.0" top="80.0" />
          </GridPane.margin>
@@ -224,6 +238,7 @@
          <GridPane.margin>
             <Insets left="50.0" top="100.0" />
          </GridPane.margin>
+<<<<<<< HEAD
          <font>
             <Font size="14.0" />
          </font>
@@ -232,6 +247,10 @@
          <opaqueInsets>
             <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
          </opaqueInsets>
+=======
+      </TextField>
+      <ComboBox fx:id="comboCidade" prefWidth="150.0" style="-fx-border-color: #000;" GridPane.columnIndex="2" GridPane.rowIndex="3">
+>>>>>>> f89950be85970cdf8b4cdb7698bdfc2dc2515521
          <GridPane.margin>
             <Insets left="150.0" top="100.0" />
          </GridPane.margin>

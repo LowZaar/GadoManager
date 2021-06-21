@@ -5,6 +5,8 @@ import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 
+import org.controlsfx.control.Notifications;
+
 import classes.Usuarios;
 import classes.Veterinario;
 
@@ -231,7 +233,7 @@ public class cadastroEventoSaudeController {
 			eventoBov.setData(data);
 			DAOHibernate<EventosSaudeBovinos> daoSB = new DAOHibernate<>(EventosSaudeBovinos.class);
 			daoSB.beginTransaction().save(eventoBov).commitTransaction().closeAll();
-			
+			Notifications.create().title("Evento Saúde").text("Evento Bovino cadastrado com sucesso!").showConfirm();
 			
 
 		} else if (evento == "Medicação" && !(eventoMed == null)) {
@@ -239,21 +241,21 @@ public class cadastroEventoSaudeController {
 			eventoMed.setIdEventoSaude(eventosSaude);
 			DAOHibernate<EventosSaudeMedicacao> daoSM = new DAOHibernate<>(EventosSaudeMedicacao.class);
 			daoSM.beginTransaction().save(eventoMed).commitTransaction().closeAll();
-			
+			Notifications.create().title("Evento Saúde").text("Evento Medicação cadastrado com sucesso!").showConfirm();
 
 		} else if (evento == "Vacina" && !(eventoVac == null)) {
 
 			eventoVac.setIdEventoSaude(eventosSaude);
 			DAOHibernate<EventosSaudeVacina> daoSV = new DAOHibernate<>(EventosSaudeVacina.class);
 			daoSV.beginTransaction().save(eventoVac).commitTransaction().closeAll();
-			
+			Notifications.create().title("Evento Saúde").text("Evento Vacinação cadastrado com sucesso!").showConfirm();
 
 		} else {
 
 			eventoOutro.setIdEventoSaude(eventosSaude);
 			DAOHibernate<EventosSaudeOutros> daoOutro = new DAOHibernate<>(EventosSaudeOutros.class);
 			daoOutro.beginTransaction().save(eventoOutro).commitTransaction().closeAll();
-			
+			Notifications.create().title("Evento Saúde").text("Evento Outro cadastrado com sucesso!").showConfirm();
 		}
 		
 		

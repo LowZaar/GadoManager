@@ -181,7 +181,7 @@ public class consultaController {
 		menuConsulta.setText(currentPerspective);
 
 		btnEditar.setDisable(false);
-
+		btnExcluir.setDisable(false);
 		setPerspectiveList(getBovinos());
 		consultarBovino();
 
@@ -241,14 +241,15 @@ public class consultaController {
 	}
 
 	@FXML
-	private void usuarioClick() {
+	public void usuarioClick() {
 
 		setCurrentPerspective("Usuarios");
 
 		menuConsulta.setText(currentPerspective);
 
 		btnEditar.setDisable(false);
-
+		btnExcluir.setDisable(false);
+		
 		setPerspectiveList(getUsuarios());
 		consultarUsuarios();
 	}
@@ -289,12 +290,13 @@ public class consultaController {
 	}
 
 	@FXML
-	private void veterinariosClick() {
+	public void veterinariosClick() {
 		setCurrentPerspective("Veterinarios");
 		menuConsulta.setText(currentPerspective);
 
 		btnEditar.setDisable(true);
-
+		btnExcluir.setDisable(true);
+		
 		setPerspectiveList(getVeterinarios());
 		consultarVeterinarios();
 	}
@@ -477,7 +479,6 @@ public class consultaController {
 		}
 		if (perspectiva == "Veterinarios") {
 
-			btnExcluir.setDisable(true);
 
 			// Excluir veterinarios??
 //			Veterinario vet = (Veterinario) tableConsulta.getItems().get(index);

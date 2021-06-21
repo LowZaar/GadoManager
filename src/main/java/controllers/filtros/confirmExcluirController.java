@@ -29,7 +29,7 @@ public class confirmExcluirController {
 			String texto = "Nome: " + ((Usuarios) classobj).getNome() + "\n";
 			texto += "Usuario: " + ((Usuarios) classobj).getUsuario() + "\n";
 			if (((Usuarios) classobj).isUsuarioMestre()) {
-				texto += "É usuário mestre";
+				texto += "É um Usuário Mestre";
 			}
 			labelClass.setText(texto);			
 		}

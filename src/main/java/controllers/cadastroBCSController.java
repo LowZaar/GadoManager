@@ -5,6 +5,8 @@ import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 
+import org.controlsfx.control.Notifications;
+
 import classes.BCS;
 import classes.Bovinos;
 import classes.Usuarios;
@@ -87,6 +89,12 @@ public class cadastroBCSController {
 		BCS bcsObj = new BCS(bovino, dataBCS, indiceBCS);
 		
 		daoBCS.beginTransaction().save(bcsObj).commitTransaction().closeAll();
+		
+		Notifications.create().title("Alerta").text("Novo BCS adicionado com sucesso!")
+		.showConfirm();
+		
+		txtIndiceBCS.clear();
+		comboBovino.setValue(null);
 		
 	}
 	
