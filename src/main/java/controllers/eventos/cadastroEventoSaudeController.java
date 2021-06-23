@@ -148,7 +148,7 @@ public class cadastroEventoSaudeController {
 			eventoStage.setScene(eventoScene);
 			eventoStage.showAndWait();
 			
-			if (!(this.eventoBov.getIdBovino().equals(null))) {
+			if (!(this.eventoBov.getIdBovino() == null)) {
 				System.out.println(eventoBov.getIdBovino().getNome());
 				labelStatus.setText("Evento Bovino Criado");
 				
