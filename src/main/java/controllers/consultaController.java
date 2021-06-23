@@ -71,7 +71,7 @@ public class consultaController {
 	}
 
 	public void setPerspectiveList(ObservableList<Object> perspectiveList) {
-		this.perspectiveList = perspectiveList;	
+		this.perspectiveList = perspectiveList;
 	}
 
 	public Usuarios getUser() {
@@ -222,7 +222,6 @@ public class consultaController {
 				resultado = "Sim";
 			} else {
 				resultado = "N�o";
-				resultado = "N�o";
 			}
 			return new ReadOnlyStringWrapper(resultado);
 		});
@@ -340,7 +339,6 @@ public class consultaController {
 			filtroStage.initModality(Modality.APPLICATION_MODAL);
 			filtroStage.setScene(filtroScene);
 			filtroStage.showAndWait();
-			consultarUsuarios();
 			if (getPerspectiveList().isEmpty()) {
 				setPerspectiveList(getUsuarios());
 				consultarUsuarios();

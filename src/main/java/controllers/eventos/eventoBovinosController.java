@@ -127,7 +127,7 @@ public class eventoBovinosController {
 		tableBovinos.getColumns().add(bovinoPaiCol);
 
 		TableColumn<Bovinos, String> bovinoMaeCol = new TableColumn<>("Bovino Mãe");
-		bovinoPaiCol.setCellValueFactory(info -> {
+		bovinoMaeCol.setCellValueFactory(info -> {
 			Bovinos bovinoMae = ((Bovinos) info.getValue()).getIdBovino_mae();
 			String resultado;
 			if (!(bovinoMae == null)) {

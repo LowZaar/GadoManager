@@ -15,9 +15,9 @@
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="229.0" minWidth="10.0" prefWidth="229.0" />
   </columnConstraints>
   <rowConstraints>
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="155.0" minHeight="10.0" prefHeight="155.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="298.0" minHeight="10.0" prefHeight="250.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="164.0" minHeight="10.0" prefHeight="102.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
       <Label alignment="TOP_CENTER" text="Parâmetros do Sistema" textAlignment="CENTER" GridPane.columnSpan="2">
@@ -78,18 +78,24 @@
             <Insets bottom="200.0" left="30.0" right="75.0" />
          </GridPane.margin>
       </TextField>
-      <Button fx:id="btnSalvar" alignment="BOTTOM_LEFT" mnemonicParsing="false" onAction="#salvar" text="Salvar" textAlignment="CENTER" GridPane.rowIndex="2">
+      <Button fx:id="btnSalvar" alignment="BOTTOM_LEFT" mnemonicParsing="false" onAction="#salvar" text="Salvar" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2">
          <GridPane.margin>
-            <Insets left="50.0" top="50.0" />
+            <Insets left="32.0" top="12.0" />
          </GridPane.margin>
+         <font>
+            <Font size="14.0" />
+         </font>
       </Button>
       <Button fx:id="btnCancelar" cancelButton="true" mnemonicParsing="false" onAction="#cancelar" text="Cancelar" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2">
          <opaqueInsets>
             <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
          </opaqueInsets>
          <GridPane.margin>
-            <Insets left="75.0" top="50.0" />
+            <Insets left="116.0" top="12.0" />
          </GridPane.margin>
+         <font>
+            <Font size="14.0" />
+         </font>
       </Button>
    </children>
 </GridPane>
