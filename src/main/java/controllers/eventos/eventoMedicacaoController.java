@@ -90,11 +90,27 @@ public class eventoMedicacaoController {
 		if (!txtDiasTratamento.getText().isEmpty()) {
 			eventoMedicacao.setDiasTratamento(Integer.parseInt(txtDiasTratamento.getText()));
 		}
-		eventoMedicacao.setIdMedicamento(getMedicamento());
-		eventoMedicacao.setLote(txtLote.getText());
-		eventoMedicacao.setPosologia(txtPosologia.getText());
-		eventoMedicacao.setTipoAplicacao(txtTipoAplicacao.getText());
-		eventoMedicacao.setObservacoes(txtAObservacoes.getText());
+		if (!txtLote.getText().isEmpty()) {			
+			eventoMedicacao.setLote(txtLote.getText());
+		}
+		try {
+			if (!(getMedicamento() == null)) {			
+				eventoMedicacao.setIdMedicamento(getMedicamento());
+			}
+			
+		} catch (IndexOutOfBoundsException e) {
+			System.out.println(e);
+		}
+		
+		if (!txtPosologia.getText().isEmpty()) {			
+			eventoMedicacao.setPosologia(txtPosologia.getText());
+		}
+		if (!txtTipoAplicacao.getText().isEmpty()) {			
+			eventoMedicacao.setTipoAplicacao(txtTipoAplicacao.getText());
+		}
+		if (!txtAObservacoes.getText().isEmpty()) {			
+			eventoMedicacao.setObservacoes(txtAObservacoes.getText());
+		}
 
 		cadastroEventoSaudeController.setEventoMed(eventoMedicacao);
 		

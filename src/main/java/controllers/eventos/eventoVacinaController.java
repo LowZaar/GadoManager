@@ -81,13 +81,25 @@ public class eventoVacinaController {
 		
 		EventosSaudeVacina eventosSaudeVacina = new EventosSaudeVacina();
 		
-		eventosSaudeVacina.setIdVacina(getVacina());
+		try {
+			Vacina vacina = getVacina();
+			eventosSaudeVacina.setIdVacina(vacina);
+			
+		} catch (IndexOutOfBoundsException e) {
+			System.out.println(e);
+		}
+		
 
 		String lote = txtLote.getText();
-		eventosSaudeVacina.setLote(lote);
+		if (!lote.isEmpty()) {			
+			eventosSaudeVacina.setLote(lote);
+		}
 
 		String observacoes = txtAObservacoes.getText();
-		eventosSaudeVacina.setObservacoes(observacoes);
+		if (!observacoes.isEmpty()) {
+			
+			eventosSaudeVacina.setObservacoes(observacoes);
+		}
 
 		cadastroEventoSaudeController.setEventoVac(eventosSaudeVacina);
 

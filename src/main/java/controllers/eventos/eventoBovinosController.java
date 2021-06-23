@@ -84,10 +84,10 @@ public class eventoBovinosController {
 		DAOHibernate<Rebanhos> daoRE = new DAOHibernate<Rebanhos>(Rebanhos.class);
 		Rebanhos rebanho = daoRE.getFirst("selectRebanhobyNomeEmpresa", "nome", nomeRebanho, "empresa",
 				user.getIdEmpresas_Pessoa());
-		
+
 		daoRE.closeAll();
 		setRebanhoAtual(rebanho);
-		
+
 		System.out.println(rebanho.toString());
 
 		DAOHibernate<Bovinos> daoB = new DAOHibernate<>(Bovinos.class);
@@ -127,7 +127,7 @@ public class eventoBovinosController {
 		tableBovinos.getColumns().add(bovinoPaiCol);
 
 		TableColumn<Bovinos, String> bovinoMaeCol = new TableColumn<>("Bovino Mãe");
-		bovinoPaiCol.setCellValueFactory(info -> {
+		bovinoMaeCol.setCellValueFactory(info -> {
 			Bovinos bovinoMae = ((Bovinos) info.getValue()).getIdBovino_mae();
 			String resultado;
 			if (!(bovinoMae == null)) {
@@ -158,11 +158,19 @@ public class eventoBovinosController {
 	@FXML
 	public void fechar() {
 		EventosSaudeBovinos evento = new EventosSaudeBovinos();
-		evento.setIdBovino(getBovino());
-		cadastroEventoSaudeController.setEventoBov(evento);
-		
+		try {
+			Bovinos bovino = getBovino();
+
+			if (!(bovino == null)) {
+				evento.setIdBovino(bovino);
+				cadastroEventoSaudeController.setEventoBov(evento);
+			}
+		} catch (IndexOutOfBoundsException e) {
+			System.out.println(e);
+		}
+
 		Stage window = (Stage) btnFechar.getScene().getWindow();
 		window.close();
-		
+
 	}
 }

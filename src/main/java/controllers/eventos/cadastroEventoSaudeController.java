@@ -169,7 +169,7 @@ public class cadastroEventoSaudeController {
 			eventoStage.setScene(eventoScene);
 			eventoStage.showAndWait();
 			
-			if (!(this.eventoMed.getIdMedicamento().equals(null))) {
+			if (!(this.eventoMed.getIdMedicamento() == null)) {
 				labelStatus.setText("Evento Medicação Criado");
 			}
 			
@@ -189,7 +189,7 @@ public class cadastroEventoSaudeController {
 			eventoStage.setScene(eventoScene);
 			eventoStage.showAndWait();
 
-			if(!(this.eventoVac.getIdVacina().equals(null))) {
+			if(!(this.eventoVac.getIdVacina() == null)) {
 				labelStatus.setText("Evento Vacina Criado");
 			}
 
@@ -226,7 +226,7 @@ public class cadastroEventoSaudeController {
 		daoEvento.beginTransaction().save(eventosSaude).commitTransaction().closeAll();
 		
 		String evento = getEvento();
-		if (evento == "Bovinos" && !(eventoBov == null)) {
+		if (evento == "Bovinos" && !(eventoBov.getIdBovino() == null)) {
 			
 			eventoBov.setObservacoes(txtObservacoes.getText());
 			eventoBov.setIdEventoSaude(eventosSaude);
@@ -236,14 +236,14 @@ public class cadastroEventoSaudeController {
 			Notifications.create().title("Evento Saúde").text("Evento Bovino cadastrado com sucesso!").showConfirm();
 			
 
-		} else if (evento == "Medicação" && !(eventoMed == null)) {
+		} else if (evento == "Medicação" && !(eventoMed.getIdMedicamento() == null)) {
 
 			eventoMed.setIdEventoSaude(eventosSaude);
 			DAOHibernate<EventosSaudeMedicacao> daoSM = new DAOHibernate<>(EventosSaudeMedicacao.class);
 			daoSM.beginTransaction().save(eventoMed).commitTransaction().closeAll();
 			Notifications.create().title("Evento Saúde").text("Evento Medicação cadastrado com sucesso!").showConfirm();
 
-		} else if (evento == "Vacina" && !(eventoVac == null)) {
+		} else if (evento == "Vacina" && !(eventoVac.getIdVacina() == null)) {
 
 			eventoVac.setIdEventoSaude(eventosSaude);
 			DAOHibernate<EventosSaudeVacina> daoSV = new DAOHibernate<>(EventosSaudeVacina.class);

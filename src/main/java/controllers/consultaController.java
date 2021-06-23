@@ -356,7 +356,6 @@ public class consultaController {
 			filtroStage.initModality(Modality.APPLICATION_MODAL);
 			filtroStage.setScene(filtroScene);
 			filtroStage.showAndWait();
-			consultarVeterinarios();
 			if (getPerspectiveList().isEmpty()) {
 				setPerspectiveList(getVeterinarios());
 				consultarVeterinarios();

@@ -86,7 +86,6 @@ public class filtroUsuarioController {
 
 			String usuarioQ = queryResult.getString("usuario");
 			user.setUsuario(usuarioQ);
-			;
 
 			String emailQ = queryResult.getString("email");
 			user.setEmail(emailQ);
