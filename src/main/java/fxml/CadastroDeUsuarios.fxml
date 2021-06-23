@@ -30,11 +30,6 @@
             <Insets left="50.0" />
          </GridPane.margin>
       </Label>
-      <CheckBox fx:id="checkboxMestre" mnemonicParsing="false" prefHeight="17.0" prefWidth="273.0" selected="true" text="Usuario Mestre" GridPane.columnIndex="1" GridPane.rowIndex="1">
-         <GridPane.margin>
-            <Insets left="5.0" />
-         </GridPane.margin>
-      </CheckBox>
       <Label alignment="TOP_CENTER" text="Nome" GridPane.columnSpan="2">
          <font>
             <Font size="20.0" />
@@ -48,6 +43,11 @@
             <Insets left="50.0" right="50.0" top="250.0" />
          </GridPane.margin>
       </TextField>
+      <CheckBox fx:id="checkboxMestre" mnemonicParsing="false" prefHeight="17.0" prefWidth="273.0" selected="true" text="Usuario Mestre" GridPane.columnIndex="1" GridPane.rowIndex="1">
+         <GridPane.margin>
+            <Insets left="5.0" />
+         </GridPane.margin>
+      </CheckBox>
       <Label alignment="TOP_CENTER" text="Usuario" GridPane.rowIndex="1">
          <font>
             <Font size="20.0" />
@@ -92,8 +92,11 @@
       </TextField>
       <Button fx:id="btnSalvar" alignment="BOTTOM_LEFT" mnemonicParsing="false" onAction="#salvar" text="Salvar" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2">
          <GridPane.margin>
-            <Insets left="50.0" top="50.0" />
+            <Insets left="81.0" top="50.0" />
          </GridPane.margin>
+         <font>
+            <Font size="14.0" />
+         </font>
       </Button>
       <Button fx:id="btnCancelar" cancelButton="true" mnemonicParsing="false" onAction="#cancelar" text="Cancelar" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2">
          <opaqueInsets>
@@ -102,6 +105,9 @@
          <GridPane.margin>
             <Insets left="165.0" top="50.0" />
          </GridPane.margin>
+         <font>
+            <Font size="14.0" />
+         </font>
       </Button>
    </children>
 </GridPane>
