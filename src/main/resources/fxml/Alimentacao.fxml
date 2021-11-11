@@ -59,6 +59,19 @@
             <Insets left="50.0" top="150.0" />
          </GridPane.margin>
       </DatePicker>
+      <Label alignment="TOP_CENTER" text="Observações" GridPane.columnSpan="2" GridPane.rowIndex="1">
+         <font>
+            <Font size="20.0" />
+         </font>
+         <GridPane.margin>
+            <Insets bottom="100.0" left="50.0" right="50.0" />
+         </GridPane.margin>
+      </Label>
+      <TextArea fx:id="txtObservacoes" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #000;" GridPane.columnSpan="2" GridPane.rowIndex="1">
+         <GridPane.margin>
+            <Insets left="50.0" right="50.0" top="75.0" />
+         </GridPane.margin>
+      </TextArea>
       <Label alignment="TOP_CENTER" text="Rebanho" GridPane.columnSpan="2" GridPane.rowIndex="1">
          <font>
             <Font size="20.0" />
@@ -85,31 +98,24 @@
             <Insets bottom="50.0" left="80.0" />
          </GridPane.margin>
       </ComboBox>
-      <Label alignment="TOP_CENTER" text="Observações" GridPane.columnSpan="2" GridPane.rowIndex="1">
-         <font>
-            <Font size="20.0" />
-         </font>
-         <GridPane.margin>
-            <Insets bottom="100.0" left="50.0" right="50.0" />
-         </GridPane.margin>
-      </Label>
-      <TextArea fx:id="txtObservacoes" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #000;" GridPane.columnSpan="2" GridPane.rowIndex="1">
-         <GridPane.margin>
-            <Insets left="50.0" right="50.0" top="75.0" />
-         </GridPane.margin>
-      </TextArea>
-      <Button fx:id="btnSalvar" alignment="CENTER" mnemonicParsing="false" onAction="#salvar" prefHeight="25.0" prefWidth="65.0" text="Salvar" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2">
+      <Button fx:id="btnSalvar" alignment="CENTER" mnemonicParsing="false" onAction="#salvar" prefHeight="25.0" prefWidth="74.0" text="Salvar" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets left="70.0" top="100.0" />
          </GridPane.margin>
+         <font>
+            <Font size="14.0" />
+         </font>
       </Button>
-      <Button fx:id="btnCancelar" cancelButton="true" mnemonicParsing="false" onAction="#cancelar" prefHeight="25.0" prefWidth="65.0" text="Cancelar" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2">
+      <Button fx:id="btnCancelar" cancelButton="true" mnemonicParsing="false" onAction="#cancelar" prefHeight="30.0" prefWidth="74.0" text="Cancelar" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2">
          <opaqueInsets>
             <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
          </opaqueInsets>
          <GridPane.margin>
             <Insets left="160.0" top="100.0" />
          </GridPane.margin>
+         <font>
+            <Font size="14.0" />
+         </font>
       </Button>
    </children>
 </GridPane>

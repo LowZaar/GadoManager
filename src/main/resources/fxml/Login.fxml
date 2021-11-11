@@ -73,11 +73,17 @@
          <GridPane.margin>
             <Insets left="150.0" top="75.0" />
          </GridPane.margin>
+         <font>
+            <Font size="14.0" />
+         </font>
       </Button>
       <Button fx:id="btnCadastrar" mnemonicParsing="false" onAction="#cadastrar" text="Cadastrar" GridPane.columnIndex="1" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets top="75.0" />
          </GridPane.margin>
+         <font>
+            <Font size="14.0" />
+         </font>
       </Button>
    </children>
 </GridPane>

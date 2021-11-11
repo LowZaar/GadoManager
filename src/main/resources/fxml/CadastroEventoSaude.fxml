@@ -31,6 +31,19 @@
             <Insets left="35.0" />
          </GridPane.margin>
       </Label>
+      <Label alignment="TOP_CENTER" text="Veterinario" GridPane.rowIndex="1">
+         <font>
+            <Font size="20.0" />
+         </font>
+         <GridPane.margin>
+            <Insets bottom="200.0" left="50.0" />
+         </GridPane.margin>
+      </Label>
+      <ComboBox fx:id="comboVeterinario" prefWidth="150.0" style="-fx-border-color: #000;" GridPane.rowIndex="1">
+         <GridPane.margin>
+            <Insets bottom="150.0" left="50.0" />
+         </GridPane.margin>
+      </ComboBox>
       <Label alignment="TOP_CENTER" text="Evento" GridPane.columnIndex="1" GridPane.rowIndex="1">
          <font>
             <Font size="20.0" />
@@ -74,6 +87,9 @@
          <GridPane.margin>
             <Insets left="15.0" top="150.0" />
          </GridPane.margin>
+         <font>
+            <Font size="14.0" />
+         </font>
       </Button>
       <Button fx:id="btnCancelar" cancelButton="true" mnemonicParsing="false" onAction="#cancelar" text="Cancelar" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2">
          <opaqueInsets>
@@ -82,20 +98,10 @@
          <GridPane.margin>
             <Insets left="115.0" top="150.0" />
          </GridPane.margin>
-      </Button>
-      <Label alignment="TOP_CENTER" text="Veterinario" GridPane.rowIndex="1">
          <font>
-            <Font size="20.0" />
+            <Font size="14.0" />
          </font>
-         <GridPane.margin>
-            <Insets bottom="200.0" left="50.0" />
-         </GridPane.margin>
-      </Label>
-      <ComboBox fx:id="comboVeterinario" prefWidth="150.0" style="-fx-border-color: #000;" GridPane.rowIndex="1">
-         <GridPane.margin>
-            <Insets bottom="150.0" left="50.0" />
-         </GridPane.margin>
-      </ComboBox>
+      </Button>
       <Label fx:id="labelStatus" prefHeight="17.0" prefWidth="174.0">
          <GridPane.margin>
             <Insets left="50.0" top="150.0" />

@@ -11,17 +11,21 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
+<<<<<<< HEAD:src/main/resources/fxml/CadastroDeBovinos.fxml
 <GridPane maxHeight="601.0" maxWidth="700.0" minHeight="539.0" minWidth="700.0" prefHeight="601.0" prefWidth="700.0" style="-fx-background-color: #fff; -fx-border-radius: 5; -fx-border-insets: 5; -fx-border-color: #000;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gadomanager.gadomanager.controllers.cadastroBovinoController">
+=======
+<GridPane maxHeight="601.0" maxWidth="700.0" minHeight="539.0" minWidth="642.0" prefHeight="541.0" prefWidth="659.0" style="-fx-background-color: #fff; -fx-border-radius: 5; -fx-border-insets: 5; -fx-border-color: #000;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.cadastroBovinoController">
+>>>>>>> ddd3b6dc8ba5f7744b787db44c8d68103fbafe26:src/main/java/fxml/CadastroDeBovinos.fxml
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="249.0" minWidth="10.0" prefWidth="248.0" />
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="280.0" minWidth="10.0" prefWidth="270.0" />
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="391.0" minWidth="10.0" prefWidth="250.0" />
   </columnConstraints>
   <rowConstraints>
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="279.0" minHeight="10.0" prefHeight="144.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="202.0" minHeight="10.0" prefHeight="125.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="307.0" minHeight="10.0" prefHeight="194.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="142.0" minHeight="10.0" prefHeight="73.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
       <Label alignment="TOP_CENTER" text="Cadastro de Bovino" textAlignment="CENTER" GridPane.columnSpan="3">
@@ -29,7 +33,7 @@
             <Font size="38.0" />
          </font>
          <GridPane.margin>
-            <Insets left="200.0" />
+            <Insets left="172.0" />
          </GridPane.margin>
       </Label>
       <Label alignment="TOP_CENTER" text="Categoria" GridPane.columnSpan="2">
@@ -58,19 +62,19 @@
             <Insets left="50.0" top="200.0" />
          </GridPane.margin>
       </TextField>
-      <Label alignment="TOP_CENTER" text="Data Morte" GridPane.columnIndex="1" GridPane.rowIndex="2">
+      <Label alignment="TOP_CENTER" text="Brinco" GridPane.columnIndex="2">
          <font>
             <Font size="20.0" />
          </font>
          <GridPane.margin>
-            <Insets bottom="150.0" left="50.0" right="50.0" />
+            <Insets left="50.0" right="50.0" top="150.0" />
          </GridPane.margin>
       </Label>
-      <DatePicker fx:id="dateDataMorte" style="-fx-border-color: #000;" GridPane.columnIndex="1" GridPane.rowIndex="2">
+      <TextField fx:id="txtBrinco" prefWidth="150.0" style="-fx-border-color: #000;" GridPane.columnIndex="2">
          <GridPane.margin>
-            <Insets bottom="100.0" left="50.0" right="50.0" />
+            <Insets left="50.0" right="50.0" top="200.0" />
          </GridPane.margin>
-      </DatePicker>
+      </TextField>
       <Label alignment="TOP_CENTER" text="Associação" GridPane.rowIndex="1">
          <font>
             <Font size="20.0" />
@@ -84,17 +88,17 @@
             <Insets left="50.0" top="50.0" />
          </GridPane.margin>
       </TextField>
-      <Label alignment="TOP_CENTER" text="Sexo" GridPane.columnIndex="1">
+      <Label alignment="TOP_CENTER" text="Sexo" GridPane.columnIndex="1" GridPane.rowIndex="1">
          <font>
             <Font size="20.0" />
          </font>
          <GridPane.margin>
-            <Insets left="50.0" right="50.0" top="350.0" />
+            <Insets left="50.0" right="50.0" />
          </GridPane.margin>
       </Label>
-      <ComboBox fx:id="comboSexo" prefWidth="150.0" style="-fx-border-color: #000;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+      <ComboBox fx:id="comboSexo" prefHeight="27.0" prefWidth="93.0" style="-fx-border-color: #000;" GridPane.columnIndex="1" GridPane.rowIndex="1">
          <GridPane.margin>
-            <Insets left="100.0" right="75.0" top="50.0" />
+            <Insets left="50.0" right="50.0" top="50.0" />
          </GridPane.margin>
       </ComboBox>
       <Label alignment="TOP_CENTER" text="Raça" GridPane.columnIndex="2" GridPane.rowIndex="1">
@@ -123,6 +127,32 @@
             <Insets bottom="100.0" left="50.0" />
          </GridPane.margin>
       </DatePicker>
+      <Label alignment="TOP_CENTER" text="Data Morte" GridPane.columnIndex="1" GridPane.rowIndex="2">
+         <font>
+            <Font size="20.0" />
+         </font>
+         <GridPane.margin>
+            <Insets bottom="150.0" left="50.0" right="50.0" />
+         </GridPane.margin>
+      </Label>
+      <DatePicker fx:id="dateDataMorte" style="-fx-border-color: #000;" GridPane.columnIndex="1" GridPane.rowIndex="2">
+         <GridPane.margin>
+            <Insets bottom="100.0" left="50.0" right="50.0" />
+         </GridPane.margin>
+      </DatePicker>
+      <Label alignment="TOP_CENTER" text="Rebanho" GridPane.columnIndex="2" GridPane.rowIndex="1">
+         <font>
+            <Font size="20.0" />
+         </font>
+         <GridPane.margin>
+            <Insets left="50.0" right="50.0" top="150.0" />
+         </GridPane.margin>
+      </Label>
+      <ComboBox fx:id="comboRebanho" prefWidth="150.0" style="-fx-border-color: #000;" GridPane.columnIndex="2" GridPane.rowIndex="2">
+         <GridPane.margin>
+            <Insets bottom="100.0" left="50.0" />
+         </GridPane.margin>
+      </ComboBox>
       <Label alignment="TOP_CENTER" text="Peso Nascimento" GridPane.rowIndex="2">
          <font>
             <Font size="20.0" />
@@ -152,32 +182,6 @@
             <Insets left="50.0" top="50.0" />
          </GridPane.margin>
       </ComboBox>
-      <Label alignment="TOP_CENTER" text="Brinco" GridPane.columnIndex="2">
-         <font>
-            <Font size="20.0" />
-         </font>
-         <GridPane.margin>
-            <Insets left="50.0" right="50.0" top="150.0" />
-         </GridPane.margin>
-      </Label>
-      <TextField fx:id="txtBrinco" prefWidth="150.0" style="-fx-border-color: #000;" GridPane.columnIndex="2">
-         <GridPane.margin>
-            <Insets left="50.0" right="50.0" top="200.0" />
-         </GridPane.margin>
-      </TextField>
-      <Label alignment="TOP_CENTER" text="Rebanho" GridPane.columnIndex="2" GridPane.rowIndex="1">
-         <font>
-            <Font size="20.0" />
-         </font>
-         <GridPane.margin>
-            <Insets left="50.0" right="50.0" top="150.0" />
-         </GridPane.margin>
-      </Label>
-      <ComboBox fx:id="comboRebanho" prefWidth="150.0" style="-fx-border-color: #000;" GridPane.columnIndex="2" GridPane.rowIndex="2">
-         <GridPane.margin>
-            <Insets bottom="100.0" left="50.0" />
-         </GridPane.margin>
-      </ComboBox>
       <Label alignment="TOP_CENTER" text="Bovino Mae" GridPane.columnIndex="2" GridPane.rowIndex="2">
          <font>
             <Font size="20.0" />
@@ -194,18 +198,24 @@
             <Insets left="50.0" top="50.0" />
          </GridPane.margin>
       </ComboBox>
-      <Button fx:id="btnSalvar" alignment="BOTTOM_LEFT" mnemonicParsing="false" onAction="#salvar" text="Salvar" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="3">
+      <Button fx:id="btnSalvar" alignment="CENTER" mnemonicParsing="false" onAction="#salvar" prefHeight="30.0" prefWidth="72.0" text="Salvar" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="3">
          <GridPane.margin>
-            <Insets left="50.0" top="100.0" />
+            <Insets left="19.0" top="-43.0" />
          </GridPane.margin>
+         <font>
+            <Font size="14.0" />
+         </font>
       </Button>
-      <Button fx:id="btnCancelar" cancelButton="true" mnemonicParsing="false" onAction="#cancelar" text="Cancelar" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="3">
+      <Button fx:id="btnCancelar" cancelButton="true" mnemonicParsing="false" onAction="#cancelar" prefHeight="30.0" prefWidth="72.0" text="Cancelar" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="3">
          <opaqueInsets>
             <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
          </opaqueInsets>
          <GridPane.margin>
-            <Insets left="135.0" top="100.0" />
+            <Insets left="113.0" top="-43.0" />
          </GridPane.margin>
+         <font>
+            <Font size="14.0" />
+         </font>
       </Button>
    </children>
 </GridPane>

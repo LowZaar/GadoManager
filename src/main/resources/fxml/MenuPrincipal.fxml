@@ -26,26 +26,26 @@
         <menus>
           <Menu mnemonicParsing="false" text="Bovinos">
             <items>
-              <MenuItem fx:id="menuBovino" mnemonicParsing="false" onAction="#abrirBovino" text="Bovinos" />
                   <MenuItem fx:id="menuRebanhos" mnemonicParsing="false" onAction="#abrirRebanho" text="Rebanhos" />
+              <MenuItem fx:id="menuBovino" mnemonicParsing="false" onAction="#abrirBovino" text="Bovinos" />
                   <MenuItem fx:id="menuBCS" mnemonicParsing="false" onAction="#abrirBCS" text="BCS" />
                   <MenuItem fx:id="menuPesagens" mnemonicParsing="false" onAction="#abrirPesagens" text="Pesagens" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Saude">
+          <Menu mnemonicParsing="false" text="Cadastros">
+            <items>
+              <MenuItem fx:id="menuUsuarios" mnemonicParsing="false" onAction="#abrirUsuario" text="Usuários" />
+                  <MenuItem fx:id="menuVeterinarios" mnemonicParsing="false" onAction="#abrirVeterinario" text="Veterinários" />
+                  <MenuItem fx:id="menuParams" mnemonicParsing="false" onAction="#abrirParams" text="Parâmetros" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Saúde">
             <items>
                   <MenuItem fx:id="menuEventoSaude" mnemonicParsing="false" onAction="#abrirEventoSaude" text="Eventos de Saúde" />
                   <MenuItem fx:id="menuMedicacao" mnemonicParsing="false" onAction="#abrirMedicacao" text="Medicação" />
                   <MenuItem fx:id="menuVacinas" mnemonicParsing="false" onAction="#abrirVacina" text="Vacinas" />
                   <MenuItem fx:id="menuRacoes" mnemonicParsing="false" onAction="#abrirRacao" text="Rações" />
                   <MenuItem fx:id="menuAlimentacao" mnemonicParsing="false" onAction="#abrirAlimentacao" text="Alimentação" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Usuario">
-            <items>
-              <MenuItem fx:id="menuUsuarios" mnemonicParsing="false" onAction="#abrirUsuario" text="Usuarios" />
-                  <MenuItem fx:id="menuVeterinarios" mnemonicParsing="false" onAction="#abrirVeterinario" text="Veterinarios" />
-                  <MenuItem fx:id="menuParams" mnemonicParsing="false" onAction="#abrirParams" text="Parâmetros" />
             </items>
           </Menu>
             <Menu mnemonicParsing="false" text="Consultas">

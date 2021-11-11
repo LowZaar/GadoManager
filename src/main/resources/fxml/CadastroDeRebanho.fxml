@@ -22,19 +22,6 @@
     <RowConstraints maxHeight="181.0" minHeight="10.0" prefHeight="150.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <Button fx:id="btnSalvar" alignment="BOTTOM_LEFT" mnemonicParsing="false" onAction="#salvar" text="Salvar" textAlignment="CENTER" GridPane.rowIndex="3">
-         <GridPane.margin>
-            <Insets left="50.0" top="50.0" />
-         </GridPane.margin>
-      </Button>
-      <Button fx:id="btnCancelar" cancelButton="true" mnemonicParsing="false" onAction="#cancelar" text="Cancelar" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3">
-         <opaqueInsets>
-            <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-         </opaqueInsets>
-         <GridPane.margin>
-            <Insets left="75.0" top="50.0" />
-         </GridPane.margin>
-      </Button>
       <Label alignment="TOP_CENTER" text="Cadastro de Rebanho" textAlignment="CENTER" GridPane.columnSpan="2">
          <font>
             <Font size="38.0" />
@@ -69,5 +56,24 @@
             <Insets bottom="100.0" left="50.0" right="50.0" top="50.0" />
          </GridPane.margin>
       </TextArea>
+      <Button fx:id="btnSalvar" alignment="BOTTOM_LEFT" mnemonicParsing="false" onAction="#salvar" text="Salvar" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3">
+         <GridPane.margin>
+            <Insets left="35.0" top="50.0" />
+         </GridPane.margin>
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnCancelar" cancelButton="true" mnemonicParsing="false" onAction="#cancelar" text="Cancelar" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3">
+         <opaqueInsets>
+            <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+         </opaqueInsets>
+         <GridPane.margin>
+            <Insets left="108.0" top="50.0" />
+         </GridPane.margin>
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
    </children>
 </GridPane>

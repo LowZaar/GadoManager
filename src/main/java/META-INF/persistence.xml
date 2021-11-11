@@ -33,7 +33,11 @@
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/bovinosdb" />
 			<property name="javax.persistence.jdbc.user" value="root" />
+<<<<<<< HEAD
 			<property name="javax.persistence.jdbc.password" value="m4n5mn45"/>
+=======
+			<property name="javax.persistence.jdbc.password" value="pudim123"/>
+>>>>>>> ddd3b6dc8ba5f7744b787db44c8d68103fbafe26
 
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL57Dialect" />
 			<property name="hibernate.show_sql" value="false" />

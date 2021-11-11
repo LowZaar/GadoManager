@@ -16,9 +16,9 @@
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
   </columnConstraints>
   <rowConstraints>
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="211.0" minHeight="10.0" prefHeight="211.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="219.0" minHeight="10.0" prefHeight="219.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="164.0" minHeight="10.0" prefHeight="77.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
       <Label alignment="TOP_CENTER" prefHeight="52.0" prefWidth="320.0" text="Medicamento" textAlignment="CENTER" GridPane.columnSpan="2">
@@ -47,7 +47,7 @@
             <Font size="20.0" />
          </font>
          <GridPane.margin>
-            <Insets bottom="100.0" left="50.0" />
+            <Insets bottom="152.0" left="50.0" />
          </GridPane.margin>
       </Label>
       <TextArea fx:id="txtAPrincipioAtivo" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #000;" GridPane.columnSpan="2" GridPane.rowIndex="1">
@@ -55,18 +55,24 @@
             <Insets left="50.0" right="50.0" top="50.0" />
          </GridPane.margin>
       </TextArea>
-      <Button fx:id="btnSalvar" alignment="BOTTOM_LEFT" mnemonicParsing="false" onAction="#salvar" text="Salvar" textAlignment="CENTER" GridPane.rowIndex="2">
+      <Button fx:id="btnSalvar" alignment="BOTTOM_LEFT" mnemonicParsing="false" onAction="#salvar" text="Salvar" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2">
          <GridPane.margin>
-            <Insets left="50.0" />
+            <Insets left="35.0" />
          </GridPane.margin>
+         <font>
+            <Font size="14.0" />
+         </font>
       </Button>
       <Button fx:id="btnCancelar" cancelButton="true" mnemonicParsing="false" onAction="#cancelar" text="Cancelar" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2">
          <opaqueInsets>
             <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
          </opaqueInsets>
          <GridPane.margin>
-            <Insets left="75.0" />
+            <Insets left="110.0" />
          </GridPane.margin>
+         <font>
+            <Font size="14.0" />
+         </font>
       </Button>
    </children>
 </GridPane>

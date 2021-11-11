@@ -30,32 +30,6 @@
             <Insets bottom="18.0" left="35.0" />
          </GridPane.margin>
       </Label>
-      <TextField fx:id="txtIndiceBCS" prefHeight="27.0" prefWidth="185.0" GridPane.columnSpan="2" GridPane.rowIndex="2">
-         <GridPane.margin>
-            <Insets bottom="119.0" left="50.0" right="60.0" />
-         </GridPane.margin>
-      </TextField>
-      <Label alignment="TOP_CENTER" text="Indice do BCS" GridPane.columnSpan="2" GridPane.rowIndex="2">
-         <font>
-            <Font size="20.0" />
-         </font>
-         <GridPane.margin>
-            <Insets bottom="188.0" left="50.0" />
-         </GridPane.margin>
-      </Label>
-      <Label alignment="TOP_CENTER" text="Data" GridPane.columnSpan="2" GridPane.rowIndex="1">
-         <font>
-            <Font size="20.0" />
-         </font>
-         <GridPane.margin>
-            <Insets bottom="60.0" left="50.0" right="50.0" />
-         </GridPane.margin>
-      </Label>
-      <DatePicker fx:id="dateData" prefHeight="27.0" prefWidth="174.0" GridPane.columnSpan="2" GridPane.rowIndex="1">
-         <GridPane.margin>
-            <Insets bottom="-13.0" left="50.0" />
-         </GridPane.margin>
-      </DatePicker>
       <Label alignment="TOP_CENTER" text="Bovino" GridPane.columnSpan="2">
          <font>
             <Font size="20.0" />
@@ -69,15 +43,47 @@
             <Insets bottom="-8.0" left="50.0" top="150.0" />
          </GridPane.margin>
       </ComboBox>
-      <Button fx:id="btnSalvar" alignment="CENTER" mnemonicParsing="false" onAction="#salvar" prefHeight="25.0" prefWidth="65.0" text="Salvar" textAlignment="CENTER" GridPane.rowIndex="2">
+      <Label alignment="TOP_CENTER" text="Data" GridPane.columnSpan="2" GridPane.rowIndex="1">
+         <font>
+            <Font size="20.0" />
+         </font>
+         <GridPane.margin>
+            <Insets bottom="60.0" left="50.0" right="50.0" />
+         </GridPane.margin>
+      </Label>
+      <DatePicker fx:id="dateData" prefHeight="27.0" prefWidth="174.0" GridPane.columnSpan="2" GridPane.rowIndex="1">
+         <GridPane.margin>
+            <Insets bottom="-13.0" left="50.0" />
+         </GridPane.margin>
+      </DatePicker>
+      <Label alignment="TOP_CENTER" text="Indice do BCS" GridPane.columnSpan="2" GridPane.rowIndex="2">
+         <font>
+            <Font size="20.0" />
+         </font>
+         <GridPane.margin>
+            <Insets bottom="188.0" left="50.0" />
+         </GridPane.margin>
+      </Label>
+      <TextField fx:id="txtIndiceBCS" prefHeight="27.0" prefWidth="185.0" GridPane.columnSpan="2" GridPane.rowIndex="2">
+         <GridPane.margin>
+            <Insets bottom="119.0" left="50.0" right="60.0" />
+         </GridPane.margin>
+      </TextField>
+      <Button fx:id="btnSalvar" alignment="CENTER" mnemonicParsing="false" onAction="#salvar" prefHeight="25.0" prefWidth="74.0" text="Salvar" textAlignment="CENTER" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets bottom="36.0" left="115.0" top="50.0" />
          </GridPane.margin>
+         <font>
+            <Font size="14.0" />
+         </font>
       </Button>
-      <Button fx:id="btnCancelar" alignment="CENTER" mnemonicParsing="false" onAction="#cancelar" prefHeight="25.0" prefWidth="65.0" text="Cancelar" textAlignment="CENTER" GridPane.rowIndex="2">
+      <Button fx:id="btnCancelar" alignment="CENTER" mnemonicParsing="false" onAction="#cancelar" prefHeight="30.0" prefWidth="74.0" text="Cancelar" textAlignment="CENTER" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets bottom="36.0" left="200.0" top="50.0" />
          </GridPane.margin>
+         <font>
+            <Font size="14.0" />
+         </font>
       </Button>
    </children>
 </GridPane>
