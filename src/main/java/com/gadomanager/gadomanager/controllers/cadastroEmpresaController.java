@@ -174,7 +174,9 @@ public class cadastroEmpresaController {
 		URL fxmlLogin = getClass().getResource("/fxml/Login.fxml");
 
 		FXMLLoader loader = new FXMLLoader(fxmlLogin);
-
+		
+		loader.setControllerFactory(context::getBean);
+		
 		Parent loginP = loader.load();
 
 		Stage window = (Stage) btnSalvar.getScene().getWindow();
