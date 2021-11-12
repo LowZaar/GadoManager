@@ -62,9 +62,9 @@ public class mainMenuController {
 		FXMLLoader loader = new FXMLLoader(fxmlBovino);
 
 		Parent bovinoP = loader.load();
-
 		Stage cadastroBovino = new Stage();
 		Scene bovinoScene = new Scene(bovinoP);
+		
 		cadastroBovino.setScene(bovinoScene);
 		cadastroBovinoController cadastroBovinoController = loader.getController();
 		cadastroBovinoController.setUser(userLogin);
