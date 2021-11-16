@@ -6,10 +6,12 @@ import java.util.Date;
 import java.util.List;
 
 import org.controlsfx.control.Notifications;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.gadomanager.gadomanager.classes.BCS;
 import com.gadomanager.gadomanager.classes.Bovinos;
 import com.gadomanager.gadomanager.classes.Usuarios;
+import com.gadomanager.gadomanager.repos.BCSRepository;
 import com.gadomanager.gadomanager.utils.DAOHibernate;
 
 import javafx.fxml.FXML;
@@ -20,6 +22,9 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class cadastroBCSController {
+	
+	@Autowired
+	private BCSRepository repo;
 	
 	@FXML
 	private TextField txtIndiceBCS;
@@ -37,6 +42,7 @@ public class cadastroBCSController {
 	private Button btnCancelar;
 	
 	private Usuarios user;
+	
 	
 	public Usuarios getUser() {
 		return user;
@@ -86,10 +92,9 @@ public class cadastroBCSController {
 		Date dataBCS = localDateToDate(dateData.getValue());
 		Bovinos bovino = findBovino(comboBovino.getValue());
 		
-		DAOHibernate<BCS> daoBCS = new DAOHibernate<>(BCS.class);
 		BCS bcsObj = new BCS(bovino, dataBCS, indiceBCS);
 		
-		daoBCS.beginTransaction().save(bcsObj).commitTransaction().closeAll();
+		repo.save(bcsObj);
 		
 		Notifications.create().title("Alerta").text("Novo BCS adicionado com sucesso!")
 		.showConfirm();

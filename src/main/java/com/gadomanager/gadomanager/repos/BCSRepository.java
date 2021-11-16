@@ -2,7 +2,9 @@ package com.gadomanager.gadomanager.repos;
 
 import org.springframework.data.repository.CrudRepository;
 
-public interface BCSRepository extends CrudRepository<BCSRepository, Long>{
+import com.gadomanager.gadomanager.classes.BCS;
+
+public interface BCSRepository extends CrudRepository<BCS, Long>{
 
 	
 	

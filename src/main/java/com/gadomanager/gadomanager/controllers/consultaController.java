@@ -222,7 +222,7 @@ public class consultaController {
 			if (userMestre) {
 				resultado = "Sim";
 			} else {
-				resultado = "N�o";
+				resultado = "Não";
 			}
 			return new ReadOnlyStringWrapper(resultado);
 		});

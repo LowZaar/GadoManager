@@ -9,7 +9,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-11">
 		<attributes>
 			<attribute name="module" value="true"/>
-			<attribute name="limit-modules" value="java.desktop,java.instrument,java.net.http,java.scripting,java.sql,jdk.compiler,jdk.dynalink,jdk.httpserver,jdk.internal.ed,jdk.internal.le,jdk.internal.opt,jdk.jartool,jdk.jdi,jdk.jsobject,jdk.management.agent,jdk.management.jfr,jdk.net,jdk.nio.mapmode,jdk.sctp,jdk.security.auth,jdk.security.jgss,jdk.unsupported"/>
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>

@@ -42,11 +42,12 @@ import javafx.stage.Stage;
 public class mainMenuController {
 
 	private Usuarios userLogin;
+
 	
 	@Autowired
 	private ApplicationContext context;
-	
 
+	
 	public Usuarios getUserLogin() {
 		return userLogin;
 	}
@@ -64,7 +65,7 @@ public class mainMenuController {
 		Parent bovinoP = loader.load();
 		Stage cadastroBovino = new Stage();
 		Scene bovinoScene = new Scene(bovinoP);
-		
+
 		cadastroBovino.setScene(bovinoScene);
 		cadastroBovinoController cadastroBovinoController = loader.getController();
 		cadastroBovinoController.setUser(userLogin);
@@ -227,7 +228,7 @@ public class mainMenuController {
 
 		FXMLLoader loader = new FXMLLoader(fxmlAlimentacao);
 		loader.setControllerFactory(context::getBean);
-		
+
 		Parent alimentacaoP = loader.load();
 
 		Stage cadastroAlimentacao = new Stage();
@@ -370,7 +371,7 @@ public class mainMenuController {
 				Row headRow = sheet.createRow(0);
 
 				String[] headCols = { "Brinco", "Associação", "Nome", "Peso Atual", "Ultima Pesagem", "Sexo",
-						"Nome Pai", "Nome Mãe","BCS", "Avisos" };
+						"Nome Pai", "Nome Mãe", "BCS", "Avisos" };
 
 				for (int i = 0; i < headCols.length; i++) {
 					Cell headcell = headRow.createCell(i);
@@ -433,11 +434,10 @@ public class mainMenuController {
 					BCS bcs = daoBCS.getFirst("selectBCSbyBovino", "bovino", bovinos);
 					if (!(bcs == null)) {
 						row.createCell(8).setCellValue(bcs.getIndiceBCS());
-					}else {
+					} else {
 						row.createCell(8).setCellValue("BCS Necessário");
 					}
-					
-					
+
 					Instant agora = Instant.now();
 					Instant instParams = agora.minus(Duration.ofDays(params.getAlertaDiasSemPesar()));
 					Date dateParams = Date.from(instParams);
