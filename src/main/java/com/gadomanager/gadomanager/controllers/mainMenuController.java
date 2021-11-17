@@ -81,6 +81,8 @@ public class mainMenuController {
 		URL fxmlRaca = getClass().getResource("/fxml/CadastroDeRaca.fxml");
 
 		FXMLLoader loader = new FXMLLoader(fxmlRaca);
+		loader.setControllerFactory(context::getBean);
+
 
 		Parent racaP = loader.load();
 
@@ -138,6 +140,7 @@ public class mainMenuController {
 		URL fxmlPesagem = getClass().getResource("/fxml/CadastroDePesagem.fxml");
 
 		FXMLLoader loader = new FXMLLoader(fxmlPesagem);
+		loader.setControllerFactory(context::getBean);
 
 		Parent pesagemP = loader.load();
 

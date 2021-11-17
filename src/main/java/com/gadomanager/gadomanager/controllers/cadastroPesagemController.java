@@ -6,10 +6,13 @@ import java.util.Date;
 import java.util.List;
 
 import org.controlsfx.control.Notifications;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.gadomanager.gadomanager.classes.Bovinos;
 import com.gadomanager.gadomanager.classes.Pesagens;
 import com.gadomanager.gadomanager.classes.Usuarios;
+import com.gadomanager.gadomanager.repos.PesagemRepository;
 import com.gadomanager.gadomanager.utils.DAOHibernate;
 
 import javafx.fxml.FXML;
@@ -20,8 +23,12 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+@Component
 public class cadastroPesagemController {
 
+	@Autowired
+	private PesagemRepository repo;
+	
 	@FXML
 	private TextArea txtAObservacoes;
 
@@ -88,9 +95,7 @@ public class cadastroPesagemController {
 		Bovinos bovino = findBovino(comboBovino.getValue());
 		
 		Pesagens pesagem = new Pesagens(dataPesagem,peso,Observacoes,bovino);
-		DAOHibernate<Pesagens> daoPe = new DAOHibernate<>(Pesagens.class);
-		
-		daoPe.beginTransaction().save(pesagem).commitTransaction().closeAll();
+		repo.save(pesagem);
 		
 		Notifications.create().title("Pesagens").title("Nova Pesagem criada com sucesso!").showConfirm();
 		

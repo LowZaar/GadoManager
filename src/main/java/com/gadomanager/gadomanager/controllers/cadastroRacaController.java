@@ -1,8 +1,11 @@
 package com.gadomanager.gadomanager.controllers;
 
 import org.controlsfx.control.Notifications;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.gadomanager.gadomanager.classes.Racas;
+import com.gadomanager.gadomanager.repos.RacasRepository;
 import com.gadomanager.gadomanager.utils.DAOHibernate;
 
 import javafx.fxml.FXML;
@@ -10,7 +13,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+@Component
 public class cadastroRacaController {
+	
+	@Autowired
+	private RacasRepository repo;
 	
 	@FXML
 	private TextField txtNome;
@@ -24,7 +31,7 @@ public class cadastroRacaController {
 	@FXML
 	public void salvar() {
 		
-		DAOHibernate<Racas> daoRa = new DAOHibernate<>(Racas.class);
+//		DAOHibernate<Racas> daoRa = new DAOHibernate<>(Racas.class);
 		
 		if (txtNome.getText().isEmpty()) {
 			
@@ -32,7 +39,14 @@ public class cadastroRacaController {
 		
 		}else {
 			
-			daoRa.beginTransaction().save(new Racas(txtNome.getText())).commitTransaction().closeAll();
+//			daoRa.beginTransaction().save(new Racas(txtNome.getText())).commitTransaction().closeAll();
+			
+			String nome = txtNome.getText();
+			
+			Racas raca = new Racas(nome);
+			
+			repo.save(raca);
+			
 			
 			Notifications.create().title("Cadastro de Raças").text("Raça "+ txtNome.getText() + " adicionada com sucesso!").showConfirm();
 			
