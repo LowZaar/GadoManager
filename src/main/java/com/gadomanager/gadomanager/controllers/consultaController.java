@@ -1,11 +1,13 @@
 package com.gadomanager.gadomanager.controllers;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import org.controlsfx.control.tableview2.TableView2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Component;
 
 import com.gadomanager.gadomanager.classes.Alimentos;
@@ -340,23 +342,23 @@ public class consultaController {
 	private ObservableList<Object> getAlimentos() {
 		ObservableList<Object> list = FXCollections.observableArrayList();
 
-		DAOHibernate<Veterinario> daoVet = new DAOHibernate<>(Veterinario.class);
-		Iterable<Alimentos> query = repoAlimento.findAll();
+		List<Alimentos> query = Streamable.of(repoAlimento.findAll()).toList();
+		
 		list.addAll(query);
 
 		return list;
 	}
 
 	@FXML
-	public void AlimentosClick() {
-		setCurrentPerspective("Veterinarios");
+	public void alimentosClick() {
+		setCurrentPerspective("Alimentação");
 		menuConsulta.setText(currentPerspective);
 
 		btnEditar.setDisable(true);
-		btnExcluir.setDisable(true);
+		btnExcluir.setDisable(false);
 		
-		setPerspectiveList(getVeterinarios());
-		consultarVeterinarios();
+		setPerspectiveList(getAlimentos());
+		consultarAlimentos();
 	}
 
 	@FXML
@@ -544,6 +546,20 @@ public class consultaController {
 //			
 //			setPerspectiveList(getVeterinarios());
 //			consultarVeterinarios();
+		}
+		if (perspectiva == "Alimentos") {
+			Alimentos alimento = (Alimentos) tableConsulta.getItems().get(index);
+			
+			
+			confirmExcluirController.setClass(alimento);
+			dialogStage.showAndWait();
+			Boolean excluir = confirmExcluirController.returnDelete();
+			if (excluir) {
+				
+				repoAlimento.deleteById(alimento.getIdAlimento());
+				setPerspectiveList(getAlimentos());
+				consultarAlimentos();
+			}
 		}
 	}
 

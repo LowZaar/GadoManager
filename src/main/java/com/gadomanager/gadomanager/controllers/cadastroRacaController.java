@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component;
 
 import com.gadomanager.gadomanager.classes.Racas;
 import com.gadomanager.gadomanager.repos.RacasRepository;
-import com.gadomanager.gadomanager.utils.DAOHibernate;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

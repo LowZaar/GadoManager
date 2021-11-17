@@ -323,7 +323,9 @@ public class mainMenuController {
 		URL fxmlConsultas = getClass().getResource("/fxml/Consulta.fxml");
 
 		FXMLLoader loader = new FXMLLoader(fxmlConsultas);
-
+		loader.setControllerFactory(context::getBean);
+		
+		
 		Parent consultasP = loader.load();
 
 		Stage consultaStage = new Stage();
