@@ -5,7 +5,10 @@ import java.util.Date;
 import java.util.List;
 
 import org.controlsfx.control.tableview2.TableView2;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+import com.gadomanager.gadomanager.classes.Alimentos;
 import com.gadomanager.gadomanager.classes.Bovinos;
 import com.gadomanager.gadomanager.classes.Usuarios;
 import com.gadomanager.gadomanager.classes.Veterinario;
@@ -13,6 +16,7 @@ import com.gadomanager.gadomanager.controllers.filtros.confirmExcluirController;
 import com.gadomanager.gadomanager.controllers.filtros.filtroBovinoController;
 import com.gadomanager.gadomanager.controllers.filtros.filtroUsuarioController;
 import com.gadomanager.gadomanager.controllers.filtros.filtroVeterinarioController;
+import com.gadomanager.gadomanager.repos.AlimentoRepository;
 import com.gadomanager.gadomanager.utils.DAOHibernate;
 
 import javafx.beans.property.ReadOnlyStringWrapper;
@@ -32,8 +36,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+@Component
 public class consultaController {
 
+	@Autowired
+	private AlimentoRepository repoAlimento;
+	
 	@FXML
 	private Button btnFiltro;
 
@@ -291,6 +299,56 @@ public class consultaController {
 
 	@FXML
 	public void veterinariosClick() {
+		setCurrentPerspective("Veterinarios");
+		menuConsulta.setText(currentPerspective);
+
+		btnEditar.setDisable(true);
+		btnExcluir.setDisable(true);
+		
+		setPerspectiveList(getVeterinarios());
+		consultarVeterinarios();
+	}
+	
+	
+	private void consultarAlimentos() {
+
+		tableConsulta.getColumns().clear();
+		tableConsulta.getItems().clear();
+		tableConsulta.setItems(getPerspectiveList());
+
+		// Colunas
+		TableColumn<Object, String> rebanhoCol = new TableColumn<>("Rebanho");
+		rebanhoCol.setCellValueFactory(
+				info -> new SimpleStringProperty(((Alimentos) info.getValue()).getIdRebanho().getNome()));
+		tableConsulta.getColumns().add(rebanhoCol);
+
+		TableColumn<Object, String> racaoCol = new TableColumn<>("Ração");
+		racaoCol.setCellValueFactory(
+				info -> new SimpleStringProperty(((Alimentos) info.getValue()).getIdracao().getDescricao()));
+		tableConsulta.getColumns().add(racaoCol);
+
+		TableColumn<Object, String> DataIniCol = new TableColumn<>("Data Início");
+		DataIniCol.setCellValueFactory(new PropertyValueFactory<>("dataInicio"));
+		tableConsulta.getColumns().add(DataIniCol);
+
+		TableColumn<Object, String> DataTerminoCol = new TableColumn<>("Data Início");
+		DataTerminoCol.setCellValueFactory(new PropertyValueFactory<>("dataTermino"));
+		tableConsulta.getColumns().add(DataTerminoCol);
+
+	}
+
+	private ObservableList<Object> getAlimentos() {
+		ObservableList<Object> list = FXCollections.observableArrayList();
+
+		DAOHibernate<Veterinario> daoVet = new DAOHibernate<>(Veterinario.class);
+		Iterable<Alimentos> query = repoAlimento.findAll();
+		list.addAll(query);
+
+		return list;
+	}
+
+	@FXML
+	public void AlimentosClick() {
 		setCurrentPerspective("Veterinarios");
 		menuConsulta.setText(currentPerspective);
 
