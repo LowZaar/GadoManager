@@ -1,12 +1,12 @@
 package com.gadomanager.gadomanager.controllers;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import org.controlsfx.control.tableview2.TableView2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Component;
 
@@ -40,6 +40,9 @@ import javafx.stage.Stage;
 
 @Component
 public class consultaController {
+
+	@Autowired
+	private ApplicationContext context;
 
 	@Autowired
 	private AlimentoRepository repoAlimento;
@@ -499,6 +502,8 @@ public class consultaController {
 
 		URL fxmldialog = getClass().getResource("/fxml/ExcluirDialog.fxml");
 		FXMLLoader loader = new FXMLLoader(fxmldialog);
+		
+		loader.setControllerFactory(context::getBean);
 		Parent dialog = loader.load();
 		Scene dialogScene = new Scene(dialog);
 		confirmExcluirController confirmExcluirController = loader.getController();

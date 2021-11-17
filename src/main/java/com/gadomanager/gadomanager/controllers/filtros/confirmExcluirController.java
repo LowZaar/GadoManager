@@ -1,5 +1,6 @@
 package com.gadomanager.gadomanager.controllers.filtros;
 
+import com.gadomanager.gadomanager.classes.Alimentos;
 import com.gadomanager.gadomanager.classes.Bovinos;
 import com.gadomanager.gadomanager.classes.Usuarios;
 
@@ -33,6 +34,11 @@ public class confirmExcluirController {
 				texto += "É um Usuário Mestre";
 			}
 			labelClass.setText(texto);			
+		}else if (classobj instanceof Alimentos) {
+			String texto = "Alimentação  iniciada em " + ((Alimentos) classobj).getDataInicio() + "\n";
+			texto += "Ração utilizada: " + ((Alimentos) classobj).getIdracao().getDescricao() + "\n";
+			texto += "Para o Rebanho " + ((Alimentos) classobj).getIdRebanho().getNome() + "\n";
+			labelClass.setText(texto);
 		}
     }
 
