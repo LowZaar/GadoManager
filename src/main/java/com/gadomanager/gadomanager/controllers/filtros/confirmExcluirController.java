@@ -1,5 +1,7 @@
 package com.gadomanager.gadomanager.controllers.filtros;
 
+import org.springframework.stereotype.Component;
+
 import com.gadomanager.gadomanager.classes.Alimentos;
 import com.gadomanager.gadomanager.classes.Bovinos;
 import com.gadomanager.gadomanager.classes.Usuarios;
@@ -9,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
+@Component
 public class confirmExcluirController {
 
     @FXML

@@ -552,8 +552,9 @@ public class consultaController {
 //			setPerspectiveList(getVeterinarios());
 //			consultarVeterinarios();
 		}
-		if (perspectiva == "Alimentos") {
+		if (perspectiva == "Alimentação") {
 			Alimentos alimento = (Alimentos) tableConsulta.getItems().get(index);
+			System.out.println(alimento);
 			
 			
 			confirmExcluirController.setClass(alimento);
