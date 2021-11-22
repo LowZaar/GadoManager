@@ -65,7 +65,7 @@ public class cadastroBCSController {
 		DAOHibernate<Bovinos> daoB = new DAOHibernate<>(Bovinos.class);
 		
 		List<Bovinos> query = daoB.getAllByNamedQuery("selectBovinobyEmpresa", "empresa", 
-				user.getIdEmpresas_Pessoa());
+				user.getIdEmpresasPessoa());
 		
 		comboBovino.getItems().add("Selecione...");
 		for (Bovinos bovinos : query) {
@@ -77,7 +77,7 @@ public class cadastroBCSController {
 	private Bovinos findBovino(String bovinoNome) {
 		
 		DAOHibernate<Bovinos> daoB = new DAOHibernate<>(Bovinos.class);
-		Bovinos bovino = daoB.getFirst("selectBovinobyNomeEmpresa", "nome", bovinoNome, "empresa", user.getIdEmpresas_Pessoa());
+		Bovinos bovino = daoB.getFirst("selectBovinobyNomeEmpresa", "nome", bovinoNome, "empresa", user.getIdEmpresasPessoa());
 		
 		if (bovino == null) {
 			return null;

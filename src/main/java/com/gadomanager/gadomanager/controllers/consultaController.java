@@ -19,6 +19,7 @@ import com.gadomanager.gadomanager.controllers.filtros.filtroBovinoController;
 import com.gadomanager.gadomanager.controllers.filtros.filtroUsuarioController;
 import com.gadomanager.gadomanager.controllers.filtros.filtroVeterinarioController;
 import com.gadomanager.gadomanager.repos.AlimentoRepository;
+import com.gadomanager.gadomanager.repos.UsuarioRepository;
 import com.gadomanager.gadomanager.utils.DAOHibernate;
 
 import javafx.beans.property.ReadOnlyStringWrapper;
@@ -46,6 +47,9 @@ public class consultaController {
 
 	@Autowired
 	private AlimentoRepository repoAlimento;
+	
+	@Autowired
+	private UsuarioRepository repoUser;
 	
 	@FXML
 	private Button btnFiltro;
@@ -182,7 +186,7 @@ public class consultaController {
 		ObservableList<Object> list = FXCollections.observableArrayList();
 
 		DAOHibernate<Bovinos> daoB = new DAOHibernate<Bovinos>(Bovinos.class);
-		List<Bovinos> query = daoB.getAllByNamedQuery("selectBovinobyEmpresa", "empresa", user.getIdEmpresas_Pessoa());
+		List<Bovinos> query = daoB.getAllByNamedQuery("selectBovinobyEmpresa", "empresa", user.getIdEmpresasPessoa());
 		list.addAll(query);
 
 		return list;
@@ -210,7 +214,6 @@ public class consultaController {
 //		setPerspectiveList(getUsuarios());
 
 		tableConsulta.setItems(getPerspectiveList());
-		System.out.println("1>" + getPerspectiveList().toString());
 		// Colunas
 		TableColumn<Object, String> nomeCol = new TableColumn<>("Nome");
 		nomeCol.setCellValueFactory(new PropertyValueFactory<>("nome"));
@@ -244,10 +247,10 @@ public class consultaController {
 
 	private ObservableList<Object> getUsuarios() {
 		ObservableList<Object> list = FXCollections.observableArrayList();
-
-		DAOHibernate<Usuarios> daoUser = new DAOHibernate<>(Usuarios.class);
-		List<Usuarios> query = daoUser.getAllByNamedQuery("selectUserbyEmpresa", "empresa",
-				user.getIdEmpresas_Pessoa());
+		
+		
+		List<Usuarios> query = repoUser.findByIdEmpresasPessoa(user.getIdEmpresasPessoa());
+		
 		list.addAll(query);
 
 		return list;
@@ -449,7 +452,7 @@ public class consultaController {
 			cadastroBovinoController.setUser(user);
 			DAOHibernate<Bovinos> daoB = new DAOHibernate<>(Bovinos.class);
 			Bovinos bovinoEdit = daoB.getFirst("selectBovinobyNomeEmpresa", "nome", bovino.getNome(), "empresa",
-					user.getIdEmpresas_Pessoa());
+					user.getIdEmpresasPessoa());
 			cadastroBovinoController.setBovino(bovinoEdit);
 			cadastroBovinoController.setEdit(true);
 			cadastroBovinoController.populateFields(bovino);

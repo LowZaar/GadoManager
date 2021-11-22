@@ -42,7 +42,7 @@ public class cadastroRebanhoController {
 
 		String nome = txtNome.getText();
 		String descricao = txtADescricao.getText();
-		Empresas_Pessoas empresa = user.getIdEmpresas_Pessoa();
+		Empresas_Pessoas empresa = user.getIdEmpresasPessoa();
 
 		DAOHibernate<Rebanhos> daoR = new DAOHibernate<Rebanhos>(Rebanhos.class);
 

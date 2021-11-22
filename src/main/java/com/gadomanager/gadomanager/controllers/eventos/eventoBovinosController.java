@@ -65,7 +65,7 @@ public class eventoBovinosController {
 
 		DAOHibernate<Rebanhos> daoRE = new DAOHibernate<Rebanhos>(Rebanhos.class);
 		List<Rebanhos> queryRe = daoRE.getAllByNamedQuery("selectRebanhobyEmpresa", "empresa",
-				user.getIdEmpresas_Pessoa());
+				user.getIdEmpresasPessoa());
 		daoRE.closeAll();
 		for (Rebanhos rebanhos : queryRe) {
 			comboRebanhos.getItems().add(rebanhos.getNome());
@@ -84,7 +84,7 @@ public class eventoBovinosController {
 
 		DAOHibernate<Rebanhos> daoRE = new DAOHibernate<Rebanhos>(Rebanhos.class);
 		Rebanhos rebanho = daoRE.getFirst("selectRebanhobyNomeEmpresa", "nome", nomeRebanho, "empresa",
-				user.getIdEmpresas_Pessoa());
+				user.getIdEmpresasPessoa());
 
 		daoRE.closeAll();
 		setRebanhoAtual(rebanho);

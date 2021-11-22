@@ -67,7 +67,7 @@ public class cadastroAlimentacaoController {
 		// Combo Rebanho
 		DAOHibernate<Rebanhos> daoRE = new DAOHibernate<Rebanhos>(Rebanhos.class);
 		List<Rebanhos> queryRE = daoRE.getAllByNamedQuery("selectRebanhobyEmpresa", "empresa",
-				user.getIdEmpresas_Pessoa());
+				user.getIdEmpresasPessoa());
 		daoRE.closeAll();
 		for (Rebanhos rebanhos : queryRE) {
 			comboRebanho.getItems().add(rebanhos.getNome());
@@ -85,7 +85,7 @@ public class cadastroAlimentacaoController {
 	private Rebanhos findRebanho(String rebanhoNome) {
 		DAOHibernate<Rebanhos> daoRE = new DAOHibernate<Rebanhos>(Rebanhos.class);
 		Rebanhos rebanho = daoRE.getFirst("selectRebanhobyNomeEmpresa", "nome", rebanhoNome, "empresa",
-				user.getIdEmpresas_Pessoa());
+				user.getIdEmpresasPessoa());
 
 		if (rebanho == null) {
 			return null;

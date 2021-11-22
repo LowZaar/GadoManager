@@ -89,13 +89,13 @@
 
 	<named-query name="selectUserbyEmpresa">
 		<query>
-			SELECT u from Usuarios u where u.idEmpresas_Pessoa = :empresa
+			SELECT u from Usuarios u where u.idEmpresasPessoa = :empresa
 		</query>
 	</named-query>
 
 	<named-query name="selectUserbyNomeEmpresa">
 		<query>
-			SELECT u from Usuarios u where  u.nome = :nome and u.idEmpresas_Pessoa = :empresa
+			SELECT u from Usuarios u where  u.nome = :nome and u.idEmpresasPessoa = :empresa
 		</query>
 	</named-query>
 

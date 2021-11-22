@@ -107,7 +107,7 @@ public class cadastroUsuarioController {
 			String senha = passSenha.getText();
 			String email = txtEmail.getText();
 			boolean usuarioMestre = false;
-			Empresas_Pessoas empresa = user.getIdEmpresas_Pessoa();
+			Empresas_Pessoas empresa = user.getIdEmpresasPessoa();
 
 			DAOHibernate<Usuarios> daoUser = new DAOHibernate<>(Usuarios.class);
 

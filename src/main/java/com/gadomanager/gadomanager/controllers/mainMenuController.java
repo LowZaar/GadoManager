@@ -344,7 +344,7 @@ public class mainMenuController {
 
 		DAOHibernate<Parametros> daoParams = new DAOHibernate<>(Parametros.class);
 
-		Parametros params = daoParams.getFirst("selectParamsbyEmpresa", "empresa", userLogin.getIdEmpresas_Pessoa());
+		Parametros params = daoParams.getFirst("selectParamsbyEmpresa", "empresa", userLogin.getIdEmpresasPessoa());
 
 		File directory = new File(System.getProperty("user.home") + "/Desktop/GadoManager/");
 		directory.mkdirs();
@@ -389,7 +389,7 @@ public class mainMenuController {
 
 				DAOHibernate<Bovinos> daoB = new DAOHibernate<>(Bovinos.class);
 				List<Bovinos> listB = daoB.getAllByNamedQuery("selectBovinobyEmpresa", "empresa",
-						userLogin.getIdEmpresas_Pessoa());
+						userLogin.getIdEmpresasPessoa());
 				DAOHibernate<Pesagens> daoP = new DAOHibernate<>(Pesagens.class);
 
 				CellStyle dataStyle = wb.createCellStyle();
