@@ -53,7 +53,7 @@ public class cadastroParamsController {
 	public void populateParams() {
 		DAOHibernate<Parametros> daoParams = new DAOHibernate<>(Parametros.class);
 		
-		Parametros params = daoParams.getFirst("selectParamsbyEmpresa", "empresa", user.getIdEmpresasPessoa());
+		Parametros params = daoParams.getFirst("selectParamsbyEmpresa", "empresa", user.getIdEmpresas_Pessoa());
 		this.params = params;
 		daoParams.closeAll();
 		

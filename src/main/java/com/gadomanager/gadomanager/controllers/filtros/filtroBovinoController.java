@@ -75,7 +75,7 @@ public class filtroBovinoController {
 
 		DAOHibernate<Rebanhos> daoRE = new DAOHibernate<Rebanhos>(Rebanhos.class);
 		List<Rebanhos> queryRe = daoRE.getAllByNamedQuery("selectRebanhobyEmpresa", "empresa",
-				user.getIdEmpresasPessoa());
+				user.getIdEmpresas_Pessoa());
 		daoRE.closeAll();
 		for (Rebanhos rebanhos : queryRe) {
 			comboRebanho.getItems().add(rebanhos.getNome());
@@ -111,7 +111,7 @@ public class filtroBovinoController {
 
 			DAOHibernate<Rebanhos> daoRe = new DAOHibernate<>(Rebanhos.class);
 			Rebanhos rebanhoquery = daoRe.getFirst("selectRebanhobyNomeEmpresa", "nome", comboRebanho.getValue(),
-					"empresa", user.getIdEmpresasPessoa());
+					"empresa", user.getIdEmpresas_Pessoa());
 			daoRe.closeAll();
 			int rebanhoId = rebanhoquery.getIdRebanho().intValue();
 

@@ -24,8 +24,6 @@ public class Vacina {
 		this.descricao = descricao;
 	}
 
-
-
 	public Long getIdVacina() {
 		return idVacina;
 	}

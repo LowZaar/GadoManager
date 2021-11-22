@@ -13,13 +13,14 @@ import org.springframework.stereotype.Component;
 import com.gadomanager.gadomanager.classes.Alimentos;
 import com.gadomanager.gadomanager.classes.Bovinos;
 import com.gadomanager.gadomanager.classes.Usuarios;
+import com.gadomanager.gadomanager.classes.Vacina;
 import com.gadomanager.gadomanager.classes.Veterinario;
 import com.gadomanager.gadomanager.controllers.filtros.confirmExcluirController;
 import com.gadomanager.gadomanager.controllers.filtros.filtroBovinoController;
 import com.gadomanager.gadomanager.controllers.filtros.filtroUsuarioController;
+import com.gadomanager.gadomanager.controllers.filtros.filtroVacinaController;
 import com.gadomanager.gadomanager.controllers.filtros.filtroVeterinarioController;
 import com.gadomanager.gadomanager.repos.AlimentoRepository;
-import com.gadomanager.gadomanager.repos.UsuarioRepository;
 import com.gadomanager.gadomanager.utils.DAOHibernate;
 
 import javafx.beans.property.ReadOnlyStringWrapper;
@@ -48,9 +49,6 @@ public class consultaController {
 	@Autowired
 	private AlimentoRepository repoAlimento;
 	
-	@Autowired
-	private UsuarioRepository repoUser;
-	
 	@FXML
 	private Button btnFiltro;
 
@@ -77,6 +75,9 @@ public class consultaController {
 
 	@FXML
 	private MenuItem menuConsultaVeterinarios;
+	
+	@FXML
+	private MenuItem menuConsultaVacinas;
 
 	private String currentPerspective;
 
@@ -186,7 +187,7 @@ public class consultaController {
 		ObservableList<Object> list = FXCollections.observableArrayList();
 
 		DAOHibernate<Bovinos> daoB = new DAOHibernate<Bovinos>(Bovinos.class);
-		List<Bovinos> query = daoB.getAllByNamedQuery("selectBovinobyEmpresa", "empresa", user.getIdEmpresasPessoa());
+		List<Bovinos> query = daoB.getAllByNamedQuery("selectBovinobyEmpresa", "empresa", user.getIdEmpresas_Pessoa());
 		list.addAll(query);
 
 		return list;
@@ -214,6 +215,7 @@ public class consultaController {
 //		setPerspectiveList(getUsuarios());
 
 		tableConsulta.setItems(getPerspectiveList());
+		System.out.println("1>" + getPerspectiveList().toString());
 		// Colunas
 		TableColumn<Object, String> nomeCol = new TableColumn<>("Nome");
 		nomeCol.setCellValueFactory(new PropertyValueFactory<>("nome"));
@@ -247,10 +249,10 @@ public class consultaController {
 
 	private ObservableList<Object> getUsuarios() {
 		ObservableList<Object> list = FXCollections.observableArrayList();
-		
-		
-		List<Usuarios> query = repoUser.findByIdEmpresasPessoa(user.getIdEmpresasPessoa());
-		
+
+		DAOHibernate<Usuarios> daoUser = new DAOHibernate<>(Usuarios.class);
+		List<Usuarios> query = daoUser.getAllByNamedQuery("selectUserbyEmpresa", "empresa",
+				user.getIdEmpresas_Pessoa());
 		list.addAll(query);
 
 		return list;
@@ -306,16 +308,51 @@ public class consultaController {
 	}
 
 	@FXML
+	public void vacinasClick() {
+		setCurrentPerspective("Vacinas");
+		menuConsulta.setText(currentPerspective);
+
+		btnEditar.setDisable(false);
+		btnExcluir.setDisable(false);
+		
+		setPerspectiveList(getVacinas());
+		consultarVacinas();
+	}
+	
+	private void consultarVacinas() {
+
+		tableConsulta.getColumns().clear();
+		tableConsulta.getItems().clear();
+		tableConsulta.setItems(getPerspectiveList());
+
+		// Colunas
+		TableColumn<Object, String> descCol = new TableColumn<>("descricao");
+		descCol.setCellValueFactory(new PropertyValueFactory<>("descricao"));
+		tableConsulta.getColumns().add(descCol);
+	}
+
+	private ObservableList<Object> getVacinas() {
+		ObservableList<Object> list = FXCollections.observableArrayList();
+
+		DAOHibernate<Vacina> daoVac = new DAOHibernate<>(Vacina.class);
+		List<Vacina> query = daoVac.getAll();
+		list.addAll(query);
+
+		return list;
+	}
+
+	@FXML
 	public void veterinariosClick() {
 		setCurrentPerspective("Veterinarios");
 		menuConsulta.setText(currentPerspective);
 
-		btnEditar.setDisable(true);
-		btnExcluir.setDisable(true);
+		btnEditar.setDisable(false);
+		btnExcluir.setDisable(false);
 		
 		setPerspectiveList(getVeterinarios());
 		consultarVeterinarios();
 	}
+
 	
 	
 	private void consultarAlimentos() {
@@ -395,6 +432,25 @@ public class consultaController {
 				consultarBovino();
 			}
 		}
+		if (perspectiva == "Vacinas") {
+			fxmlFiltro = getClass().getResource("/fxml/FiltroDeVacinas.fxml");
+			loader.setLocation(fxmlFiltro);
+			Parent filtroP = loader.load();
+			Scene filtroScene = new Scene(filtroP);
+			filtroVacinaController filtrovacinaController = loader.getController();
+			filtrovacinaController.setConsultaController(this);
+			filtroStage.initModality(Modality.APPLICATION_MODAL);
+			filtroStage.setScene(filtroScene);
+			filtroStage.showAndWait();
+
+			if (getPerspectiveList() == null) {
+				setPerspectiveList(getVacinas());
+				consultarVacinas();
+			} else {
+				consultarVacinas();
+			}
+		}
+	
 		if (perspectiva == "Usuarios") {
 			fxmlFiltro = getClass().getResource("/fxml/FiltroDeUsuario.fxml");
 			loader.setLocation(fxmlFiltro);
@@ -431,7 +487,7 @@ public class consultaController {
 			}
 		}
 	}
-
+		
 	@FXML
 	public void editar() throws Exception {
 		int index = tableConsulta.getSelectionModel().getSelectedIndex();
@@ -452,7 +508,7 @@ public class consultaController {
 			cadastroBovinoController.setUser(user);
 			DAOHibernate<Bovinos> daoB = new DAOHibernate<>(Bovinos.class);
 			Bovinos bovinoEdit = daoB.getFirst("selectBovinobyNomeEmpresa", "nome", bovino.getNome(), "empresa",
-					user.getIdEmpresasPessoa());
+					user.getIdEmpresas_Pessoa());
 			cadastroBovinoController.setBovino(bovinoEdit);
 			cadastroBovinoController.setEdit(true);
 			cadastroBovinoController.populateFields(bovino);
@@ -479,22 +535,37 @@ public class consultaController {
 			setPerspectiveList(getUsuarios());
 			consultarUsuarios();
 
-		} else if (perspectiva == "Veterinarios") {
+		} else if (perspectiva == "Vacinas") {
+			Vacina vacina = (Vacina) tableConsulta.getItems().get(index);
+
+			fxmledit = getClass().getResource("/fxml/Vacina.fxml");
+			loader.setLocation(fxmledit);
+			Parent editP = loader.load();
+			Scene editScene = new Scene(editP);
+			cadastroVacinaController cadastroVacinaController = loader.getController();
+			cadastroVacinaController.setEdit(true);
+			cadastroVacinaController.populateFields(vacina);
+			editStage.initModality(Modality.APPLICATION_MODAL);
+			editStage.setScene(editScene);
+			editStage.showAndWait();
+			setPerspectiveList(getVacinas());
+			consultarVacinas();
+			
+		}else if (perspectiva == "Veterinarios") {
 			Veterinario vet = (Veterinario) tableConsulta.getItems().get(index);
 
-			fxmledit = getClass().getResource("/fxml/CadastroDeVeterinarios.fxml");
+			fxmledit = getClass().getResource("/fxml/CadastroDeVeterinario.fxml");
 			loader.setLocation(fxmledit);
-			Parent edtitP = loader.load();
-			Scene editScene = new Scene(edtitP);
+			Parent editP = loader.load();
+			Scene editScene = new Scene(editP);
 			cadastroVeterinarioController cadastroVeterinarioController = loader.getController();
-			cadastroVeterinarioController.populateFields(vet);
 			cadastroVeterinarioController.setEdit(true);
+			cadastroVeterinarioController.populateFields(vet);
 			editStage.initModality(Modality.APPLICATION_MODAL);
 			editStage.setScene(editScene);
 			editStage.showAndWait();
 			setPerspectiveList(getVeterinarios());
 			consultarVeterinarios();
-
 		}
 	}
 
@@ -544,20 +615,36 @@ public class consultaController {
 			}
 		}
 		if (perspectiva == "Veterinarios") {
+		 Veterinario vet = (Veterinario) tableConsulta.getItems().get(index);
+		 	DAOHibernate<Veterinario> daoV = new DAOHibernate<>(Veterinario.class);
+			Veterinario vetDel = daoV.getAllById(vet.getIdVeterinario());
 
+			confirmExcluirController.setClass(vetDel);
+			dialogStage.showAndWait();
+			Boolean excluir = confirmExcluirController.returnDelete();
+			if (excluir) {
+				daoV.beginTransaction().delete(vetDel).commitTransaction().closeAll();
+				setPerspectiveList(getVeterinarios());
+				consultarVeterinarios();
+			}
 
-			// Excluir veterinarios??
-//			Veterinario vet = (Veterinario) tableConsulta.getItems().get(index);
-//			DAOHibernate<Veterinario> daoVet = new DAOHibernate<Veterinario>(Veterinario.class);
-//			Veterinario vetDel = daoVet.getAllById(vet.getIdVeterinario());
-//			daoVet.beginTransaction().delete(vetDel).commitTransaction().closeAll();
-//			
-//			setPerspectiveList(getVeterinarios());
-//			consultarVeterinarios();
 		}
-		if (perspectiva == "Alimentação") {
+		if (perspectiva == "Vacinas") {
+			Vacina vac = (Vacina) tableConsulta.getItems().get(index);
+		 	DAOHibernate<Vacina> daoV = new DAOHibernate<>(Vacina.class);
+			Vacina vacDel = daoV.getAllById(vac.getIdVacina());
+
+			confirmExcluirController.setClass(vacDel);
+			dialogStage.showAndWait();
+			Boolean excluir = confirmExcluirController.returnDelete();
+			if (excluir) {
+				daoV.beginTransaction().delete(vacDel).commitTransaction().closeAll();
+				setPerspectiveList(getVacinas());
+				consultarVacinas();
+			}
+		}
+		if (perspectiva == "Alimentos") {
 			Alimentos alimento = (Alimentos) tableConsulta.getItems().get(index);
-			System.out.println(alimento);
 			
 			
 			confirmExcluirController.setClass(alimento);

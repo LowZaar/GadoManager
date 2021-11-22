@@ -69,7 +69,7 @@ public class filtroUsuarioController {
 			sql += "AND usuarios.email like '%" + email + "%' ";
 		}
 		
-		sql += "AND usuarios.idEmpresa_Pessoa = " + user.getIdEmpresasPessoa().getIdEmpresa_Pessoa()+ "";
+		sql += "AND usuarios.idEmpresa_Pessoa = " + user.getIdEmpresas_Pessoa().getIdEmpresa_Pessoa()+ "";
 
 		System.out.println(sql);
 		
