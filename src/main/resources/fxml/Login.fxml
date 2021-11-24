@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<GridPane maxHeight="450.0" maxWidth="450.0" minHeight="450.0" minWidth="450.0" prefHeight="450.0" prefWidth="450.0" style="-fx-background-color: #fff; -fx-border-color: #000; -fx-border-insets: 5;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gadomanager.gadomanager.controllers.loginController">
+<GridPane maxHeight="450.0" maxWidth="450.0" minHeight="450.0" minWidth="450.0" prefHeight="450.0" prefWidth="450.0" style="-fx-background-color: #fff; -fx-border-color: #000; -fx-border-insets: 5;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gadomanager.gadomanager.controllers.loginController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -27,7 +27,7 @@
       <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
    </padding>
    <children>
-      <Label alignment="TOP_LEFT" contentDisplay="TOP" graphicTextGap="0.0" nodeOrientation="LEFT_TO_RIGHT" text="GadoManager" textAlignment="CENTER" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+      <Label fx:id="labelTitulo" alignment="TOP_LEFT" contentDisplay="TOP" graphicTextGap="0.0" nodeOrientation="LEFT_TO_RIGHT" text="GadoManager" textAlignment="CENTER" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
          <font>
             <Font name="Arial" size="50.0" />
          </font>

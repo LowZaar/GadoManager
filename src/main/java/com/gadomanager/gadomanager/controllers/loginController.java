@@ -1,6 +1,7 @@
 package com.gadomanager.gadomanager.controllers;
 
 import java.net.URL;
+import java.util.SplittableRandom;
 
 import org.controlsfx.control.Notifications;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,6 +61,16 @@ public class loginController {
 	}
 	
 	@FXML
+	private void initialize() {
+		SplittableRandom rand = new SplittableRandom();
+		int chance = rand.nextInt(0,300);
+		if (chance > 180 && chance < 190) {
+			labelTitulo.setText("DaviManager");
+		}
+	}
+	
+	
+	@FXML
 	private void login() throws Exception {
 		
 		DAOHibernate<Usuarios> dao = createCon();
@@ -68,8 +79,10 @@ public class loginController {
 
 		String senha = passwordLogin.getText();
 
+		Usuarios query = repo.findByUsuarioAndSenha(usuario, senha);
+		
+		System.out.println(query);
 
-		Usuarios query = dao.getFirst("loginCheck", "usuario", usuario, "senha", senha);
 		
 		if (query == null) {
 			Notifications.create().title("Alerta de Login").text("Usuario ou senha incorreto").showWarning();

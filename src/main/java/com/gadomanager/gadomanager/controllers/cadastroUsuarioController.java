@@ -1,9 +1,11 @@
 package com.gadomanager.gadomanager.controllers;
 
 import org.controlsfx.control.Notifications;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.gadomanager.gadomanager.classes.Empresas_Pessoas;
 import com.gadomanager.gadomanager.classes.Usuarios;
+import com.gadomanager.gadomanager.repos.UsuarioRepository;
 import com.gadomanager.gadomanager.utils.DAOHibernate;
 
 import javafx.fxml.FXML;
@@ -38,7 +40,10 @@ public class cadastroUsuarioController {
 
 	@FXML
 	private Button btnAtualizar;
-
+	
+	@Autowired
+	private UsuarioRepository repo;
+	
 	private Usuarios user;
 
 	private Usuarios userEdit;
@@ -95,8 +100,8 @@ public class cadastroUsuarioController {
 			}
 			editedUser.setUsuarioMestre(usuarioMestre);
 
-			daoUser.beginTransaction().update(editedUser).commitTransaction().closeAll();
-
+			repo.save(editedUser);
+			
 			Stage window = (Stage) btnCancelar.getScene().getWindow();
 			window.close();
 
@@ -109,15 +114,13 @@ public class cadastroUsuarioController {
 			boolean usuarioMestre = false;
 			Empresas_Pessoas empresa = user.getIdEmpresas_Pessoa();
 
-			DAOHibernate<Usuarios> daoUser = new DAOHibernate<>(Usuarios.class);
-
 			if (checkboxMestre.isSelected()) {
 				usuarioMestre = true;
 			}
 			Usuarios user = new Usuarios(nome, email, usuario, senha, usuarioMestre, empresa);
 
-			daoUser.beginTransaction().save(user).commitTransaction().closeAll();
-
+			repo.save(user);
+			
 			Notifications.create().title("Alerta").text("Usuario criado com sucesso! " + "\n" + "Nome de usuario = "
 					+ user.getUsuario() + "\n" + "Senha = " + user.getSenha()).showConfirm();
 		}
