@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 import com.gadomanager.gadomanager.classes.Empresas_Pessoas;
 import com.gadomanager.gadomanager.classes.Usuarios;
-import com.gadomanager.gadomanager.utils.DAOHibernate;
+import com.gadomanager.gadomanager.repos.UsuarioRepository;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -46,13 +46,10 @@ public class loginController {
 	@Autowired
 	private ApplicationContext context;
 	
+	@Autowired
+	private UsuarioRepository repo;
 	
-	private DAOHibernate<Usuarios> createCon() {
 
-		DAOHibernate<Usuarios> dao = new DAOHibernate<>();
-		return dao;
-	}
-	
 	@FXML
 	private void loginOnEnter(KeyEvent e) throws Exception {
 		if (e.getCode() == KeyCode.ENTER) {
@@ -73,7 +70,6 @@ public class loginController {
 	@FXML
 	private void login() throws Exception {
 		
-		DAOHibernate<Usuarios> dao = createCon();
 		
 		String usuario = userLogin.getText();
 
