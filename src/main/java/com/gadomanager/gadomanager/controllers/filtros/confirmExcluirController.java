@@ -5,6 +5,8 @@ import org.springframework.stereotype.Component;
 import com.gadomanager.gadomanager.classes.Alimentos;
 import com.gadomanager.gadomanager.classes.Bovinos;
 import com.gadomanager.gadomanager.classes.Usuarios;
+import com.gadomanager.gadomanager.classes.Vacina;
+import com.gadomanager.gadomanager.classes.Veterinario;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -42,7 +44,15 @@ public class confirmExcluirController {
 			texto += "Ração utilizada: " + ((Alimentos) classobj).getIdracao().getDescricao() + "\n";
 			texto += "Para o Rebanho " + ((Alimentos) classobj).getIdRebanho().getNome() + "\n";
 			labelClass.setText(texto);
-		}
+		}else if (classobj instanceof Vacina) {
+    		String texto = "Descrição: " + ((Vacina) classobj).getDescricao() + "\n";
+    		labelClass.setText(texto);
+    	}else if (classobj instanceof Veterinario) {
+    		String texto = "Nome: " + ((Veterinario) classobj).getNome() + "\n";
+    		texto += "CPF: " + ((Veterinario) classobj).getCpf() + "\n";
+    		texto += "CRMV: " + ((Veterinario) classobj).getCrmv() + "\n";
+    		labelClass.setText(texto);
+    	}
     }
 
     public boolean returnDelete() {

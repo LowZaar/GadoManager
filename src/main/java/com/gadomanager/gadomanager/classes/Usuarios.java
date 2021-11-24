@@ -30,8 +30,6 @@ public class Usuarios {
 	@JoinColumn(name = "idEmpresas_Pessoa")
 	private Empresas_Pessoas idEmpresasPessoa;
 	
-	
-	
 	public Usuarios() {
 		
 	}
@@ -45,7 +43,7 @@ public class Usuarios {
 		this.usuario = usuario;
 		this.senha = senha;
 		this.usuarioMestre = usuarioMestre;
-		this.idEmpresasPessoa = idEmpresas_Pessoa;
+		this.idEmpresas_Pessoa = idEmpresas_Pessoa;
 	}
 
 
@@ -99,12 +97,12 @@ public class Usuarios {
 		this.usuarioMestre = usuarioMestre;
 	}
 
-	public Empresas_Pessoas getIdEmpresasPessoa() {
-		return idEmpresasPessoa;
+	public Empresas_Pessoas getIdEmpresas_Pessoa() {
+		return idEmpresas_Pessoa;
 	}
 
 	public void setIdEmpresas_Pessoa(Empresas_Pessoas idEmpresas_Pessoa) {
-		this.idEmpresasPessoa = idEmpresas_Pessoa;
+		this.idEmpresas_Pessoa = idEmpresas_Pessoa;
 	}
 	
 	

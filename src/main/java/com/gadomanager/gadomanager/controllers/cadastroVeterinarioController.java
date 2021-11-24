@@ -77,6 +77,9 @@ public class cadastroVeterinarioController {
 			vetEdit.setCrmv(crmv);
 
 			daoVet.beginTransaction().update(vetEdit).commitTransaction().closeAll();
+			
+			Notifications.create().title("Alerta").text("Veterinario(a) alterado com sucesso!").showConfirm();
+
 		} else {
 
 			String nome = txtNome.getText();

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 import com.gadomanager.gadomanager.classes.Empresas_Pessoas;
 import com.gadomanager.gadomanager.classes.Usuarios;
-import com.gadomanager.gadomanager.repos.UsuarioRepository;
+import com.gadomanager.gadomanager.utils.DAOHibernate;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -46,8 +46,12 @@ public class loginController {
 	@Autowired
 	private ApplicationContext context;
 	
-	@Autowired
-	private UsuarioRepository repo;
+	
+	private DAOHibernate<Usuarios> createCon() {
+
+		DAOHibernate<Usuarios> dao = new DAOHibernate<>();
+		return dao;
+	}
 	
 	@FXML
 	private void loginOnEnter(KeyEvent e) throws Exception {
@@ -68,7 +72,9 @@ public class loginController {
 	
 	@FXML
 	private void login() throws Exception {
-				
+		
+		DAOHibernate<Usuarios> dao = createCon();
+		
 		String usuario = userLogin.getText();
 
 		String senha = passwordLogin.getText();
@@ -76,6 +82,7 @@ public class loginController {
 		Usuarios query = repo.findByUsuarioAndSenha(usuario, senha);
 		
 		System.out.println(query);
+
 		
 		if (query == null) {
 			Notifications.create().title("Alerta de Login").text("Usuario ou senha incorreto").showWarning();

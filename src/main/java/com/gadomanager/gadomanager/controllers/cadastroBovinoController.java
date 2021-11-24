@@ -105,7 +105,7 @@ public class cadastroBovinoController {
 		char fem = 'F';
 		// Combo Bovino Pai e Mãe
 		DAOHibernate<Bovinos> daoB = new DAOHibernate<Bovinos>(Bovinos.class);
-		List<Bovinos> queryB = daoB.getAllByNamedQuery("selectBovinobyEmpresa", "empresa", user.getIdEmpresasPessoa());
+		List<Bovinos> queryB = daoB.getAllByNamedQuery("selectBovinobyEmpresa", "empresa", user.getIdEmpresas_Pessoa());
 		daoB.closeAll();
 		queryB.toString();
 		comboBovinoPai.getItems().add("Selecione...");
@@ -130,7 +130,7 @@ public class cadastroBovinoController {
 		// Combo Rebanho
 		DAOHibernate<Rebanhos> daoRE = new DAOHibernate<Rebanhos>(Rebanhos.class);
 		List<Rebanhos> queryRe = daoRE.getAllByNamedQuery("selectRebanhobyEmpresa", "empresa",
-				user.getIdEmpresasPessoa());
+				user.getIdEmpresas_Pessoa());
 		daoRE.closeAll();
 		for (Rebanhos rebanhos : queryRe) {
 			comboRebanho.getItems().add(rebanhos.getNome());
@@ -149,7 +149,7 @@ public class cadastroBovinoController {
 	private Rebanhos findRebanho(String rebanhoNome) {
 		DAOHibernate<Rebanhos> daoRE = new DAOHibernate<Rebanhos>(Rebanhos.class);
 		Rebanhos rebanho = daoRE.getFirst("selectRebanhobyNomeEmpresa", "nome", rebanhoNome, "empresa",
-				user.getIdEmpresasPessoa());
+				user.getIdEmpresas_Pessoa());
 		if (rebanho == null) {
 			return null;
 		} else {
@@ -170,7 +170,7 @@ public class cadastroBovinoController {
 	private Bovinos findBovino(String bovinoNome) {
 		DAOHibernate<Bovinos> daoB = new DAOHibernate<Bovinos>(Bovinos.class);
 		Bovinos bovino = daoB.getFirst("selectBovinobyNomeEmpresa", "nome", bovinoNome, "empresa",
-				user.getIdEmpresasPessoa());
+				user.getIdEmpresas_Pessoa());
 		if (bovino == null) {
 			return null;
 		} else {
@@ -234,7 +234,7 @@ public class cadastroBovinoController {
 			Bovinos bovinoMae = findBovino(comboBovinoMae.getValue());
 			bovinoEdit.setIdBovino_mae(bovinoMae);
 
-			bovinoEdit.setIdEmpresaPessoas(user.getIdEmpresasPessoa());
+			bovinoEdit.setIdEmpresaPessoas(user.getIdEmpresas_Pessoa());
 
 			daoB.beginTransaction().update(bovinoEdit).commitTransaction().closeAll();
 
@@ -291,7 +291,7 @@ public class cadastroBovinoController {
 			Bovinos bovinoMae = findBovino(comboBovinoMae.getValue());
 			bovino.setIdBovino_mae(bovinoMae);
 
-			bovino.setIdEmpresaPessoas(user.getIdEmpresasPessoa());
+			bovino.setIdEmpresaPessoas(user.getIdEmpresas_Pessoa());
 
 			DAOHibernate<Bovinos> daoBovino = new DAOHibernate<>(Bovinos.class);
 			daoBovino.beginTransaction().save(bovino).commitTransaction().closeAll();

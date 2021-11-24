@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="308.0" maxWidth="455.0" minHeight="273.0" minWidth="455.0" prefHeight="273.0" prefWidth="455.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gadomanager.gadomanager.controllers.filtros.filtroVacinaController">
+   <children>
+      <Label layoutX="75.0" layoutY="14.0" text="Filtro de Vacinas">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+      <Label layoutX="17.0" layoutY="97.0" text="Descição:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnFiltrar" layoutX="271.0" layoutY="234.0" mnemonicParsing="false" onAction="#filtrar" prefHeight="25.0" prefWidth="75.0" text="Filtrar">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
+      <Button fx:id="btnCancelar" layoutX="359.0" layoutY="234.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="25.0" prefWidth="75.0" text="Cancelar">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
+      <TextArea fx:id="txtDescricao" layoutX="17.0" layoutY="124.0" prefHeight="90.0" prefWidth="430.0" />
+   </children>
+</Pane>

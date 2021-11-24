@@ -112,7 +112,7 @@ public class cadastroUsuarioController {
 			String senha = passSenha.getText();
 			String email = txtEmail.getText();
 			boolean usuarioMestre = false;
-			Empresas_Pessoas empresa = user.getIdEmpresasPessoa();
+			Empresas_Pessoas empresa = user.getIdEmpresas_Pessoa();
 
 			if (checkboxMestre.isSelected()) {
 				usuarioMestre = true;
