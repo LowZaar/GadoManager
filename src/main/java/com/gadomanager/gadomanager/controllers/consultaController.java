@@ -184,7 +184,7 @@ public class consultaController {
 
 	private ObservableList<Object> getBovinos() {
 		ObservableList<Object> list = FXCollections.observableArrayList();
-
+		
 		DAOHibernate<Bovinos> daoB = new DAOHibernate<Bovinos>(Bovinos.class);
 		List<Bovinos> query = daoB.getAllByNamedQuery("selectBovinobyEmpresa", "empresa", user.getIdEmpresasPessoa());
 		list.addAll(query);

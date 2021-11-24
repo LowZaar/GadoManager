@@ -27,10 +27,8 @@ public class Usuarios {
 	private boolean usuarioMestre;
 	
 	@ManyToOne
-	@JoinColumn(name = "idEmpresa_Pessoa")
+	@JoinColumn(name = "idEmpresas_Pessoa")
 	private Empresas_Pessoas idEmpresasPessoa;
-	
-
 	
 	
 	
