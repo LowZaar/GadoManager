@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import com.gadomanager.gadomanager.classes.Alimentos;
 import com.gadomanager.gadomanager.classes.Bovinos;
+import com.gadomanager.gadomanager.classes.Racas;
 import com.gadomanager.gadomanager.classes.Usuarios;
 import com.gadomanager.gadomanager.classes.Vacina;
 import com.gadomanager.gadomanager.classes.Veterinario;
@@ -21,6 +22,7 @@ import com.gadomanager.gadomanager.controllers.filtros.filtroUsuarioController;
 import com.gadomanager.gadomanager.controllers.filtros.filtroVacinaController;
 import com.gadomanager.gadomanager.controllers.filtros.filtroVeterinarioController;
 import com.gadomanager.gadomanager.repos.AlimentoRepository;
+import com.gadomanager.gadomanager.repos.RacasRepository;
 import com.gadomanager.gadomanager.utils.DAOHibernate;
 
 import javafx.beans.property.ReadOnlyStringWrapper;
@@ -48,6 +50,9 @@ public class consultaController {
 
 	@Autowired
 	private AlimentoRepository repoAlimento;
+	
+	@Autowired
+	private RacasRepository racaRepo;
 	
 	@FXML
 	private Button btnFiltro;
@@ -397,11 +402,51 @@ public class consultaController {
 		setCurrentPerspective("Alimentação");
 		menuConsulta.setText(currentPerspective);
 
-		btnEditar.setDisable(true);
+		btnEditar.setDisable(false);
 		btnExcluir.setDisable(false);
 		
 		setPerspectiveList(getAlimentos());
 		consultarAlimentos();
+	}
+	
+	private void consultarRacas() {
+
+		tableConsulta.getColumns().clear();
+		tableConsulta.getItems().clear();
+		tableConsulta.setItems(getPerspectiveList());
+
+		// Colunas
+		
+		TableColumn<Object, String> idCol = new TableColumn<>("Código");
+		idCol.setCellValueFactory(new PropertyValueFactory<>("idRaca"));
+		tableConsulta.getColumns().add(idCol);
+		
+		TableColumn<Object, String> nomeCol = new TableColumn<>("Nome");
+		nomeCol.setCellValueFactory(new PropertyValueFactory<>("nomeRaca"));
+		tableConsulta.getColumns().add(nomeCol);
+
+	}
+
+	private ObservableList<Object> getRacas() {
+		ObservableList<Object> list = FXCollections.observableArrayList();
+
+		List<Racas> query = Streamable.of(racaRepo.findAll()).toList();
+		
+		list.addAll(query);
+
+		return list;
+	}
+	
+	@FXML
+	public void racasClick() {
+		setCurrentPerspective("Raças");
+		menuConsulta.setText(currentPerspective);
+
+		btnEditar.setDisable(false);
+		btnExcluir.setDisable(false);
+		
+		setPerspectiveList(getRacas());
+		consultarRacas();
 	}
 
 	@FXML
@@ -486,6 +531,8 @@ public class consultaController {
 				consultarVeterinarios();
 			}
 		}
+		
+		
 	}
 		
 	@FXML
@@ -534,8 +581,45 @@ public class consultaController {
 			editStage.showAndWait();
 			setPerspectiveList(getUsuarios());
 			consultarUsuarios();
+			
+		} else if (perspectiva == "Raças") {
+			Racas racas = (Racas) tableConsulta.getItems().get(index);
+			
+			fxmledit = getClass().getResource("/fxml/CadastroDeRaca.fxml");
+			loader.setLocation(fxmledit);
+			loader.setControllerFactory(context::getBean);
+			Parent editP = loader.load();
+			Scene editScene = new Scene(editP);
+			cadastroRacaController cadastroRacaController = loader.getController();
+			cadastroRacaController.setEdit(true);
+			cadastroRacaController.setRacaEdit(racas);
+			cadastroRacaController.populateFields(racas);
+			editStage.initModality(Modality.APPLICATION_MODAL);
+			editStage.setScene(editScene);
+			editStage.showAndWait();
+			setPerspectiveList(getRacas());
+			consultarRacas();
 
-		} else if (perspectiva == "Vacinas") {
+		}else if (perspectiva == "Alimentação") {
+			Alimentos alimento = (Alimentos) tableConsulta.getItems().get(index);
+			
+			fxmledit = getClass().getResource("/fxml/Alimentacao.fxml");
+			loader.setLocation(fxmledit);
+			loader.setControllerFactory(context::getBean);
+			Parent editP = loader.load();
+			Scene editScene = new Scene(editP);
+			cadastroAlimentacaoController cadastroAlimentacaoController = loader.getController();
+			cadastroAlimentacaoController.setUser(user);
+			cadastroAlimentacaoController.setEdit(true);
+			cadastroAlimentacaoController.setAlimentoEdit(alimento);
+			cadastroAlimentacaoController.populateFields(alimento);
+			editStage.initModality(Modality.APPLICATION_MODAL);
+			editStage.setScene(editScene);
+			editStage.showAndWait();
+			setPerspectiveList(getAlimentos());
+			consultarAlimentos();
+
+		}else if (perspectiva == "Vacinas") {
 			Vacina vacina = (Vacina) tableConsulta.getItems().get(index);
 
 			fxmledit = getClass().getResource("/fxml/Vacina.fxml");
@@ -646,7 +730,6 @@ public class consultaController {
 		if (perspectiva == "Alimentos") {
 			Alimentos alimento = (Alimentos) tableConsulta.getItems().get(index);
 			
-			
 			confirmExcluirController.setClass(alimento);
 			dialogStage.showAndWait();
 			Boolean excluir = confirmExcluirController.returnDelete();
@@ -655,6 +738,21 @@ public class consultaController {
 				repoAlimento.deleteById(alimento.getIdAlimento());
 				setPerspectiveList(getAlimentos());
 				consultarAlimentos();
+			}
+		}
+		
+		if (perspectiva == "Raças") {
+			Racas racas = (Racas) tableConsulta.getItems().get(index);
+			
+			
+			confirmExcluirController.setClass(racas);
+			dialogStage.showAndWait();
+			Boolean excluir = confirmExcluirController.returnDelete();
+			if (excluir) {
+				
+				racaRepo.deleteById(racas.getIdRaca());
+				setPerspectiveList(getRacas());
+				consultarRacas();
 			}
 		}
 	}

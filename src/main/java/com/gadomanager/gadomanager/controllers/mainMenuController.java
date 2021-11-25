@@ -90,6 +90,8 @@ public class mainMenuController {
 		Scene racaScene = new Scene(racaP);
 
 		cadastroRaca.setScene(racaScene);
+		cadastroRacaController cadastroRacaController = loader.getController();
+		cadastroRacaController.setEdit(false);
 		cadastroRaca.getIcons().add(new Image(getClass().getResourceAsStream("/images/taskIcon.png")));
 		cadastroRaca.show();
 
@@ -120,7 +122,8 @@ public class mainMenuController {
 		URL fxmlBCS = getClass().getResource("/fxml/CadastroDeBCS.fxml");
 
 		FXMLLoader loader = new FXMLLoader(fxmlBCS);
-
+		loader.setControllerFactory(context::getBean);
+		
 		Parent bcsP = loader.load();
 
 		Stage cadastroBCS = new Stage();
@@ -253,7 +256,8 @@ public class mainMenuController {
 			URL fxmlUsuario = getClass().getResource("/fxml/CadastroDeUsuarios.fxml");
 
 			FXMLLoader loader = new FXMLLoader(fxmlUsuario);
-
+			loader.setControllerFactory(context::getBean);
+			
 			Parent usuarioP = loader.load();
 
 			Stage cadastroUsuario = new Stage();
