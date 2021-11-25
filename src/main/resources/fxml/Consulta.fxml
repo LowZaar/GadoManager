@@ -29,10 +29,11 @@
    <children>
       <SplitMenuButton fx:id="menuConsulta" alignment="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="142.0" text="Consulta">
         <items>
+            <MenuItem fx:id="menuConsultaBovino1" mnemonicParsing="false" onAction="#alimentosClick" text="Alimentos" />
           <MenuItem fx:id="menuConsultaBovino" mnemonicParsing="false" onAction="#bovinoClick" text="Bovinos" />
+            <MenuItem fx:id="menuConsultaBovino2" mnemonicParsing="false" onAction="#racasClick" text="Raças" />
           <MenuItem fx:id="menuConsultaUsuarios" mnemonicParsing="false" onAction="#usuarioClick" text="Usuarios" />
             <MenuItem fx:id="menuConsultaVeterinarios" mnemonicParsing="false" onAction="#veterinariosClick" text="Veterinários" />
-            <MenuItem fx:id="menuConsultaBovino1" mnemonicParsing="false" onAction="#alimentosClick" text="Alimentos" />
        		<MenuItem fx:id="menuConsultaVacinas" mnemonicParsing="false" onAction="#vacinasClick" text="Vacinas" />
        
         </items>

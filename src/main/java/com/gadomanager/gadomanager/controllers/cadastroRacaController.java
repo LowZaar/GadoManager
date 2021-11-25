@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 import com.gadomanager.gadomanager.classes.Racas;
 import com.gadomanager.gadomanager.repos.RacasRepository;
+import com.gadomanager.gadomanager.utils.DAOHibernate;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -26,19 +27,37 @@ public class cadastroRacaController {
 	
 	@FXML
 	private Button btnCancelar;
+
+	private Boolean editMode;
+	
+	private Racas racaEdit;
 	
 	@FXML
 	public void salvar() {
 		
-//		DAOHibernate<Racas> daoRa = new DAOHibernate<>(Racas.class);
+		if (editMode) {
+
+			racaEdit = this.getRacaEdit();
+
+			DAOHibernate<Racas> daoRaca = new DAOHibernate<>(Racas.class);
+
+			Racas editedRaca = daoRaca.getAllById(racaEdit.getIdRaca());
+
+			String nome = txtNome.getText();
+			editedRaca.setNomeRaca(nome);
+
+
+			repo.save(editedRaca);
+			
+			Stage window = (Stage) btnCancelar.getScene().getWindow();
+			window.close();
+
 		
-		if (txtNome.getText().isEmpty()) {
+		}else if (txtNome.getText().isEmpty()) {
 			
 			Notifications.create().title("Cadastro de Raças").text("Nome de raça vazio!!").showError();
 		
 		}else {
-			
-//			daoRa.beginTransaction().save(new Racas(txtNome.getText())).commitTransaction().closeAll();
 			
 			String nome = txtNome.getText();
 			
@@ -54,10 +73,33 @@ public class cadastroRacaController {
 		
 	}
 	
+	public Racas getRacaEdit() {
+		return racaEdit;
+	}
+
+	public void setRacaEdit(Racas racaEdit) {
+		this.racaEdit = racaEdit;
+	}
+
 	@FXML
 	public void cancelar() {
 		
 		Stage currentStage = (Stage) btnCancelar.getScene().getWindow();
 		currentStage.close();
+	}
+
+	public void populateFields(Racas racas) {
+		txtNome.setText(racas.getNomeRaca());
+		
+	}
+
+	public void setEdit(boolean EditMode) {
+		
+		if (EditMode) {
+			this.editMode = true;
+		} else {
+			this.editMode = false;
+		}
+		
 	}
 }

@@ -1,5 +1,6 @@
 package com.gadomanager.gadomanager.controllers;
 
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
@@ -49,8 +50,27 @@ public class cadastroAlimentacaoController {
 
 	@FXML
 	private Button btnCancelar;
-
 	
+	private Boolean editMode;
+	
+	private Alimentos alimentoEdit;
+
+	public Boolean getEditMode() {
+		return editMode;
+	}
+
+	public void setEditMode(Boolean editMode) {
+		this.editMode = editMode;
+	}
+
+	public Alimentos getAlimentoEdit() {
+		return alimentoEdit;
+	}
+
+	public void setAlimentoEdit(Alimentos alimentoEdit) {
+		this.alimentoEdit = alimentoEdit;
+	}
+
 	private Usuarios user;
 
 
@@ -61,7 +81,7 @@ public class cadastroAlimentacaoController {
 	public void setUser(Usuarios user) {
 		this.user = user;
 	}
-
+	
 	public void populateCombos() {
 
 		// Combo Rebanho
@@ -112,6 +132,10 @@ public class cadastroAlimentacaoController {
 		return Date.from(data.atStartOfDay(zoneidDefault).toInstant());
 	}
 	
+	public LocalDate DateToLocalDate(Date date) {
+		return Instant.ofEpochMilli(date.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
+	}
+	
 	@FXML
 	public void salvar() {
 		
@@ -144,5 +168,26 @@ public class cadastroAlimentacaoController {
 
 		Stage window = (Stage) btnCancelar.getScene().getWindow();
 		window.close();
+	}
+
+	public void setEdit(boolean EditMode) {
+		if (EditMode) {
+			this.editMode = true;
+		} else {
+			this.editMode = false;
+		}
+		
+	}
+
+	public void populateFields(Alimentos alimento) {
+		populateCombos();
+		
+		txtObservacoes.setText(alimento.getObservacoes());
+		comboRebanho.getSelectionModel().select(String.valueOf(alimento.getIdRebanho()));
+		comboRacao.getSelectionModel().select(String.valueOf(alimento.getIdracao()));
+		dateDataInicio.setValue(DateToLocalDate(alimento.getDataInicio()));
+		dateDataFinal.setValue(DateToLocalDate(alimento.getDataTermino()));
+		
+		
 	}
 }
