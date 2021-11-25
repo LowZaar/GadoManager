@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.controlsfx.control.Notifications;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -149,12 +150,31 @@ public class cadastroAlimentacaoController {
 		Racoes racao = findRacao(comboRacao.getValue());
 		String observacao = txtObservacoes.getText(); 
 		
-		Alimentos alimento = new Alimentos(rebanho, date1, date2, racao, observacao);	
 		
-		aliRepo.save(alimento);
+		if (editMode) {
+			Optional<Alimentos> aliopt = aliRepo.findById(alimentoEdit.getIdAlimento());
+			Alimentos aliEdit = aliopt.get();
+			if (aliEdit != null) {
+				aliEdit.setDataInicio(date1);
+				aliEdit.setDataTermino(date2);
+				aliEdit.setIdRebanho(rebanho);
+				aliEdit.setIdracao(racao);
+				aliEdit.setObservacoes(observacao);
+				
+				aliRepo.save(aliEdit);
+				
+				Stage window = (Stage) btnCancelar.getScene().getWindow();
+				window.close();
+			}
+			
+		}else {
+			Alimentos alimento = new Alimentos(rebanho, date1, date2, racao, observacao);	
+			aliRepo.save(alimento);
+
+			Notifications.create().title("Alerta").text("Nova rotina de Alimentação adicionada com sucesso!")
+			.showConfirm();
+		}
 		
-		Notifications.create().title("Alerta").text("Nova rotina de Alimentação adicionada com sucesso!")
-		.showConfirm();
 		
 		dateDataInicio.setValue(null);
 		dateDataFinal.setValue(null);
@@ -183,8 +203,8 @@ public class cadastroAlimentacaoController {
 		populateCombos();
 		
 		txtObservacoes.setText(alimento.getObservacoes());
-		comboRebanho.getSelectionModel().select(String.valueOf(alimento.getIdRebanho()));
-		comboRacao.getSelectionModel().select(String.valueOf(alimento.getIdracao()));
+		comboRebanho.getSelectionModel().select(String.valueOf(alimento.getIdRebanho().getNome()));
+		comboRacao.getSelectionModel().select(String.valueOf(alimento.getIdracao().getDescricao()));
 		dateDataInicio.setValue(DateToLocalDate(alimento.getDataInicio()));
 		dateDataFinal.setValue(DateToLocalDate(alimento.getDataTermino()));
 		//TO LOCO

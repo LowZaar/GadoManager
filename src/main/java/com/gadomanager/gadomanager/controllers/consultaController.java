@@ -727,7 +727,7 @@ public class consultaController {
 				consultarVacinas();
 			}
 		}
-		if (perspectiva == "Alimentos") {
+		if (perspectiva == "Alimentação") {
 			Alimentos alimento = (Alimentos) tableConsulta.getItems().get(index);
 			
 			confirmExcluirController.setClass(alimento);
