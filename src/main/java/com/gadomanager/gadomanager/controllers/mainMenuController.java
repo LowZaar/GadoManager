@@ -243,6 +243,7 @@ public class mainMenuController {
 		cadastroAlimentacao.setScene(alimentacaoScene);
 		cadastroAlimentacaoController cadastroAlimentacaoController = loader.getController();
 		cadastroAlimentacaoController.setUser(userLogin);
+		cadastroAlimentacaoController.setEdit(false);
 		cadastroAlimentacaoController.populateCombos();
 		cadastroAlimentacao.getIcons().add(new Image(getClass().getResourceAsStream("/images/taskIcon.png")));
 		cadastroAlimentacao.show();

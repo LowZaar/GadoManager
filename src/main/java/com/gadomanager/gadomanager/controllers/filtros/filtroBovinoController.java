@@ -4,6 +4,8 @@ import java.sql.ResultSet;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 import com.gadomanager.gadomanager.classes.Bovinos;
 import com.gadomanager.gadomanager.classes.Racas;
 import com.gadomanager.gadomanager.classes.Rebanhos;
@@ -20,6 +22,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+@Component
 public class filtroBovinoController {
 
 	@FXML
@@ -45,11 +48,12 @@ public class filtroBovinoController {
 
 	@FXML
 	private Button btnFiltrar;
-
+	
 	private consultaController consultaController;
 
 	private Usuarios user;
 
+		
 	public Usuarios getUser() {
 		return user;
 	}
@@ -83,6 +87,7 @@ public class filtroBovinoController {
 
 	}
 
+	
 	@FXML
 	public void filtrar() throws Exception {
 

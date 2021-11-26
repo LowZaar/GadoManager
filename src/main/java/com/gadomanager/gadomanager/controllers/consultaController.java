@@ -38,7 +38,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SplitMenuButton;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -66,6 +69,9 @@ public class consultaController {
 	@FXML
 	private Button btnFechar;
 
+	@FXML
+	private TextField txtFiltro;
+	
 	@FXML
 	public TableView2<Object> tableConsulta;
 
@@ -384,7 +390,10 @@ public class consultaController {
 		TableColumn<Object, String> DataTerminoCol = new TableColumn<>("Data Início");
 		DataTerminoCol.setCellValueFactory(new PropertyValueFactory<>("dataTermino"));
 		tableConsulta.getColumns().add(DataTerminoCol);
-
+		
+		TableColumn<Object, String> ObservacaoCol = new TableColumn<>("Observações");
+		ObservacaoCol.setCellValueFactory(new PropertyValueFactory<>("observacoes"));
+		tableConsulta.getColumns().add(ObservacaoCol);
 	}
 
 	private ObservableList<Object> getAlimentos() {
@@ -507,7 +516,7 @@ public class consultaController {
 			filtroStage.initModality(Modality.APPLICATION_MODAL);
 			filtroStage.setScene(filtroScene);
 			filtroStage.showAndWait();
-			if (getPerspectiveList().isEmpty()) {
+			if (getPerspectiveList().isEmpty() || getPerspectiveList() == null) {
 				setPerspectiveList(getUsuarios());
 				consultarUsuarios();
 			} else {
@@ -757,6 +766,36 @@ public class consultaController {
 		}
 	}
 
+	@FXML
+	public void search() {
+		String chave = txtFiltro.getText();
+		
+		if (currentPerspective == "Alimentação") {
+			List<Alimentos> query = Streamable.of(repoAlimento.search(chave)).toList();
+			ObservableList<Object> list = FXCollections.observableArrayList();	
+			
+			list.addAll(query);
+			setPerspectiveList(list);
+			consultarAlimentos();
+		} else if (currentPerspective == "Raças") {
+			List<Racas> query = Streamable.of(racaRepo.search(chave)).toList();
+			ObservableList<Object> list = FXCollections.observableArrayList();
+			
+			list.addAll(query);
+			setPerspectiveList(list);
+			consultarRacas();
+		}
+		
+	}
+	
+	@FXML
+	private void searchOnEnter(KeyEvent e) throws Exception {
+		if (e.getCode() == KeyCode.ENTER) {
+			search();
+		}
+	}
+	
+	
 	@FXML
 	public void fechar() {
 
