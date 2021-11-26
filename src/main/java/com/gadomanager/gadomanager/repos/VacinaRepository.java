@@ -1,12 +1,16 @@
 package com.gadomanager.gadomanager.repos;
 
+import java.util.List;
+
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
 
 import com.gadomanager.gadomanager.classes.Vacina;
 
-@Repository
 public interface VacinaRepository extends CrudRepository<Vacina, String>{
+	
+	@Query("SELECT v from Vacina v where v.descricao like %?1%")
+    public List<Vacina> search(String filter);
 	
 //	//selects
 //	

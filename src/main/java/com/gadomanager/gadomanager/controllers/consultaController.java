@@ -23,6 +23,8 @@ import com.gadomanager.gadomanager.controllers.filtros.filtroVacinaController;
 import com.gadomanager.gadomanager.controllers.filtros.filtroVeterinarioController;
 import com.gadomanager.gadomanager.repos.AlimentoRepository;
 import com.gadomanager.gadomanager.repos.RacasRepository;
+import com.gadomanager.gadomanager.repos.VacinaRepository;
+import com.gadomanager.gadomanager.repos.VeterinarioRepository;
 import com.gadomanager.gadomanager.utils.DAOHibernate;
 
 import javafx.beans.property.ReadOnlyStringWrapper;
@@ -56,6 +58,12 @@ public class consultaController {
 	
 	@Autowired
 	private RacasRepository racaRepo;
+	
+	@Autowired
+	private VacinaRepository vacRepo;
+	
+	@Autowired
+	private VeterinarioRepository vetRepo;
 	
 	@FXML
 	private Button btnFiltro;
@@ -786,6 +794,22 @@ public class consultaController {
 			consultarRacas();
 		}
 		
+	 else if (currentPerspective == "Vacinas") {
+		List<Vacina> query = Streamable.of(vacRepo.search(chave)).toList();
+		ObservableList<Object> list = FXCollections.observableArrayList();
+		
+		list.addAll(query);
+		setPerspectiveList(list);
+		consultarVacinas();
+	}
+	 else if (currentPerspective == "Veterinarios") {
+		List<Veterinario> query = Streamable.of(vetRepo.search(chave)).toList();
+		ObservableList<Object> list = FXCollections.observableArrayList();
+		
+		list.addAll(query);
+		setPerspectiveList(list);
+		consultarVeterinarios();
+	}
 	}
 	
 	@FXML
