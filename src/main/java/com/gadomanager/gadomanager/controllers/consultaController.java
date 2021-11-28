@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import com.gadomanager.gadomanager.classes.Alimentos;
 import com.gadomanager.gadomanager.classes.Bovinos;
+
 import com.gadomanager.gadomanager.classes.Medicamentos;
 import com.gadomanager.gadomanager.classes.Racas;
 import com.gadomanager.gadomanager.classes.Racoes;
@@ -29,6 +30,7 @@ import com.gadomanager.gadomanager.repos.AlimentoRepository;
 import com.gadomanager.gadomanager.repos.MedicamentoRepository;
 import com.gadomanager.gadomanager.repos.RacasRepository;
 import com.gadomanager.gadomanager.repos.RacoesRepository;
+import com.gadomanager.gadomanager.repos.RacasRepository;
 import com.gadomanager.gadomanager.repos.VacinaRepository;
 import com.gadomanager.gadomanager.repos.VeterinarioRepository;
 import com.gadomanager.gadomanager.utils.DAOHibernate;
@@ -77,6 +79,10 @@ public class consultaController {
 	@Autowired
 	private RacoesRepository racRepo;
 	
+  @Autowired
+	private VeterinarioRepository vetRepo;
+	
+
 	@FXML
 	private Button btnFiltro;
 
@@ -150,6 +156,7 @@ public class consultaController {
 		tableConsulta.setPlaceholder(new Label("Escolha uma opção de consulta"));
 	}
 	
+
 	private void consultarRacoes() {
 
 		tableConsulta.getColumns().clear();
@@ -188,7 +195,6 @@ public class consultaController {
 		setPerspectiveList(getRacoes());
 		consultarRacoes();
 	}
-	
 	
 	public void consultarBovino() {
 
@@ -520,7 +526,7 @@ public class consultaController {
 		setPerspectiveList(getRacas());
 		consultarRacas();
 	}
-	
+  
 	private void consultarMedicamentos() {
 
 		tableConsulta.getColumns().clear();
@@ -761,8 +767,8 @@ public class consultaController {
 			editStage.showAndWait();
 			setPerspectiveList(getMedicamentos());
 			consultarMedicamentos();
-		}
-		else if (perspectiva == "Alimentação") {
+		}else if (perspectiva == "Alimentação") {
+
 			Alimentos alimento = (Alimentos) tableConsulta.getItems().get(index);
 			
 			fxmledit = getClass().getResource("/fxml/Alimentacao.fxml");
@@ -933,7 +939,6 @@ public class consultaController {
 				consultarRacas();
 			}
 		}
-		
 		if (perspectiva == "Medicamentos") {
 			Medicamentos medicamento = (Medicamentos) tableConsulta.getItems().get(index);
 			DAOHibernate<Medicamentos> daoV = new DAOHibernate<>(Medicamentos.class);
@@ -999,6 +1004,7 @@ public class consultaController {
 		list.addAll(query);
 		setPerspectiveList(list);
 		consultarVeterinarios();
+     
 	} else if (currentPerspective == "Medicamentos") {
 		List<Medicamentos> query = Streamable.of(medRepo.search(chave)).toList();
 		ObservableList<Object> list = FXCollections.observableArrayList();
@@ -1015,6 +1021,8 @@ public class consultaController {
 		setPerspectiveList(list);
 		consultarRacoes();
 		}
+	}
+
 	}
 	
 	@FXML

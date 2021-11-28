@@ -23,7 +23,9 @@ public class cadastroMedicamentoController {
 	private Button btnSalvar;
 	
 	private Boolean editMode = false;
-		
+	
+  private Medicamentos medicamentos;
+  
 	@FXML
 	private Button btnCancelar;
 	
@@ -35,7 +37,7 @@ public class cadastroMedicamentoController {
 		}
 	}
 	
-	private Medicamentos medicamentos;
+
 	
 	public Medicamentos getMedicamento() {
 		return medicamentos;
@@ -77,7 +79,10 @@ public class cadastroMedicamentoController {
 			Notifications.create().title("Alerta").text("Medicação editada com sucesso").showConfirm();
 			
 		
-		}else { 
+		}
+	
+	@FXML
+	public void salvar() {
 		
 		String nome = txtNome.getText();
 		String principioAtivo = txtAPrincipioAtivo.getText();
@@ -95,6 +100,7 @@ public class cadastroMedicamentoController {
 		txtAPrincipioAtivo.clear();
 		
 	}
+
 	}
 	
 	@FXML

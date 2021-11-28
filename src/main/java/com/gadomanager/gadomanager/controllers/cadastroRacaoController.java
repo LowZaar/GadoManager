@@ -25,6 +25,7 @@ public class cadastroRacaoController {
 	@FXML
 	private Button btnCancelar;
 	
+
 	private Boolean editMode = false;
 
 	private Racoes racao;
@@ -72,7 +73,6 @@ public class cadastroRacaoController {
 			daoRac.beginTransaction().update(racEdit).commitTransaction().closeAll();
 		} else {
 			
-		
 		String observacao = txtAObservacao.getText();
 		
 		String descricao = txtDescricao.getText();
@@ -84,6 +84,7 @@ public class cadastroRacaoController {
 		daoR.beginTransaction().save(racao).commitTransaction().closeAll();
 		
 		Notifications.create().title("Alerta").text("Nova Ração adicionada com sucesso!").showConfirm();
+      
 		}
 	}
 	
