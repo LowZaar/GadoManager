@@ -38,7 +38,7 @@
 			<property name="hibernate.show_sql" value="false" />
 			<property name="hibernate.format_sql" value="true" />
 			<property name="hibernate.hbm2ddl.auto" value="update" />
-			<property name="javax.persistence.jdbc.password" value="GS0101"/>
+			<property name="javax.persistence.jdbc.password" value=""/>
 			
 		</properties>
 	</persistence-unit>

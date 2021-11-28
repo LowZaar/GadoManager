@@ -11,7 +11,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-
 @Entity
 @Table(name = "Alimentos")
 public class Alimentos {
@@ -19,27 +18,27 @@ public class Alimentos {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idAlimento;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "idRebanho")
 	private Rebanhos idRebanho;
-	
+
 	@Column(name = "dataInicio")
 	private Date dataInicio;
-	
+
 	@Column(name = "dataTermino")
 	private Date dataTermino;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "idRacao")
 	private Racoes idracao;
-	
+
 	private String observacoes;
-	
+
 	public Alimentos() {
-	
+
 	}
-	
+
 	public Alimentos(Rebanhos idRebanho, Date dataInicio, Date dataTermino, Racoes idracao, String observacoes) {
 		this.idRebanho = idRebanho;
 		this.dataInicio = dataInicio;
@@ -47,8 +46,6 @@ public class Alimentos {
 		this.idracao = idracao;
 		this.observacoes = observacoes;
 	}
-
-
 
 	public Long getIdAlimento() {
 		return idAlimento;
@@ -97,7 +94,5 @@ public class Alimentos {
 	public void setObservacoes(String observacoes) {
 		this.observacoes = observacoes;
 	}
-	
-	
 
 }

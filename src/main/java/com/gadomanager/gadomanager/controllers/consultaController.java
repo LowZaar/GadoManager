@@ -30,7 +30,6 @@ import com.gadomanager.gadomanager.repos.AlimentoRepository;
 import com.gadomanager.gadomanager.repos.MedicamentoRepository;
 import com.gadomanager.gadomanager.repos.RacasRepository;
 import com.gadomanager.gadomanager.repos.RacoesRepository;
-import com.gadomanager.gadomanager.repos.RacasRepository;
 import com.gadomanager.gadomanager.repos.VacinaRepository;
 import com.gadomanager.gadomanager.repos.VeterinarioRepository;
 import com.gadomanager.gadomanager.utils.DAOHibernate;
@@ -63,25 +62,21 @@ public class consultaController {
 
 	@Autowired
 	private AlimentoRepository repoAlimento;
-	
+
 	@Autowired
 	private RacasRepository racaRepo;
-	
+
 	@Autowired
 	private VacinaRepository vacRepo;
-	
+
 	@Autowired
 	private MedicamentoRepository medRepo;
-	
+
 	@Autowired
 	private VeterinarioRepository vetRepo;
-	
+
 	@Autowired
 	private RacoesRepository racRepo;
-	
-  @Autowired
-	private VeterinarioRepository vetRepo;
-	
 
 	@FXML
 	private Button btnFiltro;
@@ -97,7 +92,7 @@ public class consultaController {
 
 	@FXML
 	private TextField txtFiltro;
-	
+
 	@FXML
 	public TableView2<Object> tableConsulta;
 
@@ -112,13 +107,13 @@ public class consultaController {
 
 	@FXML
 	private MenuItem menuConsultaVeterinarios;
-	
+
 	@FXML
 	private MenuItem menuConsultaMedicamentos;
-	
+
 	@FXML
 	private MenuItem menuConsultaRacoes;
-	
+
 	@FXML
 	private MenuItem menuConsultaVacinas;
 
@@ -151,11 +146,11 @@ public class consultaController {
 	public void setCurrentPerspective(String currentPerspective) {
 		this.currentPerspective = currentPerspective;
 	}
+
 	@FXML
 	public void initialize() {
 		tableConsulta.setPlaceholder(new Label("Escolha uma opção de consulta"));
 	}
-	
 
 	private void consultarRacoes() {
 
@@ -191,11 +186,11 @@ public class consultaController {
 
 		btnEditar.setDisable(false);
 		btnExcluir.setDisable(false);
-		
+
 		setPerspectiveList(getRacoes());
 		consultarRacoes();
 	}
-	
+
 	public void consultarBovino() {
 
 		tableConsulta.getColumns().clear();
@@ -267,7 +262,7 @@ public class consultaController {
 
 	private ObservableList<Object> getBovinos() {
 		ObservableList<Object> list = FXCollections.observableArrayList();
-		
+
 		DAOHibernate<Bovinos> daoB = new DAOHibernate<Bovinos>(Bovinos.class);
 		List<Bovinos> query = daoB.getAllByNamedQuery("selectBovinobyEmpresa", "empresa", user.getIdEmpresas_Pessoa());
 		list.addAll(query);
@@ -349,7 +344,7 @@ public class consultaController {
 
 		btnEditar.setDisable(false);
 		btnExcluir.setDisable(false);
-		
+
 		setPerspectiveList(getUsuarios());
 		consultarUsuarios();
 	}
@@ -396,11 +391,11 @@ public class consultaController {
 
 		btnEditar.setDisable(false);
 		btnExcluir.setDisable(false);
-		
+
 		setPerspectiveList(getVacinas());
 		consultarVacinas();
 	}
-	
+
 	private void consultarVacinas() {
 
 		tableConsulta.getColumns().clear();
@@ -430,11 +425,11 @@ public class consultaController {
 
 		btnEditar.setDisable(false);
 		btnExcluir.setDisable(false);
-		
+
 		setPerspectiveList(getVeterinarios());
 		consultarVeterinarios();
 	}
-	
+
 	private void consultarAlimentos() {
 
 		tableConsulta.getColumns().clear();
@@ -459,7 +454,7 @@ public class consultaController {
 		TableColumn<Object, String> DataTerminoCol = new TableColumn<>("Data Início");
 		DataTerminoCol.setCellValueFactory(new PropertyValueFactory<>("dataTermino"));
 		tableConsulta.getColumns().add(DataTerminoCol);
-		
+
 		TableColumn<Object, String> ObservacaoCol = new TableColumn<>("Observações");
 		ObservacaoCol.setCellValueFactory(new PropertyValueFactory<>("observacoes"));
 		tableConsulta.getColumns().add(ObservacaoCol);
@@ -469,7 +464,7 @@ public class consultaController {
 		ObservableList<Object> list = FXCollections.observableArrayList();
 
 		List<Alimentos> query = Streamable.of(repoAlimento.findAll()).toList();
-		
+
 		list.addAll(query);
 
 		return list;
@@ -482,11 +477,11 @@ public class consultaController {
 
 		btnEditar.setDisable(false);
 		btnExcluir.setDisable(false);
-		
+
 		setPerspectiveList(getAlimentos());
 		consultarAlimentos();
 	}
-	
+
 	private void consultarRacas() {
 
 		tableConsulta.getColumns().clear();
@@ -494,11 +489,11 @@ public class consultaController {
 		tableConsulta.setItems(getPerspectiveList());
 
 		// Colunas
-		
+
 		TableColumn<Object, String> idCol = new TableColumn<>("Código");
 		idCol.setCellValueFactory(new PropertyValueFactory<>("idRaca"));
 		tableConsulta.getColumns().add(idCol);
-		
+
 		TableColumn<Object, String> nomeCol = new TableColumn<>("Nome");
 		nomeCol.setCellValueFactory(new PropertyValueFactory<>("nomeRaca"));
 		tableConsulta.getColumns().add(nomeCol);
@@ -509,12 +504,12 @@ public class consultaController {
 		ObservableList<Object> list = FXCollections.observableArrayList();
 
 		List<Racas> query = Streamable.of(racaRepo.findAll()).toList();
-		
+
 		list.addAll(query);
 
 		return list;
 	}
-	
+
 	@FXML
 	public void racasClick() {
 		setCurrentPerspective("Raças");
@@ -522,11 +517,11 @@ public class consultaController {
 
 		btnEditar.setDisable(false);
 		btnExcluir.setDisable(false);
-		
+
 		setPerspectiveList(getRacas());
 		consultarRacas();
 	}
-  
+
 	private void consultarMedicamentos() {
 
 		tableConsulta.getColumns().clear();
@@ -534,11 +529,11 @@ public class consultaController {
 		tableConsulta.setItems(getPerspectiveList());
 
 		// Colunas
-		
-		TableColumn<Object, String> descCol = new TableColumn<>("principioAtivo");
+
+		TableColumn<Object, String> descCol = new TableColumn<>("Principio Ativo");
 		descCol.setCellValueFactory(new PropertyValueFactory<>("principioAtivo"));
 		tableConsulta.getColumns().add(descCol);
-		
+
 		TableColumn<Object, String> nomeCol = new TableColumn<>("Nome");
 		nomeCol.setCellValueFactory(new PropertyValueFactory<>("nome"));
 		tableConsulta.getColumns().add(nomeCol);
@@ -549,12 +544,12 @@ public class consultaController {
 		ObservableList<Object> list = FXCollections.observableArrayList();
 
 		List<Medicamentos> query = Streamable.of(medRepo.findAll()).toList();
-		
+
 		list.addAll(query);
 
 		return list;
 	}
-	
+
 	@FXML
 	public void medicamentosClick() {
 		setCurrentPerspective("Medicamentos");
@@ -562,7 +557,7 @@ public class consultaController {
 
 		btnEditar.setDisable(false);
 		btnExcluir.setDisable(false);
-		
+
 		setPerspectiveList(getMedicamentos());
 		consultarMedicamentos();
 	}
@@ -613,7 +608,7 @@ public class consultaController {
 				consultarVacinas();
 			}
 		}
-	
+
 		if (perspectiva == "Usuarios") {
 			fxmlFiltro = getClass().getResource("/fxml/FiltroDeUsuario.fxml");
 			loader.setLocation(fxmlFiltro);
@@ -666,7 +661,7 @@ public class consultaController {
 				consultarMedicamentos();
 			}
 		}
-		
+
 		if (perspectiva == "Racoes") {
 			fxmlFiltro = getClass().getResource("/fxml/FiltroDeRacoes.fxml");
 			loader.setLocation(fxmlFiltro);
@@ -684,10 +679,9 @@ public class consultaController {
 				consultarRacoes();
 			}
 		}
-		
-		
+
 	}
-		
+
 	@FXML
 	public void editar() throws Exception {
 		int index = tableConsulta.getSelectionModel().getSelectedIndex();
@@ -734,10 +728,10 @@ public class consultaController {
 			editStage.showAndWait();
 			setPerspectiveList(getUsuarios());
 			consultarUsuarios();
-			
+
 		} else if (perspectiva == "Raças") {
 			Racas racas = (Racas) tableConsulta.getItems().get(index);
-			
+
 			fxmledit = getClass().getResource("/fxml/CadastroDeRaca.fxml");
 			loader.setLocation(fxmledit);
 			loader.setControllerFactory(context::getBean);
@@ -753,7 +747,7 @@ public class consultaController {
 			setPerspectiveList(getRacas());
 			consultarRacas();
 
-		}else if (perspectiva == "Medicamentos") {
+		} else if (perspectiva == "Medicamentos") {
 			Medicamentos medic = (Medicamentos) tableConsulta.getItems().get(index);
 			fxmledit = getClass().getResource("/fxml/Medicamento.fxml");
 			loader.setLocation(fxmledit);
@@ -767,10 +761,10 @@ public class consultaController {
 			editStage.showAndWait();
 			setPerspectiveList(getMedicamentos());
 			consultarMedicamentos();
-		}else if (perspectiva == "Alimentação") {
+		} else if (perspectiva == "Alimentação") {
 
 			Alimentos alimento = (Alimentos) tableConsulta.getItems().get(index);
-			
+
 			fxmledit = getClass().getResource("/fxml/Alimentacao.fxml");
 			loader.setLocation(fxmledit);
 			loader.setControllerFactory(context::getBean);
@@ -787,7 +781,7 @@ public class consultaController {
 			setPerspectiveList(getAlimentos());
 			consultarAlimentos();
 
-		}else if (perspectiva == "Vacinas") {
+		} else if (perspectiva == "Vacinas") {
 			Vacina vacina = (Vacina) tableConsulta.getItems().get(index);
 
 			fxmledit = getClass().getResource("/fxml/Vacina.fxml");
@@ -802,8 +796,8 @@ public class consultaController {
 			editStage.showAndWait();
 			setPerspectiveList(getVacinas());
 			consultarVacinas();
-			
-		}else if (perspectiva == "Veterinarios") {
+
+		} else if (perspectiva == "Veterinarios") {
 			Veterinario vet = (Veterinario) tableConsulta.getItems().get(index);
 
 			fxmledit = getClass().getResource("/fxml/CadastroDeVeterinario.fxml");
@@ -818,7 +812,7 @@ public class consultaController {
 			editStage.showAndWait();
 			setPerspectiveList(getVeterinarios());
 			consultarVeterinarios();
-		}else if (perspectiva == "Racoes") {
+		} else if (perspectiva == "Racoes") {
 			Racoes rac = (Racoes) tableConsulta.getItems().get(index);
 
 			fxmledit = getClass().getResource("/fxml/Racoes.fxml");
@@ -844,7 +838,7 @@ public class consultaController {
 
 		URL fxmldialog = getClass().getResource("/fxml/ExcluirDialog.fxml");
 		FXMLLoader loader = new FXMLLoader(fxmldialog);
-		
+
 		loader.setControllerFactory(context::getBean);
 		Parent dialog = loader.load();
 		Scene dialogScene = new Scene(dialog);
@@ -883,8 +877,8 @@ public class consultaController {
 			}
 		}
 		if (perspectiva == "Veterinarios") {
-		 Veterinario vet = (Veterinario) tableConsulta.getItems().get(index);
-		 	DAOHibernate<Veterinario> daoV = new DAOHibernate<>(Veterinario.class);
+			Veterinario vet = (Veterinario) tableConsulta.getItems().get(index);
+			DAOHibernate<Veterinario> daoV = new DAOHibernate<>(Veterinario.class);
 			Veterinario vetDel = daoV.getAllById(vet.getIdVeterinario());
 
 			confirmExcluirController.setClass(vetDel);
@@ -899,7 +893,7 @@ public class consultaController {
 		}
 		if (perspectiva == "Vacinas") {
 			Vacina vac = (Vacina) tableConsulta.getItems().get(index);
-		 	DAOHibernate<Vacina> daoV = new DAOHibernate<>(Vacina.class);
+			DAOHibernate<Vacina> daoV = new DAOHibernate<>(Vacina.class);
 			Vacina vacDel = daoV.getAllById(vac.getIdVacina());
 
 			confirmExcluirController.setClass(vacDel);
@@ -913,27 +907,26 @@ public class consultaController {
 		}
 		if (perspectiva == "Alimentação") {
 			Alimentos alimento = (Alimentos) tableConsulta.getItems().get(index);
-			
+
 			confirmExcluirController.setClass(alimento);
 			dialogStage.showAndWait();
 			Boolean excluir = confirmExcluirController.returnDelete();
 			if (excluir) {
-				
+
 				repoAlimento.deleteById(alimento.getIdAlimento());
 				setPerspectiveList(getAlimentos());
 				consultarAlimentos();
 			}
 		}
-		
+
 		if (perspectiva == "Raças") {
 			Racas racas = (Racas) tableConsulta.getItems().get(index);
-			
-			
+
 			confirmExcluirController.setClass(racas);
 			dialogStage.showAndWait();
 			Boolean excluir = confirmExcluirController.returnDelete();
 			if (excluir) {
-				
+
 				racaRepo.deleteById(racas.getIdRaca());
 				setPerspectiveList(getRacas());
 				consultarRacas();
@@ -972,67 +965,60 @@ public class consultaController {
 	@FXML
 	public void search() {
 		String chave = txtFiltro.getText();
-		
+
 		if (currentPerspective == "Alimentação") {
 			List<Alimentos> query = Streamable.of(repoAlimento.search(chave)).toList();
-			ObservableList<Object> list = FXCollections.observableArrayList();	
-			
+			ObservableList<Object> list = FXCollections.observableArrayList();
+
 			list.addAll(query);
 			setPerspectiveList(list);
 			consultarAlimentos();
 		} else if (currentPerspective == "Raças") {
 			List<Racas> query = Streamable.of(racaRepo.search(chave)).toList();
 			ObservableList<Object> list = FXCollections.observableArrayList();
-			
+
 			list.addAll(query);
 			setPerspectiveList(list);
 			consultarRacas();
-		}
-		
-	 else if (currentPerspective == "Vacinas") {
-		List<Vacina> query = Streamable.of(vacRepo.search(chave)).toList();
-		ObservableList<Object> list = FXCollections.observableArrayList();
-		
-		list.addAll(query);
-		setPerspectiveList(list);
-		consultarVacinas();
-	}
-	 else if (currentPerspective == "Veterinarios") {
-		List<Veterinario> query = Streamable.of(vetRepo.search(chave)).toList();
-		ObservableList<Object> list = FXCollections.observableArrayList();
-		
-		list.addAll(query);
-		setPerspectiveList(list);
-		consultarVeterinarios();
-     
-	} else if (currentPerspective == "Medicamentos") {
-		List<Medicamentos> query = Streamable.of(medRepo.search(chave)).toList();
-		ObservableList<Object> list = FXCollections.observableArrayList();
-		
-		list.addAll(query);
-		setPerspectiveList(list);
-		consultarMedicamentos();
-	}
-	else if (currentPerspective == "Racoes") {
-		List<Racoes> query = Streamable.of(racRepo.search(chave)).toList();
-		ObservableList<Object> list = FXCollections.observableArrayList();
-		
-		list.addAll(query);
-		setPerspectiveList(list);
-		consultarRacoes();
+		} else if (currentPerspective == "Vacinas") {
+			List<Vacina> query = Streamable.of(vacRepo.search(chave)).toList();
+			ObservableList<Object> list = FXCollections.observableArrayList();
+
+			list.addAll(query);
+			setPerspectiveList(list);
+			consultarVacinas();
+		} else if (currentPerspective == "Veterinarios") {
+			List<Veterinario> query = Streamable.of(vetRepo.search(chave)).toList();
+			ObservableList<Object> list = FXCollections.observableArrayList();
+
+			list.addAll(query);
+			setPerspectiveList(list);
+			consultarVeterinarios();
+
+		} else if (currentPerspective == "Medicamentos") {
+			List<Medicamentos> query = Streamable.of(medRepo.search(chave)).toList();
+			ObservableList<Object> list = FXCollections.observableArrayList();
+
+			list.addAll(query);
+			setPerspectiveList(list);
+			consultarMedicamentos();
+		} else if (currentPerspective == "Racoes") {
+			List<Racoes> query = Streamable.of(racRepo.search(chave)).toList();
+			ObservableList<Object> list = FXCollections.observableArrayList();
+
+			list.addAll(query);
+			setPerspectiveList(list);
+			consultarRacoes();
 		}
 	}
 
-	}
-	
 	@FXML
 	private void searchOnEnter(KeyEvent e) throws Exception {
 		if (e.getCode() == KeyCode.ENTER) {
 			search();
 		}
 	}
-	
-	
+
 	@FXML
 	public void fechar() {
 

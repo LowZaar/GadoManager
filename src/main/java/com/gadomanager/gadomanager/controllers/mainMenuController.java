@@ -43,11 +43,9 @@ public class mainMenuController {
 
 	private Usuarios userLogin;
 
-	
 	@Autowired
 	private ApplicationContext context;
 
-	
 	public Usuarios getUserLogin() {
 		return userLogin;
 	}
@@ -82,7 +80,6 @@ public class mainMenuController {
 
 		FXMLLoader loader = new FXMLLoader(fxmlRaca);
 		loader.setControllerFactory(context::getBean);
-
 
 		Parent racaP = loader.load();
 
@@ -123,7 +120,7 @@ public class mainMenuController {
 
 		FXMLLoader loader = new FXMLLoader(fxmlBCS);
 		loader.setControllerFactory(context::getBean);
-		
+
 		Parent bcsP = loader.load();
 
 		Stage cadastroBCS = new Stage();
@@ -182,6 +179,7 @@ public class mainMenuController {
 		URL fxmlMedicacao = getClass().getResource("/fxml/Medicamento.fxml");
 
 		FXMLLoader loader = new FXMLLoader(fxmlMedicacao);
+		loader.setControllerFactory(context::getBean);
 
 		Parent medicacaoP = loader.load();
 
@@ -258,7 +256,7 @@ public class mainMenuController {
 
 			FXMLLoader loader = new FXMLLoader(fxmlUsuario);
 			loader.setControllerFactory(context::getBean);
-			
+
 			Parent usuarioP = loader.load();
 
 			Stage cadastroUsuario = new Stage();
@@ -329,8 +327,7 @@ public class mainMenuController {
 
 		FXMLLoader loader = new FXMLLoader(fxmlConsultas);
 		loader.setControllerFactory(context::getBean);
-		
-		
+
 		Parent consultasP = loader.load();
 
 		Stage consultaStage = new Stage();
