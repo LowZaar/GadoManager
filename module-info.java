@@ -1,13 +1,9 @@
 module gadoManager {
 
 	requires javafx.controls;
-	requires javafx.graphics;
 	requires javafx.fxml;
-	requires java.sql;
-	requires org.controlsfx.controls;
-	requires java.persistence;
+	requires javafx.collections.ObservableList;
+	requires org.apache.poi.ooxml;
 	
-	opens gadoManager to javafx.graphics, javafx.controls;
-	
-	exports gadoManager;
+	opens com.gadomanager.gadomanager to javafx.fxml;
 }

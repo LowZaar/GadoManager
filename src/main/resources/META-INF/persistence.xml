@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+	<persistence-unit name="GadoManager">
+	<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+	
+	<mapping-file>META-INF/consultas.xml</mapping-file>
+	
+		<class>com.gadomanager.gadomanager.classes.Alimentos</class>
+		<class>com.gadomanager.gadomanager.classes.BCS</class>
+		<class>com.gadomanager.gadomanager.classes.Bovinos</class>
+		<class>com.gadomanager.gadomanager.classes.Cidades</class>
+		<class>com.gadomanager.gadomanager.classes.Empresas_Pessoas</class>
+		<class>com.gadomanager.gadomanager.classes.Estados</class>
+		<class>com.gadomanager.gadomanager.classes.Medicamentos</class>
+		<class>com.gadomanager.gadomanager.classes.Parametros</class>
+		<class>com.gadomanager.gadomanager.classes.Pesagens</class>
+		<class>com.gadomanager.gadomanager.classes.Racas</class>
+		<class>com.gadomanager.gadomanager.classes.Racoes</class>
+		<class>com.gadomanager.gadomanager.classes.Rebanhos</class>
+		<class>com.gadomanager.gadomanager.classes.Usuarios</class>
+		<class>com.gadomanager.gadomanager.classes.Vacina</class>
+		<class>com.gadomanager.gadomanager.classes.Veterinario</class>
+	
+		<class>com.gadomanager.gadomanager.eventos.EventosSaude</class>
+		<class>com.gadomanager.gadomanager.eventos.TiposEvento</class>
+		<class>com.gadomanager.gadomanager.eventos.EventosSaudeBovinos</class>
+		<class>com.gadomanager.gadomanager.eventos.EventosSaudeMedicacao</class>
+		<class>com.gadomanager.gadomanager.eventos.EventosSaudeVacina</class>
+		<class>com.gadomanager.gadomanager.eventos.EventosSaudeOutros</class>
+		
+	
+	<properties>
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/bovinosdb" />
+			<property name="javax.persistence.jdbc.user" value="root" />
+			<property name="javax.persistence.jdbc.password" value="GS0101"/>
+
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL57Dialect" />
+			<property name="hibernate.show_sql" value="false" />
+			<property name="hibernate.format_sql" value="true" />
+			<property name="hibernate.hbm2ddl.auto" value="update" />
+			
+		</properties>
+	</persistence-unit>
+</persistence>

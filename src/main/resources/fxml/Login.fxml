@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<GridPane maxHeight="450.0" maxWidth="450.0" minHeight="450.0" minWidth="450.0" prefHeight="450.0" prefWidth="450.0" style="-fx-background-color: #fff; -fx-border-color: #000; -fx-border-insets: 5;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gadomanager.gadomanager.controllers.loginController">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <opaqueInsets>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </opaqueInsets>
+   <padding>
+      <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+   </padding>
+   <children>
+      <Label fx:id="labelTitulo" alignment="TOP_LEFT" contentDisplay="TOP" graphicTextGap="0.0" nodeOrientation="LEFT_TO_RIGHT" text="GadoManager" textAlignment="CENTER" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+         <font>
+            <Font name="Arial" size="50.0" />
+         </font>
+      </Label>
+      <Label contentDisplay="RIGHT" graphicTextGap="8.0" text="Login" textFill="#080808" textOverrun="CLIP" wrapText="true" GridPane.rowIndex="1">
+         <font>
+            <Font size="24.0" />
+         </font>
+         <padding>
+            <Insets top="75.0" />
+         </padding>
+      </Label>
+      <Label text="Senha" textFill="#0a0a0a" GridPane.rowIndex="1">
+         <font>
+            <Font size="24.0" />
+         </font>
+         <GridPane.margin>
+            <Insets top="150.0" />
+         </GridPane.margin>
+         <padding>
+            <Insets top="75.0" />
+         </padding>
+      </Label>
+      <TextField fx:id="userLogin" style="-fx-border-color: #000;" GridPane.columnSpan="2" GridPane.rowIndex="1">
+         <GridPane.margin>
+            <Insets left="75.0" right="75.0" top="75.0" />
+         </GridPane.margin>
+      </TextField>
+      <PasswordField fx:id="passwordLogin" onKeyPressed="#loginOnEnter" style="-fx-border-color: #000;" GridPane.columnSpan="2" GridPane.rowIndex="2">
+         <GridPane.margin>
+            <Insets bottom="50.0" left="75.0" right="70.0" />
+         </GridPane.margin>
+      </PasswordField>
+      <Label contentDisplay="TOP" graphicTextGap="0.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="33.0" prefWidth="225.0" text="Seja Bem Vindo!" textAlignment="CENTER" GridPane.columnSpan="2">
+         <font>
+            <Font name="Arial" size="26.0" />
+         </font>
+         <GridPane.margin>
+            <Insets left="110.0" top="100.0" />
+         </GridPane.margin>
+      </Label>
+      <Button fx:id="btnLogin" mnemonicParsing="false" onAction="#login" text="Login" GridPane.rowIndex="2">
+         <GridPane.margin>
+            <Insets left="150.0" top="75.0" />
+         </GridPane.margin>
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnCadastrar" mnemonicParsing="false" onAction="#cadastrar" text="Cadastrar" GridPane.columnIndex="1" GridPane.rowIndex="2">
+         <GridPane.margin>
+            <Insets top="75.0" />
+         </GridPane.margin>
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+   </children>
+</GridPane>

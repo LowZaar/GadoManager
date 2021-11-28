@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitMenuButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import org.controlsfx.control.tableview2.TableView2?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="626.0" prefWidth="880.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gadomanager.gadomanager.controllers.consultaController">
+   <children>
+      <SplitMenuButton fx:id="menuConsulta" alignment="CENTER" layoutX="14.0" layoutY="27.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="142.0" text="Consulta">
+         <items>
+            <MenuItem fx:id="menuConsultaBovino1" mnemonicParsing="false" onAction="#alimentosClick" text="Alimentos" />
+            <MenuItem fx:id="menuConsultaBovino" mnemonicParsing="false" onAction="#bovinoClick" text="Bovinos" />
+            <MenuItem fx:id="menuConsultaBovino2" mnemonicParsing="false" onAction="#racasClick" text="Raças" />
+            <MenuItem fx:id="menuConsultaUsuarios" mnemonicParsing="false" onAction="#usuarioClick" text="Usuarios" />
+            <MenuItem fx:id="menuConsultaMedicamentos" mnemonicParsing="false" onAction="#medicamentosClick" text="Medicamentos" />
+            <MenuItem fx:id="menuConsultaVeterinarios" mnemonicParsing="false" onAction="#veterinariosClick" text="Veterinários" />
+            <MenuItem fx:id="menuConsultaRacoes" mnemonicParsing="false" onAction="#racoesClick" text="Racoes" />
+            <MenuItem fx:id="menuConsultaVacinas" mnemonicParsing="false" onAction="#vacinasClick" text="Vacinas" />
+         </items>
+      </SplitMenuButton>
+      <TableView2 fx:id="tableConsulta" layoutY="65.0" prefHeight="558.0" prefWidth="880.0" />
+      <Button fx:id="btnFiltro" layoutX="370.0" layoutY="27.0" mnemonicParsing="false" onAction="#search" prefHeight="25.0" prefWidth="70.0" text="Filtro" />
+      <TextField fx:id="txtFiltro" layoutX="208.0" layoutY="27.0" onKeyPressed="#searchOnEnter" />
+      <Button fx:id="btnEditar" layoutX="558.0" layoutY="27.0" mnemonicParsing="false" onAction="#editar" prefHeight="25.0" prefWidth="70.0" text="Editar" />
+      <Button fx:id="btnExcluir" layoutX="654.0" layoutY="27.0" mnemonicParsing="false" onAction="#excluir" prefHeight="25.0" prefWidth="70.0" text="Excluir" />
+      <Button fx:id="btnFechar" layoutX="766.0" layoutY="27.0" mnemonicParsing="false" onAction="#fechar" prefHeight="25.0" prefWidth="70.0" text="Fechar" />
+   </children>
+</Pane>

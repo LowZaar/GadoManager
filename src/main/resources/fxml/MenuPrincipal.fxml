@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<GridPane maxHeight="500.0" maxWidth="500.0" minHeight="500.0" minWidth="500.0" prefHeight="500.0" prefWidth="500.0" style="-fx-background-color: #FFF; -fx-border-color: #000; -fx-border-insets: 5; -fx-border-radius: 5;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gadomanager.gadomanager.controllers.mainMenuController">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="526.0" minWidth="10.0" prefWidth="401.0" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="387.0" minWidth="10.0" prefWidth="387.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <MenuBar GridPane.columnSpan="2">
+        <menus>
+          <Menu mnemonicParsing="false" text="Bovinos">
+            <items>
+                  <MenuItem fx:id="menuRebanhos" mnemonicParsing="false" onAction="#abrirRebanho" text="Rebanhos" />
+                  <MenuItem fx:id="menuRebanhos1" mnemonicParsing="false" onAction="#abrirRacas" text="Raças" />
+              <MenuItem fx:id="menuBovino" mnemonicParsing="false" onAction="#abrirBovino" text="Bovinos" />
+                  <MenuItem fx:id="menuBCS" mnemonicParsing="false" onAction="#abrirBCS" text="BCS" />
+                  <MenuItem fx:id="menuPesagens" mnemonicParsing="false" onAction="#abrirPesagens" text="Pesagens" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Cadastros">
+            <items>
+              <MenuItem fx:id="menuUsuarios" mnemonicParsing="false" onAction="#abrirUsuario" text="Usuários" />
+                  <MenuItem fx:id="menuVeterinarios" mnemonicParsing="false" onAction="#abrirVeterinario" text="Veterinários" />
+                  <MenuItem fx:id="menuParams" mnemonicParsing="false" onAction="#abrirParams" text="Parâmetros" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Saúde">
+            <items>
+                  <MenuItem fx:id="menuEventoSaude" mnemonicParsing="false" onAction="#abrirEventoSaude" text="Eventos de Saúde" />
+                  <MenuItem fx:id="menuMedicacao" mnemonicParsing="false" onAction="#abrirMedicacao" text="Medicação" />
+                  <MenuItem fx:id="menuVacinas" mnemonicParsing="false" onAction="#abrirVacina" text="Vacinas" />
+                  <MenuItem fx:id="menuRacoes" mnemonicParsing="false" onAction="#abrirRacao" text="Rações" />
+                  <MenuItem fx:id="menuAlimentacao" mnemonicParsing="false" onAction="#abrirAlimentacao" text="Alimentação" />
+            </items>
+          </Menu>
+            <Menu mnemonicParsing="false" text="Consultas">
+               <items>
+                  <MenuItem fx:id="menuConsultas" mnemonicParsing="false" onAction="#abrirConsultas" text="Abrir Consulta" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Relatórios">
+              <items>
+                <MenuItem fx:id="menuRelatorios" mnemonicParsing="false" onAction="#abrirRelatorioBovinos" text="Bovinos" />
+              </items>
+            </Menu>
+        </menus>
+         <GridPane.margin>
+            <Insets bottom="220.0" />
+         </GridPane.margin>
+      </MenuBar>
+      <ImageView fitHeight="250.0" fitWidth="350.0" opacity="0.4" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2147483647" GridPane.rowIndex="1" GridPane.rowSpan="2147483647">
+         <image>
+            <Image url="@../images/gadoimage.png" />
+         </image>
+         <effect>
+            <Glow level="1.0">
+               <input>
+                  <DropShadow blurType="ONE_PASS_BOX" height="1.0" radius="0.0" width="1.0" />
+               </input>
+            </Glow>
+         </effect>
+         <GridPane.margin>
+            <Insets bottom="245.0" left="126.0" />
+         </GridPane.margin>
+      </ImageView>
+   </children>
+</GridPane>

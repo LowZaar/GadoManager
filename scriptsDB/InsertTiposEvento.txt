@@ -1,0 +1,6 @@
+INSERT INTO bovinosdb.tiposevento
+(descricao, tag)
+VALUES("Eventos de Saúde Bovinos", 'B'), 
+("Eventos de Saúde Medicação", 'M'), 
+("Eventos de Saúde Vacina",'V'),
+("Eventos de Saúde Outros", 'O');

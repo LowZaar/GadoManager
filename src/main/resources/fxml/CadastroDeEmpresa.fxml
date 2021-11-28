@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<GridPane maxHeight="601.0" maxWidth="780.0" minHeight="601.0" minWidth="780.0" prefHeight="601.0" prefWidth="780.0" style="-fx-background-color: #fff; -fx-border-radius: 5; -fx-border-insets: 5; -fx-border-color: #000;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gadomanager.gadomanager.controllers.cadastroEmpresaController">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="249.0" minWidth="10.0" prefWidth="248.0" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="280.0" minWidth="10.0" prefWidth="270.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="391.0" minWidth="10.0" prefWidth="250.0" />
+      <ColumnConstraints />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="0.0" percentHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <Label alignment="TOP_CENTER" text="Cadastro de Empresas" textAlignment="CENTER" GridPane.columnSpan="3">
+         <font>
+            <Font size="38.0" />
+         </font>
+         <GridPane.margin>
+            <Insets bottom="52.0" left="200.0" />
+         </GridPane.margin>
+      </Label>
+      <RadioButton fx:id="radioTipoFisica" mnemonicParsing="false" onAction="#pfChecked" selected="true" text="Pessoa Fisica">
+         <GridPane.margin>
+            <Insets left="30.0" top="64.0" />
+         </GridPane.margin>
+      </RadioButton>
+      <RadioButton fx:id="radioTipoJuridica" layoutX="584.0" layoutY="376.0" mnemonicParsing="false" onAction="#pjChecked" text="Pessoa Juridica" GridPane.columnSpan="2">
+         <GridPane.margin>
+            <Insets left="130.0" top="64.0" />
+         </GridPane.margin>
+      </RadioButton>
+      <Label alignment="TOP_CENTER" prefHeight="30.0" prefWidth="179.0" text="Nome/Razão Social">
+         <font>
+            <Font size="20.0" />
+         </font>
+         <GridPane.margin>
+            <Insets left="30.0" top="123.0" />
+         </GridPane.margin>
+      </Label>
+      <TextField fx:id="txtNome" style="-fx-border-color: #000;" GridPane.columnSpan="2">
+         <GridPane.margin>
+            <Insets left="30.0" right="-41.0" top="175.0" />
+         </GridPane.margin>
+      </TextField>
+      <Label alignment="TOP_CENTER" text="Data de Nascimento" GridPane.columnIndex="2" GridPane.columnSpan="2">
+         <font>
+            <Font size="20.0" />
+         </font>
+         <GridPane.margin>
+            <Insets left="58.0" top="123.0" />
+         </GridPane.margin>
+      </Label>
+      <DatePicker fx:id="dateDataNascimento" style="-fx-border-color: #000;" GridPane.columnIndex="2">
+         <GridPane.margin>
+            <Insets left="60.0" top="175.0" />
+         </GridPane.margin>
+      </DatePicker>
+      <Label fx:id="LabelCNPJ" alignment="TOP_CENTER" text="CPF/CNPJ" GridPane.columnSpan="2" GridPane.rowIndex="1">
+         <font>
+            <Font size="20.0" />
+         </font>
+         <GridPane.margin>
+            <Insets bottom="145.0" left="30.0" />
+         </GridPane.margin>
+      </Label>
+      <TextField fx:id="txtCNPJ" onKeyReleased="#formatCPFCPNJ" style="-fx-border-color: #000;" GridPane.columnSpan="2" GridPane.rowIndex="1">
+         <GridPane.margin>
+            <Insets bottom="100.0" left="30.0" right="269.0" top="6.0" />
+         </GridPane.margin>
+      </TextField>
+      <Label alignment="TOP_CENTER" text="RG" GridPane.columnIndex="1" GridPane.rowIndex="1">
+         <font>
+            <Font size="20.0" />
+         </font>
+         <GridPane.margin>
+            <Insets bottom="145.0" left="13.0" />
+         </GridPane.margin>
+      </Label>
+      <TextField fx:id="txtRG" onKeyReleased="#formatRG" style="-fx-border-color: #000;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+         <GridPane.margin>
+            <Insets bottom="100.0" left="13.0" right="14.0" top="6.0" />
+         </GridPane.margin>
+      </TextField>
+      <Label alignment="TOP_CENTER" text="Incs. Estadual" GridPane.columnIndex="2" GridPane.rowIndex="1">
+         <font>
+            <Font size="20.0" />
+         </font>
+         <GridPane.margin>
+            <Insets bottom="145.0" left="13.0" />
+         </GridPane.margin>
+      </Label>
+      <TextField fx:id="txtIE" style="-fx-border-color: #000;" GridPane.columnIndex="2" GridPane.rowIndex="1">
+         <GridPane.margin>
+            <Insets bottom="100.0" left="13.0" right="14.0" top="6.0" />
+         </GridPane.margin>
+      </TextField>
+      <Label alignment="TOP_CENTER" text="Endereço" GridPane.rowIndex="1">
+         <font>
+            <Font size="20.0" />
+         </font>
+         <GridPane.margin>
+            <Insets bottom="90.0" left="30.0" top="75.0" />
+         </GridPane.margin>
+      </Label>
+      <TextField fx:id="txtEndereco" style="-fx-border-color: #000;" GridPane.columnSpan="2" GridPane.rowIndex="1">
+         <GridPane.margin>
+            <Insets bottom="80.0" left="30.0" right="13.0" top="122.0" />
+         </GridPane.margin>
+      </TextField>
+      <Label alignment="TOP_CENTER" text="Insc. Municipal" GridPane.columnIndex="2" GridPane.rowIndex="1">
+         <font>
+            <Font size="20.0" />
+         </font>
+         <GridPane.margin>
+            <Insets bottom="90.0" left="13.0" top="75.0" />
+         </GridPane.margin>
+      </Label>
+      <TextField fx:id="txtIM" style="-fx-border-color: #000;" GridPane.columnIndex="2" GridPane.rowIndex="1">
+         <GridPane.margin>
+            <Insets bottom="80.0" left="13.0" right="14.0" top="122.0" />
+         </GridPane.margin>
+      </TextField>
+      <Label alignment="TOP_CENTER" text="Estado" GridPane.rowIndex="2">
+         <font>
+            <Font size="20.0" />
+         </font>
+         <GridPane.margin>
+            <Insets bottom="280.0" left="30.0" />
+         </GridPane.margin>
+      </Label>
+      <ComboBox fx:id="comboEstado" onAction="#populateCidade" prefHeight="27.0" prefWidth="71.0" style="-fx-border-color: #000;" GridPane.rowIndex="2">
+         <GridPane.margin>
+            <Insets bottom="220.0" left="30.0" />
+         </GridPane.margin>
+      </ComboBox>
+      <Label alignment="TOP_CENTER" text="Cidade" GridPane.rowIndex="2">
+         <font>
+            <Font size="20.0" />
+         </font>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <GridPane.margin>
+            <Insets bottom="280.0" left="120.0" />
+         </GridPane.margin>
+      </Label>
+      <ComboBox fx:id="comboCidade" prefHeight="27.0" prefWidth="148.0" style="-fx-border-color: #000;" GridPane.columnSpan="2" GridPane.rowIndex="2">
+         <GridPane.margin>
+            <Insets bottom="220.0" left="120.0" />
+         </GridPane.margin>
+      </ComboBox>
+      <Label alignment="TOP_CENTER" text="CEP" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2">
+         <font>
+            <Font size="20.0" />
+         </font>
+         <GridPane.margin>
+            <Insets bottom="280.0" left="50.0" />
+         </GridPane.margin>
+      </Label>
+      <TextField fx:id="txtCEP" onKeyReleased="#formatCEP" style="-fx-border-color: #000;" GridPane.columnIndex="1" GridPane.rowIndex="2">
+         <GridPane.margin>
+            <Insets bottom="220.0" left="50.0" right="10.0" />
+         </GridPane.margin>
+      </TextField>
+      <Label alignment="TOP_CENTER" text="Telefone" GridPane.columnIndex="2" GridPane.rowIndex="2">
+         <font>
+            <Font size="20.0" />
+         </font>
+         <GridPane.margin>
+            <Insets bottom="280.0" left="13.0" />
+         </GridPane.margin>
+      </Label>
+      <TextField fx:id="txtTelefone" onKeyReleased="#formatPhone" style="-fx-border-color: #000;" GridPane.columnIndex="2" GridPane.rowIndex="2">
+         <GridPane.margin>
+            <Insets bottom="220.0" left="13.0" right="12.0" />
+         </GridPane.margin>
+      </TextField>
+      <Label alignment="TOP_CENTER" text="Email" GridPane.columnSpan="2" GridPane.rowIndex="2">
+         <font>
+            <Font size="20.0" />
+         </font>
+         <GridPane.margin>
+            <Insets bottom="160.0" left="30.0" top="15.0" />
+         </GridPane.margin>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </Label>
+      <TextField fx:id="txtEmail" style="-fx-border-color: #000;" GridPane.columnSpan="2" GridPane.rowIndex="2">
+         <GridPane.margin>
+            <Insets bottom="160.0" left="30.0" right="170.0" top="80.0" />
+         </GridPane.margin>
+      </TextField>
+      <Label alignment="TOP_CENTER" text="Senha" GridPane.columnIndex="1" GridPane.rowIndex="2">
+         <font>
+            <Font size="20.0" />
+         </font>
+         <GridPane.margin>
+            <Insets bottom="160.0" left="135.0" top="15.0" />
+         </GridPane.margin>
+      </Label>
+      <PasswordField fx:id="passSenha" style="-fx-border-color: #000;" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2">
+         <GridPane.margin>
+            <Insets bottom="160.0" left="135.0" right="117.0" top="80.0" />
+         </GridPane.margin>
+      </PasswordField>
+      <Button fx:id="btnSalvar" alignment="CENTER" mnemonicParsing="false" onAction="#Salvar" prefHeight="25.0" prefWidth="74.0" text="Salvar" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="2">
+         <GridPane.margin>
+            <Insets left="50.0" top="100.0" />
+         </GridPane.margin>
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnCancelar" cancelButton="true" mnemonicParsing="false" onAction="#Cancelar" prefWidth="74.0" text="Cancelar" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="2">
+         <opaqueInsets>
+            <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+         </opaqueInsets>
+         <GridPane.margin>
+            <Insets left="150.0" top="100.0" />
+         </GridPane.margin>
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+   </children>
+</GridPane>
