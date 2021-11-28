@@ -4,6 +4,8 @@ import org.springframework.stereotype.Component;
 
 import com.gadomanager.gadomanager.classes.Alimentos;
 import com.gadomanager.gadomanager.classes.Bovinos;
+import com.gadomanager.gadomanager.classes.Medicamentos;
+
 import com.gadomanager.gadomanager.classes.Racas;
 import com.gadomanager.gadomanager.classes.Usuarios;
 import com.gadomanager.gadomanager.classes.Vacina;
@@ -56,6 +58,13 @@ public class confirmExcluirController {
     	}else if (classobj instanceof Racas) {
     		String texto = "Nome: " + ((Racas) classobj).getNomeRaca() + "\n";
     		labelClass.setText(texto);
+    	}else if (classobj instanceof Medicamentos) {
+    		String texto = "Nome: " + ((Medicamentos) classobj).getNome() + "\n";
+    		labelClass.setText(texto);
+    	}else if (classobj instanceof Racas) {
+    		String texto = "Nome: " + ((Racas) classobj).getNomeRaca() + "\n";
+    		labelClass.setText(texto);
+
     	}
     }
 

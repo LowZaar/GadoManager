@@ -12,16 +12,24 @@ import org.springframework.stereotype.Component;
 
 import com.gadomanager.gadomanager.classes.Alimentos;
 import com.gadomanager.gadomanager.classes.Bovinos;
+
+import com.gadomanager.gadomanager.classes.Medicamentos;
 import com.gadomanager.gadomanager.classes.Racas;
+import com.gadomanager.gadomanager.classes.Racoes;
 import com.gadomanager.gadomanager.classes.Usuarios;
 import com.gadomanager.gadomanager.classes.Vacina;
 import com.gadomanager.gadomanager.classes.Veterinario;
 import com.gadomanager.gadomanager.controllers.filtros.confirmExcluirController;
 import com.gadomanager.gadomanager.controllers.filtros.filtroBovinoController;
+import com.gadomanager.gadomanager.controllers.filtros.filtroMedicamentoController;
+import com.gadomanager.gadomanager.controllers.filtros.filtroRacoesController;
 import com.gadomanager.gadomanager.controllers.filtros.filtroUsuarioController;
 import com.gadomanager.gadomanager.controllers.filtros.filtroVacinaController;
 import com.gadomanager.gadomanager.controllers.filtros.filtroVeterinarioController;
 import com.gadomanager.gadomanager.repos.AlimentoRepository;
+import com.gadomanager.gadomanager.repos.MedicamentoRepository;
+import com.gadomanager.gadomanager.repos.RacasRepository;
+import com.gadomanager.gadomanager.repos.RacoesRepository;
 import com.gadomanager.gadomanager.repos.RacasRepository;
 import com.gadomanager.gadomanager.repos.VacinaRepository;
 import com.gadomanager.gadomanager.repos.VeterinarioRepository;
@@ -63,8 +71,18 @@ public class consultaController {
 	private VacinaRepository vacRepo;
 	
 	@Autowired
+	private MedicamentoRepository medRepo;
+	
+	@Autowired
 	private VeterinarioRepository vetRepo;
 	
+	@Autowired
+	private RacoesRepository racRepo;
+	
+  @Autowired
+	private VeterinarioRepository vetRepo;
+	
+
 	@FXML
 	private Button btnFiltro;
 
@@ -94,6 +112,12 @@ public class consultaController {
 
 	@FXML
 	private MenuItem menuConsultaVeterinarios;
+	
+	@FXML
+	private MenuItem menuConsultaMedicamentos;
+	
+	@FXML
+	private MenuItem menuConsultaRacoes;
 	
 	@FXML
 	private MenuItem menuConsultaVacinas;
@@ -132,6 +156,45 @@ public class consultaController {
 		tableConsulta.setPlaceholder(new Label("Escolha uma opção de consulta"));
 	}
 	
+
+	private void consultarRacoes() {
+
+		tableConsulta.getColumns().clear();
+		tableConsulta.getItems().clear();
+		tableConsulta.setItems(getPerspectiveList());
+
+		// Colunas
+		TableColumn<Object, String> obsCol = new TableColumn<>("Observacao");
+		obsCol.setCellValueFactory(new PropertyValueFactory<>("Observacao"));
+		tableConsulta.getColumns().add(obsCol);
+
+		TableColumn<Object, String> descCol = new TableColumn<>("descricao");
+		descCol.setCellValueFactory(new PropertyValueFactory<>("descricao"));
+		tableConsulta.getColumns().add(descCol);
+
+	}
+
+	private ObservableList<Object> getRacoes() {
+		ObservableList<Object> list = FXCollections.observableArrayList();
+
+		DAOHibernate<Racoes> daoRacao = new DAOHibernate<>(Racoes.class);
+		List<Racoes> query = daoRacao.getAll();
+		list.addAll(query);
+
+		return list;
+	}
+
+	@FXML
+	public void racoesClick() {
+		setCurrentPerspective("Racoes");
+		menuConsulta.setText(currentPerspective);
+
+		btnEditar.setDisable(false);
+		btnExcluir.setDisable(false);
+		
+		setPerspectiveList(getRacoes());
+		consultarRacoes();
+	}
 	
 	public void consultarBovino() {
 
@@ -371,8 +434,6 @@ public class consultaController {
 		setPerspectiveList(getVeterinarios());
 		consultarVeterinarios();
 	}
-
-	
 	
 	private void consultarAlimentos() {
 
@@ -465,6 +526,46 @@ public class consultaController {
 		setPerspectiveList(getRacas());
 		consultarRacas();
 	}
+  
+	private void consultarMedicamentos() {
+
+		tableConsulta.getColumns().clear();
+		tableConsulta.getItems().clear();
+		tableConsulta.setItems(getPerspectiveList());
+
+		// Colunas
+		
+		TableColumn<Object, String> descCol = new TableColumn<>("principioAtivo");
+		descCol.setCellValueFactory(new PropertyValueFactory<>("principioAtivo"));
+		tableConsulta.getColumns().add(descCol);
+		
+		TableColumn<Object, String> nomeCol = new TableColumn<>("Nome");
+		nomeCol.setCellValueFactory(new PropertyValueFactory<>("nome"));
+		tableConsulta.getColumns().add(nomeCol);
+
+	}
+
+	private ObservableList<Object> getMedicamentos() {
+		ObservableList<Object> list = FXCollections.observableArrayList();
+
+		List<Medicamentos> query = Streamable.of(medRepo.findAll()).toList();
+		
+		list.addAll(query);
+
+		return list;
+	}
+	
+	@FXML
+	public void medicamentosClick() {
+		setCurrentPerspective("Medicamentos");
+		menuConsulta.setText(currentPerspective);
+
+		btnEditar.setDisable(false);
+		btnExcluir.setDisable(false);
+		
+		setPerspectiveList(getMedicamentos());
+		consultarMedicamentos();
+	}
 
 	@FXML
 	public void filtrar() throws Exception {
@@ -548,6 +649,41 @@ public class consultaController {
 				consultarVeterinarios();
 			}
 		}
+		if (perspectiva == "Medicamentos") {
+			fxmlFiltro = getClass().getResource("/fxml/FiltroDeMedicamentos.fxml");
+			loader.setLocation(fxmlFiltro);
+			Parent filtroP = loader.load();
+			Scene filtroScene = new Scene(filtroP);
+			filtroMedicamentoController filtroMedicamentoController = loader.getController();
+			filtroMedicamentoController.setConsultaController(this);
+			filtroStage.initModality(Modality.APPLICATION_MODAL);
+			filtroStage.setScene(filtroScene);
+			filtroStage.showAndWait();
+			if (getPerspectiveList().isEmpty()) {
+				setPerspectiveList(getMedicamentos());
+				consultarMedicamentos();
+			} else {
+				consultarMedicamentos();
+			}
+		}
+		
+		if (perspectiva == "Racoes") {
+			fxmlFiltro = getClass().getResource("/fxml/FiltroDeRacoes.fxml");
+			loader.setLocation(fxmlFiltro);
+			Parent filtroP = loader.load();
+			Scene filtroScene = new Scene(filtroP);
+			filtroRacoesController filtroRacoesController = loader.getController();
+			filtroRacoesController.setConsultaController(this);
+			filtroStage.initModality(Modality.APPLICATION_MODAL);
+			filtroStage.setScene(filtroScene);
+			filtroStage.showAndWait();
+			if (getPerspectiveList().isEmpty()) {
+				setPerspectiveList(getRacoes());
+				consultarRacoes();
+			} else {
+				consultarRacoes();
+			}
+		}
 		
 		
 	}
@@ -617,7 +753,22 @@ public class consultaController {
 			setPerspectiveList(getRacas());
 			consultarRacas();
 
+		}else if (perspectiva == "Medicamentos") {
+			Medicamentos medic = (Medicamentos) tableConsulta.getItems().get(index);
+			fxmledit = getClass().getResource("/fxml/Medicamento.fxml");
+			loader.setLocation(fxmledit);
+			Parent editP = loader.load();
+			Scene editScene = new Scene(editP);
+			cadastroMedicamentoController cadastroMedicamentoController = loader.getController();
+			cadastroMedicamentoController.setEdit(true);
+			cadastroMedicamentoController.populateFields(medic);
+			editStage.initModality(Modality.APPLICATION_MODAL);
+			editStage.setScene(editScene);
+			editStage.showAndWait();
+			setPerspectiveList(getMedicamentos());
+			consultarMedicamentos();
 		}else if (perspectiva == "Alimentação") {
+
 			Alimentos alimento = (Alimentos) tableConsulta.getItems().get(index);
 			
 			fxmledit = getClass().getResource("/fxml/Alimentacao.fxml");
@@ -667,6 +818,22 @@ public class consultaController {
 			editStage.showAndWait();
 			setPerspectiveList(getVeterinarios());
 			consultarVeterinarios();
+		}else if (perspectiva == "Racoes") {
+			Racoes rac = (Racoes) tableConsulta.getItems().get(index);
+
+			fxmledit = getClass().getResource("/fxml/Racoes.fxml");
+			loader.setLocation(fxmledit);
+			Parent edtitP = loader.load();
+			Scene editScene = new Scene(edtitP);
+			cadastroRacaoController cadastroRacoesController = loader.getController();
+			cadastroRacoesController.populateFields(rac);
+			cadastroRacoesController.setEdit(true);
+			editStage.initModality(Modality.APPLICATION_MODAL);
+			editStage.setScene(editScene);
+			editStage.showAndWait();
+			setPerspectiveList(getRacoes());
+			consultarRacoes();
+
 		}
 	}
 
@@ -772,6 +939,34 @@ public class consultaController {
 				consultarRacas();
 			}
 		}
+		if (perspectiva == "Medicamentos") {
+			Medicamentos medicamento = (Medicamentos) tableConsulta.getItems().get(index);
+			DAOHibernate<Medicamentos> daoV = new DAOHibernate<>(Medicamentos.class);
+			Medicamentos vacDel = daoV.getAllById(medicamento.getIdMedicamento());
+
+			confirmExcluirController.setClass(vacDel);
+			dialogStage.showAndWait();
+			Boolean excluir = confirmExcluirController.returnDelete();
+			if (excluir) {
+				daoV.beginTransaction().delete(vacDel).commitTransaction().closeAll();
+				setPerspectiveList(getMedicamentos());
+				consultarMedicamentos();
+			}
+		}
+		if (perspectiva == "Racoes") {
+			Racoes racao = (Racoes) tableConsulta.getItems().get(index);
+			DAOHibernate<Racoes> daoB = new DAOHibernate<>(Racoes.class);
+			Racoes racaoDel = daoB.getAllById(racao.getIdRacao());
+
+			confirmExcluirController.setClass(racaoDel);
+			dialogStage.showAndWait();
+			Boolean excluir = confirmExcluirController.returnDelete();
+			if (excluir) {
+				daoB.beginTransaction().delete(racaoDel).commitTransaction().closeAll();
+				setPerspectiveList(getRacoes());
+				consultarRacoes();
+			}
+		}
 	}
 
 	@FXML
@@ -809,7 +1004,25 @@ public class consultaController {
 		list.addAll(query);
 		setPerspectiveList(list);
 		consultarVeterinarios();
+     
+	} else if (currentPerspective == "Medicamentos") {
+		List<Medicamentos> query = Streamable.of(medRepo.search(chave)).toList();
+		ObservableList<Object> list = FXCollections.observableArrayList();
+		
+		list.addAll(query);
+		setPerspectiveList(list);
+		consultarMedicamentos();
 	}
+	else if (currentPerspective == "Racoes") {
+		List<Racoes> query = Streamable.of(racRepo.search(chave)).toList();
+		ObservableList<Object> list = FXCollections.observableArrayList();
+		
+		list.addAll(query);
+		setPerspectiveList(list);
+		consultarRacoes();
+		}
+	}
+
 	}
 	
 	@FXML

@@ -16,6 +16,9 @@
             <MenuItem fx:id="menuConsultaBovino" mnemonicParsing="false" onAction="#bovinoClick" text="Bovinos" />
             <MenuItem fx:id="menuConsultaBovino2" mnemonicParsing="false" onAction="#racasClick" text="Raças" />
             <MenuItem fx:id="menuConsultaUsuarios" mnemonicParsing="false" onAction="#usuarioClick" text="Usuarios" />
+            <MenuItem fx:id="menuConsultaMedicamentos" mnemonicParsing="false" onAction="#medicamentosClick" text="Medicamentos" />
+            <MenuItem fx:id="menuConsultaVeterinarios" mnemonicParsing="false" onAction="#veterinariosClick" text="Veterinários" />
+            <MenuItem fx:id="menuConsultaRacoes" mnemonicParsing="false" onAction="#racoesClick" text="Racoes" />
             <MenuItem fx:id="menuConsultaVeterinarios" mnemonicParsing="false" onAction="#veterinariosClick" text="Veterinários" />
             <MenuItem fx:id="menuConsultaVacinas" mnemonicParsing="false" onAction="#vacinasClick" text="Vacinas" />
          </items>

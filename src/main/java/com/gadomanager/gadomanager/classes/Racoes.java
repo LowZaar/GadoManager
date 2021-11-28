@@ -44,5 +44,12 @@ public class Racoes {
 		Observacao = observacao;
 	}
 	
-	
+	public Long getIdRacao() {
+		return idRacao;
+	}
+
+	public void setIdRacao(Long idRacao) {
+		this.idRacao = idRacao;
+	}	
 }
+
