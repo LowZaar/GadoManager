@@ -1,16 +1,24 @@
 package com.gadomanager.gadomanager.controllers;
 
+import java.util.Optional;
+
 import org.controlsfx.control.Notifications;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.gadomanager.gadomanager.classes.Vacina;
-import com.gadomanager.gadomanager.utils.DAOHibernate;
+import com.gadomanager.gadomanager.repos.VacinaRepository;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 
+@Component
 public class cadastroVacinaController {
+	
+	@Autowired
+	private VacinaRepository repoVacina;
 	
 	@FXML
 	private TextArea txtADescricao;
@@ -21,10 +29,20 @@ public class cadastroVacinaController {
 	@FXML
 	private Button btnCancelar;
 	
-	private Boolean editMode = false;
+	private Boolean editMode;
 	
 	private Vacina vacina;
 	
+	private Vacina vacinaEdit;
+	
+	public Vacina getVacinaEdit() {
+		return vacinaEdit;
+	}
+
+	public void setVacinaEdit(Vacina vacinaEdit) {
+		this.vacinaEdit = vacinaEdit;
+	}
+
 	public void setEdit(boolean EditMode) {
 		if (EditMode) {
 			this.editMode = true;
@@ -53,14 +71,14 @@ public class cadastroVacinaController {
 
 			vacina = this.getVacina();
 
-			DAOHibernate<Vacina> daoV = new DAOHibernate<>(Vacina.class);
-
-			Vacina vacinaEdit = daoV.getAllById(vacina.getIdVacina());
-
+			Optional<Vacina> vacinaopt = repoVacina.findById(vacinaEdit.getIdVacina());
+			Vacina vacinaEdit = vacinaopt.get();
+			
 			String desc = txtADescricao.getText();
 			vacinaEdit.setDescricao(desc);
 			
-			daoV.beginTransaction().update(vacinaEdit).commitTransaction().closeAll();
+			repoVacina.save(vacinaEdit);
+			
 
 			Stage window = (Stage) btnCancelar.getScene().getWindow();
 			window.close();
@@ -71,12 +89,9 @@ public class cadastroVacinaController {
 		}else { 
 		
 		String Descricao = txtADescricao.getText();
-		
-		DAOHibernate<Vacina> daoV = new DAOHibernate<>(Vacina.class);
-		
 		Vacina vac = new Vacina(Descricao);
 		
-		daoV.beginTransaction().save(vac).commitTransaction().closeAll();
+		repoVacina.save(vac);
 		
 		Notifications.create().title("Alerta").text("Vacina adicionada com sucesso").showConfirm();
 		

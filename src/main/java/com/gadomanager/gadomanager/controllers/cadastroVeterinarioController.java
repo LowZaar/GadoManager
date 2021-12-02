@@ -1,9 +1,13 @@
 package com.gadomanager.gadomanager.controllers;
 
+import java.util.Optional;
+
 import org.controlsfx.control.Notifications;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.gadomanager.gadomanager.classes.Veterinario;
-import com.gadomanager.gadomanager.utils.DAOHibernate;
+import com.gadomanager.gadomanager.repos.VeterinarioRepository;
 import com.gadomanager.gadomanager.utils.TextFieldFormatter;
 
 import javafx.fxml.FXML;
@@ -11,7 +15,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+@Component
 public class cadastroVeterinarioController {
+	
+	@Autowired
+	private VeterinarioRepository repoVet;
 
 	@FXML
 	private TextField txtNome;
@@ -60,9 +68,8 @@ public class cadastroVeterinarioController {
 
 		if (editMode) {
 
-			DAOHibernate<Veterinario> daoVet = new DAOHibernate<Veterinario>(Veterinario.class);
-
-			Veterinario vetEdit = daoVet.getAllById(veterinario.getIdVeterinario());
+			Optional<Veterinario> vetopt = repoVet.findById(veterinario.getIdVeterinario());
+			Veterinario vetEdit = vetopt.get();
 
 			String nome = txtNome.getText();
 			vetEdit.setNome(nome);
@@ -76,7 +83,7 @@ public class cadastroVeterinarioController {
 			String crmv = txtCRMV.getText();
 			vetEdit.setCrmv(crmv);
 
-			daoVet.beginTransaction().update(vetEdit).commitTransaction().closeAll();
+			repoVet.save(vetEdit);
 			
 			Notifications.create().title("Alerta").text("Veterinario(a) alterado com sucesso!").showConfirm();
 
@@ -87,10 +94,9 @@ public class cadastroVeterinarioController {
 			String cpf = txtCPF.getText();
 			String crmv = txtCRMV.getText();
 
-			DAOHibernate<Veterinario> daoV = new DAOHibernate<>(Veterinario.class);
 			Veterinario vet = new Veterinario(nome, crmv, cpf, rg);
 
-			daoV.beginTransaction().save(vet).commitTransaction().closeAll();
+			repoVet.save(vet);
 
 			Notifications.create().title("Alerta").text("Veterinario(a) criado com sucesso!").showConfirm();
 		}

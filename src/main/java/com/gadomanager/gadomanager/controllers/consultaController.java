@@ -795,6 +795,7 @@ public class consultaController {
 			Scene editScene = new Scene(editP);
 			cadastroVacinaController cadastroVacinaController = loader.getController();
 			cadastroVacinaController.setEdit(true);
+			cadastroVacinaController.setVacinaEdit(vacina);
 			cadastroVacinaController.populateFields(vacina);
 			editStage.initModality(Modality.APPLICATION_MODAL);
 			editStage.setScene(editScene);
