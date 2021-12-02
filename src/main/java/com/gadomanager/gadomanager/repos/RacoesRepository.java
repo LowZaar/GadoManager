@@ -7,7 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.gadomanager.gadomanager.classes.Racoes;
 
-public interface RacoesRepository extends CrudRepository<Racoes, String>{
+public interface RacoesRepository extends CrudRepository<Racoes, Long>{
 	
 	@Query("SELECT r from Racoes r where r.descricao like %?1%"
 			+ "or r.Observacao like %?1%")

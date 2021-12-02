@@ -696,6 +696,7 @@ public class consultaController {
 
 			fxmledit = getClass().getResource("/fxml/CadastroDeBovinos.fxml");
 			loader.setLocation(fxmledit);
+			loader.setControllerFactory(context::getBean);
 			Parent editP = loader.load();
 			Scene editScene = new Scene(editP);
 			cadastroBovinoController cadastroBovinoController = loader.getController();
@@ -705,6 +706,7 @@ public class consultaController {
 					user.getIdEmpresas_Pessoa());
 			cadastroBovinoController.setBovino(bovinoEdit);
 			cadastroBovinoController.setEdit(true);
+			cadastroBovinoController.setBovinosEdit(bovinoEdit);
 			cadastroBovinoController.populateFields(bovino);
 			editStage.initModality(Modality.APPLICATION_MODAL);
 			editStage.setScene(editScene);
@@ -716,6 +718,7 @@ public class consultaController {
 
 			fxmledit = getClass().getResource("/fxml/CadastroDeUsuarios.fxml");
 			loader.setLocation(fxmledit);
+			loader.setControllerFactory(context::getBean);
 			Parent editP = loader.load();
 			Scene editScene = new Scene(editP);
 			cadastroUsuarioController cadastroUsuarioController = loader.getController();
@@ -751,10 +754,11 @@ public class consultaController {
 			Medicamentos medic = (Medicamentos) tableConsulta.getItems().get(index);
 			fxmledit = getClass().getResource("/fxml/Medicamento.fxml");
 			loader.setLocation(fxmledit);
+			loader.setControllerFactory(context::getBean);
 			Parent editP = loader.load();
 			Scene editScene = new Scene(editP);
 			cadastroMedicamentoController cadastroMedicamentoController = loader.getController();
-			cadastroMedicamentoController.setEdit(true);
+			cadastroMedicamentoController.setEditMode(true);
 			cadastroMedicamentoController.populateFields(medic);
 			editStage.initModality(Modality.APPLICATION_MODAL);
 			editStage.setScene(editScene);
@@ -786,10 +790,12 @@ public class consultaController {
 
 			fxmledit = getClass().getResource("/fxml/Vacina.fxml");
 			loader.setLocation(fxmledit);
+			loader.setControllerFactory(context::getBean);
 			Parent editP = loader.load();
 			Scene editScene = new Scene(editP);
 			cadastroVacinaController cadastroVacinaController = loader.getController();
 			cadastroVacinaController.setEdit(true);
+			cadastroVacinaController.setVacinaEdit(vacina);
 			cadastroVacinaController.populateFields(vacina);
 			editStage.initModality(Modality.APPLICATION_MODAL);
 			editStage.setScene(editScene);
@@ -802,6 +808,7 @@ public class consultaController {
 
 			fxmledit = getClass().getResource("/fxml/CadastroDeVeterinario.fxml");
 			loader.setLocation(fxmledit);
+			loader.setControllerFactory(context::getBean);
 			Parent editP = loader.load();
 			Scene editScene = new Scene(editP);
 			cadastroVeterinarioController cadastroVeterinarioController = loader.getController();
@@ -817,6 +824,7 @@ public class consultaController {
 
 			fxmledit = getClass().getResource("/fxml/Racoes.fxml");
 			loader.setLocation(fxmledit);
+			loader.setControllerFactory(context::getBean);
 			Parent edtitP = loader.load();
 			Scene editScene = new Scene(edtitP);
 			cadastroRacaoController cadastroRacoesController = loader.getController();

@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 
 import com.gadomanager.gadomanager.classes.Medicamentos;
 import com.gadomanager.gadomanager.repos.MedicamentoRepository;
-import com.gadomanager.gadomanager.utils.DAOHibernate;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -28,7 +27,8 @@ public class cadastroMedicamentoController {
 	@FXML
 	private Button btnSalvar;
 
-	private Boolean editMode = false;
+	private Boolean editMode;
+
 
 	private Medicamentos medicamentos;
 
@@ -38,12 +38,13 @@ public class cadastroMedicamentoController {
 	@Autowired
 	private MedicamentoRepository medRepo;
 	
-	public void setEdit(boolean EditMode) {
-		if (EditMode) {
-			this.editMode = true;
-		} else {
-			this.editMode = false;
-		}
+	
+	public Boolean getEditMode() {
+		return editMode;
+	}
+	
+	public void setEditMode(Boolean editMode) {
+		this.editMode = editMode;
 	}
 
 	public Medicamentos getMedicamento() {
@@ -64,23 +65,20 @@ public class cadastroMedicamentoController {
 
 	@FXML
 	public void salvar() {
-		if (editMode) {
+		if (this.editMode) {
 
 			Medicamentos medicamentos = this.getMedicamento();
 			
-			Optional<Medicamentos> aliopt = medRepo.findById(medicamentos.getIdMedicamento().toString());
+			Optional<Medicamentos> medicopt = medRepo.findById(medicamentos.getIdMedicamento());
+			Medicamentos medicEdit = medicopt.get();
 			
-			Medicamentos medicEdit = aliopt.get();
-			
-
 			String desc = txtAPrincipioAtivo.getText();
 			medicEdit.setPrincipioAtivo(desc);
 
 			String nome = txtNome.getText();
-			medicEdit.setPrincipioAtivo(nome);
-
+			medicEdit.setNome(nome);
 			
-			
+			medRepo.save(medicEdit);
 			Stage window = (Stage) btnCancelar.getScene().getWindow();
 			window.close();
 
@@ -91,11 +89,9 @@ public class cadastroMedicamentoController {
 			String nome = txtNome.getText();
 			String principioAtivo = txtAPrincipioAtivo.getText();
 
-			DAOHibernate<Medicamentos> daoM = new DAOHibernate<>(Medicamentos.class);
-
 			Medicamentos med = new Medicamentos(nome, principioAtivo);
 
-			daoM.beginTransaction().save(med).commitTransaction().closeAll();
+			medRepo.save(med);
 
 			Notifications.create().title("Alerta").text("Medicação " + med.getNome() + " adicionado com sucesso")
 					.showConfirm();

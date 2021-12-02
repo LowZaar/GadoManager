@@ -1,9 +1,13 @@
 package com.gadomanager.gadomanager.controllers;
 
+import java.util.Optional;
+
 import org.controlsfx.control.Notifications;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.gadomanager.gadomanager.classes.Racoes;
-import com.gadomanager.gadomanager.utils.DAOHibernate;
+import com.gadomanager.gadomanager.repos.RacoesRepository;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -11,7 +15,11 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+@Component
 public class cadastroRacaoController {
+	
+	@Autowired
+	private RacoesRepository repoRacao;
 
 	@FXML
 	private TextArea txtAObservacao;
@@ -26,9 +34,18 @@ public class cadastroRacaoController {
 	private Button btnCancelar;
 	
 
-	private Boolean editMode = false;
-
+	private Boolean editMode;
+	
 	private Racoes racao;
+
+	public Boolean getEditMode() {
+		return editMode;
+	}
+
+	public void setEditMode(Boolean editMode) {
+		this.editMode = editMode;
+	}
+
 	
 	public Racoes getRacoes() {
 		return racao;
@@ -59,10 +76,9 @@ public class cadastroRacaoController {
 	public void salvar() {
 		
 		if (editMode) {
-
-			DAOHibernate<Racoes> daoRac = new DAOHibernate<Racoes>(Racoes.class);
-
-			Racoes racEdit = daoRac.getAllById(racao.getIdRacao());
+			
+			Optional<Racoes> racopt = repoRacao.findById(racao.getIdRacao());
+			Racoes racEdit = racopt.get();
 
 			String observacao = txtAObservacao.getText();
 			racEdit.setObservacao(observacao);
@@ -70,18 +86,17 @@ public class cadastroRacaoController {
 			String descricao = txtDescricao.getText();
 			racEdit.setDescricao(descricao);
 
-			daoRac.beginTransaction().update(racEdit).commitTransaction().closeAll();
+			repoRacao.save(racEdit);
+			
 		} else {
 			
 		String observacao = txtAObservacao.getText();
 		
 		String descricao = txtDescricao.getText();
 		
-		DAOHibernate<Racoes> daoR = new DAOHibernate<>(Racoes.class);
-		
 		Racoes racao = new Racoes(descricao,observacao);
 		
-		daoR.beginTransaction().save(racao).commitTransaction().closeAll();
+		repoRacao.save(racao);
 		
 		Notifications.create().title("Alerta").text("Nova Ração adicionada com sucesso!").showConfirm();
       
