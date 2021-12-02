@@ -5,13 +5,17 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.controlsfx.control.Notifications;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.gadomanager.gadomanager.classes.Bovinos;
 import com.gadomanager.gadomanager.classes.Racas;
 import com.gadomanager.gadomanager.classes.Rebanhos;
 import com.gadomanager.gadomanager.classes.Usuarios;
+import com.gadomanager.gadomanager.repos.BovinoRepository;
 import com.gadomanager.gadomanager.utils.DAOHibernate;
 
 import javafx.fxml.FXML;
@@ -21,8 +25,12 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+@Component
 public class cadastroBovinoController {
 
+	@Autowired
+	private BovinoRepository repobovino;
+	
 	@FXML
 	private TextField txtCategoria;
 
@@ -73,6 +81,16 @@ public class cadastroBovinoController {
 	private Bovinos bovino;
 
 	private Boolean editMode;
+	
+	private Bovinos bovinosEdit;
+
+	public Bovinos getBovinosEdit() {
+		return bovinosEdit;
+	}
+
+	public void setBovinosEdit(Bovinos bovinosEdit) {
+		this.bovinosEdit = bovinosEdit;
+	}
 
 	public Bovinos getBovino() {
 		return bovino;
@@ -186,10 +204,9 @@ public class cadastroBovinoController {
 			bovino = this.getBovino();
 
 			Date dataNow = new Date();
-
-			DAOHibernate<Bovinos> daoB = new DAOHibernate<>(Bovinos.class);
-
-			Bovinos bovinoEdit = daoB.getAllById(bovino.getIdBovino());
+			
+			Optional<Bovinos> bovinosopt = repobovino.findById(bovinosEdit.getIdBovino());
+			Bovinos bovinoEdit = bovinosopt.get();
 
 			String categoria = txtCategoria.getText();
 			bovinoEdit.setCategoria(categoria);
@@ -235,8 +252,8 @@ public class cadastroBovinoController {
 			bovinoEdit.setIdBovino_mae(bovinoMae);
 
 			bovinoEdit.setIdEmpresaPessoas(user.getIdEmpresas_Pessoa());
-
-			daoB.beginTransaction().update(bovinoEdit).commitTransaction().closeAll();
+			
+			repobovino.save(bovinoEdit);
 
 			Stage window = (Stage) btnCancelar.getScene().getWindow();
 			window.close();
@@ -293,8 +310,7 @@ public class cadastroBovinoController {
 
 			bovino.setIdEmpresaPessoas(user.getIdEmpresas_Pessoa());
 
-			DAOHibernate<Bovinos> daoBovino = new DAOHibernate<>(Bovinos.class);
-			daoBovino.beginTransaction().save(bovino).commitTransaction().closeAll();
+			repobovino.save(bovino);
 
 			txtCategoria.clear();
 			txtNome.clear();

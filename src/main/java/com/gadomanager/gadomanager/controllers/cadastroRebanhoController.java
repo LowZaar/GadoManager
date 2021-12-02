@@ -1,11 +1,13 @@
 package com.gadomanager.gadomanager.controllers;
 
 import org.controlsfx.control.Notifications;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.gadomanager.gadomanager.classes.Empresas_Pessoas;
 import com.gadomanager.gadomanager.classes.Rebanhos;
 import com.gadomanager.gadomanager.classes.Usuarios;
-import com.gadomanager.gadomanager.utils.DAOHibernate;
+import com.gadomanager.gadomanager.repos.RebanhoRepository;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -13,7 +15,11 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+@Component
 public class cadastroRebanhoController {
+	
+	@Autowired
+	private RebanhoRepository rebanhoRepo;
 
 	@FXML
 	private Button btnSalvar;
@@ -43,16 +49,14 @@ public class cadastroRebanhoController {
 		String nome = txtNome.getText();
 		String descricao = txtADescricao.getText();
 		Empresas_Pessoas empresa = user.getIdEmpresas_Pessoa();
-
-		DAOHibernate<Rebanhos> daoR = new DAOHibernate<Rebanhos>(Rebanhos.class);
-
+		
 		Rebanhos rebanho = new Rebanhos(nome, descricao, empresa);
 
 		if (txtNome.getText().isEmpty()) {
 			Notifications.create().title("Cadastro de Rebanhos").text("O rebanho precisa de um nome!").showError();
 		} else {
 
-			daoR.beginTransaction().save(rebanho).commitTransaction().closeAll();
+			rebanhoRepo.save(rebanho);
 			Notifications.create().title("Alerta").text("Rebanho " + rebanho.getNome() + " Adicionado com sucesso! ")
 					.showConfirm();
 			txtNome.clear();

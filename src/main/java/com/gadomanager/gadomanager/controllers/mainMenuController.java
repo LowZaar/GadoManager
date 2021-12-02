@@ -59,6 +59,7 @@ public class mainMenuController {
 		URL fxmlBovino = getClass().getResource("/fxml/CadastroDeBovinos.fxml");
 
 		FXMLLoader loader = new FXMLLoader(fxmlBovino);
+		loader.setControllerFactory(context::getBean);
 
 		Parent bovinoP = loader.load();
 		Stage cadastroBovino = new Stage();
@@ -99,6 +100,7 @@ public class mainMenuController {
 		URL fxmlRebanho = getClass().getResource("/fxml/CadastroDeRebanho.fxml");
 
 		FXMLLoader loader = new FXMLLoader(fxmlRebanho);
+		loader.setControllerFactory(context::getBean);
 
 		Parent rebanhoP = loader.load();
 
@@ -160,7 +162,8 @@ public class mainMenuController {
 		URL fxmlEventoSaude = getClass().getResource("/fxml/CadastroEventoSaude.fxml");
 
 		FXMLLoader loader = new FXMLLoader(fxmlEventoSaude);
-
+		loader.setControllerFactory(context::getBean);
+		
 		Parent eventoSaude = loader.load();
 
 		Stage cadastroEventoSaude = new Stage();
@@ -186,6 +189,8 @@ public class mainMenuController {
 		Stage cadastroMedicacao = new Stage();
 		Scene medicacaoScene = new Scene(medicacaoP);
 
+		cadastroMedicamentoController cadastroMedicamentoController = loader.getController();
+		cadastroMedicamentoController.setEditMode(false);
 		cadastroMedicacao.setScene(medicacaoScene);
 		cadastroMedicacao.getIcons().add(new Image(getClass().getResourceAsStream("/images/taskIcon.png")));
 		cadastroMedicacao.show();
@@ -197,6 +202,7 @@ public class mainMenuController {
 		URL fxmlVacina = getClass().getResource("/fxml/Vacina.fxml");
 
 		FXMLLoader loader = new FXMLLoader(fxmlVacina);
+		loader.setControllerFactory(context::getBean);
 
 		Parent vacinaP = loader.load();
 
@@ -214,13 +220,17 @@ public class mainMenuController {
 		URL fxmlRacao = getClass().getResource("/fxml/Racoes.fxml");
 
 		FXMLLoader loader = new FXMLLoader(fxmlRacao);
+		loader.setControllerFactory(context::getBean);
 
 		Parent racaoP = loader.load();
 
 		Stage cadastroRacao = new Stage();
 		Scene racaoScene = new Scene(racaoP);
-
+		
+		
 		cadastroRacao.setScene(racaoScene);
+		cadastroRacaoController cadastroRacaoController = loader.getController();
+		cadastroRacaoController.setEditMode(false);
 		cadastroRacao.getIcons().add(new Image(getClass().getResourceAsStream("/images/taskIcon.png")));
 		cadastroRacao.show();
 
@@ -281,6 +291,7 @@ public class mainMenuController {
 		URL fxmlVeterinario = getClass().getResource("/fxml/CadastroDeVeterinario.fxml");
 
 		FXMLLoader loader = new FXMLLoader(fxmlVeterinario);
+		loader.setControllerFactory(context::getBean);
 
 		Parent veterinarioP = loader.load();
 
@@ -300,6 +311,7 @@ public class mainMenuController {
 			URL fxmlParams = getClass().getResource("/fxml/Parametros.fxml");
 
 			FXMLLoader loader = new FXMLLoader(fxmlParams);
+			loader.setControllerFactory(context::getBean);
 
 			Parent paramsP = loader.load();
 

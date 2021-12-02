@@ -7,7 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.gadomanager.gadomanager.classes.Medicamentos;
 
-public interface MedicamentoRepository extends CrudRepository<Medicamentos, String>{
+public interface MedicamentoRepository extends CrudRepository<Medicamentos, Long>{
 	
 
 	@Query("SELECT m FROM Medicamentos m WHERE m.nome LIKE %?1%"
