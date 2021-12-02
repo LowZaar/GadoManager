@@ -49,6 +49,7 @@ import javafx.scene.control.SplitMenuButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
@@ -844,6 +845,7 @@ public class consultaController {
 		Scene dialogScene = new Scene(dialog);
 		confirmExcluirController confirmExcluirController = loader.getController();
 		Stage dialogStage = new Stage();
+		dialogStage.getIcons().add(new Image(getClass().getResourceAsStream("/images/taskIcon.png")));
 		dialogStage.initModality(Modality.APPLICATION_MODAL);
 		dialogStage.setScene(dialogScene);
 
@@ -1009,6 +1011,7 @@ public class consultaController {
 			list.addAll(query);
 			setPerspectiveList(list);
 			consultarRacoes();
+		} else if (currentPerspective == "Bovinos") {
 		}
 	}
 

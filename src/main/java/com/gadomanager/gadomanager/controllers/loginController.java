@@ -77,9 +77,6 @@ public class loginController {
 
 		Usuarios query = repo.findByUsuarioAndSenha(usuario, senha);
 		
-		System.out.println(query);
-
-		
 		if (query == null) {
 			Notifications.create().title("Alerta de Login").text("Usuario ou senha incorreto").showWarning();
 
