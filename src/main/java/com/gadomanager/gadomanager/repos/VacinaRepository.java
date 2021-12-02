@@ -7,7 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.gadomanager.gadomanager.classes.Vacina;
 
-public interface VacinaRepository extends CrudRepository<Vacina, String>{
+public interface VacinaRepository extends CrudRepository<Vacina, Long>{
 	
 	@Query("SELECT v from Vacina v where v.descricao like %?1%")
     public List<Vacina> search(String filter);
