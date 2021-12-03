@@ -6,6 +6,9 @@ import java.util.Date;
 import java.util.List;
 
 import org.controlsfx.control.Notifications;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.stereotype.Component;
 
 import com.gadomanager.gadomanager.classes.Usuarios;
 import com.gadomanager.gadomanager.classes.Veterinario;
@@ -29,8 +32,12 @@ import javafx.scene.control.TextArea;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+@Component
 public class cadastroEventoSaudeController {
 
+	@Autowired
+	private ApplicationContext context;
+	
 	@FXML
 	private ComboBox<String> comboEvento;
 
@@ -137,6 +144,7 @@ public class cadastroEventoSaudeController {
 			setEvento("Bovinos");
 						
 			fxmlEvento = getClass().getResource("/fxml/EventosSaudeBovinos.fxml");
+			loader.setControllerFactory(context::getBean);
 			loader.setLocation(fxmlEvento);
 			Parent eventoP = loader.load();
 			Scene eventoScene = new Scene(eventoP);
@@ -160,6 +168,7 @@ public class cadastroEventoSaudeController {
 
 			fxmlEvento = getClass().getResource("/fxml/EventosSaudeMedicacao.fxml");
 			loader.setLocation(fxmlEvento);
+			loader.setControllerFactory(context::getBean);
 			Parent eventoP = loader.load();
 			Scene eventoScene = new Scene(eventoP);
 			eventoMedicacaoController eventoMedicacaoController = loader.getController();
@@ -180,6 +189,7 @@ public class cadastroEventoSaudeController {
 			
 			fxmlEvento = getClass().getResource("/fxml/EventosSaudeVacina.fxml");
 			loader.setLocation(fxmlEvento);
+			loader.setControllerFactory(context::getBean);
 			Parent eventoP = loader.load();
 			Scene eventoScene = new Scene(eventoP);
 			eventoVacinaController eventoVacinaController = loader.getController();

@@ -27,6 +27,7 @@ import com.gadomanager.gadomanager.controllers.filtros.filtroUsuarioController;
 import com.gadomanager.gadomanager.controllers.filtros.filtroVacinaController;
 import com.gadomanager.gadomanager.controllers.filtros.filtroVeterinarioController;
 import com.gadomanager.gadomanager.repos.AlimentoRepository;
+import com.gadomanager.gadomanager.repos.BovinoRepository;
 import com.gadomanager.gadomanager.repos.MedicamentoRepository;
 import com.gadomanager.gadomanager.repos.RacasRepository;
 import com.gadomanager.gadomanager.repos.RacoesRepository;
@@ -79,6 +80,9 @@ public class consultaController {
 	@Autowired
 	private RacoesRepository racRepo;
 
+	@Autowired
+	private BovinoRepository bovRepo;
+	
 	@FXML
 	private Button btnFiltro;
 
@@ -264,8 +268,8 @@ public class consultaController {
 	private ObservableList<Object> getBovinos() {
 		ObservableList<Object> list = FXCollections.observableArrayList();
 
-		DAOHibernate<Bovinos> daoB = new DAOHibernate<Bovinos>(Bovinos.class);
-		List<Bovinos> query = daoB.getAllByNamedQuery("selectBovinobyEmpresa", "empresa", user.getIdEmpresas_Pessoa());
+		List<Bovinos> query = Streamable.of(bovRepo.findByIdEmpresaPessoas(user.getIdEmpresas_Pessoa())).toList();
+
 		list.addAll(query);
 
 		return list;
@@ -290,7 +294,6 @@ public class consultaController {
 		tableConsulta.getColumns().clear();
 		tableConsulta.getItems().clear();
 
-//		setPerspectiveList(getUsuarios());
 
 		tableConsulta.setItems(getPerspectiveList());
 		System.out.println("1>" + getPerspectiveList().toString());
@@ -1020,6 +1023,15 @@ public class consultaController {
 			setPerspectiveList(list);
 			consultarRacoes();
 		} else if (currentPerspective == "Bovinos") {
+			List<Bovinos> query = Streamable.of(bovRepo.search(chave ,user.getIdEmpresas_Pessoa())).toList();
+			ObservableList<Object> list = FXCollections.observableArrayList();
+			
+			list.addAll(query);
+			
+			System.out.println(list);
+			
+			setPerspectiveList(list);
+			consultarBovino();
 		}
 	}
 

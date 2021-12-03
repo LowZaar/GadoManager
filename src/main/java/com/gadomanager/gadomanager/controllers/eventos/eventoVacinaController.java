@@ -13,11 +13,13 @@ import javafx.stage.Stage;
 import java.util.List;
 
 import org.controlsfx.control.tableview2.TableView2;
+import org.springframework.stereotype.Component;
 
 import com.gadomanager.gadomanager.classes.Vacina;
 import com.gadomanager.gadomanager.eventos.EventosSaudeVacina;
 import com.gadomanager.gadomanager.utils.DAOHibernate;
 
+@Component
 public class eventoVacinaController {
 
 	@FXML

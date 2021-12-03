@@ -1,6 +1,7 @@
 package com.gadomanager.gadomanager.controllers;
 
 import org.controlsfx.control.Notifications;
+import org.springframework.stereotype.Component;
 
 import com.gadomanager.gadomanager.classes.Parametros;
 import com.gadomanager.gadomanager.classes.Usuarios;
@@ -11,6 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+@Component
 public class cadastroParamsController {
 
 	@FXML

@@ -3,6 +3,7 @@ package com.gadomanager.gadomanager.controllers.eventos;
 import java.util.List;
 
 import org.controlsfx.control.tableview2.TableView2;
+import org.springframework.stereotype.Component;
 
 import com.gadomanager.gadomanager.classes.Bovinos;
 import com.gadomanager.gadomanager.classes.Rebanhos;
@@ -22,6 +23,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
+@Component
 public class eventoBovinosController {
 
 	@FXML

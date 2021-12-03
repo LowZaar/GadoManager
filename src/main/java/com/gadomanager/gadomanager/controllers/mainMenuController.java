@@ -312,7 +312,7 @@ public class mainMenuController {
 
 			FXMLLoader loader = new FXMLLoader(fxmlParams);
 			loader.setControllerFactory(context::getBean);
-
+			
 			Parent paramsP = loader.load();
 
 			Stage paramsStage = new Stage();
