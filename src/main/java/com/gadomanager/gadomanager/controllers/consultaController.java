@@ -31,6 +31,7 @@ import com.gadomanager.gadomanager.repos.BovinoRepository;
 import com.gadomanager.gadomanager.repos.MedicamentoRepository;
 import com.gadomanager.gadomanager.repos.RacasRepository;
 import com.gadomanager.gadomanager.repos.RacoesRepository;
+import com.gadomanager.gadomanager.repos.UsuarioRepository;
 import com.gadomanager.gadomanager.repos.VacinaRepository;
 import com.gadomanager.gadomanager.repos.VeterinarioRepository;
 import com.gadomanager.gadomanager.utils.DAOHibernate;
@@ -83,6 +84,12 @@ public class consultaController {
 	@Autowired
 	private BovinoRepository bovRepo;
 	
+	@Autowired
+	private UsuarioRepository userRepo;
+	
+	@Autowired
+	private RacoesRepository racaoRepo;
+		
 	@FXML
 	private Button btnFiltro;
 
@@ -176,11 +183,8 @@ public class consultaController {
 
 	private ObservableList<Object> getRacoes() {
 		ObservableList<Object> list = FXCollections.observableArrayList();
-
-		DAOHibernate<Racoes> daoRacao = new DAOHibernate<>(Racoes.class);
-		List<Racoes> query = daoRacao.getAll();
+		List<Racoes> query = Streamable.of(racaoRepo.findAll()).toList();
 		list.addAll(query);
-
 		return list;
 	}
 
@@ -267,11 +271,8 @@ public class consultaController {
 
 	private ObservableList<Object> getBovinos() {
 		ObservableList<Object> list = FXCollections.observableArrayList();
-
 		List<Bovinos> query = Streamable.of(bovRepo.findByIdEmpresaPessoas(user.getIdEmpresas_Pessoa())).toList();
-
 		list.addAll(query);
-
 		return list;
 	}
 
@@ -331,9 +332,8 @@ public class consultaController {
 	private ObservableList<Object> getUsuarios() {
 		ObservableList<Object> list = FXCollections.observableArrayList();
 
-		DAOHibernate<Usuarios> daoUser = new DAOHibernate<>(Usuarios.class);
-		List<Usuarios> query = daoUser.getAllByNamedQuery("selectUserbyEmpresa", "empresa",
-				user.getIdEmpresas_Pessoa());
+		List<Usuarios> query = Streamable.of(userRepo.findByIdEmpresasPessoa(user.getIdEmpresas_Pessoa())).toList();
+
 		list.addAll(query);
 
 		return list;
@@ -381,8 +381,7 @@ public class consultaController {
 	private ObservableList<Object> getVeterinarios() {
 		ObservableList<Object> list = FXCollections.observableArrayList();
 
-		DAOHibernate<Veterinario> daoVet = new DAOHibernate<>(Veterinario.class);
-		List<Veterinario> query = daoVet.getAll();
+		List<Veterinario> query = Streamable.of(vetRepo.findAll()).toList();
 		list.addAll(query);
 
 		return list;
@@ -415,8 +414,7 @@ public class consultaController {
 	private ObservableList<Object> getVacinas() {
 		ObservableList<Object> list = FXCollections.observableArrayList();
 
-		DAOHibernate<Vacina> daoVac = new DAOHibernate<>(Vacina.class);
-		List<Vacina> query = daoVac.getAll();
+		List<Vacina> query = Streamable.of(vacRepo.findAll()).toList();
 		list.addAll(query);
 
 		return list;
