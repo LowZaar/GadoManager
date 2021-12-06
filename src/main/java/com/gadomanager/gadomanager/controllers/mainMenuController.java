@@ -30,7 +30,10 @@ import com.gadomanager.gadomanager.classes.Parametros;
 import com.gadomanager.gadomanager.classes.Pesagens;
 import com.gadomanager.gadomanager.classes.Usuarios;
 import com.gadomanager.gadomanager.controllers.eventos.cadastroEventoSaudeController;
-import com.gadomanager.gadomanager.utils.DAOHibernate;
+import com.gadomanager.gadomanager.repos.BCSRepository;
+import com.gadomanager.gadomanager.repos.BovinoRepository;
+import com.gadomanager.gadomanager.repos.ParametrosRepository;
+import com.gadomanager.gadomanager.repos.PesagemRepository;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -46,6 +49,18 @@ public class mainMenuController {
 	@Autowired
 	private ApplicationContext context;
 
+	@Autowired
+	private BovinoRepository bovRepo;
+	
+	@Autowired
+	private ParametrosRepository paramRepo;
+
+	@Autowired
+	private PesagemRepository pesagemRepo;
+
+	@Autowired
+	private BCSRepository bcsRepo;
+	
 	public Usuarios getUserLogin() {
 		return userLogin;
 	}
@@ -356,9 +371,9 @@ public class mainMenuController {
 
 		System.out.println("relatorio");
 
-		DAOHibernate<Parametros> daoParams = new DAOHibernate<>(Parametros.class);
 
-		Parametros params = daoParams.getFirst("selectParamsbyEmpresa", "empresa", userLogin.getIdEmpresas_Pessoa());
+		Parametros params = paramRepo.findByIdEmpresaPessoa(userLogin.getIdEmpresas_Pessoa());
+		
 
 		File directory = new File(System.getProperty("user.home") + "/Desktop/GadoManager/");
 		directory.mkdirs();
@@ -401,16 +416,13 @@ public class mainMenuController {
 
 				int rowNum = 1;
 
-				DAOHibernate<Bovinos> daoB = new DAOHibernate<>(Bovinos.class);
-				List<Bovinos> listB = daoB.getAllByNamedQuery("selectBovinobyEmpresa", "empresa",
-						userLogin.getIdEmpresas_Pessoa());
-				DAOHibernate<Pesagens> daoP = new DAOHibernate<>(Pesagens.class);
+				List<Bovinos> listB = bovRepo.findByIdEmpresaPessoas(userLogin.getIdEmpresas_Pessoa());
 
 				CellStyle dataStyle = wb.createCellStyle();
 				dataStyle.setDataFormat(createHelper.createDataFormat().getFormat("dd/MM/yy"));
 
 				for (Bovinos bovinos : listB) {
-					Pesagens ultimoPeso = daoP.getFirst("selectLastdateBovino", "idBovino", bovinos);
+					Pesagens ultimoPeso = pesagemRepo.findLastDateBovino(bovinos);
 					Row row = sheet.createRow(rowNum++);
 
 					row.createCell(0).setCellValue(String.valueOf(bovinos.getIdBrinco()));
@@ -449,8 +461,7 @@ public class mainMenuController {
 						row.createCell(7).setCellValue(" ");
 					}
 
-					DAOHibernate<BCS> daoBCS = new DAOHibernate<>(BCS.class);
-					BCS bcs = daoBCS.getFirst("selectBCSbyBovino", "bovino", bovinos);
+					BCS bcs = bcsRepo.findByidBovino(bovinos);
 					if (!(bcs == null)) {
 						row.createCell(8).setCellValue(bcs.getIndiceBCS());
 					} else {

@@ -1,11 +1,12 @@
 package com.gadomanager.gadomanager.controllers;
 
 import org.controlsfx.control.Notifications;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.gadomanager.gadomanager.classes.Parametros;
 import com.gadomanager.gadomanager.classes.Usuarios;
-import com.gadomanager.gadomanager.utils.DAOHibernate;
+import com.gadomanager.gadomanager.repos.ParametrosRepository;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -15,6 +16,9 @@ import javafx.stage.Stage;
 @Component
 public class cadastroParamsController {
 
+	@Autowired
+	private ParametrosRepository paramRepo;
+	
 	@FXML
 	private TextField txtAlertaPesagem;
 	
@@ -52,12 +56,10 @@ public class cadastroParamsController {
 		this.params = params;
 	}
 
-	public void populateParams() {
-		DAOHibernate<Parametros> daoParams = new DAOHibernate<>(Parametros.class);
-		
-		Parametros params = daoParams.getFirst("selectParamsbyEmpresa", "empresa", user.getIdEmpresas_Pessoa());
+	public void populateParams() {		
+		Parametros params = paramRepo.findByIdEmpresaPessoa(user.getIdEmpresas_Pessoa());
+				
 		this.params = params;
-		daoParams.closeAll();
 		
 		txtAlertaPesagem.setText(String.valueOf(params.getAlertaDiasSemPesar()));
 		txtAlertaEngorda.setText(String.valueOf(params.getAlertaEngordaDiario()));
@@ -67,12 +69,11 @@ public class cadastroParamsController {
 	@FXML
 	public void salvar() {
 		
-		DAOHibernate<Parametros> daoParams = new DAOHibernate<>(Parametros.class);
 		this.params.setAlertaDiasSemPesar(Integer.parseInt(txtAlertaPesagem.getText()));
 		this.params.setAlertaEngordaDiario(Integer.parseInt(txtAlertaEngorda.getText()));
 		this.params.setTaxaEngordaDiario(Double.parseDouble(txtTaxaEngorda.getText()));
 		
-		daoParams.beginTransaction().update(params).commitTransaction().closeAll();
+		paramRepo.save(this.params);
 		
 		Notifications.create().title("Alerta").text("Parametros atualizados com sucesso!").showConfirm();
 	}

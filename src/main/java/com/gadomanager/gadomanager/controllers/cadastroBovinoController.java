@@ -9,6 +9,7 @@ import java.util.Optional;
 
 import org.controlsfx.control.Notifications;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Component;
 
 import com.gadomanager.gadomanager.classes.Bovinos;
@@ -16,8 +17,8 @@ import com.gadomanager.gadomanager.classes.Racas;
 import com.gadomanager.gadomanager.classes.Rebanhos;
 import com.gadomanager.gadomanager.classes.Usuarios;
 import com.gadomanager.gadomanager.repos.BovinoRepository;
-import com.gadomanager.gadomanager.utils.DAOHibernate;
-
+import com.gadomanager.gadomanager.repos.RacasRepository;
+import com.gadomanager.gadomanager.repos.RebanhoRepository;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -30,6 +31,12 @@ public class cadastroBovinoController {
 
 	@Autowired
 	private BovinoRepository repobovino;
+	
+	@Autowired
+	private RacasRepository racaRepo;
+	
+	@Autowired
+	private RebanhoRepository rebRepo;
 	
 	@FXML
 	private TextField txtCategoria;
@@ -122,10 +129,7 @@ public class cadastroBovinoController {
 		char masc = 'M';
 		char fem = 'F';
 		// Combo Bovino Pai e Mãe
-		DAOHibernate<Bovinos> daoB = new DAOHibernate<Bovinos>(Bovinos.class);
-		List<Bovinos> queryB = daoB.getAllByNamedQuery("selectBovinobyEmpresa", "empresa", user.getIdEmpresas_Pessoa());
-		daoB.closeAll();
-		queryB.toString();
+		List<Bovinos> queryB = repobovino.findByIdEmpresaPessoas(user.getIdEmpresas_Pessoa());
 		comboBovinoPai.getItems().add("Selecione...");
 		comboBovinoMae.getItems().add("Selecione...");
 		for (Bovinos bovinos : queryB) {
@@ -138,18 +142,14 @@ public class cadastroBovinoController {
 		}
 
 		// Combo Raça
-		DAOHibernate<Racas> daoR = new DAOHibernate<Racas>(Racas.class);
-		List<Racas> queryR = daoR.getAll();
-		daoR.closeAll();
+		List<Racas> queryR = Streamable.of(racaRepo.findAll()).toList();
+		
 		for (Racas racas : queryR) {
 			comboRaca.getItems().add(racas.getNomeRaca());
 		}
 
 		// Combo Rebanho
-		DAOHibernate<Rebanhos> daoRE = new DAOHibernate<Rebanhos>(Rebanhos.class);
-		List<Rebanhos> queryRe = daoRE.getAllByNamedQuery("selectRebanhobyEmpresa", "empresa",
-				user.getIdEmpresas_Pessoa());
-		daoRE.closeAll();
+		List<Rebanhos> queryRe = rebRepo.findByIdEmpresaPessoa(user.getIdEmpresas_Pessoa());
 		for (Rebanhos rebanhos : queryRe) {
 			comboRebanho.getItems().add(rebanhos.getNome());
 		}
@@ -165,9 +165,9 @@ public class cadastroBovinoController {
 	}
 
 	private Rebanhos findRebanho(String rebanhoNome) {
-		DAOHibernate<Rebanhos> daoRE = new DAOHibernate<Rebanhos>(Rebanhos.class);
-		Rebanhos rebanho = daoRE.getFirst("selectRebanhobyNomeEmpresa", "nome", rebanhoNome, "empresa",
-				user.getIdEmpresas_Pessoa());
+		
+		Rebanhos rebanho = rebRepo.findByNomeAndIdEmpresaPessoa(rebanhoNome, user.getIdEmpresas_Pessoa());
+		
 		if (rebanho == null) {
 			return null;
 		} else {
@@ -176,8 +176,7 @@ public class cadastroBovinoController {
 	}
 
 	private Racas findRaca(String racaNome) {
-		DAOHibernate<Racas> daoRa = new DAOHibernate<>(Racas.class);
-		Racas raca = daoRa.getFirst("selectRacasbyNome", "nome", racaNome);
+		Racas raca = racaRepo.findByNomeRaca(racaNome);
 		if (raca == null) {
 			return null;
 		} else {
@@ -186,9 +185,8 @@ public class cadastroBovinoController {
 	}
 
 	private Bovinos findBovino(String bovinoNome) {
-		DAOHibernate<Bovinos> daoB = new DAOHibernate<Bovinos>(Bovinos.class);
-		Bovinos bovino = daoB.getFirst("selectBovinobyNomeEmpresa", "nome", bovinoNome, "empresa",
-				user.getIdEmpresas_Pessoa());
+		Bovinos bovino = repobovino.findByIdEmpresaPessoasAndNome(user.getIdEmpresas_Pessoa(), 
+				bovinoNome);
 		if (bovino == null) {
 			return null;
 		} else {

@@ -3,13 +3,16 @@ package com.gadomanager.gadomanager.controllers.eventos;
 import java.util.List;
 
 import org.controlsfx.control.tableview2.TableView2;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Component;
 
 import com.gadomanager.gadomanager.classes.Bovinos;
 import com.gadomanager.gadomanager.classes.Rebanhos;
 import com.gadomanager.gadomanager.classes.Usuarios;
 import com.gadomanager.gadomanager.eventos.EventosSaudeBovinos;
-import com.gadomanager.gadomanager.utils.DAOHibernate;
+import com.gadomanager.gadomanager.repos.BovinoRepository;
+import com.gadomanager.gadomanager.repos.RebanhoRepository;
 
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
@@ -26,6 +29,12 @@ import javafx.stage.Stage;
 @Component
 public class eventoBovinosController {
 
+	@Autowired
+	private RebanhoRepository rebRepo;
+	
+	@Autowired
+	private BovinoRepository bovRepo;
+	
 	@FXML
 	private TableView2<Bovinos> tableBovinos;
 
@@ -36,7 +45,7 @@ public class eventoBovinosController {
 	private ComboBox<String> comboRebanhos;
 
 	private cadastroEventoSaudeController cadastroEventoSaudeController;
-
+	
 	private Rebanhos rebanhoAtual;
 
 	public Rebanhos getRebanhoAtual() {
@@ -65,10 +74,7 @@ public class eventoBovinosController {
 
 		tableBovinos.setPlaceholder(new Label("Selecione um Rebanho"));
 
-		DAOHibernate<Rebanhos> daoRE = new DAOHibernate<Rebanhos>(Rebanhos.class);
-		List<Rebanhos> queryRe = daoRE.getAllByNamedQuery("selectRebanhobyEmpresa", "empresa",
-				user.getIdEmpresas_Pessoa());
-		daoRE.closeAll();
+		List<Rebanhos> queryRe = rebRepo.findByIdEmpresaPessoa(user.getIdEmpresas_Pessoa());
 		for (Rebanhos rebanhos : queryRe) {
 			comboRebanhos.getItems().add(rebanhos.getNome());
 		}
@@ -84,22 +90,16 @@ public class eventoBovinosController {
 
 		ObservableList<Bovinos> list = FXCollections.observableArrayList();
 
-		DAOHibernate<Rebanhos> daoRE = new DAOHibernate<Rebanhos>(Rebanhos.class);
-		Rebanhos rebanho = daoRE.getFirst("selectRebanhobyNomeEmpresa", "nome", nomeRebanho, "empresa",
-				user.getIdEmpresas_Pessoa());
-
-		daoRE.closeAll();
+		Rebanhos rebanho = rebRepo.findByNomeAndIdEmpresaPessoa(nomeRebanho, user.getIdEmpresas_Pessoa());
 		setRebanhoAtual(rebanho);
 
 		System.out.println(rebanho.toString());
+		
+		List<Bovinos> bovQuery = Streamable.of(bovRepo.findByIdRebanho(rebanho)).toList();
+		
+		list.addAll(bovQuery);
 
-		DAOHibernate<Bovinos> daoB = new DAOHibernate<>(Bovinos.class);
-		List<Bovinos> bovinos = daoB.getAllByNamedQuery("selectBovinobyRebanho", "rebanho", rebanho);
-		daoB.closeAll();
-		list.addAll(bovinos);
-
-		System.out.println(bovinos.toString());
-		System.out.println("test");
+		System.out.println(bovQuery.toString());
 
 		tableBovinos.setItems(list);
 

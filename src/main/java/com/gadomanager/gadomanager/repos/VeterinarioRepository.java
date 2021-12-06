@@ -13,4 +13,6 @@ public interface VeterinarioRepository extends CrudRepository<Veterinario, Long>
 			+ "OR v.cpf LIKE %?1%" + "OR v.rg LIKE %?1%")
 	public List<Veterinario> search(String filter);
 
+	
+	public Veterinario findByNome(String nome);
 }

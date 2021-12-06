@@ -13,7 +13,7 @@ import com.gadomanager.gadomanager.classes.BCS;
 import com.gadomanager.gadomanager.classes.Bovinos;
 import com.gadomanager.gadomanager.classes.Usuarios;
 import com.gadomanager.gadomanager.repos.BCSRepository;
-import com.gadomanager.gadomanager.utils.DAOHibernate;
+import com.gadomanager.gadomanager.repos.BovinoRepository;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -27,6 +27,9 @@ public class cadastroBCSController {
 	
 	@Autowired
 	private BCSRepository repo;
+	
+	@Autowired
+	private BovinoRepository bovRepo;
 	
 	@FXML
 	private TextField txtIndiceBCS;
@@ -64,10 +67,7 @@ public class cadastroBCSController {
 	
 	public void populateCombo() {
 		
-		DAOHibernate<Bovinos> daoB = new DAOHibernate<>(Bovinos.class);
-		
-		List<Bovinos> query = daoB.getAllByNamedQuery("selectBovinobyEmpresa", "empresa", 
-				user.getIdEmpresas_Pessoa());
+		List<Bovinos> query = bovRepo.findByIdEmpresaPessoas(user.getIdEmpresas_Pessoa());
 		
 		comboBovino.getItems().add("Selecione...");
 		for (Bovinos bovinos : query) {
@@ -78,9 +78,9 @@ public class cadastroBCSController {
 	
 	private Bovinos findBovino(String bovinoNome) {
 		
-		DAOHibernate<Bovinos> daoB = new DAOHibernate<>(Bovinos.class);
-		Bovinos bovino = daoB.getFirst("selectBovinobyNomeEmpresa", "nome", bovinoNome, "empresa", user.getIdEmpresas_Pessoa());
-		
+		Bovinos bovino = bovRepo.findByIdEmpresaPessoasAndNome(
+				user.getIdEmpresas_Pessoa(), bovinoNome);
+
 		if (bovino == null) {
 			return null;
 		}else {

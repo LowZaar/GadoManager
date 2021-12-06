@@ -13,4 +13,8 @@ public interface RacasRepository extends CrudRepository<Racas, Long> {
 	
 	@Query("SELECT r from Racas r where r.nomeRaca like %?1%")
     public List<Racas> search(String filter);
+	
+	
+	public Racas findByNomeRaca(String nome);
+	
 }

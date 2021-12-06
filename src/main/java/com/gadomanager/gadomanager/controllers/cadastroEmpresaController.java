@@ -5,9 +5,11 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Component;
 
 import com.gadomanager.gadomanager.classes.Cidades;
@@ -15,7 +17,11 @@ import com.gadomanager.gadomanager.classes.Empresas_Pessoas;
 import com.gadomanager.gadomanager.classes.Estados;
 import com.gadomanager.gadomanager.classes.Parametros;
 import com.gadomanager.gadomanager.classes.Usuarios;
-import com.gadomanager.gadomanager.utils.DAOHibernate;
+import com.gadomanager.gadomanager.repos.EmpresaPessoaRepository;
+import com.gadomanager.gadomanager.repos.ParametrosRepository;
+import com.gadomanager.gadomanager.repos.UsuarioRepository;
+import com.gadomanager.gadomanager.repos.estadosCidades.CidadesRepository;
+import com.gadomanager.gadomanager.repos.estadosCidades.EstadoRepository;
 import com.gadomanager.gadomanager.utils.TextFieldFormatter;
 
 import javafx.fxml.FXML;
@@ -34,7 +40,22 @@ import javafx.stage.Stage;
 
 @Component
 public class cadastroEmpresaController {
+	
+	@Autowired
+	private EmpresaPessoaRepository empRepo;
+	
+	@Autowired
+	private UsuarioRepository userRepo;
 
+	@Autowired
+	private ParametrosRepository paramRepo;
+	
+	@Autowired 
+	private EstadoRepository estadoRepo;
+	
+	@Autowired
+	private CidadesRepository cidadeRepo;
+	
 	@FXML
 	private Label LabelCPF;
 
@@ -127,7 +148,6 @@ public class cadastroEmpresaController {
 //		Long estadoId = (long) comboEstado.getItems().indexOf(estadoEmp);
 		Cidades cidadeObj = findCidade(cidadeNome);
 
-		DAOHibernate<Empresas_Pessoas> daoEmp = new DAOHibernate<>(Empresas_Pessoas.class);
 
 		Empresas_Pessoas empresa = new Empresas_Pessoas();
 
@@ -155,22 +175,20 @@ public class cadastroEmpresaController {
 		empresa.setIdEstado(cidadeObj);
 		empresa.setTelefone(telefoneEmp);
 
-		daoEmp.beginTransaction().save(empresa).commitTransaction().closeAll();
-
-		DAOHibernate<Usuarios> daoUser = new DAOHibernate<>(Usuarios.class);
+		empRepo.save(empresa);
+		
 
 		String nome = empresa.getNome().replaceAll(" ", "").toLowerCase();
 
 		Usuarios user = new Usuarios(empresa.getNome(), empresa.getEmail(), nome, senhaEmp, true, empresa);
 
-		daoUser.beginTransaction().save(user).commitTransaction().closeAll();
-
-		DAOHibernate<Parametros> daoParams = new DAOHibernate<>(Parametros.class);
+		userRepo.save(user);
+		
 
 		Parametros paramObj = new Parametros(empresa, 0, 0, 0.00);
 
-		daoParams.beginTransaction().save(paramObj).commitTransaction().closeAll();
-
+		paramRepo.save(paramObj);
+		
 		URL fxmlLogin = getClass().getResource("/fxml/Login.fxml");
 
 		FXMLLoader loader = new FXMLLoader(fxmlLogin);
@@ -239,8 +257,8 @@ public class cadastroEmpresaController {
 
 	@FXML
 	public void estadoCombo() {
-		List<Estados> list = prepareEstadoList();
-
+		List<Estados> list = Streamable.of(estadoRepo.findAll()).toList();
+		
 		comboEstado.getItems().clear();
 
 		comboEstado.getItems().add("Selecione...");
@@ -252,22 +270,10 @@ public class cadastroEmpresaController {
 
 	public Cidades findCidade(String cidadeNome) {
 
-		DAOHibernate<Cidades> daoCity = new DAOHibernate<>(Cidades.class);
 
-		daoCity.beginTransaction();
-		Cidades cidadeObj = daoCity.getFirst("findCidadeid", "nome", cidadeNome);
+		Cidades cidadeObj = cidadeRepo.findByNome(cidadeNome);
 
-		daoCity.closeAll();
 		return cidadeObj;
-	}
-
-	public static List<Estados> prepareEstadoList() {
-		DAOHibernate<Estados> daoE = new DAOHibernate<>();
-		List<Estados> list = null;
-		list = daoE.getAllByNamedQuery("selectEstados");
-		daoE.closeAll();
-
-		return list;
 	}
 
 	
@@ -277,18 +283,23 @@ public class cadastroEmpresaController {
 
 		System.out.println("populating cidades");
 
-		DAOHibernate<Cidades> daoCidadeEstado = new DAOHibernate<>();
 
-		Long idEstado = Long.valueOf(comboEstado.getSelectionModel().getSelectedIndex());
+		Optional<Estados> idEstado = estadoRepo.findById((long) comboEstado.getSelectionModel().getSelectedIndex());
 		
-		System.out.println(idEstado);
 		
-		List<Cidades> list = daoCidadeEstado.getAllByNamedQuery("selectCidadebyEstado", "idEstado", idEstado);
-		for (Cidades cidades : list) {
+		if (idEstado.isPresent()) {
+			Estados estados = idEstado.get();			
+			List<Cidades> list = cidadeRepo.findByEstado(estados);
 
-			comboCidade.getItems().add(cidades.getNome());
-
+			for (Cidades cidades : list) {
+				
+				comboCidade.getItems().add(cidades.getNome());
+				
+			}
 		}
+		
+		
+		
 	}
 
 	@FXML

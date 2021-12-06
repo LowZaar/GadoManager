@@ -13,15 +13,20 @@ import javafx.stage.Stage;
 import java.util.List;
 
 import org.controlsfx.control.tableview2.TableView2;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Component;
 
 import com.gadomanager.gadomanager.classes.Medicamentos;
 import com.gadomanager.gadomanager.eventos.EventosSaudeMedicacao;
-import com.gadomanager.gadomanager.utils.DAOHibernate;
+import com.gadomanager.gadomanager.repos.MedicamentoRepository;
 
 @Component
 public class eventoMedicacaoController {
 
+	@Autowired
+	private MedicamentoRepository medRepo;
+	
 	@FXML
 	private TableView2<Medicamentos> tableMedicamento;
 
@@ -54,8 +59,7 @@ public class eventoMedicacaoController {
 
 		ObservableList<Medicamentos> list = FXCollections.observableArrayList();
 
-		DAOHibernate<Medicamentos> daoMed = new DAOHibernate<>(Medicamentos.class);
-		List<Medicamentos> query = daoMed.getAll();
+		List<Medicamentos> query = Streamable.of(medRepo.findAll()).toList();
 		list.addAll(query);
 
 		tableMedicamento.setItems(list);

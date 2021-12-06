@@ -8,6 +8,7 @@ import java.util.List;
 import org.controlsfx.control.Notifications;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Component;
 
 import com.gadomanager.gadomanager.classes.Usuarios;
@@ -18,7 +19,13 @@ import com.gadomanager.gadomanager.eventos.EventosSaudeMedicacao;
 import com.gadomanager.gadomanager.eventos.EventosSaudeOutros;
 import com.gadomanager.gadomanager.eventos.EventosSaudeVacina;
 import com.gadomanager.gadomanager.eventos.TiposEvento;
-import com.gadomanager.gadomanager.utils.DAOHibernate;
+import com.gadomanager.gadomanager.repos.VeterinarioRepository;
+import com.gadomanager.gadomanager.repos.eventos.EventoBovinoRepository;
+import com.gadomanager.gadomanager.repos.eventos.EventoMedicamentoRepository;
+import com.gadomanager.gadomanager.repos.eventos.EventoOutrosRepository;
+import com.gadomanager.gadomanager.repos.eventos.EventoSaudeRepository;
+import com.gadomanager.gadomanager.repos.eventos.EventoVacinaRepository;
+import com.gadomanager.gadomanager.repos.eventos.TiposEventoRepository;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -37,6 +44,27 @@ public class cadastroEventoSaudeController {
 
 	@Autowired
 	private ApplicationContext context;
+	
+	@Autowired
+	private TiposEventoRepository tipoEventoRepo;
+	
+	@Autowired
+	private VeterinarioRepository vetRepo;
+	
+	@Autowired
+	private EventoSaudeRepository eventoRepo;
+	
+	@Autowired
+	private EventoBovinoRepository eventoBovRepo;
+	
+	@Autowired
+	private EventoMedicamentoRepository eventoMedRepo;
+	
+	@Autowired
+	private EventoVacinaRepository eventoVacRepo;
+	
+	@Autowired
+	private EventoOutrosRepository eventoOutrosRepo;
 	
 	@FXML
 	private ComboBox<String> comboEvento;
@@ -122,9 +150,8 @@ public class cadastroEventoSaudeController {
 	public void populateCombos() {
 
 		comboEvento.getItems().addAll("Bovinos", "Medicação", "Vacina", "Outros");
-
-		DAOHibernate<Veterinario> daoVet = new DAOHibernate<>(Veterinario.class);
-		List<Veterinario> listaVet = daoVet.getAll();
+				
+		List<Veterinario> listaVet = Streamable.of(vetRepo.findAll()).toList();
 
 		for (Veterinario veterinario : listaVet) {
 			comboVeterinario.getItems().add(veterinario.getNome());
@@ -164,7 +191,6 @@ public class cadastroEventoSaudeController {
 			
 		} else if (comboEvento.getValue() == "Medicação") {
 			setEvento("Medicação");
-
 
 			fxmlEvento = getClass().getResource("/fxml/EventosSaudeMedicacao.fxml");
 			loader.setLocation(fxmlEvento);
@@ -220,20 +246,17 @@ public class cadastroEventoSaudeController {
 		String veterinarioNome = comboVeterinario.getValue();
 		Date data = Date.from(dateData.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
 
-		DAOHibernate<TiposEvento> daoTE = new DAOHibernate<>(TiposEvento.class);
-		TiposEvento tipoEvento = daoTE.getFirst("selectTipoEventobyTag", "tag", tagEvento);
-		daoTE.closeAll();
+		TiposEvento tipoEvento = tipoEventoRepo.findByTag(tagEvento);
+		
 
-		DAOHibernate<Veterinario> daovet = new DAOHibernate<>(Veterinario.class);
-		Veterinario vet = daovet.getFirst("selectVeterinariobyNome", "nome", veterinarioNome);
-
+		Veterinario vet = vetRepo.findByNome(veterinarioNome);
+				
 		EventosSaude eventosSaude = new EventosSaude();
 		eventosSaude.setData(data);
 		eventosSaude.setIdTipoEvento(tipoEvento);
 		eventosSaude.setIdVeterinario(vet);
 		
-		DAOHibernate<EventosSaude> daoEvento = new DAOHibernate<>(EventosSaude.class);
-		daoEvento.beginTransaction().save(eventosSaude).commitTransaction().closeAll();
+		eventoRepo.save(eventosSaude);
 		
 		String evento = getEvento();
 		if (evento == "Bovinos" && !(eventoBov.getIdBovino() == null)) {
@@ -241,30 +264,34 @@ public class cadastroEventoSaudeController {
 			eventoBov.setObservacoes(txtObservacoes.getText());
 			eventoBov.setIdEventoSaude(eventosSaude);
 			eventoBov.setData(data);
-			DAOHibernate<EventosSaudeBovinos> daoSB = new DAOHibernate<>(EventosSaudeBovinos.class);
-			daoSB.beginTransaction().save(eventoBov).commitTransaction().closeAll();
+			
+			eventoBovRepo.save(eventoBov);
+			
 			Notifications.create().title("Evento Saúde").text("Evento Bovino cadastrado com sucesso!").showConfirm();
 			
 
 		} else if (evento == "Medicação" && !(eventoMed.getIdMedicamento() == null)) {
 
 			eventoMed.setIdEventoSaude(eventosSaude);
-			DAOHibernate<EventosSaudeMedicacao> daoSM = new DAOHibernate<>(EventosSaudeMedicacao.class);
-			daoSM.beginTransaction().save(eventoMed).commitTransaction().closeAll();
+			
+			eventoMedRepo.save(eventoMed);
+			
 			Notifications.create().title("Evento Saúde").text("Evento Medicação cadastrado com sucesso!").showConfirm();
 
 		} else if (evento == "Vacina" && !(eventoVac.getIdVacina() == null)) {
 
 			eventoVac.setIdEventoSaude(eventosSaude);
-			DAOHibernate<EventosSaudeVacina> daoSV = new DAOHibernate<>(EventosSaudeVacina.class);
-			daoSV.beginTransaction().save(eventoVac).commitTransaction().closeAll();
+			
+			eventoVacRepo.save(eventoVac);
+			
 			Notifications.create().title("Evento Saúde").text("Evento Vacinação cadastrado com sucesso!").showConfirm();
 
 		} else {
 
 			eventoOutro.setIdEventoSaude(eventosSaude);
-			DAOHibernate<EventosSaudeOutros> daoOutro = new DAOHibernate<>(EventosSaudeOutros.class);
-			daoOutro.beginTransaction().save(eventoOutro).commitTransaction().closeAll();
+			
+			eventoOutrosRepo.save(eventoOutro);
+			
 			Notifications.create().title("Evento Saúde").text("Evento Outro cadastrado com sucesso!").showConfirm();
 		}
 		

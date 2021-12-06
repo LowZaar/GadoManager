@@ -12,8 +12,8 @@ import org.springframework.stereotype.Component;
 import com.gadomanager.gadomanager.classes.Bovinos;
 import com.gadomanager.gadomanager.classes.Pesagens;
 import com.gadomanager.gadomanager.classes.Usuarios;
+import com.gadomanager.gadomanager.repos.BovinoRepository;
 import com.gadomanager.gadomanager.repos.PesagemRepository;
-import com.gadomanager.gadomanager.utils.DAOHibernate;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -28,6 +28,9 @@ public class cadastroPesagemController {
 
 	@Autowired
 	private PesagemRepository repo;
+	
+	@Autowired
+	private BovinoRepository bovRepo;
 	
 	@FXML
 	private TextArea txtAObservacoes;
@@ -59,9 +62,8 @@ public class cadastroPesagemController {
 
 	public void populateCombo() {
 
-		DAOHibernate<Bovinos> daoB = new DAOHibernate<>(Bovinos.class);
+		List<Bovinos> query = bovRepo.findByIdEmpresaPessoas(user.getIdEmpresas_Pessoa());
 
-		List<Bovinos> query = daoB.getAllByNamedQuery("selectBovinobyEmpresa", "empresa", user.getIdEmpresas_Pessoa());
 
 		comboBovino.getItems().add("Selecione...");
 		for (Bovinos bovinos : query) {
@@ -71,9 +73,10 @@ public class cadastroPesagemController {
 	}
 
 	private Bovinos findBovino(String bovinoNome) {
-		DAOHibernate<Bovinos> daoB = new DAOHibernate<Bovinos>(Bovinos.class);
-		Bovinos bovino = daoB.getFirst("selectBovinobyNomeEmpresa", "nome", bovinoNome, "empresa",
-				user.getIdEmpresas_Pessoa());
+		
+		Bovinos bovino = bovRepo.findByIdEmpresaPessoasAndNome(
+				user.getIdEmpresas_Pessoa(), bovinoNome);
+		
 		if (bovino == null) {
 			return null;
 		} else {

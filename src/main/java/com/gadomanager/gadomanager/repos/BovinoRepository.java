@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 
 import com.gadomanager.gadomanager.classes.Bovinos;
 import com.gadomanager.gadomanager.classes.Empresas_Pessoas;
+import com.gadomanager.gadomanager.classes.Rebanhos;
 
 public interface BovinoRepository extends CrudRepository<Bovinos, Long>{
 
@@ -28,5 +29,10 @@ public interface BovinoRepository extends CrudRepository<Bovinos, Long>{
 	
 	@Query("SELECT b from Bovinos b where b.idEmpresaPessoas = :empresa")
 	List<Bovinos> findByIdEmpresaPessoas(@Param("empresa") Empresas_Pessoas idEmpresas_Pessoa);
+	
+	
+	List<Bovinos> findByIdRebanho(Rebanhos rebanho);
+	
+	Bovinos findByIdEmpresaPessoasAndNome(Empresas_Pessoas empresa , String nome);
 	
 }
